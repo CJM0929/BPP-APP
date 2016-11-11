@@ -1159,8 +1159,8 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('editSupportersProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$cordovaCamera','$ionicPopup','multipartForm','$ionicLoading','Upload',  //'Upload',
-function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $cordovaCamera,$ionicPopup,multipartForm,$ionicLoading,Upload) {
+.controller('editSupportersProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$cordovaCamera','$ionicPopup','multipartForm','$ionicLoading','Upload','$state',  //'Upload',
+function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $cordovaCamera,$ionicPopup,multipartForm,$ionicLoading,Upload,$state) {
 
     ////////////////////////////////////
     //    TOKEN RETRIEVAL
@@ -1179,34 +1179,34 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     
     ////////////////////////////////////////////////////////////////////
     //With this we get the skills from the database using a GET Method
-    $http({
-        url: 'http://hoyportibppr.com/api/supporters/skills',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', 
-            'X-API-KEY' : '123456'
-        }
-        })
-        .then( function(response) {
-        $scope.skills = response.data.message.skills;   
-        console.log($scope.skills);
-        $scope.selectedSkills = function selectedSkills() {
-    return filterFilter($scope.skills, { selected: true });
-  };
+//    $http({
+//        url: 'http://hoyportibppr.com/api/supporters/skills',
+//        method: 'GET',
+//        headers: {
+//          'Content-Type': 'application/x-www-form-urlencoded', 
+//            'X-API-KEY' : '123456'
+//        }
+//        })
+//        .then( function(response) {
+//        $scope.skills = response.data.message.skills;   
+//        console.log($scope.skills);
+//        $scope.selectedSkills = function selectedSkills() {
+//    return filterFilter($scope.skills, { selected: true });
+//  };
  //////////////////////////////////////////////////////////////////////
         
         
         
         
- $scope.$watch('skills|filter:{selected:true}', function (nv) {
-    $scope.selection = nv.map(function (skills) {
-      return skills.name;
-    });
-  }, true);
-       // $scope.cate1 = response.data.message.categories[0];
-      console.log($scope.skills)
-            //console.log($scope.cate1)
-        })
+// $scope.$watch('skills|filter:{selected:true}', function (nv) {
+//    $scope.selection = nv.map(function (skills) {
+//      return skills.name;
+//    });
+//  }, true);
+//       // $scope.cate1 = response.data.message.categories[0];
+//      console.log($scope.skills)
+//            //console.log($scope.cate1)
+//        })
     ///////////////////////////////////////////////////////////
    
     ////////////////////////////////////////////////////////////
@@ -1214,9 +1214,9 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     //When the user press the submit button it will call this function
     //and send all the data via POST method to the API, storing the data
     //in the database
-     $scope.selection = {
-        value: {"value": false}
-    };
+//     $scope.selection = {
+//        value: {"value": false}
+//    };
     $scope.UpdateData = function() { 
         
          $ionicLoading.show({
@@ -1275,12 +1275,12 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-        $scope.info = data.message;
-        $scope.kkk = data.message.skills;
-        console.log($scope.kkk);
+       $scope.info = data.message;
+       $scope.skills = data.message.skills;
+        
 
         console.log($scope.info);
-         $scope.img={}
+        $scope.img={}
         $scope.img = data.message.sup_pic;
         console.log($scope.img);
         
@@ -1339,8 +1339,8 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
 //Edit Entity Profile Page Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.controller('editentityProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','$ionicLoading',  //'Upload',
-function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$ionicPopup,$ionicLoading) {
+.controller('editentityProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','$ionicLoading','$state',  //'Upload',
+function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$ionicPopup,$ionicLoading,$state) {
 
     // Token retrieval
     var t1 = store.get('token');

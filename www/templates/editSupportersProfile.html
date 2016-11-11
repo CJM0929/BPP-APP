@@ -111,17 +111,19 @@
     <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider"><b>Skills (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
 <!--ng-repeat="skill in skills"-->
         
-   <div ng-show="showSkill"  class="dropdown">  
-        
-   <ion-checkbox ng-repeat="skill in kkk" class="item item-checkbox checkbox-royal"
-    ng-checked="data.checked"
-    ng-model="data.checked"
-    > {{skill}} 
+   <div  ng-show="showSkill"  class="dropdown">  
+   <ion-checkbox ng-repeat="skill in skills track by $index" class="item item-checkbox checkbox-royal"
+    ng-checked="data.skills[$index].checked"
+    ng-model="data.skills[$index].checked"
+    > {{skill.text}} 
     </ion-checkbox>
-<!--  skill_name type="checkbox"  name="selectedSkills[]"  value="{{info.skills}}"-->
+        </div>
+<!--
 
-    </div>
+ng-true-value="true"
+    ng-false-value="false"
 
+   -->
 
                 
                 
@@ -139,4 +141,5 @@
                 
             
         </ion-list>
+                    
     </ion-content>
