@@ -1,0 +1,248 @@
+    <ion-view title="{{profile.name}}">
+
+        
+<!-- Como poner boton en el header a la derecha
+            <ion-nav-bar class="bar-royal">
+                <ion-nav-back-button></ion-nav-back-button>
+                 <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear ion-compose" ui-sref="roleDecision"></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+
+on-scroll="onUserDetailContentScroll()"
+-->
+    
+      <ion-content  overflow-scroll='false' delegate-handle="userDetailContent"  header-shrink scroll-event-interval="5" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
+        
+
+  
+     
+          
+    <div class="spacer" style="width: 300px; height: 0px;"></div>
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+          
+      <div class="about-header">
+          <ion-slide-box auto-play="false" show-pager="false">
+                       
+
+              
+               <div class="profile-media">
+              <div class="profile-details">
+          <!--      <img  ng-src="{{profile.avatar}}" class="img-circle profile-image">-->  
+                <h2 class="color-white">
+                 <b> {{profile.name}} </b>
+               
+                </h2>
+                  
+                  
+        <!-- -->       
+              </div>
+              <img ng-src="{{profile.background}}" class="about-image profile-background-image" style="vertical-align:middle;">
+            </div>
+  
+              
+               <img ng-src="{{profile.background}}" width="300" height="225" >
+            
+              </div>
+          
+              
+    <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+          <img id="profile-image" src="{{profile.avatar}}">
+<!--          <h3 id="profile-name">{{profile.name}}</h3>-->
+         
+    </div>
+        <!--
+           <ion-item class="item-avatar-right  " id="animalAid-list-item35">
+                <img src="img/animalaid2_500280.jpg">
+                <h2>{{profile.name}}</h2>
+            </ion-item>
+          -->
+          
+          
+          
+
+<!--
+          <div id="mydiv" class="item tabs tabs-secondary tabs-stable tabs-icon-left">
+    <a class="tab-item custom-tabs" ui-sref="post" ><i class="icon ion-compose"></i><b>Posts</b> </a>
+	<a class="tab-item custom-tabs" ui-sref="entitySignUp"><i class="icon ion-edit"></i><b>Edit Profile</b></a>
+    </div>
+-->
+        
+
+          
+          
+          
+<!--
+<ion-list>
+        <ion-item class="item-divider item-icon-right custom-item-divider2" ><b>About</b> <i class="icon ion-information"></i></ion-item>
+  
+          <ion-item ng-repeat="item in items" class="item item-text-wrap">
+          <div ng-class="isItemShown(item) ? 'item-expand active' : 'item-expand inactive'">
+            <p style="color:#583faa">{{ item.text }}</p>
+          </div>
+          <div ng-click="toggleItem(item)" class="item-expand-footer">
+            <i ng-class="isItemShown(item) ? 'ion-ios-minus-outline' : 'ion-ios-plus-outline'"></i>
+            {{ isItemShown(item) ? 'Less' : 'More' }}
+          </div>
+        </ion-item>
+     </ion-list>
+-->
+<!--*******************************************************************-->
+<!--*******************************************************************-->
+<!--*******************************************************************-->   
+          <div class="list card">
+
+          
+          <ion-item ng-click="myFunc4()"class="item-divider item-icon-right custom-item-divider"><b>About</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--    <i class="icon ion-information"></i>-->
+<div ng-show="showMe4" class="drodpown">
+   
+  <div class="item item-text-wrap">
+     {{profile.about}}
+   </div>
+    
+</div>
+          
+          
+<ion-item ng-click="myFunc2()"class="item-divider item-icon-right custom-item-divider"><b>Address</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--    <i class="icon ion-location"> </i> -->
+<div ng-show="showMe2" class="drodpown">
+   
+    <ion-item class="item-icon-right" ng-click="">
+    <i class="icon ion-map"></i>
+     {{profile.city}}, {{profile.state}} PR<br>
+     {{profile.streetline1}}<br> 
+     {{profile.streetline2}}
+    </ion-item>
+    
+</div>
+          
+    <ion-item ng-click="myFunc3()" class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--    <i class="icon ion-chatboxes"></i>-->
+<div ng-show="showMe3" class="dropdown">
+        <ion-item class="item-icon-right" ng-click="call()">
+<!-- Call us-->
+            {{profile.phone}}
+          <i class="icon ion-android-call"></i>
+        </ion-item>
+        <ion-item class="item-icon-right" ng-click="mail()">
+<!--Send us an e-mail-->
+            {{profile.email}}
+          <i class="icon ion-ios-email"></i>
+        </ion-item>
+        <ion-item class="item-icon-right " ng-click="website()">
+<!--Visit our homepage-->
+            {{profile.website}}
+          <i class="icon ion-ios-home"></i>
+        </ion-item>
+</div>
+<!--*******************************************************************-->    
+<!--*******************************************************************-->
+<!--*******************************************************************-->
+       
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+<!-- <a ui-sref="aboutAddressContactInformation" id="aboutid" class=" button button-full button-large button-royal ">Address &amp; Contact Information</a>-->
+          
+        <ion-list>
+               <ion-item class="item-divider item-icon-left royal" ><b>Feed</b><i class="icon ion-ios-list royal"></i></ion-item>
+        </ion-list>
+          
+          
+    <div id="mydiv" class="item tabs tabs-secondary tabs-stable ">
+    <a class="tab-item custom-tabs" href="#"> <b>Posts</b> </a>
+	<a class="tab-item custom-tabs" href="#"> <b>Events</b></a>
+    <a class="tab-item custom-tabs" href="#"><b>Volunteer</b></a>
+    <a class="tab-item custom-tabs" href="#"><b>Donations</b></a>
+    </div>
+    
+
+          </ion-slide-box>       
+</div>
+    
+   
+          
+           <div class="list card " id="afeed1">
+          
+            <ion-item class="item-avatar  " id="activityFeed-list-item39">
+                <h2>Item</h2>
+                <p>1 min ago</p>
+            </ion-item>
+            <p style="padding: 15px">Some friendly
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+            </p>
+            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
+                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+            </div>
+           
+    <p style="padding: 20px 2% 10px 10px; font-size:large;">
+      <a href="#" class="subdued">Like</a>
+      <a href="#" class="subdued">Share</a>
+    </p> 
+            
+    </div>
+        
+        
+        <div class="list card " id="afeed1">
+          
+            <ion-item class="item-avatar  " id="activityFeed-list-item39">
+                <h2>Item</h2>
+                <p>1 min ago</p>
+            </ion-item>
+            <p style="padding: 15px">Some friendly
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+            </p>
+            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
+                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+            </div>
+           
+    <p style="padding: 20px 2% 10px 10px; font-size:large;">
+      <a href="#" class="subdued">Like</a>
+      <a href="#" class="subdued">Share</a>
+    </p> 
+            
+    </div>
+          
+          
+          <div class="list card " id="afeed1">
+          
+            <ion-item class="item-avatar  " id="activityFeed-list-item39">
+                <h2>Item</h2>
+                <p>1 min ago</p>
+            </ion-item>
+            <p style="padding: 15px">Some friendly
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+            </p>
+            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
+                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+            </div>
+           
+    <p style="padding: 20px 2% 10px 10px; font-size:large;">
+      <a href="#" class="subdued">Like</a>
+      <a href="#" class="subdued">Share</a>
+    </p> 
+            
+    </div>
+          </div>
+        
+  </ion-content>
+    
+</ion-view>

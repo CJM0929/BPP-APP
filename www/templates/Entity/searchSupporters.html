@@ -1,0 +1,49 @@
+<ion-view cache-view="false" title="Activity Feed"  id="page18" class=" ">
+   
+     <ion-nav-buttons side="right">
+    <button class="button icon-left ion-edit" ng-click="newPost()"></button>
+    </ion-nav-buttons>
+    
+    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+        
+        
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+        
+        <div class="spacer" style="width: 300px; height: 20px;"></div>
+        
+        <div class="list">
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Email">
+    </label>
+    <button class="button button-small button-royal">
+      Submit
+    </button>
+  </div>
+
+</div>
+<!--        <a ng-click="postData()" ui-sref="dashboard.EactivityFeed" class=" button button-royal  button-block " style="font-size: 20px;">Post</a>-->
+
+    </ion-content>
+    
+    <ion-footer-bar align-title="right" keyboard-attach class="bar-royal">
+     
+    <div class="buttons">
+      <button class="button button-icon-left button-clear ion-image" ng-click="addImage()"></button>
+    </div>
+    
+    <h1 class="title"></h1>
+    
+    <div class="buttons" ng-click="doSomething()">
+      <button class="button">{{returnCount()}}</button>
+      <button class="button button-royal ion-android-send" style="font-size: 20px;"ng-click="postData()" ui-sref="dashboard.EactivityFeed"></button>
+    </div>
+     
+  </ion-footer-bar>
+    
+    
+</ion-view>

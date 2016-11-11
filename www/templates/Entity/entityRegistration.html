@@ -1,0 +1,307 @@
+<ion-view title="Entity Sign up" id="page15" class=" ">
+    
+   
+    
+    <ion-content padding="true"  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+        
+        
+        
+        <form  name="myForm" class="list" novalidate>
+                
+            <ion-item class="item-divider custom-item-divider" >Basic Information</ion-item>
+            
+            <item-divider class="item item-input"> <!--   ng-model="entityName"-->
+            <button ng-click="tip1()" class="icon ion-information-circled button button-small button-clear button-positive" style="padding-left: 1px; padding-right: 10px;"></button>
+            <span class="input-label">Username</span>
+            <input type="text" ng-model="data.username" required>   
+            </item-divider>
+            
+            <item-divider class="item item-input"> <!--   ng-model="entityName"-->
+            <span class="input-label">Entity name</span>
+            <input type="text" ng-model="data.ent_name" placeholder="Save the pandas" >    
+            </item-divider>
+         
+            <item-divider class="item item-input">  
+            <span class="input-label">IRS Number</span>
+            <input type="text" ng-model="data.irs" placeholder="#####" required>    
+            </item-divider>
+            
+<!--
+            <item-divider class="item item-input " >
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="data.password" placeholder="P@ssw0rd" required>
+            </item-divider>
+-->
+            
+            <item-divider class="item item-input ">
+        <button ng-click="tip5()" class="icon ion-information-circled button button-small button-clear button-positive" style="padding-left: 1px; padding-right: 10px;"></button>
+        <span class="input-label">Password</span>
+        <input type="password" name="password" ng-model="data.password" placeholder="P@ssw0rd" 
+           ng-minlength="8" 
+           ng-maxlength="25" 
+           required>
+            <br>
+        <p ng-show="myForm.password.$invalid && myForm.password.$touched" style="color:red;"  class="input-label">!</p>
+            <br>
+        </item-divider>
+            
+        <label class="item item-input ">
+        <span class="input-label">Confirm Password</span>
+        <input type="password" name="password" ng-model="passwordConfirmation" placeholder="P@ssw0rd" 
+           ng-minlength="8" 
+           ng-maxlength="25" 
+            ng-pattern="data.password"
+           required>
+            <br>
+        <p ng-show="myForm.password.$invalid && myForm.password.$touched" style="color:red;"  class="input-label">!</p>
+            <br>
+        </label>
+            
+            
+<!--
+            <item-divider class="item item-input " >
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="data.email" placeholder="example@gmail.com" required>
+                
+            </item-divider>
+-->
+            
+             <item-divider class="item item-input ">
+          <button ng-click="tip2()" class="icon ion-information-circled button button-small button-clear button-positive" style="padding-left: 1px; "></button>
+            <span class="input-label">Email</span>
+            <input type="email" 
+                   name="email" 
+                   ng-model="data.email" 
+                   ng-model-options="{ updateOn: 'blur' }" 
+                   placeholder="Enter the email here." requiered>
+                
+            <span style="color:red" ng-show="myForm.email.$invalid && myForm.email.$dirty">
+            <span ng-show="myForm.email.$error.required">!</span>
+            <span ng-show="myForm.email.$error.email">!</span>
+            </span>
+           
+            </item-divider>
+            
+            <item-divider class="item item-input ">
+          
+            <span class="input-label">Confirm Email</span>
+            <input type="email" 
+                   name="email" 
+                   ng-model="emailConfirmation" 
+                   ng-model-options="{ updateOn: 'blur' }" 
+                   placeholder="Enter the email here." 
+                   ng-pattern="data.email"
+requiered>
+                
+            <span style="color:red" ng-show="myForm.email.$invalid && myForm.email.$dirty">
+            <span ng-show="myForm.email.$error.required">!</span>
+            <span ng-show="myForm.email.$error.email">!</span>
+            </span>
+           
+            </item-divider>
+            
+            
+<!--
+            <item-divider class="item item-input " >
+                <span class="input-label">Website</span>
+                <input type="text" ng-model="data.web">
+                
+            </item-divider>
+-->
+            
+            <item-divider class="item item-input " >
+                <button ng-click="tip3()" class="icon ion-information-circled button button-small button-clear button-positive" style="padding-left: 1px; "></button>
+                <span class="input-label">Phone</span>
+                <input type="tel" ng-model="data.phone" placeholder="1234567890" required>
+            </item-divider>
+            
+<!--
+            <item-divider class="item item-input " >
+                <span class="input-label" style="color:red">Alternate Phone</span>
+                <input type="tel" ng-model="data.aphone" placeholder="123-456-7890">
+            </item-divider>
+-->
+            
+            <item-divider class="item item-input " >
+                <button ng-click="tip4()" class="icon ion-information-circled button button-small button-clear button-positive" style="padding-left: 1px; "></button>
+                <span class="input-label">Fax</span>
+                <input type="tel" ng-model="data.fax" placeholder="1234567890" required>
+            </item-divider>
+            
+            
+            <item-divider class="item item-input " >
+                <span class="input-label">Founded on</span>
+                <input type="date" value="2012-10-01" ng-model="data.founded_on" >
+            </item-divider>
+            
+            <item-divider class="item item-select " >
+            <span class="input-label">Assign Category</span>
+            <select ng-model="data.category">
+            <option value="Poverty">Poverty</option>
+            <option value="Animals">Animals</option>
+            <option value="Health">Health</option>
+            <option value="Environment">Environment</option>
+            <option value="Education">Education</option>
+            <option value="Human Rights">Human Rights</option>
+            <option value="Human Services">Human Services</option>
+            <option value="Children">Children</option>
+            <option value="Hunger">Hunger</option>
+            <option value="Disaster Relief">Disaster Relief</option>
+            <option value="International">International</option>
+              </select>
+        </item-divider>
+                        
+
+            
+            <div class="spacer" style="width: 300px; height: 18px;"></div>
+            
+            <ion-item class="item-divider custom-item-divider">Addresss</ion-item>
+            
+            <ion-list>
+                <item-divider class="item item-input ">
+                    <span class="input-label">Street Line 1</span>
+                    <input type="text" ng-model="data.address1" placeholder="">
+                </item-divider>
+                
+                <item-divider class="item item-input ">
+                    <span class="input-label">Street Line 2</span>
+                    <input type="text" ng-model="data.address2" placeholder="">
+                </item-divider>
+                
+                <label class="item item-select " >
+                    <span class="input-label">City</span>
+                    <select ng-model="data.city">
+                        <option value="Adjuntas">Adjuntas</option>
+                        <option value="Aguada">Aguada</option>
+                        <option value="Aguadilla">Aguadilla</option>
+                        <option value="Aguas Buenas">Aguas Buenas</option>
+                        <option value="Aibonito">Aibonito</option>
+                        <option value="Añasco">Añasco</option>
+                        <option value="Arecibo">Arecibo</option>
+                        <option value="Arroyo">Arroyo</option>
+                        <option value="Barceloneta">Barceloneta</option>
+                        <option value="Barranquitas">Barranquitas</option>
+                        <option value="Bayamón">Bayamón</option>
+                        <option value="Cabo Rojo">Cabo Rojo</option>
+                        <option value="Caguas">Caguas</option>
+                        <option value="Camuy">Camuy</option>
+                        <option value="Canóvanas">Canóvanas</option>
+                        <option value="Carolina">Carolina</option>
+                        <option value="Carolina-Isla Verde">Carolina-Isla Verde</option>
+                        <option value="Cataño">Cataño</option>
+                        <option value="Cayey">Cayey</option>
+                        <option value="Ceiba">Ceiba</option>
+                        <option value="Ciales">Ciales</option>
+                        <option value="Cidra">Cidra</option>
+                        <option value="Coamo">Coamo</option>
+                        <option value="Comerío">Comerío</option>
+                        <option value="Corozal">Corozal</option>
+                        <option value="Culebra">Culebra</option>
+                        <option value="Dorado">Dorado</option>
+                        <option value="Fajardo">Fajardo</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Guánica">Guánica</option>
+                        <option value="Guayama">Guayama</option>
+                        <option value="Guayanilla">Guayanilla</option>
+                        <option value="Guaynabo">Guaynabo</option>
+                        <option value="Gurabo">Gurabo</option>
+                        <option value="Hatillo">Hatillo</option>
+                        <option value="Hormigueros">Hormigueros</option>
+                        <option value="Humacao">Humacao</option>
+                        <option value="Humacao-Palmas">Humacao-Palmas</option>
+                        <option value="Isabela">Isabela</option>
+                        <option value="Jayuya">Jayuya</option>
+                        <option value="Juana Díaz">Juana Díaz</option>
+                        <option value="Juncos">Juncos</option>
+                        <option value="Lajas">Lajas</option>
+                        <option value="Lares">Lares</option>
+                        <option value="Las Marías">Las Marías</option>
+                        <option value="Las Piedras">Las Piedras</option>
+                        <option value="Loíza">Loíza</option>
+                        <option value="Luquillo">Luquillo</option>
+                        <option value="Manatí">Manatí</option>
+                        <option value="Maricao">Maricao</option>
+                        <option value="Maunabo">Maunabo</option>
+                        <option value="Mayagüez">Mayagüez</option>
+                        <option value="Moca">Moca</option>
+                        <option value="Morovis">Morovis</option>
+                        <option value="Naguabo">Naguabo</option>
+                        <option value="Narajitos">Naranjitos</option>
+                        <option value="Orocovis">Orocovis</option>
+                        <option value="Patillas">Patillas</option>
+                        <option value="Peñuelas">Peñuelas</option>
+                        <option value="Ponce">Ponce</option>
+                        <option value="Quebradillas">Quebradillas</option>
+                        <option value="Rincón">Rincón</option>
+                        <option value="Río Grande">Río Grande</option>
+                        <option value="Sabana Grande">Sabana Grande</option>
+                        <option value="Salinas">Salinas</option>
+                        <option value="San Germán">San Germán</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="San Juan, Condado">San Juan, Condado</option>
+                        <option value="San Juan, Hato Rey">San Juan, Hato Rey</option>
+                        <option value="San Juan, Santurce">San Juan, Santurce</option>
+                        <option value="San Juan, Viejo San Juan">San Juan, Viejo San Juan</option>
+                        <option value="San Lorenzo">San Lorenzo</option>
+                        <option value="San Sebastián">San Sebastián</option>
+                        <option value="Santa Isabel">Santa Isabel</option>
+                        <option value="Toa Alta">Toa Alta</option>
+                        <option value="Toa Baja">Toa Baja</option>
+                        <option value="Toa Baja, Levittown">Toa Baja, Levittown</option>
+                        <option value="Trujillo Alto">Trujillo Alto</option>
+                        <option value="Utuado">Utuado</option>
+                        <option value="Vega Alta">Vega Alta</option>
+                        <option value="Vega Baja">Vega Baja</option>
+                        <option value="Vieques">Vieques</option>
+                        <option value="Villalba">Villalba</option>
+                        <option value="Yabucoa">Yabucoa</option>
+                        <option value="Yauco">Yauco</option>
+                    </select>
+                </label>           
+                
+                  
+                <item-divider class="item item-input">
+                    <span class="input-label">State</span>
+                    <input type="text" ng-model="data.country" placeholder="">
+                </item-divider>
+                
+<!--                ng-model="data.country"-->
+                
+                <item-divider class="item item-input">
+                    <span class="input-label">ZIP Code</span>
+                    <input type="text" ng-model="data.zip" placeholder="">
+                </item-divider>
+                
+            </ion-list>
+            
+            <div class="spacer" style="width: 300px; height: 5px;"></div>
+<!--
+            <ion-checkbox>I have read the Terms and Conditions</ion-checkbox>
+            <div class="spacer" style="width: 300px; height: 19px;"></div>
+-->
+            <div class="button-bar button-pill">
+             <a ng-click="submitForm2()" 
+ id="SRID" class=" button button-royal  button-block "  ng-disabled="!myForm.$valid">Create Account</a>
+            </div>
+            
+<!--            ng-disabled="!myForm.$valid"-->
+            
+<!--            ui-sref="login"-->
+<!--            <a ui-sref="browseForEntities" id="entitySignUp-button10" class=" button button-stable  button-block ">Reset</a>-->
+        </form>
+    </ion-content>
+    
+<!--
+    <ion-footer-bar align-title="right" keyboard-attach class="bar-royal">
+    
+    <h1 class="title"></h1>
+    
+    <div class="buttons" ng-click="doSomething()">
+      <button class="button button-royal" >Enter</button>
+    </div>
+     
+  </ion-footer-bar>
+-->
+    
+    
+</ion-view>

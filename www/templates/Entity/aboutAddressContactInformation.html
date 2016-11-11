@@ -1,0 +1,68 @@
+
+<ion-view cache-view="false" title="About, Address &amp; Contact Information" id="page20" class=" ">
+
+    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header;">    
+<!--<div class="list card">-->
+
+<ion-item class="item item-avatar-left">
+  <img ng-src="{{info.background || 'img/ionic2.png'}}">
+  <h2 align="center" style="color: #583faa; font-size:170%;"><b>{{info.ent_name}}</b></h2>
+    <hr>
+     <a class="button ion-star button-block button-royal "> Follow</a>
+</ion-item>
+
+<!--          ng-click="myFunc4()"-->
+<ion-item class="item-divider item-icon-right custom-item-divider"><b>About</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!-- ng-show="showMe4"-->
+        <div class="drodpown">
+   
+  <div class="item item-text-wrap">
+     {{info.ent_about || 'Not set!'}}
+      <br><hr>
+      Founded in : {{info.ent_founded || 'Not set!'}}
+                  <span am-time-ago="{{info.ent_founded}}"></span>
+
+   </div>
+    
+</div>
+<!--          ng-click="myFunc2()"-->
+<ion-item class="item-divider item-icon-right custom-item-divider"><b>Address</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--ng-show="showMe2"-->
+        <div  class="drodpown">
+   
+    <ion-item class="item-icon-right" ng-click="">
+    <i class="icon ion-map"></i>
+     {{info.city_name || 'Not set!'}}, {{info.country_name || 'Not set!'}} (PR) {{info.ent_zip || 'Not set!'}}<br>
+     {{info.ent_address1 || 'Not set!'}}<br> 
+     {{info.ent_address2 || 'Not set!'}}
+        
+    </ion-item>
+    
+</div>
+<!--          ng-click="myFunc3()"-->
+    <ion-item  class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--          -->
+<div class="dropdown">
+       
+        <ion-item class="item-icon-right" ng-click="call()">
+            {{info.ent_phone || 'Not set!'}}
+          <i class="icon ion-android-call"></i>
+        </ion-item>
+    
+        <ion-item class="item-icon-right" ng-click="call()">
+            {{info.ent_fax || 'Not set!'}}
+          <i class="icon ion-ios-printer"></i>
+        </ion-item>
+    
+        <ion-item class="item-icon-right" ng-click="mail()">
+            {{info.web_email || 'Not set!'}}
+          <i class="icon ion-ios-email"></i>
+        </ion-item>
+    
+        <ion-item class="item-icon-right " ng-click="website()">
+            {{info.ent_web || 'Not set!'}}
+          <i class="icon ion-ios-home"></i>
+        </ion-item>
+</div>
+    </ion-content>
+</ion-view>
