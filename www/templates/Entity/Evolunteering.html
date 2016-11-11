@@ -1,0 +1,25 @@
+<ion-view title="Create a Volunteering Opportunity">
+    
+    <ion-nav-buttons side="right">
+    <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
+  </ion-nav-buttons>
+    
+    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+        
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+         
+        <br>
+        
+        <ion-item ng-if="e" class="item-avatar  " >
+             <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
+            <h2><b>{{info.ent_name}}</b></h2>
+        </ion-item>
+        
+         <p class="center" style="margin: 20px 0px; color:white">Tap to edit</p>
+        
+        
+    </ion-content>
+</ion-view>

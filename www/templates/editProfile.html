@@ -1,0 +1,57 @@
+<ion-view title="Settings" id="page23">
+    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
+       
+        
+<!--
+         <div id="profile-bg"></div>
+      <div id="contentUsers">
+        <div id="profile-info">
+          <img id="profile-image-users" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+          <h3 id="profile-edit">Change Avatar</h3>
+-->
+        <div>            
+            <ion-profile-picture ng-model="myPicture"/>
+</div>
+        
+
+        <ion-list id="settings-list35">
+
+            <form id="settings-form9" class="list ">
+                
+                
+            <ion-item class="item-divider " id="settings-list-item-divider10">Edit information</ion-item>
+                <label class="item item-input " id="settings-input9">
+                    <span class="input-label">First name</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input " id="settings-input26">
+                    <span class="input-label">Last name</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input " id="settings-input28">
+                    <span class="input-label">Phone</span>
+                    <input type="tel" placeholder="">
+                </label>
+                 <label class="item item-input " id="settings-input28">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="">
+                </label>
+                 <label class="item item-input " id="settings-input28">
+                    <span class="input-label">Zip Code</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-select " id="settings-select5">
+                    <span class="input-label">Gender</span>
+                    <select>
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+            </form>
+            
+             <ion-item class="item-divider " id="settings-list-item-divider17">Privacy</ion-item>
+            <ion-toggle toggle-class="toggle-positive" id="settings-toggle2">Display Age</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" id="settings-toggle3">Display Gender</ion-toggle>
+        </ion-list>
+    </ion-content>
