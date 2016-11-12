@@ -322,7 +322,14 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
      });
      
      
-      $scope.doRefresh = function() {
+     
+    
+    
+    
+    
+    
+    
+    $scope.doRefresh = function() {
 
           
         $http({
@@ -419,6 +426,66 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
   $scope.isItemShown = function(item) {
     return $scope.shownItem === item;
   };
+    
+    
+    
+    $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/posts/'+ $rootScope.entityAdmin.role_id ,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456'}
+    })
+    .success(function (data) {
+        $scope.posts = data.message.posts;
+        console.log($scope.posts[0].id)
+    })
+    
+    
+     $scope.deletePost = function(val) {
+         
+  
+//        $http({
+//        method: 'GET',
+//        skipAuthorization: true,//es necesario enviar el token
+//        url: 'http://hoyportibppr.com/api/entities/posts/'+ent.role_id ,
+//         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+//                   'Accept': 'application/x-www-form-urlencoded',
+//                  'X-API-KEY' : '123456'}
+//    })
+//    .success(function (data) {
+//        $scope.deletee = data.message.posts;
+//        console.log($scope.posts)
+//    })
+    
+         $http({
+        method: 'DELETE',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/post/'+ val ,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456',
+                  TOKEN: token}
+    })
+    .success(function (data) {
+        $scope.delete = data;
+        console.log($scope.posts)
+    
+     }
+    );
+  };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }])
 
@@ -1135,7 +1202,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
 //     }
 //    );
 //  };
-    
+//    
     
     
     
