@@ -186,14 +186,14 @@ on-scroll="onUserDetailContentScroll()"
     <div id="mydiv" class="item tabs tabs-secondary tabs-stable " >
     <a class="tab-item custom-tabs" href="#"> <b>Posts</b> </a>
 	<a class="tab-item custom-tabs" href="#"> <b>Events</b></a>
-    <a class="tab-item custom-tabs" href="#"><b>Volunteer</b></a>
+    <a class="tab-item custom-tabs" href="#"><b>Volunteering</b></a>
 <!--    <a class="tab-item custom-tabs" href="#"><b>Donations</b></a>-->
     </div>
          
 <ion-list > 
     
 
-<div class="list card" ng-repeat="post in posts | orderBy: '-id'">
+<div class="list card" ng-repeat="post in posts  | orderBy: '-post_created'">
     
 <div class="item item-avatar" ng-click="deletePost({{post.id}})"> 
     <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">

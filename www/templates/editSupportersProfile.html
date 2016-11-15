@@ -113,6 +113,7 @@
         
    <div  ng-show="showSkill"  class="dropdown">  
    <ion-checkbox ng-repeat="skill in skills track by $index" class="item item-checkbox checkbox-royal"
+    name="skills[]"
     ng-checked="data.skills[$index].checked"
     ng-model="data.skills[$index]"
     > {{skill.text}} 
