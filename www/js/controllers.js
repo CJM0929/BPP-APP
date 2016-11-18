@@ -117,7 +117,7 @@ $scope.data = {
                 $scope.errorMessage2 = data.message.email;
                 $scope.errorMessage3 = data.message.fname;
                 $scope.errorMessage4 = data.message.lname;
-                $scope.errorMessage5 = data.message.lname;
+                $scope.errorMessage5 = data.message.gender;
 
 
                 console.log($scope.ResponseDetails)
@@ -126,7 +126,11 @@ $scope.data = {
         
    var alertPopup = $ionicPopup.alert({
        title: 'Error Description',
-       template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3 || $scope.errorMessage4 || $scope.errorMessage5 || 'There was an error creating the account. Please check the required fields and try again.'
+       template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3 || $scope.errorMessage4 || $scope.errorMessage5 || 'There was an error creating the account. Either the password or email confirmation fields does not match.'
+       
+//       'There was an error creating the account. Please check the required fields and try again.'
+       
+       
    });     
             
     }       
@@ -606,9 +610,62 @@ $scope.user = {}
 
 
 //About Page Controller
-.controller('aboutAddressContactInformationCtrl', ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state', // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state) {
+.controller('aboutAddressContactInformationCtrl', ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation', // TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation) {
 
+    
+    
+    
+    
+    
+    var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      
+      google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+ 
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });      
+          
+          
+     var infoWindow = new google.maps.InfoWindow({
+      content: "Here I am!"
+  });
+ 
+  google.maps.event.addListener(marker, 'click', function () {
+      infoWindow.open($scope.map, marker);
+  });
+          
+          
+ 
+});
+ 
+  }, function(error){
+    console.log("Could not get location");
+  });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //  
 //  $scope.toggleItem= function(item) {
 //    if ($scope.isItemShown(item)) {
@@ -1051,7 +1108,6 @@ function ($scope, $stateParams) {
    
 .controller('forgotPasswordCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','$state','$ionicPopup',
 function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,$state,$ionicPopup) {
-    
     
     $scope.data = {};
     
