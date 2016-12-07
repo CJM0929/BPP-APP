@@ -2,7 +2,7 @@
     <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class=" manual-remove-top-padding has-header">
       
         
-        <form id="login-form2" class="list ">
+        <form ng-submit="login(user);">
             
             <div class="spacer" style="width: 300px; height: 36px;"></div>
             
@@ -25,7 +25,7 @@
 
     <!-- //////////////////////////////////////////////////// -->
 
-            <a ng-click="login(user);"  class=" button button-royal button-inline block ">Log in</a>
+            <a ng-click="login(user);" class=" button button-royal button-inline block ">Log in</a>
             
         </form>
         <a ui-sref="forgotPassword" style="margin: 0 120px 10px 0; color:#5b12b1; text-decoration:none;" >Forgot Password?</a>

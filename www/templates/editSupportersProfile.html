@@ -7,19 +7,24 @@
 -->
 <ion-view cache-view="false" title="Settings">
     <ion-content  padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
-
-
 <!--
          <div>            
             <ion-profile-picture file-model="data.userfile"/>
         </div>
 -->
-    
 <!--
       <p class="center profile">
           <img ng-click="addPicture()" id="profile-image-users" ng-src="{{ data:image/jpeg;base64 + formData || 'img/ionic2.png'}}">
       </p>
 -->
+        
+<!--
+        <p class="center profile">
+        <a ng-click="changeProfilePicture()">
+           <img ng-src="{{info1 || 'img/ionic2.png'}}">
+         </a>
+      </p>
+-->  
     <div id="profile-bg"></div>
     <div id="contentUsers">
     <div id="profile-info-user">
@@ -27,10 +32,18 @@
         
     <input type="file" file-model="data.userfile">
 
-
     <div class="button-bar button-pill">
         <button class="button" ng-click="submitPicture()" style="color: #583faa;"><strong>Submit Photo</strong></button>
     </div><br>
+        
+        
+<!--
+        <button class="button button-positive button-full" ng-click= "takePhoto()">Take Picture</button>
+   <div class="center">
+       <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+       <img ng-show="imgURI === undefined" ng-src="img/ionic2.png">
+    </div>
+-->
 
 <!--
          <ion-item class="item-divider custom-item-divider">Change Avatar</ion-item>
@@ -109,7 +122,7 @@
                 
                 
     <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider"><b>Skills (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--ng-repeat="skill in skills"-->
+    <!--ng-repeat="skill in skills"-->
         
    <div  ng-show="showSkill"  class="dropdown">  
    <ion-checkbox ng-repeat="skill in skills track by $index" class="item item-checkbox checkbox-royal"
@@ -118,8 +131,18 @@
     ng-model="data.skills[$index]"
     > {{skill.text}} 
     </ion-checkbox>
-        </div>
+    
 <!--
+    <ion-checkbox class="item item-checkbox checkbox-royal"
+    name="skills[]"
+    ng-checked="data.skills[3].checked"
+    ng-model="data.skills[3].text"
+    > {{skills[3].text}} 
+    </ion-checkbox>
+-->    
+    </div>
+<!--
+                 ng-true-value="'{{skill.text}}'" ng-false-value="''"
 
 ng-true-value="true"
     ng-false-value="false"
@@ -133,13 +156,7 @@ ng-true-value="true"
        <ion-checkbox  class="checkbox-royal" ng-model="isChecked">Checkbox Label</ion-checkbox>
         </div>
 
-
-
-
-
         <button type="submit" ng-click="UpdateData()" class=" button button-royal  button-block ">Save</button>
-            
-                
             
         </ion-list>
                     

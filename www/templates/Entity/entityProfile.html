@@ -1,7 +1,7 @@
     <ion-view cache-view="false" title="{{info.ent_name}}">
 <!--background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;-->
 <!--        background-color:rgba(55, 54, 56, 0.08);-->
-         <ion-content  overflow-scroll='false' delegate-handle="userDetailContent"  header-shrink scroll-event-interval="5" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"></ion-content>
+         <ion-content  overflow-scroll='false' delegate-handle="userDetailContent"  header-shrink scroll-event-interval="5" style="background: url(img/test.jpg) no-repeat center;background-size:cover;"></ion-content>
 <!-- Como poner boton en el header a la derecha
             <ion-nav-bar class="bar-royal">
                 <ion-nav-back-button></ion-nav-back-button>
@@ -195,7 +195,7 @@ on-scroll="onUserDetailContentScroll()"
 
 <div class="list card" ng-repeat="post in posts  | orderBy: '-post_created'">
     
-<div class="item item-avatar" ng-click="deletePost({{post.id}})"> 
+<div class="item item-avatar" ng-click="alterPost({{post.id}})"> 
     <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
     <h2 >{{info.ent_name}}</h2>
     <span am-time-ago="post.post_created"></span>

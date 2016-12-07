@@ -26,9 +26,64 @@ angular.module('app', ['ionic','ion-profile-picture','app.controllers', 'app.rou
 
  
           
-.run(function($ionicPlatform, $rootScope, $timeout ) {
+.run(function($ionicPlatform, $rootScope, $timeout ,$cordovaNetwork,$ionicPopup) {
     
 
+    
+    
+    
+    //under development, Network Information
+    //////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+     document.addEventListener("deviceready", function () {
+ 
+        $scope.network = $cordovaNetwork.getNetwork();
+        $scope.isOnline = $cordovaNetwork.isOnline();
+        $scope.$apply();
+        
+        // listen for Online event
+        $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+            $scope.isOnline = true;
+            $scope.network = $cordovaNetwork.getNetwork();
+            
+            $scope.$apply();
+        })
+ 
+        // listen for Offline event
+        $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+            console.log("got offline");
+            $scope.isOnline = false;
+            $scope.network = $cordovaNetwork.getNetwork();
+            
+            $scope.$apply();
+            
+            
+                  if(!$scope.isOnline) {
+
+            $ionicPopup.confirm({
+          title: 'No Internet Connection',
+          content: 'Sorry, no Internet connectivity detected. Please reconnect and try again.'
+        })
+        .then(function(result) {
+          if(!result) {
+            ionic.Platform.exitApp();
+          }
+        });
+                  }
+            
+            
+        })
+ 
+  }, false);
+    //////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
     
     
   $ionicPlatform.ready(function() {
@@ -36,8 +91,8 @@ angular.module('app', ['ionic','ion-profile-picture','app.controllers', 'app.rou
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-      cordova.plugins.Keyboard.disableScroll(true);
-        cordova.plugins.Keyboard.close();
+      cordova.plugins.Keyboard.disableScroll(false);
+      cordova.plugins.Keyboard.close();
 
     }
     if (window.StatusBar) {

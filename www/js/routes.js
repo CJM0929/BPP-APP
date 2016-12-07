@@ -279,6 +279,13 @@ angular.module('app.routes', ['angular-jwt'])
       templateUrl: 'templates/Entity/entityProfile.html',
       controller: 'entityProfileCtrl'
   })
+  
+//  .state('editRegularPost',{
+//      url: '/editNormalPost',
+//      templateUrl: 'templates/editRegularPost.html',
+//      controller: 'editRegularPostCtrl'
+//  })
+  
 //////////////////////////////////////////////////////////
 $urlRouterProvider.otherwise('/login')
 

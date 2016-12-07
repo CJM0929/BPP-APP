@@ -2,65 +2,73 @@
  <ion-content padding="true"  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
         
 <!--            <ion-list>-->
-                
- <ion-item ng-click="eventSection()"class="item-divider item-icon-right custom-item-divider"><b>Create an Event</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--             ng-click="eventSection()"   -->
+ <ion-item class="item-divider item-icon-right custom-item-divider"><b>Create an Event</b> <i class="icon ion-chevron-down"></i></ion-item>
             <!--    <i class="icon ion-location"> </i> -->
-            <div ng-show="showEvent" class="drodpown">            
+<!--            <div ng-show="showEvent" class="drodpown">            -->
 
             <label class="item item-input">
             <span class="input-label">Event Title</span>
-            <input type="text" ng-model="" placeholder="Title here...">   
+            <input type="text" ng-model="data.title" placeholder="Title here...">   
             </label>
         
             
             <label class="item item-input">
-            <textarea ng-model="test" rows="6"  placeholder="Event Description">Event Description</textarea>
-            <input type="text"  placeholder="">
+            <textarea rows="6" style="color:black"  ng-model="data.description"  placeholder="Event Description">Event Description</textarea>
             </label>
                 
            
-                
+<!--
             <label class="item item-input">
             <input type="file" ng-model="data" >
             </label>
+-->
                 
-
-
 
 <!--            <div class="spacer" style="width: 300px; height: 18px;"></div>-->
 
             <ion-item class="item-divider custom-item-divider" >Date/Time</ion-item>
+                
+                
+<!--<a ng-click = "calendar()" id="SRID" class=" button button-royal  button-block ">Pick Date</a>-->
 
+<!--
             <label class="item item-input" >
                 <span class="input-label">Start Date</span>
-                <input type="date" ng-model="data.startDate" placeholder="hello">
+                <input type="date" ng-model="data.start_date" placeholder="hello">
             </label>
+-->
             
              <label class="item item-input" >
                 <span class="input-label">Start Time</span>
-                            <input type="time" ng-model="data.startTime" placeholder="">
+                            <input type="datetime-local" ng-model="data.start_time" placeholder="">
+            </label>
+                
+            <label class="item item-input" >
+                <span class="input-label">End Time</span>
+                            <input type="datetime-local" ng-model="data.end_time" placeholder="">
             </label>
 
+<!--
             <label class="item item-input" >
                 <span class="input-label">End Date</span>
-                <input type="date" ng-model="data.endDate" placeholder="">
+                <input type="date" ng-model="data.end_date" placeholder="">
             </label>
                       
             <label class="item item-input" >
                 <span class="input-label">End Time</span>
-                <input type="time" ng-model="data.endTime" placeholder="">
+                <input type="time" ng-model="data.end_time" placeholder="">
             </label>
+-->
 
-            
             
             <ion-item class="item-divider custom-item-divider" >Addresss</ion-item>
             
             <label class="item item-input">
-            <textarea ng-model="test" rows="3"  placeholder="Enter Full Address Here"></textarea>
-            <input type="text"  placeholder="">
+            <textarea style="color:black" ng-model="data.address" rows="3"  placeholder="Enter Full Address Here"></textarea>
             </label>
                 
-            <a ng-click="submitForm2()" ui-sref="animal" id="SRID" class=" button button-royal  button-block ">Create Event</a>
+            <a ng-click="postEvent()" ui-sref="dashboard.Eevents" id="SRID" class=" button button-royal  button-block ">Create Event</a>
 
                 
             </ion-list>

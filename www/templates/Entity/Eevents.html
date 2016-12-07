@@ -1,25 +1,69 @@
-<ion-view title="Create an Event">
-    
-    <ion-nav-buttons side="right">
+<ion-view cache-view="false" title="Events">
+<!--    style="box-shadow: 2px 2px 4px grey;"-->
+    <ion-nav-buttons  side="right">
     <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
-  </ion-nav-buttons>
+    </ion-nav-buttons>
     
-    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+    <ion-content  class="has-header" style="background: #f6f7f8;">
+<!--   #b8def5     style="background: #fafafa;"-->
+<!--        style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"-->
         
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-         
         <br>
         
-        <ion-item ng-if="e" class="item-avatar  " >
-             <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
-            <h2><b>{{info.ent_name}}</b></h2>
-        </ion-item>
+    <ion-item ng-if="e" class="item-avatar  " >
+         <img src="{{entityAdmin.photo || 'img/ionic2.png'}}"><b>{{info.ent_name}}</b>
+<!--        <h2><b>{{info.ent_name}}</b></h2>-->
+    </ion-item>
+
+     <p class="center" style="margin: 20px 0px;">Tap to edit</p>
         
-         <p class="center" style="margin: 20px 0px; color:white">Tap to edit</p>
-        
-        
+<ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+</ion-refresher>
+<ion-list >  
+<div class="list card" ng-repeat="post in posts  | orderBy: '-event_created'">
+  <div class="item item-avatar" ng-click="alterPost({{ent_id.id}})">
+    <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
+<!--    <p>{{post.post_created}}</p>-->
+      <span am-time-ago="post.event_created"></span>
+
+      <div item class="item-button-right">
+<!--      <button ng-click="deletePost()" class=" button button-royal button-small ">Delete</button>-->
+    </div>
+  </div>
+
+    
+    <div class="card">
+  <div class="item item-divider">
+      Event Title
+        </div>
+  <div class="item item-text-wrap">
+      {{post.title}}
+  </div>
+<div class="item item-divider">
+      Event Description
+        </div>
+  <div class="item item-text-wrap">
+      {{post.description}}
+  </div>
+        <div class="item item-divider">
+      Dates
+        </div>
+  <div class="item item-text-wrap">
+      From: {{post.event_created}}<br><br>
+      to: {{post.event_modified}}
+
+  </div>
+<div class="item item-divider">
+      Address
+        </div>
+  <div class="item item-text-wrap">
+      {{post.address}}
+  </div>
+
+</div>
+</ion-list>
+   
     </ion-content>
 </ion-view>

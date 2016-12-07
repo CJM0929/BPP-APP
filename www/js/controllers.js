@@ -27,23 +27,23 @@ $scope.data = {
           
       };
     
-    $scope.tip2 = function() {
-
-      var alertPopup = $ionicPopup.alert({
-       title: 'First Name rules',
-       template: 'The First Name can only contain letters and spaces'
-        });   
-          
-      };
-    
-    $scope.tip3 = function() {
-
-      var alertPopup = $ionicPopup.alert({
-       title: 'Last Name rules',
-       template: 'The Last Name can only contain letters and spaces.'
-        });   
-          
-      };
+//    $scope.tip2 = function() {
+//
+//      var alertPopup = $ionicPopup.alert({
+//       title: 'First Name rules',
+//       template: 'The First Name can only contain letters and spaces'
+//        });   
+//          
+//      };
+//    
+//    $scope.tip3 = function() {
+//
+//      var alertPopup = $ionicPopup.alert({
+//       title: 'Last Name rules',
+//       template: 'The Last Name can only contain letters and spaces.'
+//        });   
+//          
+//      };
 
     $scope.tip4 = function() {
 
@@ -54,23 +54,23 @@ $scope.data = {
           
       };
     
-    $scope.tip5 = function() {
-
-      var alertPopup = $ionicPopup.alert({
-       title: 'Rule for Username',
-       template: 'The Confirm Email field must match the previous field with the corresponding rules'
-        });   
-          
-      };
-    
-    $scope.tip6 = function() {
-
-      var alertPopup = $ionicPopup.alert({
-       title: 'Rule for Username',
-       template: 'There was an error creating the account. Please check the required fields and try again.'
-        });   
-          
-      };
+//    $scope.tip5 = function() {
+//
+//      var alertPopup = $ionicPopup.alert({
+//       title: 'Rule for Username',
+//       template: 'The Confirm Email field must match the previous field with the corresponding rules'
+//        });   
+//          
+//      };
+//    
+//    $scope.tip6 = function() {
+//
+//      var alertPopup = $ionicPopup.alert({
+//       title: 'Rule for Username',
+//       template: 'There was an error creating the account. Please check the required fields and try again.'
+//        });   
+//          
+//      };
 
        $scope.tip7 = function() {
 
@@ -81,14 +81,14 @@ $scope.data = {
           
       };
     
-       $scope.tip8 = function() {
-
-      var alertPopup = $ionicPopup.alert({
-       title: 'Confirm Password rules',
-       template: 'The Confirm Password field must match the previous field with the corresponding rules'
-        });   
-          
-      };
+//       $scope.tip8 = function() {
+//
+//      var alertPopup = $ionicPopup.alert({
+//       title: 'Confirm Password rules',
+//       template: 'The Confirm Password field must match the previous field with the corresponding rules'
+//        });   
+//          
+//      };
 //    $scope.confirmPassword = '';
       // calling our submit function.
         $scope.submitForm1 = function() {
@@ -112,13 +112,12 @@ $scope.data = {
             })
          .error(function (data, status, header, config) {
                 $scope.ResponseDetails = data.status;
-                $scope.errorMessage = data.message.password;
-                $scope.errorMessage1 = data.message.username;
-                $scope.errorMessage2 = data.message.email;
-                $scope.errorMessage3 = data.message.fname;
-                $scope.errorMessage4 = data.message.lname;
-                $scope.errorMessage5 = data.message.gender;
-
+                $scope.errorMessage = data.message.username;
+                $scope.errorMessage1 = data.message.fname;
+                $scope.errorMessage2 = data.message.lname;
+                $scope.errorMessage3 = data.message.email;
+                $scope.errorMessage4 = data.message.gender;
+                $scope.errorMessage5 = data.message.password;
 
                 console.log($scope.ResponseDetails)
                 
@@ -211,26 +210,28 @@ function ($scope, $http, $stateParams, $httpParamSerializerJQLike, $state, $ioni
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = data.status;
-                $scope.errorMessage = data.message.password;
-                $scope.errorMessage1 = data.message.username;
-                $scope.errorMessage2 = data.message.email;
-                $scope.errorMessage3 = data.message.fax;
-                $scope.errorMessage4 = data.message.phone;
-                $scope.errorMessage5 = data.message.web;
-                $scope.errorMessage6 = data.message.zip;
-                $scope.errorMessage7 = data.message.ent_name;
-                $scope.errorMessage8 = data.message.founded_on;
-                $scope.errorMessage9 = data.message.address1;
-                $scope.errorMessage10 = data.message.category;
-                $scope.errorMessage11 = data.message.country;
-                $scope.errorMessage12 = data.message.city;
+                
+                $scope.errorMessage = data.message.username;
+                $scope.errorMessage1 = data.message.ent_name;
+                $scope.errorMessage2 = data.message.founded_on;
+                $scope.errorMessage3 = data.message.category;
+                $scope.errorMessage4 = data.message.password;
+                $scope.errorMessage5 = data.message.email;
+                $scope.errorMessage6 = data.message.phone;
+                $scope.errorMessage7 = data.message.fax;                
+                $scope.errorMessage8 = data.message.address1;
+                $scope.errorMessage9 = data.message.city;
+                $scope.errorMessage10 = data.message.country;
+                $scope.errorMessage11 = data.message.zip;
+//                $scope.errorMessage5 = data.message.web;
+              
 
 
           if($scope.ResponseDetails == "failure"){ 
 
         var alertPopup = $ionicPopup.alert({
            title: 'Error Description',
-           template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3 || $scope.errorMessage4 || $scope.errorMessage5 || $scope.errorMessage6 ||  $scope.errorMessage7 ||  $scope.errorMessage8 ||  $scope.errorMessage9 || $scope.errorMessage10 || $scope.errorMessage11 || $scope.errorMessage12 || 'There was an error creating the account. Please check the required fields and try again.'
+           template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3 || $scope.errorMessage4 || $scope.errorMessage5 || $scope.errorMessage6 ||  $scope.errorMessage7 ||  $scope.errorMessage8 ||  $scope.errorMessage9 || $scope.errorMessage10 || $scope.errorMessage11 || 'There was an error creating the account. Please check the required fields and try again.'
         });  
     
     }
@@ -268,8 +269,8 @@ function ($scope, $stateParams) {
 }])
 
 
-.controller('entityProfileCtrl', ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet', // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet) {
+.controller('entityProfileCtrl', ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet','$ionicPopup','$httpParamSerializerJQLike', // TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,$ionicPopup,$httpParamSerializerJQLike) {
 
 //    $scope.profiless = uProfiles.all();
     
@@ -287,6 +288,7 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
     
     //obtenemos el token en localStorage
     var token = store.get('token');
+    $scope.data = {}
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     console.log(tokenPayload);
@@ -447,7 +449,7 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
     })
     
     
-     $scope.deletePost = function(val) {
+     $scope.alterPost = function(val) {
          
          
     var hideSheet = $ionicActionSheet.show({
@@ -465,7 +467,44 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
         },
         
      buttonClicked: function(index) {
-       return true;
+       
+        var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="data.message">',
+    title: 'Edit Post',
+//    subTitle: 'Please use normal things',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Save</b>',
+        type: 'button-royal',
+        onTap: function(e) {
+            //don't allow the user to close unless he enters wifi password
+              
+               $http({
+        url: 'http://hoyportibppr.com/api/entities/post/'+val,
+        method: 'PUT',
+        data: $httpParamSerializerJQLike($scope.data),//
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+            'X-API-KEY' : '123456',
+            'TOKEN' : token
+        }
+      })    .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
+                   $state.go($state.current, $stateParams, {reload: true, inherit: false});
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = data;
+            });
+         
+          
+        }
+      }
+    ]
+  });  
+         
+         
      },
         
     destructiveButtonClicked: function() {
@@ -728,9 +767,10 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
             })
             .success(function (data) {
                 $scope.info = data.message;
+                $scope.skills = {};
                 $scope.skills = data.message.skills;
-                console.log($scope.skills)
-                console.log($scope.info)
+                console.log($scope.skills);
+                console.log($scope.info);
             })
          .finally(function() {
        // Stop the ion-refresher from spinning
@@ -1026,22 +1066,24 @@ function ($scope, $stateParams, eProfiles, $ionicScrollDelegate,$ionicSlideBoxDe
 /////////////////////////////////////////////////////////////////////////
 
 
-.controller('EeventsCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state', '$ionicPopup','moment', //'Upload',
-function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment) {
+.controller('EeventsCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state', '$ionicPopup','moment','$ionicActionSheet','$state', //'Upload',
+function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment,$ionicActionSheet,$state) {
 
     $scope.newPost = function() {
     $state.go('postEvent');
   };
     
+   
     var t1 = store.get('token');
     var tp = jwtHelper.decodeToken(t1);
     console.log(tp);
-     var ent = tp;
-
+    var ent = tp;
+    $scope.data={}
+    
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'http://hoyportibppr.com/api/entities/'+ent.role_id ,
+        url: 'http://hoyportibppr.com/api/entities/'+ent.role_id,
          headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456'}
@@ -1051,10 +1093,129 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
         console.log($scope.info)
     })
     
-}])
-   
-.controller('volunteeringCtrl', ['$scope', '$stateParams', // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+    
+    ////////////////////////////////////////////////////////
+    //all post
+    ////////////////////////////////////////////////////////
+    $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/events/'+ent.role_id,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456'}
+    })
+    .success(function (data) {
+        $scope.posts = data.message.events;
+        console.log($scope.posts)
+    })
+    ////////////////////////////////////////////////////////
+    
+    
+    $scope.doRefresh = function() {
+        
+    $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/events/'+ent.role_id ,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456'}
+    })
+    .success(function (data) {
+        $scope.posts = data.message.events;
+        console.log($scope.posts)
+    })
+    .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+    };// end of function
+    
+    
+    $scope.alterPost = function(val) {
+         
+         
+    var hideSheet = $ionicActionSheet.show({
+        
+     buttons: [
+       { text: 'Edit' }
+     ],
+        
+     destructiveText: 'Delete',
+     titleText: "This post will be deleted and you won't be able to find it anymore. You can also edit this post, if you just want to change something.",
+     cancelText: 'Cancel',
+        
+     cancel: function() {
+          // add cancel code..
+        },
+        
+     buttonClicked: function(index) {
+        
+         var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="data.message">',
+    title: 'Edit Post',
+//    subTitle: 'Please use normal things',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Save</b>',
+        type: 'button-royal',
+        onTap: function(e) {
+            //don't allow the user to close unless he enters wifi password
+              
+               $http({
+        url: 'http://hoyportibppr.com/api/entities/editevent/'+val,
+        method: 'PUT',
+        data: $httpParamSerializerJQLike($scope.data),//
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+            'X-API-KEY' : '123456',
+            'TOKEN' : t1
+        }
+      })    .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
+                   $state.go($state.current, $stateParams, {reload: true, inherit: false});
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = data;
+            });
+         
+          
+        }
+      }
+    ]
+  });
+         
+         
+     },
+        
+    destructiveButtonClicked: function() {
+            
+        $http({
+        method: 'DELETE',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/post/'+ val ,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456',
+                  TOKEN: t1}
+    })
+    .success(function (data) {
+        $state.go($state.current, $stateParams, {reload: true, inherit: false});
+        $scope.delete = data;
+
+        console.log($scope.posts)
+            }     
+        );         
+    }
+        
+   });
+
+         
+         
+  };
 
 
 }])
@@ -1105,6 +1266,29 @@ function ($scope, $stateParams) {
 
 
 }])
+
+//.controller('editRegularPostCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','$state','$ionicPopup',
+//function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,$state,$ionicPopup) {
+//    
+//    var t1 = store.get('token');
+//    var tp = jwtHelper.decodeToken(t1);
+//    console.log(tp);
+//    var ent = tp;
+//    
+//    $http({
+//        method: 'GET',
+//        skipAuthorization: true,//es necesario enviar el token
+//        url: 'http://hoyportibppr.com/api/entities/posts/'+ent.role_id ,
+//         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+//                   'Accept': 'application/x-www-form-urlencoded',
+//                  'X-API-KEY' : '123456'}
+//    })
+//    .success(function (data) {
+//        $scope.posts = data.message.posts;
+//        console.log($scope.posts)
+//    })
+//
+//}])
    
 .controller('forgotPasswordCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','$state','$ionicPopup',
 function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,$state,$ionicPopup) {
@@ -1181,8 +1365,8 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     var t1 = store.get('token');
     var tp = jwtHelper.decodeToken(t1);
     console.log(tp);
-     var ent = tp;
-    
+    var ent = tp;
+    $scope.data={}
     
     $http({
         method: 'GET',
@@ -1199,7 +1383,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     
     
     ////////////////////////////////////////////////////////
-    //all post
+    //all events
     ////////////////////////////////////////////////////////
     $http({
         method: 'GET',
@@ -1237,7 +1421,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     };// end of function
     
     
-    $scope.deletePost = function(val) {
+    $scope.alterPost = function(val) {
          
          
     var hideSheet = $ionicActionSheet.show({
@@ -1255,7 +1439,44 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
         },
         
      buttonClicked: function(index) {
-       return true;
+        
+         var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="data.message">',
+    title: 'Edit Post',
+//    subTitle: 'Please use normal things',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Save</b>',
+        type: 'button-royal',
+        onTap: function(e) {
+            //don't allow the user to close unless he enters wifi password
+              
+               $http({
+        url: 'http://hoyportibppr.com/api/entities/post/'+val,
+        method: 'PUT',
+        data: $httpParamSerializerJQLike($scope.data),//
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+            'X-API-KEY' : '123456',
+            'TOKEN' : t1
+        }
+      })    .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
+                   $state.go($state.current, $stateParams, {reload: true, inherit: false});
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = data;
+            });
+         
+          
+        }
+      }
+    ]
+  });
+         
+         
      },
         
     destructiveButtonClicked: function() {
@@ -1303,8 +1524,8 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('editSupportersProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$cordovaCamera','$ionicPopup','multipartForm','$ionicLoading','Upload','$state',  //'Upload',
-function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $cordovaCamera,$ionicPopup,multipartForm,$ionicLoading,Upload,$state) {
+.controller('editSupportersProfileCtrl', ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$cordovaCamera','$ionicPopup','multipartForm','$ionicLoading','Upload','$state','CordovaCamera',  //'Upload',
+function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $cordovaCamera,$ionicPopup,multipartForm,$ionicLoading,Upload,$state,CordovaCamera) {
 
     ////////////////////////////////////
     //    TOKEN RETRIEVAL
@@ -1424,17 +1645,14 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
         
         
        $scope.skills = data.message.skills;
-        
+       console.log($scope.skills);
 //        angular.forEach($scope.skills, function(value, key) {
 //  console.log(key + ': ' + value);
 //});
-        
-       console.log($scope.skills);
-
 
         $scope.img={}
         $scope.img = data.message.sup_pic;
-        console.log($scope.img);
+//        console.log($scope.img);
         
         $http({
                 method: 'POST',
@@ -1448,10 +1666,49 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
                 .success(function (data) {
                     $scope.info1 = data.message;
                     console.log($scope.info1);
-             
                 })
     })
-  
+    
+    
+    
+    $scope.data = {
+        'submit' : $scope.submit = 1,
+        'userfile' : $scope.userfile
+    }
+    /////////////////////////////////////////////////////////////////////////
+    
+//     // fn update profile picture
+//  $scope.changeProfilePicture = function() {
+//    // Show the action sheet
+//    $ionicActionSheet.show({
+//        buttons: [
+//            { text: 'Take a new picture' },
+//            { text: 'Import from phone library' },
+//        ],
+//        titleText: 'Change your profile picture',
+//        cancelText: 'Cancel',
+//        cancel: function() {
+//            // add cancel code..
+//        },
+//        buttonClicked: function(sourceTypeIndex) {
+//            proceed(sourceTypeIndex)
+//            return true;
+//        }
+//    });
+//    function proceed(sourceTypeIndex) {
+//      Profile.changeProfilePicture(sourceTypeIndex, $scope.data).then(
+//        function(success){
+//            $state.transitionTo($state.current, $state.params, { reload: true, inherit: true, notify: true });
+//        }
+//      );
+//    };
+//  };
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////////
+    //DropDown Skills and Interest
     $scope.showSkill = false;
     $scope.skillFunct = function() {
         $scope.showSkill = !$scope.showSkill;
@@ -1461,11 +1718,9 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     $scope.interestsFunct = function() {
         $scope.showInterests = !$scope.showInterests;
     };
+  
+    
 
-    $scope.data = {
-        'submit' : $scope.submit = 1,
-        'userfile' : $scope.userfile,
-    }
 //    var uploadUrl = 'http://hoyportibppr.com/api/supporters/uploadpicture';
 //    
 //    $scope.$watch('data.userfile', function (img) {
@@ -1487,6 +1742,33 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
     }
     
 }])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Edit Entity Profile Page Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1581,8 +1863,8 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
 //Settings html Page Controller
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.controller('settingsCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$ionicActionSheet',
-function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $ionicActionSheet) {
+.controller('settingsCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$ionicActionSheet','$window',
+function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $ionicActionSheet,$window) {
     
     
     $scope.logout = function() {
@@ -1607,7 +1889,7 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
     $rootScope.s = true;  // when user logout the signup button will dissapear from the html DOM
     $http.defaults.headers.common.Authorization = undefined; // when logout everything will be set to undefined and default
 //    $state.transitionTo($state.current, $state.params, { reload: true, inherit: true, notify: true });//reload pg when transition to login page
-    }// end of logout function
+             }// end of logout function
              
 }
     )};
@@ -1647,7 +1929,6 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
           'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
             'TOKEN' : t1
-            
         }
       }) .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
@@ -1667,13 +1948,65 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
-.controller('postEventCtrl', ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$cordovaCalendar',
-function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $cordovaCalendar) {
+.controller('postEventCtrl',  ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','$cordovaDatePicker',
+function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,$cordovaDatePicker) {
     
-    $scope.showEvent = false;
-    $scope.eventSection = function() {
-    $scope.showEvent = !$scope.showEvent;
+    
+//    $scope.showEvent = false;
+//    $scope.eventSection = function() {
+//    $scope.showEvent = !$scope.showEvent;
+//    };
+    
+    
+    var t1 = store.get('token');
+    var tp = jwtHelper.decodeToken(t1);
+    console.log(tp);
+     var ent = tp;
+    
+    $scope.data = {}
+    
+    $scope.postEvent = function() {
+        
+    $http({
+        url: 'http://hoyportibppr.com/api/entities/newevent',
+        method: 'POST',
+        data: JSON.stringify({event: $scope.data}),//
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+            'X-API-KEY' : '123456',
+            'TOKEN' : t1
+        }
+      }) .success(function (data, status, headers, config) {
+                $scope.PostDataResponse = data;
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = data;
+            });
     };
+    
+//    $scope.calendar = function(){
+//
+//     var options = {
+//    date: new Date(),
+//    mode: 'datetime', // or 'time'
+//    minDate: new Date() - 10000,
+//    allowOldDates: true,
+//    allowFutureDates: false,
+//    doneButtonLabel: 'DONE',
+//    doneButtonColor: '#F2F3F4',
+//    cancelButtonLabel: 'CANCEL',
+//    cancelButtonColor: '#000000'
+//  };
+//
+//  document.addEventListener("deviceready", function () {
+//
+//    $cordovaDatePicker.show(options).then(function(date){
+//        alert(date);
+//    });
+//
+//  }, false);
+//};
+    
     
 //$scope.createEvent = function() {
 //        $cordovaCalendar.createEvent({
@@ -1807,7 +2140,6 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
                 $scope.error3 = data.message.new_passconf;
 
 
-            
             if($scope.ResponseDetails == "failure"){ // this if condition verify the response was an error and display the error to the user
         
                    var alertPopup = $ionicPopup.alert({ // Pop up which shows the errors to the user

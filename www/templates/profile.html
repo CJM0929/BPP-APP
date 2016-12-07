@@ -1,4 +1,4 @@
-<ion-view cache-view="false" title="Supporter Profile" id="page8" class=" ">
+<ion-view cache-view="false" title="{{info.sup_fname}} {{info.sup_lname}}" id="page8" class=" ">
     <ion-content padding="true" style="background: url(img/blurry_abstract-reverse.jpg) no-repeat center;background-size:cover;"></ion-content>
     
     <ion-nav-buttons side="right">
@@ -19,6 +19,7 @@ http://hoyportibppr.com/supporters/displaypic/8d89d41b8ace3198dd37c24d3b3f2f76.j
 
 data:image/jpeg;base64,
 -->
+<!--
       <div id="profile-bg"></div>
       <div id="contentUsers">
         <div id="profile-info-user">
@@ -27,6 +28,24 @@ data:image/jpeg;base64,
           <h4 style="color:#525053"><b>({{supporter.username}})</b></h4>
         </div>
       </div>
+-->
+        
+      <div id="contentUsers">
+        <div id="profile-info-user">
+
+        <p class="center profile">
+           <img ng-src="{{ info1 || 'img/ionic2.png'}}">
+      </p>
+        <div style="margin-top: -17px">
+        <h3 id="profile-name"><b>{{info.sup_fname}} {{info.sup_lname}}</b></h3>
+                    <div style="margin-top: -15px">
+          <h4 style="color:#525053"><b>({{supporter.username}})</b>
+                      </div>
+
+        </div>
+              </div>
+            </div>
+
         
         
 <!--
@@ -53,7 +72,7 @@ data:image/jpeg;base64,
 </b>
   </div> 
     
-    <ion-item class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
+    <ion-item class="item-divider item-icon-right custom-item-divider"><b>Contact</b></ion-item>
 <!--    <i class="icon ion-chatboxes"></i>     ng-click="myFunc3()"-->
         <ion-item class="item-icon-right" style="color:#525053"ng-click="call()">
 <!-- Call us-->

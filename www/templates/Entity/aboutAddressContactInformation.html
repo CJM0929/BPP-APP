@@ -1,7 +1,7 @@
 
 <ion-view cache-view="false" title="About, Address &amp; Contact Information" id="page20" class=" ">
 
-    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header;">    
+    <ion-content padding="true" style="background: #cbcbce" class="has-header;">    
 <!--<div class="list card">-->
 
 <ion-item class="item item-avatar-left">
@@ -11,8 +11,8 @@
      <a class="button ion-star button-block button-royal "> Follow</a>
 </ion-item>
 
-<!--          ng-click="myFunc4()"-->
-<ion-item class="item-divider item-icon-right custom-item-divider"><b>About</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--    <i class="icon ion-chevron-down"></i>      ng-click="myFunc4()"-->
+<ion-item class="item-divider item-icon-right custom-item-divider"><b>About</b> </ion-item>
 <!-- ng-show="showMe4"-->
         <div class="drodpown">
    
@@ -25,44 +25,65 @@
    </div>
     
 </div>
-<!--          ng-click="myFunc2()"-->
-<ion-item class="item-divider item-icon-right custom-item-divider"><b>Address</b> <i class="icon ion-chevron-down"></i></ion-item>
+        
+    <ion-item  class="item-divider item-icon-right custom-item-divider" ><b>Website</b> </ion-item>
+        <ion-item class="item-icon-right " ng-click="website()">
+           <b> {{info.ent_web || 'Not set!'}}</b><br><br>
+<!--                 <a class="button ion-star button button-royal"></a>-->
+<!--          <i class="icon ion-earth" style="color:#583faa"></i>-->
+            
+<!--                 <a class="button ion-earth button-block button-royal button-medium"> Visit Website</a>-->
+
+        </ion-item>
+
+<!--     <i class="icon ion-chevron-down"></i>     ng-click="myFunc2()"-->
+<ion-item class="item-divider item-icon-right custom-item-divider"><b>Address</b> </ion-item>
 <!--ng-show="showMe2"-->
         <div  class="drodpown">
    
-    <ion-item class="item-icon-right" ng-click="">
-    <i class="icon ion-map"></i>
-     {{info.city_name || 'Not set!'}}, {{info.country_name || 'Not set!'}} (PR) {{info.ent_zip || 'Not set!'}}<br>
-     {{info.ent_address1 || 'Not set!'}}<br> 
-     {{info.ent_address2 || 'Not set!'}}
+    <ion-item class="item-icon-right" href="https://maps.google.com/maps?q={{info.ent_address1}} {{info.ent_address2}} {{info.city_name}} PR, {{info.ent_zip}} {{info.country_name}}">
+ 
+<!--    <i class="icon ion-map" style="color:#583faa"></i>-->
+     {{info.ent_address1}} {{info.ent_address2}}
+     {{info.city_name}}, <br> {{info.ent_zip}}, {{info.country_name}}
+        
+<!--                         <a class="button ion-map button-block button-royal button-medium"> Visit on Map</a>-->
+
+
+        
+<!--     <a class="button ion-star button button-royal "></a>-->
+        
+<!--    <a href="http://maps.google.com/?q={{info.ent_address1}} {{info.ent_address2}} {{info.city_name}} PR, {{info.ent_zip}} {{info.country_name}}"></a>-->
         
     </ion-item>
     
 </div>
-<!--          ng-click="myFunc3()"-->
-    <ion-item  class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
+<!--    custom-item-divider    <i class="icon ion-chevron-down"></i> style="color : #583faa"  ng-click="myFunc3()"-->
+    <ion-item  class="item-divider item-icon-right custom-item-divider" ><b>Contact</b> </ion-item>
 <!--          -->
 <div class="dropdown">
        
         <ion-item class="item-icon-right" ng-click="call()">
             {{info.ent_phone || 'Not set!'}}
-          <i class="icon ion-android-call"></i>
+          <i class="icon ion-android-call"style="color:#583faa"></i>
         </ion-item>
     
         <ion-item class="item-icon-right" ng-click="call()">
             {{info.ent_fax || 'Not set!'}}
-          <i class="icon ion-ios-printer"></i>
+          <i class="icon ion-ios-printer"style="color:#583faa"></i>
         </ion-item>
     
         <ion-item class="item-icon-right" ng-click="mail()">
             {{info.web_email || 'Not set!'}}
-          <i class="icon ion-ios-email"></i>
+          <i class="icon ion-ios-email"style="color:#583faa"></i>
         </ion-item>
     
+<!--
         <ion-item class="item-icon-right " ng-click="website()">
             {{info.ent_web || 'Not set!'}}
-          <i class="icon ion-ios-home"></i>
+          <i class="icon ion-ios-home"style="color:#583faa"></i>
         </ion-item>
+-->
 </div>
         
         <div class="spacer" style="width: 300px; height: 41px;"></div>
