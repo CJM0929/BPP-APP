@@ -7,11 +7,8 @@
 -->
 <ion-view cache-view="false" title="Settings">
     <ion-content  padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
-<!--
-         <div>            
-            <ion-profile-picture file-model="data.userfile"/>
-        </div>
--->
+       
+        
 <!--
       <p class="center profile">
           <img ng-click="addPicture()" id="profile-image-users" ng-src="{{ data:image/jpeg;base64 + formData || 'img/ionic2.png'}}">
@@ -28,14 +25,21 @@
     <div id="profile-bg"></div>
     <div id="contentUsers">
     <div id="profile-info-user">
+
     <img id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
         
     <input type="file" file-model="data.userfile">
+        
+<!--
+         <div>
+        <ion-profile-picture ng-model="data.userfile"/>
+</div>
+-->
 
     <div class="button-bar button-pill">
         <button class="button" ng-click="submitPicture()" style="color: #583faa;"><strong>Submit Photo</strong></button>
     </div><br>
-        
+
         
 <!--
         <button class="button button-positive button-full" ng-click= "takePhoto()">Take Picture</button>
@@ -60,14 +64,14 @@
                 
                       <label class="item item-input "  >
                     <span class="input-label">About</span>
-                     <textarea ng-model="data.about" style="color:black" rows="5" cols="50" placeholder="{{info.sup_about}}" type="tel"></textarea>
+                     <textarea ng-model="data.about" style="color:black" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel"></textarea>
                       
                 </label>
                     
                     
                 <label class="item item-input ">
                     <span class="input-label">First Name</span>
-                    <input type="text" name="fname" ng-model="data.fname" placeholder="{{info.sup_fname}}"
+                    <input type="text" name="fname" ng-model="data.fname" placeholder="{{info.message.sup_fname}}"
                      >
 <!--                    ng-init="data.fname=info.sup_fname"-->
                 </label>
@@ -75,7 +79,7 @@
                 
             <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input type="text" name="lname" ng-model="data.lname" placeholder="{{info.sup_lname}}"
+                <input type="text" name="lname" ng-model="data.lname" placeholder="{{info.message.sup_lname}}"
                      >
 <!--               ng-init="data.lname=info.sup_lname" -->
             </label>
@@ -83,7 +87,7 @@
                 
                 <label class="item item-input "  >
                     <span class="input-label">Phone</span>
-                    <input type="tel" ng-model="data.phone" placeholder="{{info.sup_phone}}">
+                    <input type="tel" ng-model="data.phone" placeholder="{{info.message.sup_phone}}">
                 </label>
                 
 <!--
@@ -95,20 +99,20 @@
                 </label>
                  <label class="item item-input "  >
                     <span class="input-label">Zip Code</span>
-                    <input type="text" ng-model="data.zip" placeholder="{{info.sup_zip}}">
+                    <input type="text" ng-model="data.zip" placeholder="{{info.message.sup_zip}}">
                 </label>
                 
                  <label class="item item-input "  >
                     <span class="input-label">Age</span>
                     <input type="number" 
                             ng-model="data.age" 
-                             placeholder="{{info.sup_age}}">
+                             placeholder="{{info.message.sup_age}}">
                 </label>
 <!--                    ng-init="data.age='{{info.sup_age}}'" -->
                 
                  <label class="item item-select " >
                     <span class="input-label">Gender</span>
-                    <select ng-model="data.gender">
+                    <select ng-model="data.sup_gender">
                 <option value="male">male</option>
                 <option value="female">female</option>
                   </select>
@@ -125,10 +129,10 @@
     <!--ng-repeat="skill in skills"-->
         
    <div  ng-show="showSkill"  class="dropdown">  
-   <ion-checkbox ng-repeat="skill in skills track by $index" class="item item-checkbox checkbox-royal"
+   <ion-checkbox ng-repeat="skill in info.message.skills track by $index" class="item item-checkbox checkbox-royal"
     name="skills[]"
-    ng-checked="data.skills[$index].checked"
-    ng-model="data.skills[$index]"
+    ng-checked="info.message.skills[$index].checked"
+    ng-model="info.message.skills[$index].checked"
     > {{skill.text}} 
     </ion-checkbox>
     
@@ -161,3 +165,4 @@ ng-true-value="true"
         </ion-list>
                     
     </ion-content>
+        </ion-view>

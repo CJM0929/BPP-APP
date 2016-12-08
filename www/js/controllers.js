@@ -902,7 +902,7 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,$
                 $scope.info = data.message;
                 $scope.img={}
                 $scope.img = data.message.sup_pic;
-                console.log($scope.img);
+//                console.log($scope.img);
 //                $scope.skills = data.message.skills;
 //                console.log($scope.skills)
                 console.log($scope.info)
@@ -918,7 +918,7 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,$
                 })
                 .success(function (data) {
                     $rootScope.info1 = data.message;
-                    console.log($rootScope.info1);
+//                    console.log($rootScope.info1);
                 })
             })
 
@@ -1196,7 +1196,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
         $http({
         method: 'DELETE',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'http://hoyportibppr.com/api/entities/post/'+ val ,
+        url: 'http://hoyportibppr.com/api/entities/event/'+ val ,
          headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456',
@@ -1537,52 +1537,14 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
    
     ////////////////////
     //This variable  store all the input from the html
-    $scope.data = {};
-    ////////////////////
-    
-    
-    
-    ////////////////////////////////////////////////////////////////////
-    //With this we get the skills from the database using a GET Method
-//    $http({
-//        url: 'http://hoyportibppr.com/api/supporters/skills',
-//        method: 'GET',
-//        headers: {
-//          'Content-Type': 'application/x-www-form-urlencoded', 
-//            'X-API-KEY' : '123456'
-//        }
-//        })
-//        .then( function(response) {
-//        $scope.skills = response.data.message.skills;   
-//        console.log($scope.skills);
-//        $scope.selectedSkills = function selectedSkills() {
-//    return filterFilter($scope.skills, { selected: true });
-//  };
- //////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-// $scope.$watch('skills|filter:{selected:true}', function (nv) {
-//    $scope.selection = nv.map(function (skills) {
-//      return skills.name;
-//    });
-//  }, true);
-//       // $scope.cate1 = response.data.message.categories[0];
-//      console.log($scope.skills)
-//            //console.log($scope.cate1)
-//        })
-    ///////////////////////////////////////////////////////////
+//    $scope.supporterObject = {'supporter': $scope.info.message};
+//        console.info($scope.supporterObject);
+$scope.data={}
    
-    ////////////////////////////////////////////////////////////
-    //This function represent the submit button in the html
-    //When the user press the submit button it will call this function
-    //and send all the data via POST method to the API, storing the data
-    //in the database
-//     $scope.selection = {
-//        value: {"value": false}
-//    };
     $scope.UpdateData = function() { 
+        
+        $scope.supporterObject = {'supporter': $scope.info.message};
+        console.info($scope.supporterObject);
         
          $ionicLoading.show({
                   template: '<p>Loading...</p><ion-spinner></ion-spinner>',
@@ -1592,15 +1554,14 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
           $http({
         url: 'http://hoyportibppr.com/api/supporters/edit',
         method: 'POST',
-        data: $httpParamSerializerJQLike($scope.data),//
+        data: $httpParamSerializerJQLike($scope.data, $scope.supporterObject),//
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
             'TOKEN' : t1
         }
       }) .success(function (data, status, headers, config) {
-                              $state.go('profile');
-
+                $state.go('profile');
                 $scope.PostDataResponse = data;
             })
             .error(function (data, status, header, config) {
@@ -1640,12 +1601,13 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-       $scope.info = data.message;
+       $scope.info = data;
+      
        console.log($scope.info);
         
         
-       $scope.skills = data.message.skills;
-       console.log($scope.skills);
+//       $scope.skills = data.message.skills;
+//       console.log($scope.skills);
 //        angular.forEach($scope.skills, function(value, key) {
 //  console.log(key + ': ' + value);
 //});
@@ -1653,7 +1615,6 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
         $scope.img={}
         $scope.img = data.message.sup_pic;
 //        console.log($scope.img);
-        
         $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -1665,16 +1626,28 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
                 })
                 .success(function (data) {
                     $scope.info1 = data.message;
-                    console.log($scope.info1);
+//                    console.log($scope.info1);
                 })
     })
     
-    
-    
-    $scope.data = {
+         $scope.data = {
         'submit' : $scope.submit = 1,
         'userfile' : $scope.userfile
     }
+         console.log($scope.userfile);
+    
+     $scope.submitPicture = function(){
+       
+        var uploadUrl = 'http://hoyportibppr.com/api/supporters/uploadpicture';
+		multipartForm.post(uploadUrl, $scope.data);
+
+             $ionicLoading.show({
+                  template: '<p>Loading...</p><ion-spinner></ion-spinner>',
+                  duration: 2000
+                })
+    }
+    
+   
     /////////////////////////////////////////////////////////////////////////
     
 //     // fn update profile picture
@@ -1721,25 +1694,16 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
   
     
 
-//    var uploadUrl = 'http://hoyportibppr.com/api/supporters/uploadpicture';
-//    
-//    $scope.$watch('data.userfile', function (img) {
-//        $scope.data.userfile = img;
-//        multipartForm.post(uploadUrl, $scope.data);
-//    });
-//   
+    var uploadUrl = 'http://hoyportibppr.com/api/supporters/uploadpicture';
     
+    $scope.$watch('data.userfile', function (img) {
+        $scope.data.userfile = img;
+        multipartForm.post(uploadUrl, $scope.data);
+    });
+   
     
-    $scope.submitPicture = function(){
-       
-        var uploadUrl = 'http://hoyportibppr.com/api/supporters/uploadpicture';
-		multipartForm.post(uploadUrl, $scope.data);
-
-             $ionicLoading.show({
-                  template: '<p>Loading...</p><ion-spinner></ion-spinner>',
-                  duration: 2000
-                })
-    }
+ 
+   
     
 }])
 
@@ -1948,8 +1912,8 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
-.controller('postEventCtrl',  ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','$cordovaDatePicker',
-function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,$cordovaDatePicker) {
+.controller('postEventCtrl',  ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','$cordovaDatePicker','$ionicPopup',
+function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,$cordovaDatePicker,$ionicPopup) {
     
     
 //    $scope.showEvent = false;
@@ -1978,9 +1942,26 @@ function ($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$
         }
       }) .success(function (data, status, headers, config) {
                 $scope.PostDataResponse = data;
+               $state.go('dashboard.Eevents');
+
+                
             })
             .error(function (data, status, header, config) {
-                $scope.ResponseDetails = data;
+                $scope.ResponseDetails = data.status;
+            
+                 console.log($scope.PostDataResponse);
+                $scope.errorMessage = data.message;
+        
+        
+        if($scope.ResponseDetails == "failure"){ 
+
+        var alertPopup = $ionicPopup.alert({
+           title: 'Error Description',
+           template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3 || $scope.errorMessage4 || 'There was an error creating the event. Please check the required fields and try again.'
+        });  
+    
+    }
+
             });
     };
     

@@ -29,6 +29,11 @@
 /*************************************************************************/
 /* Empty. Add your own CSS if you like */
 
+i.ion-ios-location-outline{
+font-size: 30px;
+color : #583faa;;
+}
+
 /*
 .gallery {
     -webkit-flex-wrap: wrap;
