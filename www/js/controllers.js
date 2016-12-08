@@ -328,7 +328,22 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
      });
      
      
-     
+     $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/events/'+ $rootScope.entityAdmin.role_id,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456'}
+    })
+    .success(function (data) {
+        $scope.eposts = data.message.events;
+        console.log($scope.eposts)
+    })
+    .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
     
     
     
@@ -336,6 +351,24 @@ function ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, 
     
     
     $scope.doRefresh = function() {
+        
+        
+         $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'http://hoyportibppr.com/api/entities/events/'+ $rootScope.entityAdmin.role_id ,
+         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'application/x-www-form-urlencoded',
+                  'X-API-KEY' : '123456'}
+    })
+    .success(function (data) {
+        $scope.eposts = data.message.posts;
+        console.log($scope.posts)
+    })
+    .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
 
           
         $http({
@@ -1153,7 +1186,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
      buttonClicked: function(index) {
         
          var myPopup = $ionicPopup.show({
-    template: '<input type="text" ng-model="data.message">',
+    template: 'Event Title: <input type="text" ng-model="data.title">Description: <input type="text" ng-model="data.description">Start Date: <input type="datetime-local" ng-model="data.start_time">End Date: <input type="datetime-local" ng-model="data.end_time">Location<input type="text" ng-model="data.address">',
     title: 'Edit Post',
 //    subTitle: 'Please use normal things',
     scope: $scope,
@@ -1167,16 +1200,16 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
               
                $http({
         url: 'http://hoyportibppr.com/api/entities/editevent/'+val,
-        method: 'PUT',
-        data: $httpParamSerializerJQLike($scope.data),//
+        method: 'POST',
+        data: JSON.stringify({'event': $scope.data}),//
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
             'TOKEN' : t1
         }
       })    .success(function (data, status, headers, config) {
+                $state.go($state.current, $stateParams, {reload: true, inherit: false});
                 $scope.PostDataResponse = data;
-                   $state.go($state.current, $stateParams, {reload: true, inherit: false});
             })
             .error(function (data, status, header, config) {
                 $scope.ResponseDetails = data;
@@ -1441,7 +1474,7 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
      buttonClicked: function(index) {
         
          var myPopup = $ionicPopup.show({
-    template: '<input type="text" ng-model="data.message">',
+    template: 'Edit Post: <input type="text" ng-model="data.message">',
     title: 'Edit Post',
 //    subTitle: 'Please use normal things',
     scope: $scope,
@@ -1561,7 +1594,9 @@ $scope.data={}
             'TOKEN' : t1
         }
       }) .success(function (data, status, headers, config) {
-                $state.go('profile');
+//                $state.go('profile');
+            $state.go($state.current, $stateParams, {reload: true, inherit: false});
+
                 $scope.PostDataResponse = data;
             })
             .error(function (data, status, header, config) {
@@ -1776,7 +1811,8 @@ function ($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerial
       }) 
            // If there are no errors, .success will run and the data will enter through here
          .success(function (data, status, headers, config) {
-                $state.go('entityProfile');
+//                $state.go('entityProfile');
+                   $state.go($state.current, $stateParams, {reload: true, inherit: false});
 
                 $scope.PostDataResponse = data;
             })

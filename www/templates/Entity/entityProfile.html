@@ -191,26 +191,54 @@ on-scroll="onUserDetailContentScroll()"
     </div>
          
 <ion-list > 
-    
-
 <div class="list card" ng-repeat="post in posts  | orderBy: '-post_created'">
-    
 <div class="item item-avatar" ng-click="alterPost({{post.id}})"> 
     <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
     <h2 >{{info.ent_name}}</h2>
     <span am-time-ago="post.post_created"></span>
     <br>
 </div>
-
 <div class="item item-body">
     <p>
       {{post.post_message}}
     </p>
   </div>
 </div>
-
 </ion-list>
-            <!--                <div class="spacer" style="width: 300px; height: 300px;"></div>-->
+            
+            
+<ion-list >  
+<div class="list card" ng-repeat="epost in eposts  | orderBy: '-event_created'">
+  <div class="item item-avatar" ng-click="alterPost({{epost.id}})">
+    <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
+    <h2 >{{epost.ent_name}}</h2>
+      <span am-time-ago="epost.event_created"></span>
+
+      <div item class="item-button-right">
+    </div>
+  </div>
+
+    <div class="list card">
+  <div class="item item-text-wrap">
+      {{epost.title}}
+  </div>
+  <div class="item item-text-wrap">
+    <p style="font-size:15px; color: #583faa;"><b>Description: </b></p>
+      {{epost.description}}
+  </div>
+  <div class="item item-text-wrap">
+      <p style="font-size:15px; color: #583faa;"><b>From: </b></p>
+<span> {{epost.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</span><br>       <br> 
+      <p style="font-size:15px; color: #583faa;"><b>to: </b></p>
+<span> {{epost.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</span>       
+</div>
+  <ion-item class="item item-text-wrap" href="https://maps.google.com/maps?q={{epost.address}}">
+<p style="font-size:15px; color: #583faa;"><b>Location: </b></p>
+ {{epost.address}}
+  </ion-item>
+</div>
+</ion-list>
+            <!--<div class="spacer" style="width: 300px; height: 300px;"></div>-->
 
 <!--
 <ion-infinite-scroll
@@ -218,11 +246,9 @@ on-scroll="onUserDetailContentScroll()"
     distance="10%">
 </ion-infinite-scroll>
 -->
-
-
-            
+<div>
 <button class = "button button-royal" ng-click = "scrollTop()">Scroll to Top!</button>
-
+</div>
           
           
           

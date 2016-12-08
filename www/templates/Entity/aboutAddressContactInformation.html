@@ -15,13 +15,13 @@
 <ion-item class="item-divider item-icon-right custom-item-divider"><b>About</b> </ion-item>
 <!-- ng-show="showMe4"-->
         <div class="drodpown">
-   
+<!--   {{|| 'Not set!'}}-->
   <div class="item item-text-wrap">
      {{info.ent_about || 'Not set!'}}
       <br><hr>
-      Founded in : {{info.ent_founded || 'Not set!'}}
-<!--                  <span am-time-ago="{{info.ent_founded}}"></span>-->
+     <b> Founded in : <span>{{info.ent_founded  | amDateFormat:'dddd, MMMM Do YYYY'}}</span></b>
 
+<!--                  <span am-time-ago="{{info.ent_founded}}"></span>-->
    </div>
     
 </div>
