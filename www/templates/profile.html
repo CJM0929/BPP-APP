@@ -1,129 +1,80 @@
-<ion-view cache-view="false" title="{{info.sup_fname}} {{info.sup_lname}}" id="page8" class=" ">
-    <ion-content padding="true" style="background: url(img/blurry_abstract-reverse.jpg) no-repeat center;background-size:cover;"></ion-content>
-    
+<!--Profile view-->
+<ion-view cache-view="false" title="Supporter Profile" id="page8" class="">
+
     <ion-nav-buttons side="right">
-    <button class="button icon-left ion-edit" ng-click="editProfile()"></button>
+        <button class="button icon-left ion-edit" ng-click="editProfile()"></button>
     </ion-nav-buttons>
     
-    <ion-content has-header="true">
-        
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-<!--        http://hoyportibppr.com/supporters/displaypic/{{supporter.filepath}}  {{ info.sup_pic || 'img/ionic2.png'}}
-
-{{ getImage(info.sup_pic) || 'img/ionic2.png'}}
-
-http://hoyportibppr.com/supporters/displaypic/8d89d41b8ace3198dd37c24d3b3f2f76.jpg
-
-data:image/jpeg;base64,
--->
-<!--
-      <div id="profile-bg"></div>
-      <div id="contentUsers">
-        <div id="profile-info-user">
-        <img id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
-          <h3 id="profile-name"><b>{{info.sup_fname}} {{info.sup_lname}}</b></h3>
-          <h4 style="color:#525053"><b>({{supporter.username}})</b></h4>
-        </div>
-      </div>
--->
-        
-      <div id="contentUsers">
-        <div id="profile-info-user">
-
-        <p class="center profile">
-           <img ng-src="{{ info1 || 'img/ionic2.png'}}">
-      </p>
-        <div style="margin-top: -17px">
-        <h3 id="profile-name"><b>{{info.sup_fname}} {{info.sup_lname}}</b></h3>
-                    <div style="margin-top: -15px">
-          <h4 style="color:#525053"><b>({{supporter.username}})</b>
-                      </div>
-
-        </div>
-              </div>
+    <ion-content has-header="true" padding="true" style="background: url(img/blurry_abstract-reverse.jpg) no-repeat center;background-size:cover;">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <div id="profile-bg"></div>
+        <div id="contentUsers">
+            <div id="profile-info-user">
+                <img id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
+                <h3 id="profile-name">
+                    <b>{{info.sup_fname}} {{info.sup_lname}}</b>
+                </h3>
+                <h4 style="color:#525053">
+                    <b>({{supporter.username}})</b>
+                </h4>
             </div>
+        </div>
+        
+        <div class="list card">
+            <div class="item item-divider custom-item-divider">About</div>
+            <div class="item item-text-wrap" style="color:#525053">
+                <b>Bio : {{info.sup_about || 'Not set!'}}<br>
+                    <hr>
+                    Gender : {{info.sup_gender || 'Not set!'}} 
+                    <br>
+                    <hr>
+                    Age : {{info.sup_age || 'Not set!'}}
+                    <br>
+                    <hr>
+                    Zip Code : {{info.sup_zip || 'Not set!'}}
+                </b>
+            </div> 
+            
+            <div class="item item-divider custom-item-divider item-icon-right">
+                Contact information
+                <i class="icon ion-chevron-down" ng-click="showContactInfoToggle()"></i>
+            </div>
+            <ion-list ng-show="showContactInfo">
+            <ion-item class="item-icon-right" style="color:#525053"ng-click="call()">
+                <b> Phone Number : {{info.sup_phone || 'Not set!'}}</b>
+                <i class="icon ion-android-call"></i>
+            </ion-item>
+            
+            <ion-item class="item-icon-right" style="color:#525053" ng-click="mail()">
+                <b>Email : {{info.email || 'Not set!'}}</b>
+                <i class="icon ion-ios-email"></i>
+            </ion-item>
+                </ion-list>
+            
+            <div class="item item-divider custom-item-divider item-icon-right">
+                Skills
+                <i class="icon ion-chevron-down" ng-click="showSkillsToggle()"></i>
+            </div>
+            
+            <ion-list ng-repeat="skill in info.skills" ng-show="showSkills">
+                <ion-item ng-if="skill.checked === false">{{skill.text}}</ion-item>
+            </ion-list>
+            
+            
+            <div class="item item-divider custom-item-divider item-icon-right">
+                Interests
+                <i class="icon ion-chevron-down" ng-click="showInterestsToggle()"></i>
+            </div>
+                      <!--
+            Interests' area
 
-        
-        
-<!--
-         <p class="center profile">
-         <img ng-src="{{ProfileData.profilePicture || 'img/ionic2.png'}}">
-             <h3 id="profile-name">{{info.sup_fname}} {{info.sup_lname}}</h3>
-          <h4>{{supporter.username}}</h4>
-      </p>
--->
-       
-<!--     411574   img/user.jpg-->
-<div class="list card">
+            <ion-list ng-repeat="interest in info.interests" ng-show="showInterests">
+                <ion-item ng-if="interest === false">{{interest.text}}</ion-item>
+            </ion-list>
+            
+  -->
+        </div>
 
-  <div class="item item-divider custom-item-divider">About</div>
-  <div class="item item-text-wrap" style="color:#525053">
-   <b> Bio : {{info.sup_about || 'Not set!'}} <br>
-                  <hr>
-    Gender : {{info.sup_gender || 'Not set!'}} <br>
-                  <hr>
-    Age : {{info.sup_age || 'Not set!'}}<br>
-      <hr>
-      
-    Zip Code : {{info.sup_zip || 'Not set!'}}
-</b>
-  </div> 
-    
-    <ion-item class="item-divider item-icon-right custom-item-divider"><b>Contact</b></ion-item>
-<!--    <i class="icon ion-chatboxes"></i>     ng-click="myFunc3()"-->
-        <ion-item class="item-icon-right" style="color:#525053"ng-click="call()">
-<!-- Call us-->
-         <b> Phone Number : {{info.sup_phone || 'Not set!'}}</b>
-          <i class="icon ion-android-call"></i>
-        </ion-item>
-        <ion-item class="item-icon-right" style="color:#525053" ng-click="mail()">
-<!--Send us an e-mail-->
-         <b>Email : {{info.email || 'Not set!'}}</b>
-          <i class="icon ion-ios-email"></i>
-        </ion-item>
-<!--</div>-->
-      
-<!--
-  <div class="item item-divider custom-item-divider"> Christian's Causes</div>
-  <div class="item item-text-wrap">
-    This is a basic Card with some text.
-  </div>
-#525053
--->
-    
-  <div class="item item-divider custom-item-divider"> Skills</div>
-  <div class="item item-text-wrap " style="color:red" >
-<!--  <i class="icon ion-checkmark-round"></i>-->
-  <b>{{info.skill_name || 'Still in development.'}}</b>
-  </div>
-        
-  <div class="item item-divider custom-item-divider">Interests</div>
-  <div class="item item-text-wrap" style="color:red">
-  <b>{{info.interests || 'Still in development.'}}</b>
-  </div>
-      
-<!--
-    <div class="item item-divider custom-item-divider">Volunteering Attendance</div>
-    <a class="item item-avatar" href="#">
-      <img src="img/coming.jpg">
-      <h2>Beach Cleaning at Ocean Park</h2>
-      <p>1 month ago</p>
-    </a>
 
-      
-    <div class="item item-divider custom-item-divider">Followed Entities </div> 
-    <a class="item item-avatar-left" href="#">
-      <img src="img/coming.jpg">
-      <h2>Cruz Roja</h2>
-      <p>"With humanity, towards peace".</p>
-    </a>
--->
-     
-</div>
-        
-        
     </ion-content>
 </ion-view>

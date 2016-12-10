@@ -1,22 +1,21 @@
+<!--Entities view-->
 <ion-view view-title="Entities">
     <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
-        
-          <form class="list ">
+
+        <form class="list">
             <label class="item item-input" name="search">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" ng-model = "query" placeholder="Search">
+                <input type="search" ng-model="query" placeholder="Search">
             </label>
         </form>
         
-        <ion-list >
-<!--            <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-avatar-left item-icon-right" href="#/animal/{{profilelist.id}}">-->
-         <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-avatar-left item-icon-right" href="#/entityProfiles/{{profilelist.id}}">
-		<img ng-src="{{profilelist.avatar}}">
-        <h2>{{profilelist.name}}</h2>
-        <i class="icon ion-chevron-right royal"></i>
-      </ion-item>
-                  
-    </ion-list>
-        
+        <ion-list>
+            <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-avatar-left item-icon-right" href="#/entityProfiles/{{profilelist.id}}">
+                <img ng-src="{{profilelist.avatar}}">
+                <h2>{{profilelist.name}}</h2>
+                <i class="icon ion-chevron-right royal"></i>
+            </ion-item>          
+        </ion-list>
+
   </ion-content>
 </ion-view>

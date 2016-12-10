@@ -1,168 +1,91 @@
-<!--
-         <div id="profile-bg"></div>
-      <div id="contentUsers">
-        <div id="profile-info">
-          <img id="profile-image-users" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-          <h3 id="profile-edit">Change Avatar</h3>
--->
-<ion-view cache-view="false" title="Settings">
+<!--edit supporters profile-->
+<ion-view cache-view="false" title="Edit profile information">
+    
     <ion-content  padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
+        
+        <div>
+        <ion-profile-picture ng-model="eavatar"/>
+        </div>
+        
+        <div id="profile-bg"></div>
+        <div id="profile-info-user"></div>
+        <img id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
+        <input type="file" file-model="data.userfile">
        
-        
-<!--
-      <p class="center profile">
-          <img ng-click="addPicture()" id="profile-image-users" ng-src="{{ data:image/jpeg;base64 + formData || 'img/ionic2.png'}}">
-      </p>
--->
-        
-<!--
-        <p class="center profile">
-        <a ng-click="changeProfilePicture()">
-           <img ng-src="{{info1 || 'img/ionic2.png'}}">
-         </a>
-      </p>
--->  
-    <div id="profile-bg"></div>
-    <div id="contentUsers">
-    <div id="profile-info-user">
-
-    <img id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
-        
-    <input type="file" file-model="data.userfile">
-        
-<!--
-         <div>
-        <ion-profile-picture ng-model="data.userfile"/>
-</div>
--->
-
-    <div class="button-bar button-pill">
-        <button class="button" ng-click="submitPicture()" style="color: #583faa;"><strong>Submit Photo</strong></button>
-    </div><br>
-
-        
-<!--
-        <button class="button button-positive button-full" ng-click= "takePhoto()">Take Picture</button>
-   <div class="center">
-       <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-       <img ng-show="imgURI === undefined" ng-src="img/ionic2.png">
-    </div>
--->
-
-<!--
-         <ion-item class="item-divider custom-item-divider">Change Avatar</ion-item>
-        <label class="item item-input">
-            <i class = "icon ion-camera" style="font-size: 40px; color: #5a2780">_</i>
-            <input type="file" ng-model="" placeholder="Beach Cleaning">
-        </label>
-        </ion-item>
--->
+        <div class="button-bar button-pill">
+            <button class="button" ng-click="submitPicture()" style="color: #583faa;"><strong>Submit Photo</strong></button>
+        </div><br>
 
         <ion-list>
-
-            <ion-item class="item-divider custom-item-divider item-icon-right" > <i class="icon ion-edit"></i>Edit information </ion-item>
-                
-                      <label class="item item-input "  >
-                    <span class="input-label">About</span>
-                     <textarea ng-model="data.about" style="color:black" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel"></textarea>
-                      
-                </label>
-                    
-                    
-                <label class="item item-input ">
-                    <span class="input-label">First Name</span>
-                    <input type="text" name="fname" ng-model="data.fname" placeholder="{{info.message.sup_fname}}"
-                     >
-<!--                    ng-init="data.fname=info.sup_fname"-->
-                </label>
-                
+            <ion-item class="item-divider custom-item-divider item-icon-right"> 
+                <i class="icon ion-edit"></i>Edit information 
+            </ion-item>
                 
             <label class="item item-input">
-                <span class="input-label">Last Name</span>
-                <input type="text" name="lname" ng-model="data.lname" placeholder="{{info.message.sup_lname}}"
-                     >
-<!--               ng-init="data.lname=info.sup_lname" -->
+                <span class="input-label">About</span>
+                     <textarea ng-model="data.message.sup_about" style="color:black" rows="5" cols="50" placeholder="{{data.message.sup_about}}" type="tel"></textarea>
+            </label>
+                            
+            <label class="item item-input">
+                <span class="input-label">First Name</span>
+                <input type="text" name="fname" ng-model="data.message.sup_fname" placeholder="{{data.message.sup_fname}}">
             </label>
                     
+            <label class="item item-input">
+                <span class="input-label">Last Name</span>
+                <input type="text" name="lname" ng-model="data.message.sup_lname" placeholder="{{data.message.sup_lname}}">            
+            </label>
+                    
+            <label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="tel" ng-model="data.message.sup_phone" placeholder="{{data.message.sup_phone}}">
+            </label>
                 
-                <label class="item item-input "  >
-                    <span class="input-label">Phone</span>
-                    <input type="tel" ng-model="data.phone" placeholder="{{info.message.sup_phone}}">
-                </label>
-                
-<!--
-                 <label class="item item-input "  >
-                    <span class="input-label">Email</span>
-                    <input type="email" ng-model="data.email" ng-init="data.mail=info.email" placeholder="{{info.email}}"
-                     >
--->
-                </label>
-                 <label class="item item-input "  >
+            </label>
+                <label class="item item-input">
                     <span class="input-label">Zip Code</span>
-                    <input type="text" ng-model="data.zip" placeholder="{{info.message.sup_zip}}">
-                </label>
+                    <input type="text" ng-model="data.message.sup_zip" placeholder="{{data.message.sup_zip}}">
+            </label>
                 
-                 <label class="item item-input "  >
-                    <span class="input-label">Age</span>
-                    <input type="number" 
-                            ng-model="data.age" 
-                             placeholder="{{info.message.sup_age}}">
-                </label>
-<!--                    ng-init="data.age='{{info.sup_age}}'" -->
+            <label class="item item-input">
+                <span class="input-label">Age</span>
+                <input type="number" ng-model="data.message.sup_age" placeholder="Age" value="{{data.message.sup_age}}">
+            </label>
                 
-                 <label class="item item-select " >
-                    <span class="input-label">Gender</span>
-                    <select ng-model="data.sup_gender">
-                <option value="male">male</option>
-                <option value="female">female</option>
-                  </select>
-                </label>
-                    
-                 
-
+            <label class="item item-select">
+                <span class="input-label">Gender</span>
+                <select ng-model="data.message.sup_gender">
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </label>
                 
-                
-<!--                <input type='checkbox' name=‘skills[]’ value=‘killer’ />-->
-                
-                
-    <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider"><b>Skills (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
-    <!--ng-repeat="skill in skills"-->
+    <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider">
+        <b>Skills (Still in development, do not click!)</b> 
+        <i class="icon ion-chevron-down"></i>
+    </ion-item>
         
-   <div  ng-show="showSkill"  class="dropdown">  
-   <ion-checkbox ng-repeat="skill in info.message.skills track by $index" class="item item-checkbox checkbox-royal"
-    name="skills[]"
-    ng-checked="info.message.skills[$index].checked"
-    ng-model="info.message.skills[$index].checked"
-    > {{skill.text}} 
-    </ion-checkbox>
-    
-<!--
-    <ion-checkbox class="item item-checkbox checkbox-royal"
-    name="skills[]"
-    ng-checked="data.skills[3].checked"
-    ng-model="data.skills[3].text"
-    > {{skills[3].text}} 
-    </ion-checkbox>
--->    
-    </div>
-<!--
-                 ng-true-value="'{{skill.text}}'" ng-false-value="''"
-
-ng-true-value="true"
-    ng-false-value="false"
-
-   -->
-
+   <div ng-show="showSkill" class="dropdown">  
+       <ion-checkbox ng-repeat="skill in data.message.skills" class="item item-checkbox checkbox-royal" name="skills[]"
+        ng-checked="data.message.skills[$index].checked"
+        ng-model="data.message.skills[$index].checked">
+           {{skill.text}} 
+        </ion-checkbox>
+    </div>      
                 
-                
-        <ion-item ng-click="interestsFunct()" class="item-divider item-icon-right custom-item-divider"><b>Interests (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
+        <ion-item ng-click="interestsFunct()" class="item-divider item-icon-right custom-item-divider">
+            <b>Interests (Still in development, do not click!)</b> 
+            <i class="icon ion-chevron-down"></i>
+        </ion-item>
+        
         <div ng-show="showInterests" class="dropdown">
-       <ion-checkbox  class="checkbox-royal" ng-model="isChecked">Checkbox Label</ion-checkbox>
+            <ion-checkbox  class="checkbox-royal" ng-model="isChecked">
+                Checkbox Label
+            </ion-checkbox>
         </div>
-
+        
         <button type="submit" ng-click="UpdateData()" class=" button button-royal  button-block ">Save</button>
-            
-        </ion-list>
-                    
+        
+        </ion-list>            
     </ion-content>
-        </ion-view>
+</ion-view>

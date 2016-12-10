@@ -1,28 +1,31 @@
-<ion-view title="Role Decision" hide-nav-bar="1" hide-back-button="0">
-<ion-content padding="false" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"class="manual-ios-statusbar-padding">
-    
-    
-    <h3 style="padding: -5px 0px -5px 0px; color:white; text-align:center;" >Register as an</h3>
-    <div>
-    <div id="profile-bg2"></div>
-      <div ui-sref="entityRegistration" id="contentLogin">
-        <div id="profile-info2">
-          <img id="profile-image-login" src="img/admin-logo.jpg"> 
-                        <br>
-
-<a ui-sref="entityRegistration"  style="font-weight:600; color: #583faa;" class=" button button-stable button-medium button-inline block icon-left ion-ios-people "><b>Entity Administrator</b></a>            </div>
+<!--Role decision-->
+<ion-view title="Role Decision" hide-nav-bar="0" hide-back-button="0">
+    <ion-content padding="false" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"class="manual-ios-statusbar-padding">
+        <h3 style="padding: -5px 0px -5px 0px; color:white; text-align:center;">Register as an</h3>
+        <div>
+            <div id="profile-bg2"></div>
+            <div ui-sref="entityRegistration" id="contentLogin">
+                <div id="profile-info2">
+                    <img id="profile-image-login" src="img/admin-logo.jpg"> 
+                    <br>
+                    <a ui-sref="entityRegistration" style="font-weight:600; color: #583faa;" class="button button-stable button-medium button-inline block icon-left ion-ios-people">
+                        <b>Entity Administrator</b>
+                    </a>            
+                </div>
             </div>
-            </div>
-    <h3 style=" padding: 20px 10px 0px 5px; color:white; text-align:center;" >or be an</h3>
-    <div>
-    <div id="profile-bg2"></div>
-      <div ui-sref="supporterRegistration" id="contentLogin">
-        <div id="profile-info2">
-          <img id="profile-image-login" src="img/supporter.jpg">
-            <br>
-<a ui-sref="supporterRegistration" style="font-weight:600; color: #583faa;" class=" button button-stable button-medium button-inline block icon-left ion-person-add "><b>Entity Supporter</b></a>         
-          </div>
         </div>
-    </div>
-   
-</ion-content>
+        <h3 style=" padding: 20px 10px 0px 5px; color:white; text-align:center;" >or be an</h3>
+        <div>
+            <div id="profile-bg2"></div>
+            <div ui-sref="supporterRegistration" id="contentLogin">
+                <div id="profile-info2">
+                    <img id="profile-image-login" src="img/supporter.jpg">
+                    <br>
+                    <a ui-sref="supporterRegistration" style="font-weight:600; color: #583faa;" class="button button-stable button-medium button-inline block icon-left ion-person-add">
+                        <b>Entity Supporter</b>
+                    </a>         
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

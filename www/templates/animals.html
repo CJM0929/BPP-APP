@@ -1,6 +1,6 @@
+<!--Animals view:-->
 <ion-view view-title="Animals">
     <ion-content padding="true">
-        
           <form class="list ">
             <label class="item item-input" name="search">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -8,14 +8,12 @@
             </label>
         </form>
         
-        <ion-list >
-            
-         <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-thumbnail-left item-icon-right" href="#/animal/{{profilelist.id}}">
-		<img ng-src="{{profilelist.avatar}}">
-        <h2>{{profilelist.name}}</h2>
-        <i class="icon ion-chevron-right"></i>
-      </ion-item>
-            
-    </ion-list>
+        <ion-list>
+            <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-thumbnail-left item-icon-right" href="#/animal/{{profilelist.id}}">
+                <img ng-src="{{profilelist.avatar}}">
+                <h2>{{profilelist.name}}</h2>
+                <i class="icon ion-chevron-right"></i>
+            </ion-item>    
+        </ion-list>
   </ion-content>
 </ion-view>
