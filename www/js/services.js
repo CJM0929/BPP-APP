@@ -196,7 +196,7 @@ var profiles = [{
     }
 }])
 
-.factory("authFactory", ["$http", "$q", "CONFIG","$ionicPopup","$ionicLoading", function($http, $q, CONFIG, $ionicPopup,$ionicLoading)
+.factory("authFactory", ["$http", "$q", "CONFIG","$ionicPopup","$ionicLoading","$timeout", function($http, $q, CONFIG, $ionicPopup,$ionicLoading,$timeout)
 {
     ////////////////////////////////////////////////////////////////
 	return {
@@ -232,8 +232,12 @@ var profiles = [{
         
                var alertPopup = $ionicPopup.alert({
                    title: 'Error!',
-                   template: "The credentials used to log in were invalid or this user does not exist"
+                   template: 'The credentials used to log in were invalid or this user does not exist.<button ui-sref="roleDecision">Sign up for an account.</button>' 
                });     
+                  
+                $timeout(function() {
+                     alertPopup.close(); //close the popup after 3 seconds for some reason
+                  }, 3000);
 
                 }
                 

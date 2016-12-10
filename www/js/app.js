@@ -29,12 +29,16 @@ angular.module('app', ['ionic','ion-profile-picture','app.controllers', 'app.rou
 .run(function($ionicPlatform, $rootScope, $timeout ) {
     
 
+    
+    
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(true);
+        cordova.plugins.Keyboard.close();
+
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -69,5 +73,6 @@ angular.module('app', ['ionic','ion-profile-picture','app.controllers', 'app.rou
  .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   $ionicConfigProvider.backButton.previousTitleText(false);
   $ionicConfigProvider.backButton.text("")
+  $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 

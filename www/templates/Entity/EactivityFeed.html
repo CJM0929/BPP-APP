@@ -1,4 +1,4 @@
-<ion-view title="Post">
+<ion-view cache-view="false" title="Post">
 <!--    style="box-shadow: 2px 2px 4px grey;"-->
     <ion-nav-buttons  side="right">
     <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
@@ -22,8 +22,8 @@
       on-refresh="doRefresh()">
 </ion-refresher>
 <ion-list >  
-<div class="list card" ng-repeat="post in posts  | orderBy: '-id'">
-  <div class="item item-avatar">
+<div class="list card" ng-repeat="post in posts  | orderBy: '-post_created'">
+  <div class="item item-avatar" ng-click="deletePost({{post.id}})">
     <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
     <h2 >{{info.ent_name}}</h2>
 <!--    <p>{{post.post_created}}</p>-->
