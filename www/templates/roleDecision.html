@@ -1,31 +1,43 @@
 <!--Role decision-->
-<ion-view title="Role Decision" hide-nav-bar="0" hide-back-button="0">
-    <ion-content padding="false" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"class="manual-ios-statusbar-padding">
-        <h3 style="padding: -5px 0px -5px 0px; color:white; text-align:center;">Register as an</h3>
-        <div>
-            <div id="profile-bg2"></div>
-            <div ui-sref="entityRegistration" id="contentLogin">
-                <div id="profile-info2">
-                    <img id="profile-image-login" src="img/admin-logo.jpg"> 
-                    <br>
-                    <a ui-sref="entityRegistration" style="font-weight:600; color: #583faa;" class="button button-stable button-medium button-inline block icon-left ion-ios-people">
-                        <b>Entity Administrator</b>
-                    </a>            
-                </div>
+<ion-view title="Role registration decision" hide-nav-bar="0" hide-back-button="0" cache-view="false">
+
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="true">
+
+        <h1 style="padding: -5px 0px -5px 0px; color:black; text-align:center;">Register as an</h1>
+
+        <div class="list card">
+            <div class="item">
+                <h2 style="font-size: x-large; text-align:center;">Entity Organization</h2>
             </div>
-        </div>
-        <h3 style=" padding: 20px 10px 0px 5px; color:white; text-align:center;" >or be an</h3>
-        <div>
-            <div id="profile-bg2"></div>
-            <div ui-sref="supporterRegistration" id="contentLogin">
-                <div id="profile-info2">
-                    <img id="profile-image-login" src="img/supporter.jpg">
-                    <br>
-                    <a ui-sref="supporterRegistration" style="font-weight:600; color: #583faa;" class="button button-stable button-medium button-inline block icon-left ion-person-add">
-                        <b>Entity Supporter</b>
-                    </a>         
-                </div>
+            <div class="item item-body">
+                <img class="full-image" src="img/admin-logo.jpg">
+                <p>I'm signing up to raise funds for the nonprofit I work for, post and manage volunteer opportunities, engage supporters, or to find out all that GiveGab can do for my organization!
+                </p>
             </div>
+            <a ui-sref="entityRegistration" style="font-weight:600;" class="button button-calm button-medium button-inline block icon-left ion-ios-people">
+                <b>Register as entity organization</b>
+            </a>
         </div>
+
+        <h3 style="padding: 20px 10px 0px 5px; color:black; text-align:center;">or be an</h3>
+
+        <div class="list card">
+            <div class="item">
+                <h2 style="font-size: x-large; text-align:center;"> Supporter</h2>
+            </div>
+            <div class="item item-body">
+                <img class="full-image" src="img/supporter.jpg">
+                <p>I'm signing up to find volunteer opportunities, track my volunteer hours, fundraise for a cause I care about, or to explore all that GiveGab has to offer for nonprofit supporters!
+                </p>
+            </div>
+            <a ui-sref="supporterRegistration" style="font-weight:600;" class="button button-calm button-medium button-inline block icon-left ion-person-add">
+                <b>Register as supporter</b>
+            </a>
+        </div>
+
     </ion-content>
 </ion-view>

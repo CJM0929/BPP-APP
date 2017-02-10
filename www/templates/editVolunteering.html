@@ -1,0 +1,32 @@
+<ion-view cache-view="false" title="Volunteering Opportunities">
+    
+    <style>
+        #ion-content-volunteering-opportunities
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
+    
+    <ion-nav-buttons  side="right">
+        <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
+    </ion-nav-buttons>
+
+    <ion-content padding="false" class="manual-ios-statusbar-padding">
+        
+    <!-- <br> -->
+        
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <div class="list" >
+            <a class="item item-avatar" ng-repeat="post in posts | orderBy: '-event_created'" ng-click="goToVoluntView({{post.id}})">
+                <img src="{{entityAdmin.photo || 'img/eventimg.png'}}">
+                <h2>{{post.title}}</h2>
+                <p>{{post.title}}</p>
+                <p>{{info.ent_name}}</p>
+                <span am-time-ago="post.volunteering_created"></span>
+            </a>
+        </div>
+
+    </ion-content>
+</ion-view>

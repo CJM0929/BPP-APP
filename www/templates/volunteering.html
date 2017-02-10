@@ -1,42 +1,32 @@
-<ion-view title="Volunteering" id="page10" class=" ">
-    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+<ion-view cache-view="false" title="Volunteering">
+    <style>
+        #ion-content-volunteering
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
+    <ion-content padding="false" class="manual-ios-statusbar-padding">
+       
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
         
-             
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
+        <div class="list card" ng-repeat="post in posts | orderBy: '-vol_created'">
         
-        <h1 id="volunteering-heading5" style="color:white;text-align:center;" class=" ">Be a volunteer!</h1>
-        <ion-list id="volunteering-list10" class=" ">
-            <ion-item class="item-thumbnail-left  " id="volunteering-list-item13">
-                <img src="img/XvA1dr1CTLeprOjLKXxF_Beach_clean_up.jpg">
-                <h2>Help clean Ocean Park!</h2>
-            </ion-item>
-        </ion-list>
-        <div class="spacer" style="width: 300px; height: 11px;"></div>
-        <ion-list id="volunteering-list11" class=" ">
-            <ion-item class="item-thumbnail-left  " id="volunteering-list-item25">
-                <img src="img/diMEFaSnSKu0LMjx983w_Fundraiser.jpg">
-                <h2>Help our fundraiser!</h2>
-                <p style="white-space:normal;">Entity name, location, date,etc.</p>
-            </ion-item>
-        </ion-list>
-        <div class="spacer" style="width: 300px; height: 11px;"></div>
-        <ion-list id="volunteering-list12" class=" ">
-            <ion-item class="item-thumbnail-left  " id="volunteering-list-item30">
-                <img src="img/W6jOONApRfyHCzVm1Xfc_Help_the_elders.jpg">
-                <h2>Help us at the X Home</h2>
-                <p style="white-space:normal;">Entity name, location, date,etc.</p>
-            </ion-item>
-        </ion-list>
-        <div class="spacer" style="width: 300px; height: 11px;"></div>
-        <ion-list id="volunteering-list14" class=" ">
-            <ion-item class="item-thumbnail-left  " id="volunteering-list-item26">
-                <img src="img/IB0lpR3MSxaACzxhw9M2_feed_the_homeless.jpg">
-                <h2>Help to feed the homeless</h2>
-                <p style="white-space:normal;">Entity name, location, date,etc.</p>
-            </ion-item>
-        </ion-list>
+            <div class="item item-avatar item item-button-right" ng-click="goToVoluntView(post.id)">
+                <img src="{{entityAdmin.photo || 'img/volunteer.png'}}">      
+                <h2><b>{{post.title}}</b></h2>
+                Hosted by: {{post.ent_name}}
+                <br>
+                <br>
+                Date: {{post.start_time | amCalendar:referenceTime:formats}}
+                <br>
+                Time: {{post.start_time | amDateFormat:'h:mm a'}}
+                <br>
+                Place: {{post.city_name}}
+                <div item ng-click="goToVoluntView(post.id)" class="item-button-right"></div>
+            </div>
+        
+        </div>
+    
     </ion-content>
 </ion-view>

@@ -1,0 +1,49 @@
+<!--Entities view-->
+<ion-view cache-view="false" view-title="Entities">
+    
+    <style>
+        #spacer-entities
+        {
+            height: 50px;
+            width: 300px;
+        }
+        
+        #spacer-two-entities
+        {
+            height: 60px;
+            width: 300px;
+        }
+        
+        #ion-content-entities
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;"
+        }
+        
+    </style>
+    
+    <div class="spacer" id="spacer-entities"></div>    
+    
+    <form class="list bar-subheader">
+        <label class="item item-input" name="search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" ng-model="query" placeholder="Search">
+        </label>
+    </form>
+
+    <ion-content padding="true" id="ion-content-entities">
+        
+        <div class="spacer" id="spacer-two-entities"></div>   
+        
+        <ion-list>
+        
+            <ion-item ng-repeat="entities in entity | filter: query" class="item-avatar-left item-icon-right" ng-click="selectEnt({{entities.ent_id}})">
+                <img ng-src="{{profilelist.avatar || 'img/default.png'}}">
+                <p>{{entities.ent_name}}</p> 
+                <i class="icon ion-chevron-right royal"></i>
+            </ion-item>          
+        
+        </ion-list>
+
+  </ion-content>
+</ion-view>

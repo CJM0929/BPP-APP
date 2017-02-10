@@ -1,73 +1,40 @@
 <ion-view cache-view="false" title="Events">
-<!--    style="box-shadow: 2px 2px 4px grey;"-->
+    
+    <style>
+        #ion-content-events
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
+    
     <ion-nav-buttons  side="right">
-    <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
+        <button class="button icon-left ion-calendar" ng-click="newPost()"> Create</button>
     </ion-nav-buttons>
     
-    <ion-content  class="has-header" style="background: #f6f7f8;">
-<!--   #b8def5     style="background: #fafafa;"-->
-<!--        style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;"-->
+    <ion-content id="ion-content-events" padding="false">
         
-        <br>
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
         
-    <ion-item ng-if="e" class="item-avatar  " >
-         <img src="{{entityAdmin.photo || 'img/ionic2.png'}}"><b>{{info.ent_name}}</b>
-<!--        <h2><b>{{info.ent_name}}</b></h2>-->
-    </ion-item>
-
-     <p class="center" style="margin: 20px 0px;">Tap to edit</p>
-        
-<ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-</ion-refresher>
-<ion-list >  
-<div class="list card" ng-repeat="post in posts  | orderBy: '-event_created'">
-  <div class="item item-avatar" ng-click="alterPost({{post.id}})">
-    <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
-    <h2 >{{post.ent_name}}</h2>
-<!--    <p>{{post.post_created}}</p>-->
-      <span am-time-ago="post.event_created"></span>
-
-      <div item class="item-button-right">
-<!--      <button ng-click="deletePost()" class=" button button-royal button-small ">Delete</button>-->
-    </div>
-  </div>
-
+        <ion-list>  
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
+                <div class="item item-avatar item item-button-right" ng-click="goToEventView(post.id)">
+            
+                    
+                    <img ng-src="{{photos || 'img/EventIcon.jpg'}}">
+                    
+                    <a ng-click="alterPost(post, $index, $event)" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>                
+                    <h2><b>{{post.title}}</b></h2>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                </div>
+                <div class="button-bar">
+                    <a class="button"><b>Going #</b></a>
+                    <a class="button"><b>Interested #</b></a>
+                </div>
+            </div>
+        </ion-list>
     
-    <div class="list card">
-<!--<ion-item class="item-divider item-icon-right custom-item-divider"><b>Event Title</b> </ion-item>-->
-      
-  <div class="item item-text-wrap">
-<!--    <p style="font-size:20px; color: #583faa;"><b>Event Title: </b></p>-->
-      {{post.title}}
-  </div>
-<!--   <ion-item class="item-divider item-icon-right custom-item-divider"><b>Event Description</b> </ion-item>-->
-
-  <div class="item item-text-wrap">
-    <p style="font-size:15px; color: #583faa;"><b>Description: </b></p>
-      {{post.description}}
-  </div>
-<!--   <ion-item class="item-divider item-icon-right custom-item-divider"><b>Dates</b> </ion-item>-->
-
-  <div class="item item-text-wrap">
-      <p style="font-size:15px; color: #583faa;"><b>From: </b></p>
-<span> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</span><br>       <br> 
-      <p style="font-size:15px; color: #583faa;"><b>to: </b></p>
-<span> {{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</span>          
-</div>
-
-<!--       <ion-item class="item-divider item-icon-right custom-item-divider"><b>Address</b> </ion-item>-->
-
-  <ion-item class="item item-text-wrap" href="https://maps.google.com/maps?q={{post.address}}">
-<p style="font-size:15px; color: #583faa;"><b>Location: </b></p>
-
-<!--         <i class="icon ion-ios-location-outline"></i>-->
- {{post.address}}
-  </ion-item>
-
-</div>
-</ion-list>
-   
     </ion-content>
 </ion-view>

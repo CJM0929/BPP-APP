@@ -1,0 +1,38 @@
+<ion-view cache-view="false" title="Events">
+  
+    <style>
+        #ion-content-events
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
+    
+    <ion-nav-buttons side="left">
+ <button ng-show="u" class="button button-clear" ui-sref="home.discover"><i class="icon ion-chevron-left" ></i> </button>
+
+<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+    
+    <ion-content padding="false" id="ion-content-events" class="manual-ios-statusbar-padding">
+    
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
+        
+        <ion-list>
+            <div class="list" ng-repeat="post in posts | orderBy: '-event_created'">
+                <div class="item item-avatar item item-button-right" ng-click="goToEventView(post.id)">
+                    <img src="{{i || 'img/EventIcon.jpg'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
+            </div>
+        </ion-list>
+    
+    </ion-content>
+</ion-view>
+
+

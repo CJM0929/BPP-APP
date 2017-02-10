@@ -1,25 +1,45 @@
-<ion-view title="Create a Volunteering Opportunity">
+<ion-view cache-view="false" title="Volunteerings">
     
-    <ion-nav-buttons side="right">
-    <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
-  </ion-nav-buttons>
+    <style>
+        #ion-content-evolunteerings
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
     
-    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+    <ion-nav-buttons  side="right">
+        <button class="button icon-left ion-calendar" ng-click="newPost()"> Create</button>
+    </ion-nav-buttons>
+    
+    <ion-content padding="false" id="ion-content-evolunteerings">
         
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-         
-        <br>
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>    
         
-        <ion-item ng-if="e" class="item-avatar  " >
-             <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
-            <h2><b>{{info.ent_name}}</b></h2>
-        </ion-item>
+        <ion-list>
+            
+            <div class="card list" ng-repeat="post in posts | orderBy: '-vol_created'">
+                
+                <div class="item item-avatar item item-button-right" ng-click="goToVoluntView(post.id)">
+                    <img src="{{entityAdmin.photo || 'img/volunteer.png'}}">
+                    <a ng-click="alterPost(post.id,$event)" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                    
+                    <h2><b>{{post.title}}</b></h2>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <div item ng-click="goToVoluntView(post.id)" class="item-button-right"></div>
+                
+                </div>
+                
+                <div class="button-bar">
+                    <a class="button"><b>Going #</b></a>
+                    <a class="button"><b>Needed {{post.needed}}</b></a>
+                </div>
+                
+            </div>
         
-         <p class="center" style="margin: 20px 0px; color:white">Tap to edit</p>
-        
-        
+        </ion-list>
+    
     </ion-content>
 </ion-view>

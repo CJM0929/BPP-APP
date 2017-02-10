@@ -1,170 +1,182 @@
-<!--
-         <div id="profile-bg"></div>
-      <div id="contentUsers">
-        <div id="profile-info">
-          <img id="profile-image-users" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-          <h3 id="profile-edit">Change Avatar</h3>
--->
-<ion-view cache-view="false" title="Settings">
-    <ion-content  padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
-       
+<ion-view cache-view="false" title="Edit profile">
+    
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-content padding="true" class="has-header">
         
-<!--
-      <p class="center profile">
-          <img ng-click="addPicture()" id="profile-image-users" ng-src="{{ data:image/jpeg;base64 + formData || 'img/ionic2.png'}}">
-      </p>
--->
+        <div class="center">
+            <img file-model="data.userfile"  ng-src="{{ info1 || 'img/ionic2.png'}}" />
+        </div>
+        <input type="file" file-model="data.userfile">
         
-<!--
-        <p class="center profile">
-        <a ng-click="changeProfilePicture()">
-           <img ng-src="{{info1 || 'img/ionic2.png'}}">
-         </a>
-      </p>
--->  
-    <div id="profile-bg"></div>
-    <div id="contentUsers">
-    <div id="profile-info-user">
-
-    <img file-model="data.userfile" id="profile-image-users" ng-src="{{ info1 || 'img/ionic2.png'}}"/>
-        
-    <input type="file" file-model="data.userfile">
-        
-<!--
-         <div>
-        <ion-profile-picture ng-model="data.userfile"/>
-</div>
--->
-
-<!--
-    <div class="button-bar button-pill">
-        <button class="button" ng-click="submitPicture()" style="color: #583faa;"><strong>Submit Photo</strong></button>
-    </div><br>
--->
-
-        
-<!--
-        <button class="button button-positive button-full" ng-click= "takePhoto()">Take Picture</button>
-   <div class="center">
-       <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-       <img ng-show="imgURI === undefined" ng-src="img/ionic2.png">
-    </div>
--->
-
-<!--
-         <ion-item class="item-divider custom-item-divider">Change Avatar</ion-item>
-        <label class="item item-input">
-            <i class = "icon ion-camera" style="font-size: 40px; color: #5a2780">_</i>
-            <input type="file" ng-model="" placeholder="Beach Cleaning">
-        </label>
-        </ion-item>
--->
-
         <ion-list>
+            
+            <ion-item class="item-divider custom-item-divider item-icon-right">
+                <i class="icon ion-edit"></i>Edit information
+            </ion-item>
 
-            <ion-item class="item-divider custom-item-divider item-icon-right" > <i class="icon ion-edit"></i>Edit information </ion-item>
-                
-                      <label class="item item-input "  >
-                    <span class="input-label">About</span>
-                     <textarea ng-model="data.about" style="color:black" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel"></textarea>
-                      
-                </label>
-                    
-                    
-                <label class="item item-input ">
-                    <span class="input-label">First Name</span>
-                    <input type="text" name="fname" ng-model="data.fname" placeholder="{{info.message.sup_fname}}"
-                     >
-<!--                    ng-init="data.fname=info.sup_fname"-->
-                </label>
-                
-                
+            <label class="item item-input">
+                <span class="input-label">About</span>
+                <textarea style="color: black;" ng-model="info.message.sup_about" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel">
+                </textarea>
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">First Name</span>
+                <input type="text" name="fname" ng-model="info.message.sup_fname" placeholder="{{info.message.sup_fname}}">
+            </label>
+
             <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input type="text" name="lname" ng-model="data.lname" placeholder="{{info.message.sup_lname}}"
-                     >
-<!--               ng-init="data.lname=info.sup_lname" -->
+                <input type="text" name="lname" ng-model="info.message.sup_lname" placeholder="{{info.message.sup_lname}}">
             </label>
-                    
-                
-                <label class="item item-input "  >
-                    <span class="input-label">Phone</span>
-                    <input type="tel" ng-model="data.phone" placeholder="{{info.message.sup_phone}}">
-                </label>
-                
-<!--
-                 <label class="item item-input "  >
-                    <span class="input-label">Email</span>
-                    <input type="email" ng-model="data.email" ng-init="data.mail=info.email" placeholder="{{info.email}}"
-                     >
--->
-                </label>
-                 <label class="item item-input "  >
-                    <span class="input-label">Zip Code</span>
-                    <input type="text" ng-model="data.zip" placeholder="{{info.message.sup_zip}}">
-                </label>
-                
-                 <label class="item item-input "  >
-                    <span class="input-label">Age</span>
-                    <input type="number" 
-                            ng-model="data.age" 
-                             placeholder="{{info.message.sup_age}}">
-                </label>
-<!--                    ng-init="data.age='{{info.sup_age}}'" -->
-                
-                 <label class="item item-select " >
-                    <span class="input-label">Gender</span>
-                    <select ng-model="data.sup_gender">
-                <option value="male">male</option>
-                <option value="female">female</option>
-                  </select>
-                </label>
-                    
-                 
 
-                
-                
-<!--                <input type='checkbox' name=‘skills[]’ value=‘killer’ />-->
-                
-                
-    <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider"><b>Skills (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
-    <!--ng-repeat="skill in skills"-->
-        
-   <div  ng-show="showSkill"  class="dropdown">  
-   <ion-checkbox ng-repeat="skill in info.message.skills track by $index" class="item item-checkbox checkbox-royal"
-    name="skills[]"
-    ng-checked="info.message.skills[$index].checked"
-    ng-model="info.message.skills[$index].checked"
-    > {{skill.text}} 
-    </ion-checkbox>
-    
-<!--
-    <ion-checkbox class="item item-checkbox checkbox-royal"
-    name="skills[]"
-    ng-checked="data.skills[3].checked"
-    ng-model="data.skills[3].text"
-    > {{skills[3].text}} 
-    </ion-checkbox>
--->    
-    </div>
-<!--
-                 ng-true-value="'{{skill.text}}'" ng-false-value="''"
-
-ng-true-value="true"
-    ng-false-value="false"
-
-   -->
-
-                
-                
-        <ion-item ng-click="interestsFunct()" class="item-divider item-icon-right custom-item-divider"><b>Interests (Still in development, do not click!)</b> <i class="icon ion-chevron-down"></i></ion-item>
-        <div ng-show="showInterests" class="dropdown">
-       <ion-checkbox  class="checkbox-royal" ng-model="isChecked">Checkbox Label</ion-checkbox>
-        </div>
-
-        <button type="submit" ng-click="UpdateData()" class=" button button-royal  button-block ">Save</button>
+            <label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="tel" ng-model="info.message.sup_phone" placeholder="{{info.message.sup_phone}}">
+            </label>
             
-        </ion-list>
+            <label class="item item-select">
+                        <span class="input-label">City</span>
+                        <select ng-model="info.message.city_name">
+                            <option value="Adjuntas">Adjuntas</option>
+                            <option value="Aguada">Aguada</option>
+                            <option value="Aguadilla">Aguadilla</option>
+                            <option value="Aguas Buenas">Aguas Buenas</option>
+                            <option value="Aibonito">Aibonito</option>
+                            <option value="Añasco">Añasco</option>
+                            <option value="Arecibo">Arecibo</option>
+                            <option value="Arroyo">Arroyo</option>
+                            <option value="Barceloneta">Barceloneta</option>
+                            <option value="Barranquitas">Barranquitas</option>
+                            <option value="Bayamón">Bayamón</option>
+                            <option value="Cabo Rojo">Cabo Rojo</option>
+                            <option value="Caguas">Caguas</option>
+                            <option value="Camuy">Camuy</option>
+                            <option value="Canóvanas">Canóvanas</option>
+                            <option value="Carolina">Carolina</option>
+                            <option value="Carolina-Isla Verde">Carolina-Isla Verde</option>
+                            <option value="Cataño">Cataño</option>
+                            <option value="Cayey">Cayey</option>
+                            <option value="Ceiba">Ceiba</option>
+                            <option value="Ciales">Ciales</option>
+                            <option value="Cidra">Cidra</option>
+                            <option value="Coamo">Coamo</option>
+                            <option value="Comerío">Comerío</option>
+                            <option value="Corozal">Corozal</option>
+                            <option value="Culebra">Culebra</option>
+                            <option value="Dorado">Dorado</option>
+                            <option value="Fajardo">Fajardo</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Guánica">Guánica</option>
+                            <option value="Guayama">Guayama</option>
+                            <option value="Guayanilla">Guayanilla</option>
+                            <option value="Guaynabo">Guaynabo</option>
+                            <option value="Gurabo">Gurabo</option>
+                            <option value="Hatillo">Hatillo</option>
+                            <option value="Hormigueros">Hormigueros</option>
+                            <option value="Humacao">Humacao</option>
+                            <option value="Humacao-Palmas">Humacao-Palmas</option>
+                            <option value="Isabela">Isabela</option>
+                            <option value="Jayuya">Jayuya</option>
+                            <option value="Juana Díaz">Juana Díaz</option>
+                            <option value="Juncos">Juncos</option>
+                            <option value="Lajas">Lajas</option>
+                            <option value="Lares">Lares</option>
+                            <option value="Las Marías">Las Marías</option>
+                            <option value="Las Piedras">Las Piedras</option>
+                            <option value="Loíza">Loíza</option>
+                            <option value="Luquillo">Luquillo</option>
+                            <option value="Manatí">Manatí</option>
+                            <option value="Maricao">Maricao</option>
+                            <option value="Maunabo">Maunabo</option>
+                            <option value="Mayagüez">Mayagüez</option>
+                            <option value="Moca">Moca</option>
+                            <option value="Morovis">Morovis</option>
+                            <option value="Naguabo">Naguabo</option>
+                            <option value="Narajitos">Naranjitos</option>
+                            <option value="Orocovis">Orocovis</option>
+                            <option value="Patillas">Patillas</option>
+                            <option value="Peñuelas">Peñuelas</option>
+                            <option value="Ponce">Ponce</option>
+                            <option value="Quebradillas">Quebradillas</option>
+                            <option value="Rincón">Rincón</option>
+                            <option value="Río Grande">Río Grande</option>
+                            <option value="Sabana Grande">Sabana Grande</option>
+                            <option value="Salinas">Salinas</option>
+                            <option value="San Germán">San Germán</option>
+                            <option value="San Juan">San Juan</option>
+                            <option value="San Juan, Condado">San Juan, Condado</option>
+                            <option value="San Juan, Hato Rey">San Juan, Hato Rey</option>
+                            <option value="San Juan, Santurce">San Juan, Santurce</option>
+                            <option value="San Juan, Viejo San Juan">San Juan, Viejo San Juan</option>
+                            <option value="San Lorenzo">San Lorenzo</option>
+                            <option value="San Sebastián">San Sebastián</option>
+                            <option value="Santa Isabel">Santa Isabel</option>
+                            <option value="Toa Alta">Toa Alta</option>
+                            <option value="Toa Baja">Toa Baja</option>
+                            <option value="Toa Baja, Levittown">Toa Baja, Levittown</option>
+                            <option value="Trujillo Alto">Trujillo Alto</option>
+                            <option value="Utuado">Utuado</option>
+                            <option value="Vega Alta">Vega Alta</option>
+                            <option value="Vega Baja">Vega Baja</option>
+                            <option value="Vieques">Vieques</option>
+                            <option value="Villalba">Villalba</option>
+                            <option value="Yabucoa">Yabucoa</option>
+                            <option value="Yauco">Yauco</option>
+                        </select>
+                    </label>
+
+            <label class="item item-input">
+                <span class="input-label">Zip Code</span>
+                <input type="tel" ng-model="info.message.sup_zip" placeholder="{{info.message.sup_zip}}">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Age</span>
+                <input type="tel" ng-model="info.message.sup_age" placeholder="{{info.message.sup_age}}">
+            </label>
+
+            <label class="item item-select">
+                <span class="input-label">Gender</span>
+                <select ng-model="info.message.sup_gender">
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </label>
+
+            <ion-item ng-click="skillFunct()" class="item-divider item-icon-right custom-item-divider">
+                <b>Skills</b>
+                <i class="icon ion-chevron-down"></i>
+            </ion-item>
                     
+            <div ng-show="showSkill" class="dropdown">
+                <ion-checkbox ng-repeat="skill in info.message.skills" ng-checked="skill.checked" class="item item-checkbox checkbox-royal" ng-model="skill.checked">
+                    {{skill.text}}
+                </ion-checkbox>
+            </div>
+                    
+            <ion-item class="item-divider item-icon-right custom-item-divider" ng-click="interestsFunct()">
+                <b>Interests</b>
+                <i class="icon ion-chevron-down"></i>
+            </ion-item>
+                    
+            <div ng-show="showInterests" class="dropdown">
+                <ion-checkbox ng-repeat="interest in info.message.interests" class="item item-checkbox checkbox-royal" ng-checked="interest.checked" ng-model="interest.checked">
+                    {{interest.text}} 
+                </ion-checkbox>
+            </div>
+                        <ion-toggle
+                                ng-model="info.message.sup_privacy" 
+                                ng-checked="info.message.sup_privacy">
+                        Privacy
+                    </ion-toggle>
+            <button type="submit" ng-click="UpdateData()" class="button button-balanced button-block">Save</button>
+            <button class="button button-block button-assertive" ng-click="cancelEdit()">
+                Cancel
+            </button>
+        </ion-list>
     </ion-content>
-        </ion-view>
+</ion-view>

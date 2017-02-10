@@ -1,0 +1,52 @@
+/** Styling for the username field **/
+input.ng-invalid.ng-touched, input.invalid-input
+{  
+  border-bottom: 2px solid red;
+}
+
+textarea.ng-invalid.ng-touched, textarea.invalid-input
+{  
+  border-bottom: 2px solid red;
+}
+
+/** Styling for the password field when an error exists**/
+label.item.has-error-lr {  
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+/** Styling for the password field when an error has been resolved**/
+label.item.valid-lr {  
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+
+/** Styling for the error text and container **/
+.form-errors {
+  margin: 5px 0
+}
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: red;
+}
+
+input.valid-input
+{
+    
+}
+
+.box{
+  height: 100%;
+}
+ion-slides{
+  height: 100vh !important;
+}
+
+$base-color: #c24;
+$num-colors: 10;
+
+@for $i from 0 to $num-colors {
+    .bgColor_#{$i} {
+      background-color: adjust-hue($base-color, 360deg / $num-colors * $i);
+    }
+}

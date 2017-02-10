@@ -1,0 +1,109 @@
+<ion-view cache-view="false" title="{{info.ent_name}}">
+    
+    
+    <ion-nav-buttons side="left">
+ <button ng-show="u" class="button button-clear" ui-sref="home.myEntities"><i class="icon ion-chevron-left" ></i> </button>
+
+<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+    
+
+         <ion-content  overflow-scroll='false' delegate-handle="userDetailContent"  header-shrink scroll-event-interval="5" ></ion-content>
+      
+        <ion-content has-header="true">
+
+          
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+          
+    <div class="spacer" style="width: 300px; height: 0px;"></div>
+          
+      <div class="about-header">
+          <ion-slide-box auto-play="false" show-pager="false">
+      
+               <div class="profile-media">
+              <div class="profile-details">
+                <h2 class="color-white">
+                 <b> {{entityAdmin.name}} </b>
+                </h2>
+                  
+              </div>
+              <img ng-src="{{info1 || 'img/default.png'}}" class="about-image profile-background-image" style="vertical-align:middle;">
+                   
+                               
+
+            </div>
+              </div>
+          
+              
+    <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+    </div>
+      
+ </ion-slide-box>       
+    </div>
+   <div class="row">
+   <div class="col text-right">
+                 
+    <a ng-if="disableFollowButton" ng-click="unfollow({{info.ent_id}})" class="button icon-left ion-star button-small button-royal "> Unfollow</a>
+
+       </div>
+          </div>
+          
+   <h2 align="center" style="color: #262627; font-size:170%;"><b>{{info.ent_name}}</b></h2>
+        </div>
+            
+            <p style="color:#56a0ce">{{info.ent_about}}</p>
+            
+            
+            <a class="button  button-small icon-left ion-android-list button-royal" ui-sref="aboutAddressContactInformation"> View more</a>
+    
+         
+  
+            
+          <ion-list>
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
+                
+                <div  class="item item-avatar item item-button-right" ng-if="post.category === 'volunteering'">
+                    <img src="{{i || 'img/volunteer.png'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
+                
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'event'">
+            
+                    <img src="{{i || 'img/EventIcon.jpg'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
+    
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'post'">
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                    <h2>{{post.title}}</h2>
+                    <p>Posted: <span am-time-ago="post.created"></span></p>
+                </div>
+            </div>
+        
+        </ion-list>
+          
+
+          
+<div>
+            <button class="button button-block button-royal" ng-click="scrollTop()" >Scroll to Top!</button>
+        </div>
+          
+
+      </ion-content>
+          
+</ion-view>

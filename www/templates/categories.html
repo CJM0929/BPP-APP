@@ -1,12 +1,44 @@
 <!--Categories view-->
 <ion-view title="Categories">
-    <ion-content padding="true" style="background:url(img/blurry_abstract-2560x1600.jpg) no-repeat center; background-size:cover;">
-        <ion-list>  
-            <ion-item ng-repeat="x in cate" class="item-thumbnail-left item-icon-right" ui-sref="entities">
-                <img ng-src="{{profilelist.avatar ||'img/coming.jpg'}}">
-                <h2>{{x.cat_name}}</h2>
+   <ion-nav-buttons side="left">
+        <button ng-show='1' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <style>
+       
+        .item .badge
+        {
+            top:inherit;
+            right: inherit;
+        }
+        
+        #categories_item
+        {
+            font-size:21px; 
+            padding-bottom:21px;
+        }
+       
+        #ion-content-category
+        {
+            background: #56a0ce;
+        }
+        
+    </style>
+    
+    <ion-content id="ion-content-category"
+padding="true">
+        
+        <ion-list>
+                    <ion-item class="item-divider item-icon-right custom-item-divider">
+                        Categories</ion-item>
+            <a class="item item-icon-left item-icon-right" ng-repeat="x in cate | orderBy:'cat_name'" ng-click="categorySelection({{x.cat_id}})">
+                <i class="icon ion-ios-people royal"></i>
+                <b>{{x.cat_name}}</b>          
+                <p>Entities: {{x.num_entities}}</p> 
                 <i class="icon ion-chevron-right royal"></i>
-            </ion-item>
-        </ion-list>   
+            </a>
+        </ion-list>
+
     </ion-content>
+    
 </ion-view>

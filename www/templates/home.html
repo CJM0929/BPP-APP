@@ -1,23 +1,23 @@
-<ion-view title="Home" id="page1" class=" ">
-    <ion-tabs class="tabs-stable tabs-icon-top tabs-royal" >
+<!--Dashboard view-->
+<ion-view title="My Home" id="page111">
+    
+<ion-tabs class="tabs-stable tabs-top tabs-icon-top tabs-royal">        
+                
+        <ion-tab title="Events" icon="ion-android-hand" href="#/home/myEntityEvents" id="home-tab111">
+            <ion-nav-view name="tab111"></ion-nav-view>
+        </ion-tab>
         
-        <ion-tab title="Activity Feed" icon="ion-android-list" href="#/Home/newsfeed" id="home-tab1" class=" ">
-            <ion-nav-view name="tab1"></ion-nav-view>
+        <ion-tab title="Going Events" icon="ion-android-calendar" href="#/home/registeredEvents" id="home-tab222">
+            <ion-nav-view name="tab222"></ion-nav-view>
         </ion-tab>
-
-        <ion-tab title="Volunteer" icon="ion-ribbon-b" href="#/Home/volunteer" id="home-tab2" class=" ">
-            <ion-nav-view name="tab2"></ion-nav-view>
+        
+        <ion-tab title="Entities" icon="ion-ios-people" href="#/home/myEntities" id="home-tab333">
+            <ion-nav-view name="tab333"></ion-nav-view>
         </ion-tab>
-
-        <ion-tab title="Events" icon="ion-android-calendar" href="#/Home/events" id="home-tab3" class=" ">
-            <ion-nav-view name="tab3"></ion-nav-view>
+    
+        <ion-tab title="Discover" icon="ion-android-apps" href="#/home/discover" id="home-tab444">
+            <ion-nav-view name="tab444"></ion-nav-view>
         </ion-tab>
-
-<!--
-        <ion-tab title="Donate" icon="ion-ios-briefcase" href="#/Home/donate" id="home-tab4" class=" ">
-        <ion-nav-view name="tab4"></ion-nav-view>
-        </ion-tab>
--->
 
     </ion-tabs>
 </ion-view>

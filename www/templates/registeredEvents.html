@@ -1,0 +1,40 @@
+<ion-view cache-view="false" title="Going Activities">
+    
+    <style>
+        #ion-content-events
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size:cover;
+        }
+    </style>
+    
+    <ion-content padding="false" class="manual-ios-statusbar-padding" id="ion-content-events">
+                <ion-list>
+            <div class="list card" ng-repeat="post in my_activities | orderBy: '-event_created'">
+                
+                <div  class="item item-avatar item item-button-right" ng-if="post.category === 'volunteering'" ng-click="goToVoluntView(post.id)">
+                    <img src="{{i || 'img/volunteer.png'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                    <i class="icon ion-calendar" ng-click="addEventToCalendar(post, $event)">add to calendar</i>
+                </div>
+                
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'event'" ng-click="goToEventView(post.id)">
+            
+                    <img src="{{i || 'img/EventIcon.jpg'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                    <i class="icon ion-calendar" ng-click="addEventToCalendar(post, $event)">add to calendar</i>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

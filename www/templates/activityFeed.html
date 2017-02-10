@@ -1,22 +1,35 @@
-<!--Acitivity feed view:-->
-<ion-view title="Activity Feed" id="page18">
-    <ion-content class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
-        <ion-refresher  pulling-text="Pull to refresh..." on-refresh="doRefresh()">
-        </ion-refresher>
-        <div id="activityFeed-button-bar1" class=" button-bar "></div>
-        <div class="list card " id="afeed1">
-            <ion-item class="item-avatar">
-                <h2>Item</h2>
-                <p>1 min ago</p>
-            </ion-item>
-            <p style="padding: 15px">Some friendly Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-            </p>
-            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-            </div>    
-            <p style="padding: 20px 2% 10px 10px; font-size:large;">
-                <a href="#" class="subdued">Share</a>
-            </p>    
-        </div>
+<ion-view cache-view="false" title="Post">
+ 
+    <style>
+        #ion-content-post
+        {
+            background: url(img/testing.png) no-repeat center;
+            background-size: cover;
+        }
+        
+        #spacer
+        {
+            width: 0px; height: 50px;
+        }
+        
+    </style>
+    
+    <ion-content padding="false" id="ion-content-post" class="manual-ios-statusbar-padding">    
+        
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
+    
+        <ion-list>  
+            <div class="list card" ng-repeat="post in posts | orderBy: '-post_created'">
+                <div class="item item-avatar item item-button-right">
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                    <h2><b>{{post.ent_name}}</b></h2>
+                    <p>Posted: <span am-time-ago="post.post_created"></span></p>
+                    <br>
+                    <h3>{{post.post_message}}</h3>      
+                    <div class="spacer"></div>
+                </div>
+            </div>
+        </ion-list>
+    
     </ion-content>
 </ion-view>

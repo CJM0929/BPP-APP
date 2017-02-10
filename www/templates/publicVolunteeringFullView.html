@@ -1,0 +1,66 @@
+<ion-view cache-view="false" title="Volunteering Opportunities">
+    
+    <style>
+        #add-to-calendar
+        {
+            float: right;
+            font-size: 2.618em;
+        }
+    </style>
+
+<!--
+ <ion-nav-buttons side="left">
+ <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+-->
+    
+    <ion-nav-buttons side="left">
+ <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+
+<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+    
+    <ion-content class="has-header">
+        
+        <div class="list">
+            <div class="item">
+                
+                <h1 class="royal" id="align-text-events">{{post.title}}</h1>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.vol_created"></span></p>
+                <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
+                <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Place: </b> {{post.city_name}}</p>
+                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)"  ng-if="u"></i>
+            
+            </div>
+            
+            <div class="item item-body">
+               
+                <img class="full-image" ng-show="volunteering_photo !== null" ng-src="{{volunteering_photo}}">
+                <b class="royal">Details:</b><p>{{post.description}}</p>
+                <b class="royal">Application procedure:</b> <p>{{post.app_procedure}}</p>
+                <p><b class="royal">Skills Recommended</b></p>
+                
+               
+                    <p class="icon ion-ios-lightbulb" ng-if="skill.checked === true" ng-repeat="skill in post.skills" ng-if="skill.checked === true"> 
+                        {{skill.text}}
+                    </p>
+                    
+                    <b class="royal">Work hours:</b> <p>{{post.work_hours}}</p>
+                    <b class="royal">Address:</b> <p>{{post.address1}}</p> <p>{{post.address}}</p>
+                    <p>{{post.city_name}}, Puerto Rico, {{post.zip}}</p>
+                    <b class="royal">Location description:</b> <p>{{post.location_description}}</p>
+                    <b class="royal">Website:</b> <p>{{post.web}}</p>
+                    <b  class="royal">Supervisor name:</b> <p>{{post.supervisor_name}}</p>
+                    <b class="royal">Supervisor telephone #:</b> <p>{{post.supervisor_phone}}</p>
+                    <b class="royal">Supervisor email:</b> <p>{{post.supervisor_email}}</p>
+            </div>
+            
+            <a ng-click="going({{post.id}})" class="button ion-android-hand button button-block button-large button-balanced" ng-if="u && goingg">I want to go!</a>
+                
+            <a ng-if="u && notGoing" ng-click="ungoing({{post.id}})" class="button icon-left ion-star button-large button-block button-assertive">Not Going</a>
+            
+        </div>
+    
+    </ion-content>
+</ion-view>

@@ -1,0 +1,48 @@
+<ion-view title="Registration Success" hide-nav-bar="1" hide-back-button="0">
+  
+    <style>
+        #ion-content-registration-successful
+        {
+            background: url(img/testing.png) no-repeat center; 
+            background-size:cover;
+        }
+        #header-registration-successful
+        {
+            color:white;
+            padding: -5px 0px -5px 0px;
+            text-align:center;
+        }
+        
+        #spacer-registration-successful
+        {
+            height: 20px;
+            width: 300px;
+        }
+    </style>
+    
+    <ion-content scroll="false" padding="true" class="manual-ios-statusbar-padding" id="ion-content-registration-successful">       
+        <h4 id="header-registration-successful">Your registration was successful!</h4>
+        
+        <div>
+            <div id="profile-bg2"></div>
+            <div ui-sref="generalFeed">
+         
+                    <img id="profile-image-login" src="img/bpp.jpg"> 
+
+            </div>
+        </div>
+        
+        <h4 id="header-registration-successful">You will recieve an email shortly. It contains the instructions for activating your account so you can help the world!
+        </h4>
+        
+        <div class="spacer" id="spacer-registration-successful"></div>
+        
+        <button ui-sref="login" type="submit" class="button button-outline button-royal button-large button-block">Go to main page (login).
+        </button>
+        
+        <div class="spacer" id="spacer-registration-successful"></div>
+        
+        <div class="item item-divider">Note: If you do not see the email in your<br>inbox, please verify your junk email folder.</div>
+    
+    </ion-content>
+</ion-view>
