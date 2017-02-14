@@ -10,35 +10,58 @@
         {
             color: black;
         }
+        
+        .label-fix
+        {
+            border-radius: 13px;
+            padding: 10px;
+        }
+        
+        .span-fix
+        {
+            margin-left: 1.618%;
+            width: 80%;
+        }
+        .item-fix
+        {
+            margin-bottom: 10px;
+            padding: 8px 5px;
+        }
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
     </style>
+    
     <ion-nav-buttons side="left">
- <button class="button button-clear" ui-sref="dashboard.Eevents"><i class="icon ion-chevron-left" ></i> </button>
-</ion-nav-buttons>
+        <button class="button button-clear" ui-sref="dashboard.Eevents"><i class="icon ion-chevron-left" ></i> </button>
+    </ion-nav-buttons>
     
     <ion-content padding="true" class="has-header">
         
         <form name="myForm" class="list" novalidate>
-            
-            <label class="item item-input">
-                <span class="input-label"><b>Event Picture</b></span>
+            <div class="item item-divider custom-item-divider">Event banner photo</div>
+            <label class="item item-fix label-fix">
+                <span class="input-label span-fix"><b>Event Picture</b></span>
                 <input type="file" file-model="data.userfile">
             </label>
             
             <div class="item item-divider custom-item-divider">Event general information</div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Event Title</span>
-                <input name="title" type="text" ng-model="data.title" placeholder="Title here..." ng-required="true" ng-pattern="/^[a-zA-Z0-9,.: ]+$/" ng-minlength="3" ng-maxlength="64">    
+            <span class="input-label span-fix">Event Title <b style="color:red;">*</b></span>
+            <label class="item item-fix label-fix">
+                <input name="title" type="text" ng-model="data.title" placeholder="Title here..." ng-required="true" ng-minlength="3" ng-maxlength="64">    
                 
                 <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
                     <div ng-message="required" id="input-error">The event title field is required!</div>
-                    <div ng-message="pattern" id="input-error">The event title cannot have special characters!</div>
                     <div ng-message="minlength" id="input-error">The event title needs at least 3 characters long.</div>
                     <div ng-message="maxlength" id="input-error">The event title needs at less or equal than 64 characters long.</div>
                 </div>
             </label>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Event Description</span>
+            
+            <span class="input-label span-fix">Event Description <b style="color:red;">*</b></span>
+            <label class="item item-fix label-fix">
                 <textarea rows="6" id="textarea-text" ng-model="data.description" placeholder="Event Description" name="description" ng-required="true" ng-minlength="3">Event Description</textarea>
                 
                 <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
@@ -47,22 +70,26 @@
                 </div>
             </label>
 
-            <label class="item item-input item-floating-label">Start Time
-<!--                <span class="input-label">Start Time</span>-->
+            <span class="input-label span-fix">Start time <b style="color:red;">*</b></span>
+            <label class="item" >
                 <input name="start_time" type="datetime-local" ng-model="data.start_time" ng-required="true">
                 
                 <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
                     <div ng-message="required" id="input-error">A starting time for the event is required!</div>
                 </div>
             </label>
-
-            <label class="item item-input item-floating-label">End Time
-<!--                <span class="input-label">End Time</span>-->
-                <input type="datetime-local" ng-model="data.end_time">
+            
+            <span class="input-label span-fix">End time <b style="color:red;">*</b></span>
+            <label class="item item-fix label-fix">
+                <input name="end_time" type="datetime-local" ng-model="data.end_time">
+                 <div ng-messages="myForm.end_time.$error" ng-if="myForm.end_time.$touched">
+                    <div ng-message="required" id="input-error">A ending time for the event is required!</div>
+                </div>
             </label>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Full event address</span>
+            
+            <span class="input-label span-fix">Full event address <b style="color:red;">*</b></span>
+            <label class="item item-fix label-fix">
                 <textarea type="text" name="address" id="textarea-text" ng-model="data.address" rows="3" placeholder="Enter Full Address Here" ng-required="true" ng-minlength="3"></textarea>
                 
                 <div ng-messages="myForm.address.$error" ng-if="myForm.address.$touched">
@@ -71,11 +98,8 @@
                 </div>
             </label>
             
-            
-            <label class="item item-input item-select">
-                <div class="input-label">
-                    City
-                </div> 
+            <div class="input-label">City <b style="color:red;">*</b></div> 
+            <label class="item  item-select" id="selector-dropdown-fix">
                 
                 <select ng-model="data.city" ng-required="true" name="city">
                     <option value="Adjuntas">Adjuntas</option>
@@ -94,7 +118,6 @@
                     <option value="Camuy">Camuy</option>
                     <option value="Canóvanas">Canóvanas</option>
                     <option value="Carolina">Carolina</option>
-                    <option value="Carolina-Isla Verde">Carolina-Isla Verde</option>
                     <option value="Cataño">Cataño</option>
                     <option value="Cayey">Cayey</option>
                     <option value="Ceiba">Ceiba</option>
@@ -145,16 +168,11 @@
                     <option value="Salinas">Salinas</option>
                     <option value="San Germán">San Germán</option>
                     <option value="San Juan">San Juan</option>
-                    <option value="San Juan, Condado">San Juan, Condado</option>
-                    <option value="San Juan, Hato Rey">San Juan, Hato Rey</option>
-                    <option value="San Juan, Santurce">San Juan, Santurce</option>
-                    <option value="San Juan, Viejo San Juan">San Juan, Viejo San Juan</option>
                     <option value="San Lorenzo">San Lorenzo</option>
                     <option value="San Sebastián">San Sebastián</option>
                     <option value="Santa Isabel">Santa Isabel</option>
                     <option value="Toa Alta">Toa Alta</option>
                     <option value="Toa Baja">Toa Baja</option>
-                    <option value="Toa Baja, Levittown">Toa Baja, Levittown</option>
                     <option value="Trujillo Alto">Trujillo Alto</option>
                     <option value="Utuado">Utuado</option>
                     <option value="Vega Alta">Vega Alta</option>
@@ -166,8 +184,8 @@
                 </select>
             </label>
             
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Zip Code</span>
+            <span class="input-label span-fix">Zip Code <b style="color:red;">*</b></span>
+            <label class="item item-fix label-fix">
                 <input type="tel" name="zip" ng-model="data.zip" placeholder="Zip code" ng-required="true" ng-pattern="/^(\d{5}([\-]\d{4})?)$/i">
                 
                 <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
@@ -176,22 +194,19 @@
                 </div>
             </label>
             
-            
-            <label class="item item-input item-floating-label">
-                <span class="input-label">event url</span>
-                <input name="eventurl" type="text" ng-model="data.eventurl" placeholder="event url" ng-minlength="7">
+            <span class="input-label span-fix">event url</span>
+            <label class="item item-fix label-fix">
+                <input name="eventurl" type="text" ng-model="data.web" placeholder="event url" ng-minlength="7">
                     
                 <div ng-messages="myForm.eventurl.$error" ng-if="myForm.eventurl.$touched">
                     <div ng-message="minlength" id="input-error">The website of the event needs at least 7 (include http:// at the beginning) characters long.</div>
                 </div>
             </label>
             
-            <div class="item item-divider custom-item-divider">
-                Event registrar information
-            </div>
+            <div class="item item-divider custom-item-divider" style="margin: 10px 0px 5px 0;">Event registrar information</div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Contact person</span>
+            <span class="input-label span-fix">Contact person</span>
+            <label class="item item-fix label-fix">
                 <input name="contact_person" type="text" ng-model="data.supervisor_name" placeholder="Contact person" ng-minlength="2" ng-maxlength="48" ng-pattern="/^[a-zA-Z ]+$/">
                 
                 <div ng-messages="myForm.contact_person.$error" ng-if="myForm.contact_person.$touched">
@@ -201,8 +216,8 @@
                 </div>
             </label>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Phone</span>
+            <span class="input-label span-fix">Phone</span>
+            <label class="item item-fix label-fix">
                 <input name="registrar_phone" type="tel" ng-model="data.supervisor_phone" placeholder="phone number">
                 
                 <div ng-messages="myForm.registrar_phone.$error" ng-if="myForm.registrar_phone.$touched">
@@ -210,8 +225,8 @@
                 </div>
             </label>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">email</span>
+            <span class="input-label span-fix">email</span>
+            <label class="item item-fix label-fix">
                 <input type="email" name="registrar_email" ng-model="data.supervisor_email" placeholder="email">
                 
                 <div ng-messages="myForm.registrar_email.$error" ng-if="myForm.registrar_email.$touched">
@@ -222,6 +237,10 @@
         </form>
         
         <a ng-click="postEvent()" id="SRID" class="button button-royal button-block">Create Event</a>
-    
+       
+        <button class="button button-block button-assertive" ng-click="cancelEdit()">
+            Cancel
+        </button>
+        
     </ion-content>
 </ion-view>

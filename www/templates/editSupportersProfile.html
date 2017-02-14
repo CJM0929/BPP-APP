@@ -1,46 +1,102 @@
 <ion-view cache-view="false" title="Edit profile">
     
-    <ion-nav-buttons side="left">
-        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    
+    <style>
+        span
+        {
+            margin-left: 1.618%;
+        }
+        
+        label
+        {
+            border-radius: 13px;
+            padding: 10px;
+        }
+        
+        .item
+        {
+            margin-bottom: 10px;
+        }
+        
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+        
+        .input-label
+        {
+            width: 50%;
+        }
+        
+        textarea
+        {
+            color: black;
+        }
+        
+        input
+        {
+            width: 84%;
+        }
+    </style>
+    
+ <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="cancelEdit()"><i class="icon ion-chevron-left" ></i> </button>
     </ion-nav-buttons>
     
     <ion-content padding="true" class="has-header">
         
-        <div class="center">
-            <img file-model="data.userfile"  ng-src="{{ info1 || 'img/ionic2.png'}}" />
+        <div class="center profile">
+            <img file-model="data.userfile" ng-src="{{info1 || 'img/ionic2.png'}}" style="margin-top: 0;" />
         </div>
         <input type="file" file-model="data.userfile">
         
-        <ion-list>
+        <form novalidate name="myForm" class="list">
             
             <ion-item class="item-divider custom-item-divider item-icon-right">
                 <i class="icon ion-edit"></i>Edit information
             </ion-item>
 
+            <span class="input-label">About</span>
             <label class="item item-input">
-                <span class="input-label">About</span>
-                <textarea style="color: black;" ng-model="info.message.sup_about" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel">
+                <textarea ng-model="info.message.sup_about" rows="5" cols="50" placeholder="{{info.message.sup_about}}" type="tel">
                 </textarea>
             </label>
-
-            <label class="item item-input">
-                <span class="input-label">First Name</span>
-                <input type="text" name="fname" ng-model="info.message.sup_fname" placeholder="{{info.message.sup_fname}}">
-            </label>
-
-            <label class="item item-input">
-                <span class="input-label">Last Name</span>
-                <input type="text" name="lname" ng-model="info.message.sup_lname" placeholder="{{info.message.sup_lname}}">
-            </label>
-
-            <label class="item item-input">
-                <span class="input-label">Phone</span>
-                <input type="tel" ng-model="info.message.sup_phone" placeholder="{{info.message.sup_phone}}">
-            </label>
             
-            <label class="item item-select">
-                        <span class="input-label">City</span>
-                        <select ng-model="info.message.city_name">
+            <span class="input-label">First Name</span>
+            <label class="item item-input">
+                <input type="text" name="fname" ng-model="info.message.sup_fname"  ng-minlength="2" ng-maxlength="25" placeholder="First name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
+            </label>
+            <div ng-messages="myForm.fname.$error" ng-if="myForm.fname.$touched">
+                <div ng-message="required" id="input-error">The first name field is required!</div>
+                <div ng-message="pattern" id="input-error">The first name has to be in letters only!</div>
+                <div ng-message="minlength" id="input-error">The first name needs at least 2 characters long.</div>
+                <div ng-message="maxlength" id="input-error">The first name needs at less or equal than 25 characters long.</div>
+            </div>
+
+            <span class="input-label">Last Name</span>
+            <label class="item item-input">
+                <input type="text" name="lname" ng-model="info.message.sup_lname" ng-minlength="2" ng-maxlength="25" placeholder="Last name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
+            </label>
+            <div ng-messages="myForm.lname.$error" ng-if="myForm.lname.$touched">
+                <div ng-message="required" id="input-error">The last name field is required!</div>
+                <div ng-message="pattern" id="input-error">The last name has to be in letters only!</div>
+                <div ng-message="minlength" id="input-error">The last name needs at least 2 characters long.</div>
+                <div ng-message="maxlength" id="input-error">The last name needs at less or equal than 25 characters long.</div>
+            </div>
+            
+            
+            <span class="input-label">Phone</span>
+            <label class="item item-input">
+                <input name="sup_phone" type="tel" ng-model="info.message.sup_phone" placeholder="{{info.message.sup_phone}}">
+            </label>
+            <div ng-messages="myForm.sup_phone.$error" ng-if="myForm.fname.$touched">
+                <div ng-message="tel" id="input-error">The input phone is in the wrong format.</div>
+            </div>
+            
+            <span class="input-label">City</span>
+            <label class="item item-select" id="selector-dropdown-fix" style="padding: 21px;">
+                        <select name="city" ng-model="info.message.city_name" style="padding: 21px;">
                             <option value="Adjuntas">Adjuntas</option>
                             <option value="Aguada">Aguada</option>
                             <option value="Aguadilla">Aguadilla</option>
@@ -129,18 +185,23 @@
                         </select>
                     </label>
 
+            <span class="input-label">Zip Code</span>
             <label class="item item-input">
-                <span class="input-label">Zip Code</span>
-                <input type="tel" ng-model="info.message.sup_zip" placeholder="{{info.message.sup_zip}}">
+                <input name="sup_zip" type="tel" ng-model="info.message.sup_zip" placeholder="Zip code" ng-pattern="/^(\d{5}([\-]\d{4})?)$/i">
+            </label>
+            <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
+                <div ng-message="required" id="input-error">The zipcode field is required!</div>
+                <div ng-message="pattern" id="input-error">The zipcode needs to be in the american zipcode format!</div>
+            </div>
+            
+
+            <span class="input-label">Age</span>
+            <label class="item item-input">
+                <input type="number" ng-model="info.message.sup_age" placeholder="{{info.message.sup_age}}">
             </label>
 
-            <label class="item item-input">
-                <span class="input-label">Age</span>
-                <input type="tel" ng-model="info.message.sup_age" placeholder="{{info.message.sup_age}}">
-            </label>
-
+            <span class="input-label">Gender</span>
             <label class="item item-select">
-                <span class="input-label">Gender</span>
                 <select ng-model="info.message.sup_gender">
                     <option value="male">male</option>
                     <option value="female">female</option>
@@ -168,15 +229,12 @@
                     {{interest.text}} 
                 </ion-checkbox>
             </div>
-                        <ion-toggle
-                                ng-model="info.message.sup_privacy" 
-                                ng-checked="info.message.sup_privacy">
-                        Privacy
-                    </ion-toggle>
-            <button type="submit" ng-click="UpdateData()" class="button button-balanced button-block">Save</button>
+                        <ion-toggle ng-model="info.message.sup_privacy" ng-checked="info.message.sup_privacy" style="border-radius: 13px;">Privacy</ion-toggle>
+            
+            <button type="submit" ng-click="UpdateData()" class="button button-balanced button-block">Save profile</button>
             <button class="button button-block button-assertive" ng-click="cancelEdit()">
                 Cancel
             </button>
-        </ion-list>
+        </form>
     </ion-content>
 </ion-view>

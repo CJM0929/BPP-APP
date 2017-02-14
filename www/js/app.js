@@ -97,13 +97,13 @@ void set_max_resources();                             //
 
 //Angular module declaration linted:
  angular
- .module('app', ['ionic','ion-profile-picture','app.controllers', 'app.routes', 'app.directives','app.services','app.constants', 'ngRoute','angular-jwt','angular-storage','ngFileUpload','ngCordova','angularMoment', 'ngMessages', 'ngMap'])
+ .module('app', ['ionic','ion-profile-picture','app.controllers', 'app.routes', 'app.directives','app.services','app.constants', 'ngRoute','angular-jwt','angular-storage','ngFileUpload','ngCordova','angularMoment', 'ngMessages', 'ngMap', 'angularMoment'])
      .run(appRunModuleFunction)
      .config(appConfigModuleFunction);
 
-function appRunModuleFunction($ionicPlatform, $rootScope, $timeout ,$cordovaNetwork,$ionicPopup)
+function appRunModuleFunction($ionicPlatform, $rootScope, $timeout ,$cordovaNetwork,$ionicPopup, amMoment)
 {
-
+    
     //under development, Network Information
     document.addEventListener("deviceready", function () {
 
@@ -183,6 +183,9 @@ function appRunModuleFunction($ionicPlatform, $rootScope, $timeout ,$cordovaNetw
             },1000);
         }
     });
+    
+    amMoment.changeLocale('de');
+    
 }
 
 function appConfigModuleFunction($stateProvider, $urlRouterProvider, $ionicConfigProvider)

@@ -18,6 +18,41 @@
             font-size: x-large;
             margin: 3px 31px 0 0;
         }
+        
+        #input-box
+        {
+            margin: 3px;
+            border-radius: 13px;
+            padding: 5px;
+        }
+        
+        #item-fix
+        {
+            padding: 5px;
+        }
+        
+        #label-fix
+        {
+            margin-left: 3%;
+        }
+        
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+        
+        .input-label-fix
+        {
+            margin-left: 1%;
+            width: 50%;
+        }
+        
+        .input-fix
+        {
+            width: 84%;
+        }
+        
     </style>
     
     <ion-nav-buttons side="left">
@@ -28,53 +63,51 @@
         
         <form name="myForm" class="list" novalidate>  
             
-            <div class="item item-divider">Basic Information</div>
+            <div class="item item-divider custom-item-divider">Basic Information</div>
             
-            <label class="item item-input item-stacked-label">
-                
+            <span class="input-label  input-label-fix">Username <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' id="tip-icon-entity-sign-up" ng-click="entityUsernameTip()"></label>
-                
-                <span class="input-label">Username</span>
-                
-                <input type="text" ng-model="entityRegistrationObject.username" placeholder="Username" ng-required="true" name="username" ng-pattern="/^[a-z\d\._-]{5,}$/i" ng-minlength="6" ng-maxlength="30">
+                <input class="input-fix" type="text" ng-model="entityRegistrationObject.username" placeholder="Username" ng-required="true" name="username" ng-pattern="/^[a-z\d\._-]{5,}$/i" ng-minlength="6" ng-maxlength="30">
                 
                 <div ng-messages="myForm.username.$error" ng-if="myForm.username.$touched">
                     <div ng-message="required" id="input-error">The username field is required!</div>
-                    <div ng-message="pattern" id="input-error">The username needs to be  this and that!</div>
+                    <div ng-message="pattern" id="input-error">The username cannot have special characters!</div>
                     <div ng-message="minlength" id="input-error">The username needs at least 6 characters long.</div>
                     <div ng-message="maxlength" id="input-error">The username needs at less or equal than 30 characters long.</div>
                 </div>
-            
             </label>
             
-            <label class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Entity name <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityNameTip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Entity name</span>
-                <input type="text" name="ent_name" ng-model="entityRegistrationObject.ent_name" placeholder="Entity name" ng-required="true" ng-minlength="2" ng-maxlength="64" ng-pattern="/^[a-zA-Z ]+$/i">
+                
+                <input class="input-fix" type="text" name="ent_name" ng-model="entityRegistrationObject.ent_name" placeholder="Entity name" ng-required="true" ng-minlength="2" ng-maxlength="64" ng-pattern="/^[a-zA-Z ]+$/i">
                 
                 <div ng-messages="myForm.ent_name.$error" ng-if="myForm.ent_name.$touched">
                     <div ng-message="required" id="input-error">The entity name field is required!</div>
-                    <div ng-message="pattern" id="input-error">The entity name needs to be this and that!</div>
+                    <div ng-message="pattern" id="input-error">The entity name cannot have special characters or numbers!</div>
                     <div ng-message="minlength" id="input-error">The entity name needs at least 2 characters long.</div>
                     <div ng-message="maxlength" id="input-error">The entity name needs at less or equal than 64 characters long.</div>
                 </div>
                 
             </label>
             
-            <label class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Email <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityEmailtip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Email</span>
-                <input type="email" name="email" ng-model="entityRegistrationObject.email" placeholder="email" ng-required="true">
+                
+                <input class="input-fix" type="email" name="email" ng-model="entityRegistrationObject.email" placeholder="email" ng-required="true">
                 <div ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
                     <div ng-message="required" id="input-error">The email field is required!</div>
-                    <div ng-message="pattern" id="input-error">The email needs to be this and that!</div>
                     <div ng-message="email" id="input-error">The email inputted is invalid.</div>
                 </div>
             </label>
             
-            <item-divider class="item item-input item-stacked-label">
-                <span class="input-label">Confirm Email</span>
-                <input type="email" name="emailconf" ng-model="entityRegistrationObject.emailconf" placeholder="Confirm email" ng-required="true" ng-pattern="entityRegistrationObject.email">
+            <span class="input-label  input-label-fix">Confirm Email <b style="color:red;">*</b></span>
+            <item-divider class="item" id="input-box">
+                
+                <input class="input-fix" type="email" name="emailconf" ng-model="entityRegistrationObject.emailconf" placeholder="Confirm email" ng-required="true" ng-pattern="entityRegistrationObject.email">
                 
                 <div ng-messages="myForm.emailconf.$error" ng-if="myForm.emailconf.$touched">
                     <div ng-message="required" id="input-error">The email confirmation field is required!</div>
@@ -83,8 +116,9 @@
                 </div>
             </item-divider>
             
-            <item-divider class="item item-select">
-                <span class="input-label">Assign Category</span>
+            <span class="input-label  input-label-fix">Assign Category <b style="color:red;">*</b></span>
+            <item-divider class="item item-select" id="selector-dropdown-fix">
+                
                 <select ng-model="entityRegistrationObject.category" ng-required ="true" name="category">
                     <option value="Poverty">Poverty</option>
                     <option value="Animals">Animals</option>
@@ -100,37 +134,40 @@
                 </select>
             </item-divider>
             
-            <item-divider class="item item-input">
-                <span class="input-label">Founded on</span>
-                <input type="date" value="2012-10-01" ng-model="entityRegistrationObject.founded_on" ng-required="true" name="founded_on">
+            <span class="input-label  input-label-fix">Founded on <b style="color:red;">*</b></span>
+            <item-divider class="item item-input" id="input-box">
+               
+                <input class="input-fix" type="date" value="2012-10-01" ng-model="entityRegistrationObject.founded_on" ng-required="true" name="founded_on">
                 <label class='ion-information-circled balanced' ng-click="entityFoundedOnTip()" id="tip-icon-entity-sign-up_founded"></label>
             </item-divider>
             
-            <item-divider class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">IRS Number <b style="color:red;">*</b></span>
+            <item-divider class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityIrsTip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">IRS Number</span>
-                <input type="text" ng-model="entityRegistrationObject.irs" placeholder="IRS number" ng-required="true" name="irs">
+                
+                <input class="input-fix" type="text" ng-model="entityRegistrationObject.irs" placeholder="IRS number" ng-required="true" name="irs">
                 <div ng-messages="myForm.irs.$error" ng-if="myForm.irs.$touched">
                     <div ng-message="required" id="input-error">The IRS number field is required!</div>
                 </div>
             </item-divider>
             
-            <label class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Password <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityPasswordTip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Password</span>
-                <input type="password" name="password" ng-model="entityRegistrationObject.password" placeholder="Password" ng-minlength="8" ng-maxlength="25" ng-required="true" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/">
+                
+                <input class="input-fix" type="password" name="password" ng-model="entityRegistrationObject.password" placeholder="Password" ng-minlength="8" ng-maxlength="25" ng-required="true" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/">
                 
                 <div ng-messages="myForm.password.$error" ng-if="myForm.password.$touched">
                     <div ng-message="required" id="input-error">The password field is required!</div>
-                    <div ng-message="pattern" id="input-error">The password needs to be this and that!</div>
                     <div ng-message="minlength" id="input-error">The password needs at least 8 characters long.</div>
                     <div ng-message="maxlength" id="input-error">The password needs at less or equal than 25 characters long.</div>
                 </div>
             </label>
             
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Confirm Password</span>
-                <input type="password" name="passconf" ng-model="entityRegistrationObject.passconf" placeholder="Confirm password" ng-minlength="8" ng-maxlength="25" ng-pattern="entityRegistrationObject.password" ng-required="true">
+            <span class="input-label  input-label-fix">Confirm Password <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
+                
+                <input class="input-fix" type="password" name="passconf" ng-model="entityRegistrationObject.passconf" placeholder="Confirm password" ng-minlength="8" ng-maxlength="25" ng-pattern="entityRegistrationObject.password" ng-required="true">
                 
                 <div ng-messages="myForm.passconf.$error" ng-if="myForm.passconf.$touched">
                     <div ng-message="required" id="input-error">The password confirmation field is required!</div>
@@ -140,10 +177,11 @@
                 </div>
             </label>
 
-            <item-divider class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Phone number <b style="color:red;">*</b></span>
+            <item-divider class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityPhonetip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Phone number</span>
-                <input type="tel" ng-model="entityRegistrationObject.phone" placeholder="Phone number" ng-required="true" name="phone" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">
+                
+                <input class="input-fix" type="tel" ng-model="entityRegistrationObject.phone" placeholder="Phone number" ng-required="true" name="phone" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">
                 
                 <div ng-messages="myForm.phone.$error" ng-if="myForm.phone.$touched">
                     <div ng-message="required" id="input-error">The phone number field is required!</div>
@@ -152,42 +190,46 @@
                 </div>
             </item-divider>
  
-            <item-divider class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Fax number</span>
+            <item-divider class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityFaxtip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Fax number</span>
-                <input type="tel" ng-model="entityRegistrationObject.fax" placeholder="Fax number" name="fax" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">        
+                
+                <input class="input-fix" type="tel" ng-model="entityRegistrationObject.fax" placeholder="Fax number" name="fax" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">        
                 
                 <div ng-messages="myForm.fax.$error" ng-if="myForm.fax.$touched">
                     <div ng-message="tel" id="input-error">The fax number field format is invalid!</div>
-                    <div ng-message="pattern" id="input-error">The phone number field is invalid!</div>
+                    <div ng-message="pattern" id="input-error">The fax number field is invalid!</div>
                 </div>
             </item-divider>
         
-            <div class="item item-divider">Address</div>
+            <div class="item item-divider custom-item-divider" style="margin: 13px 0 5px 0;">Address</div>
             
-            <label class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Street line 1 <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityStreetTip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Street line 1</span>
-                <input type="text" ng-model="entityRegistrationObject.address1" placeholder="Street line 1" ng-required="true" name="address1" ng-pattern="/^[a-zA-Z0-9 -]+$/" ng-minlength="3">
+                
+                <input class="input-fix" type="text" ng-model="entityRegistrationObject.address1" placeholder="Street line 1" ng-required="true" name="address1" ng-minlength="3">
                 
                 <div ng-messages="myForm.address1.$error" ng-if="myForm.address1.$touched">
                     <div ng-message="required" id="input-error">The address field is required!</div>
-                    <div ng-message="pattern" id="input-error">The address needs to be this and that!</div>
+<!--                    <div ng-message="pattern" id="input-error">The address needs to be this and that!</div>-->
                     <div ng-message="minlength" id="input-error">The address field has to be longer than 3 characters.</div>
                 </div>
             </label>
+        
+            <span class="input-label  input-label-fix">Street line 2</span>
+            <label class="item" id="input-box">
                 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Street line 2</span>
-                <input type="text" ng-model="entityRegistrationObject.address2" placeholder="Street line 2" name="address2" ng-pattern="/[a-zA-Z0-9 ]+/" ng-minlength="3">
+                <input class="input-fix" type="text" ng-model="entityRegistrationObject.address2" placeholder="Street line 2" name="address2" ng-minlength="3">
                 <div ng-messages="myForm.address2.$error" ng-if="myForm.address2.$touched">
-                    <div ng-message="pattern" id="input-error">The address needs to be this and that!</div>
+<!--                    <div ng-message="pattern" id="input-error">The address needs to be this and that!</div>-->
                     <div ng-message="minlength" id="input-error">The address field has to be longer than 3 characters.</div>
                 </div>
             </label>
                 
-            <label class="item item-select">
-                <span class="input-label">City</span>
+            <span class="input-label  input-label-fix">City <b style="color:red;">*</b></span>
+            <label class="item item-select" id="selector-dropdown-fix">
+                
                 <select ng-model="entityRegistrationObject.city" ng-required="true" name="city">
                     <option value="Adjuntas">Adjuntas</option>
                     <option value="Aguada">Aguada</option>
@@ -270,8 +312,9 @@
                 </select>
             </label>
             
-            <label class="item item-select">
-                <span class="input-label">State</span>
+            <span class="input-label  input-label-fix">State <b style="color:red;">*</b></span>
+            <label class="item item-select" id="selector-dropdown-fix">
+                
                 
                 <select ng-model="entityRegistrationObject.country" ng-required="true" name="city">
                     <option value="Puerto Rico">Puerto Rico</option>            
@@ -282,19 +325,21 @@
                 </div>
             </label>
             
-            <label class="item item-input item-stacked-label">
+            <span class="input-label  input-label-fix">Zip Code <b style="color:red;">*</b></span>
+            <label class="item" id="input-box">
                 <label class='ion-information-circled balanced' ng-click="entityZipcodeTip()" id="tip-icon-entity-sign-up"></label>
-                <span class="input-label">Zip Code</span>
-                <input type="text" name="zip" ng-model="entityRegistrationObject.zip" placeholder="Zip code" ng-required="true" ng-pattern="/^(\d{5}([\-]\d{4})?)$/i">
+                
+                <input class="input-fix" type="text" name="zip" ng-model="entityRegistrationObject.zip" placeholder="Zip code" ng-required="true" ng-pattern="/^(\d{5}([\-]\d{4})?)$/i">
                 
                 <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
                     <div ng-message="required" id="input-error">The zipcode field is required!</div>
-                    <div ng-message="pattern" id="input-error">The zipcode needs to be this and that!</div>
+                    <div ng-message="pattern" id="input-error">The zipcode needs to be in the american zipcode format!</div>
                 </div>
             </label>
             
             <div class="spacer" style="width: 300px; height: 5px;"></div>
             <a ng-click="submitForm2()" id="SRID" class="button button-royal button-block">Create account</a>
+            <button class="button button-block button-assertive" ng-click="cancelEntityRegistrationButton()">Cancel</button>
         </form>
 
     </ion-content>

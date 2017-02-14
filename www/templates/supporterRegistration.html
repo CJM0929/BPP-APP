@@ -19,6 +19,57 @@
             height: 10px;
             width: 300px;
         }
+        
+        #input-box
+        {
+            margin: 3px;
+            border-radius: 13px;
+            padding: 5px;
+        }
+        
+        #item-fix
+        {
+            padding: 5px;
+        }
+        
+        #label-fix
+        {
+            margin-left: 3%;
+        }
+        
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+        
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+        
+        #ion-toggle-fix
+        {
+            border-radius: 13px;
+            margin: 13px 0;
+        }
+        
+        .span-fix
+        {
+            margin-left: 1%;
+        }
+        
+        .input-label-fix
+        {
+            margin-left: 1%;
+            width: 50%;
+        }
+        
+        .input-fix
+        {
+            width: 84%;
+        }
     </style>
     
     <ion-nav-buttons side="left">
@@ -31,55 +82,52 @@
             
             <ion-list id="supporterRegistration-list1">
                 
-                <div class="item item-divider">Basic Information</div>
+                <div class="item item-divider custom-item-divider" style="margin-bottom: 8px;">Basic Information</div>
                 
-                <item-divider class="item item-input item-stacked-label">
+                <span class="input-label span-fix input-label-fix">Username <b style="color:red;">*</b></span>
+                <item-divider class="item" id="input-box">
                     
                     <label class='ion-information-circled balanced' ng-click="supporterUsernameTip()" id="label-supporter-registration"></label>
-                    
-                    <span class="input-label">Username</span>
-                    
-                    <input type="text" name="username" ng-model="data.username" ng-minlength="6" ng-maxlength="20" placeholder="Username" ng-required="true" ng-pattern="/^[a-z\d\._-]{5,}$/i">
+                    <input class="input-fix" type="text" name="username" ng-model="data.username" ng-minlength="6" ng-maxlength="20" placeholder="Username" ng-required="true" ng-pattern="/^[a-z\d\._-]{5,}$/i">
                     
                     <div ng-messages="myForm.username.$error" ng-if="myForm.username.$touched">
                         <div ng-message when="required" id="input-error">The username field is required!</div>
-                        <div ng-message when="pattern" id="input-error">The username needs to be this and that!</div>
+                        <div ng-message when="pattern" id="input-error">The username cannot have special characters!</div>
                         <div ng-message when="minlength" id="input-error">The username needs at least 6 characters long.</div>
                         <div ng-message when="maxlength" id="input-error">The username needs at less or equal than 20 characters long.</div>
                     </div>
                 
                 </item-divider>
 
-                <item-divider class="item item-input item-stacked-label">
-                    
-                    <span class="input-label">First name</span>
-                    
-                    <input type="text" name="fname" ng-model="data.fname" ng-minlength="2" ng-maxlength="25" placeholder="First name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
+                <span class="input-label span-fix input-label-fix">First name <b style="color:red;">*</b></span>
+                <item-divider class="item item-input item-stacked-label" id="input-box">
+                    <input class="input-fix" type="text" name="fname" ng-model="data.fname" ng-minlength="2" ng-maxlength="25" placeholder="First name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
 
                     <div ng-messages="myForm.fname.$error" ng-if="myForm.fname.$touched">
                         <div ng-message="required" id="input-error">The first name field is required!</div>
-                        <div ng-message="pattern" id="input-error">The first name needs to be this and that!</div>
+                        <div ng-message="pattern" id="input-error">The first name has to be in letters only!</div>
                         <div ng-message="minlength" id="input-error">The first name needs at least 2 characters long.</div>
                         <div ng-message="maxlength" id="input-error">The first name needs at less or equal than 25 characters long.</div>
                     </div>
                 </item-divider>
                 
-                <item-divider class="item item-input item-stacked-label">
-                    <span class="input-label">Last name</span>
-                    <input type="text" name="lname" ng-model="data.lname" ng-minlength="2" ng-maxlength="25" placeholder="Last name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
+               
+                <span class="input-label span-fix input-label-fix">Last name <b style="color:red;">*</b></span>
+                <item-divider class="item item-input item-stacked-label" id="input-box">
+                    <input class="input-fix" type="text" name="lname" ng-model="data.lname" ng-minlength="2" ng-maxlength="25" placeholder="Last name" ng-required="true" ng-pattern="/^[a-zA-Z ]+$/">
                     
                     <div ng-messages="myForm.lname.$error" ng-if="myForm.lname.$touched">
                         <div ng-message="required" id="input-error">The last name field is required!</div>
-                        <div ng-message="pattern" id="input-error">The last name needs to be this and that!</div>
+                        <div ng-message="pattern" id="input-error">The last name has to be in letters only!</div>
                         <div ng-message="minlength" id="input-error">The last name needs at least 2 characters long.</div>
                         <div ng-message="maxlength" id="input-error">The last name needs at less or equal than 25 characters long.</div>
                     </div>
                 </item-divider>
 
-                <item-divider class="item item-input item-stacked-label">
+                <span class="input-label span-fix input-label-fix">Email <b style="color:red;">*</b></span>
+                <item-divider class="item " id="input-box">
                     <label class='ion-information-circled balanced' ng-click="supporterEmailTip()" id="label-supporter-registration"></label>
-                    <span class="input-label">Email</span>
-                    <input type="email" name="email" ng-model="data.email" placeholder="Email" ng-required="true">
+                    <input class="input-fix" type="email" name="email" ng-model="data.email" placeholder="Email" ng-required="true">
                     
                     <div ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
                         <div ng-message="required" id="input-error">The email field is required!</div>
@@ -87,9 +135,9 @@
                     </div>
                 </item-divider>
 
-                <item-divider class="item item-input item-stacked-label">
-                    <span class="input-label">Confirm Email</span>
-                    <input type="email" name="emailconf" ng-model="data.emailconf" placeholder="Confirm email" ng-required="true" ng-pattern="data.email">
+                <span class="input-label span-fix input-label-fix">Confirm Email <b style="color:red;">*</b></span>
+                <item-divider class="item" id="input-box">
+                    <input class="input-fix" type="email" name="emailconf" ng-model="data.emailconf" placeholder="Confirm email" ng-required="true" ng-pattern="data.email">
 
                     <div ng-messages="myForm.emailconf.$error" ng-if="myForm.emailconf.$touched">
                         <div ng-message="required" id="input-error">The email confirmation field is required!</div>
@@ -98,10 +146,9 @@
                     </div>
                 </item-divider>
                 
-                <item-divider class="item item-input item-stacked-label">
-                    
-                        <span class="input-label">Age</span>
-                        <input type="number" placeholder="Age" name="age" ng-model="data.age">
+                 <span class="input-label span-fix input-label-fix">Age <b style="color:red;">*</b></span>
+                <item-divider class="item item-input item-stacked-label" id="input-box">
+                    <input class="input-fix" type="number" placeholder="Age" name="age" ng-model="data.age">
                    
                     <div ng-messages="myForm.age.$error" ng-if="myForm.age.$touched">
                         <div ng-message="number" id="input-error">The age must be only a number!</div>
@@ -109,8 +156,8 @@
                     
                 </item-divider>
                 
-                <item-divider class="item item-select">
-                    <span class="input-label">Gender</span>
+                <span class="input-label span-fix input-label-fix">Gender <b style="color:red;">*</b></span>
+                <item-divider class="item item-select" id="selector-dropdown-fix">
                     <select ng-model="data.gender">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -118,23 +165,22 @@
                     </select>
                 </item-divider>
 
-                <item-divider class="item item-input item-stacked-label">
+                <span class="input-label span-fix input-label-fix">Password <b style="color:red;">*</b></span>
+                <item-divider class="item" id="input-box">
                     <label class='ion-information-circled balanced' ng-click="supporterPasswordTip()" id="label-supporter-registration"></label>
-                    <span class="input-label">Password</span>
-                    <input type="password" name="password" ng-model="data.password" ng-minlength="8" ng-maxlength="25" placeholder="password" ng-required="true" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/">
+                    <input class="input-fix" type="password" name="password" ng-model="data.password" ng-minlength="8" ng-maxlength="25" placeholder="password" ng-required="true" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/">
 
                     <div ng-messages="myForm.password.$error" ng-if="myForm.password.$touched">
                         <div ng-message="required" id="input-error">The password field is required!</div>
-                        <div ng-message="pattern" id="input-error">The password needs to be this and that!</div>
+<!--                        <div ng-message="pattern" id="input-error">The password needs to be this and that!</div>-->
                         <div ng-message="minlength" id="input-error">The password needs at least 8 characters long.</div>
                         <div ng-message="maxlength" id="input-error">The password needs at less or equal than 25 characters long.</div>
                     </div>
                 </item-divider>
-                
-                <item-divider class="item item-input item-stacked-label">
-                    <span class="input-label">Confirm Password</span>
-                    <input type="password" name="passconf" ng-model="data.passconf" ng-minlength="8" ng-maxlength="25" placeholder="Confirm password" ng-required="true" ng-pattern="data.password">
-                    
+
+                <span class="input-label span-fix input-label-fix">Confirm Password <b style="color:red;">*</b></span>
+                <item-divider class="item" id="input-box">
+                    <input class="input-fix" type="password" name="passconf" ng-model="data.passconf" ng-minlength="8" ng-maxlength="25" placeholder="Confirm password" ng-required="true" ng-pattern="data.password">
                     <div ng-messages="myForm.passconf.$error" ng-if="myForm.passconf.$touched">
                         <div ng-message="required" id="input-error">The password confirmation field is required!</div>
                         <div ng-message="pattern" id="input-error">The password confirmation needs to be equal to the password input!</div>
@@ -142,15 +188,8 @@
                         <div ng-message="maxlength" id="input-error">The password confirmation needs at less or equal than 25 characters long.</div>
                     </div>
                 </item-divider>
-             
-               
-                    
-                    <ion-toggle
-                                ng-model="data.privacy" 
-                                ng-checked="data.privacy">
-                        Privacy
-                    </ion-toggle>
                 
+                <ion-toggle id="ion-toggle-fix" ng-model="data.privacy" ng-checked="data.privacy">Privacy <b style="color:red;">*</b></ion-toggle>
                 
                 <div class="spacer" id="spacer-supporter-registration"></div>
               
@@ -160,6 +199,7 @@
                     </a>
                 </div>
             
+                <button class="button button-block button-assertive" ng-click="cancelSupporterRegistrationButton()">Cancel</button>
             </ion-list>
     
         </form>

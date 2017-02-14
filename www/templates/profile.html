@@ -45,16 +45,16 @@
         <div class="background-img" id="contentUsers" ng-style="{'background-image': 'src(' + info1 + ')'}">
             <div id="profile-info-user">
                 <p class="center profile">
-                    <img ng-src="{{ info1 || 'img/ionic2.png'}}"/>
+                    <img ng-src="{{ info1 || 'img/ionic2.png'}}" style="margin-bottom: 5px;"/>
                 </p>
                 
-                <h3 id="profile-name">
+                <h4 id="profile-name">
                     <b>{{info.sup_fname}} {{info.sup_lname}}</b>
-                </h3>
-                
-                <h4 id="about-username-supporter-profile">
-                    <b>({{supporter.username}})</b>
                 </h4>
+                
+                <h5 id="about-username-supporter-profile" style="margin-top: -10px;">
+                    <b>({{supporter.username}})</b>
+                </h5>
             </div>
         </div>
         

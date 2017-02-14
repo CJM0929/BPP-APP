@@ -10,128 +10,160 @@
         {
             color: black;
         }
+        
+        .span-fix
+        {
+            margin-left: 1.618%;
+        }
+        
+        .label-fix
+        {
+            border-radius: 13px;
+            padding: 10px;
+        }
+        
+        .item-fix
+        {
+            margin-bottom: 10px;
+            padding: 8px 5px;
+        }
+        
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+        
+        .input-label-fix
+        {
+            width: 50%;
+        }
+        
+        #label-fix
+        {
+            border-radius: 5px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 0;
+        }
     </style>
+    
     <ion-nav-buttons side="left">
- <button class="button button-clear" ui-sref="dashboard.Evolunteering"><i class="icon ion-chevron-left" ></i> </button>
-</ion-nav-buttons>
+        <button class="button button-clear" ui-sref="dashboard.Evolunteering"><i class="icon ion-chevron-left" ></i> </button>
+    </ion-nav-buttons>
+    
     <ion-content padding="true" class="has-header" hide-back-button="0">
         
         <form name="myForm" class="list" novalidate>
-            
+             <div class="item item-divider custom-item-divider">Event banner photo</div>
             <label>
-                <span class="input-label"><b>Volunteering Picture</b></span>
+                <span class="input-label span-fix input-label-fix"><b>Volunteering Picture</b></span>
                 <input type="file" file-model="data.userfile">
             </label>
             
             <div class="item item-divider custom-item-divider">General information</div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Title Name</span>
-                <input type="text" name="title" ng-model="volunteeringPostObject.volunteering_job.general_info.title" placeholder="Volunteer Opportunity title name" ng-required="true" ng-pattern="/^[a-zA-Z',: ]+$/" ng-minlength="3" ng-maxlength="64">
-                
-                <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+            <span class="input-label span-fix input-label-fix">Title Name <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
+                <input type="text" name="title" ng-model="volunteeringPostObject.volunteering_job.general_info.title" placeholder="Volunteer Opportunity title name" ng-required="true" ng-minlength="3" ng-maxlength="64">
+            </label>
+             <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
                     <div ng-message="required" id="input-error">The volunteering post title field is required!</div>
-                    <div ng-message="pattern" id="input-error">The volunteering post title cannot have special characters!</div>
                     <div ng-message="minlength" id="input-error">The volunteering post title needs at least 3 characters long.</div>
                     <div ng-message="maxlength" id="input-error">The volunteering post title needs at less or equal than 64 characters long.</div>
                 </div>
-            </label>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Role description</span>    
+            <span class="input-label span-fix input-label-fix">Role description <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <textarea type="text" name="description" ng-model="volunteeringPostObject.volunteering_job.general_info.description" rows="5" placeholder="Opportunity description" ng-required="true" ng-minlength="3">Opportunity description</textarea>
-                
-                <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
+            </label>
+             <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
                     <div ng-message="required" id="input-error">The opportunity description field is required!</div>
                     <div ng-message="minlength" id="input-error">The opportunity description title needs at least 3 characters long.</div>
                 </div>
-            </label>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Application<br>Procedure</span>
+            <span class="input-label span-fix input-label-fix">Application Procedure <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <textarea type="text" name="app_procedure" ng-model="volunteeringPostObject.volunteering_job.general_info.app_procedure" rows="3" placeholder="Application Procedure" ng-required="true" ng-minlength="3"></textarea>
-                <div ng-messages="myForm.app_procedure.$error" ng-if="myForm.app_procedure.$touched">
+            </label>
+            <div ng-messages="myForm.app_procedure.$error" ng-if="myForm.app_procedure.$touched">
                     <div ng-message="required" id="input-error">The application procedure field is required!</div>
                     <div ng-message="minlength" id="input-error">The application procedure needs at least 3 characters long.</div>
                 </div>
-            </label>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Hours of Work</span>
+            <span class="input-label span-fix input-label-fix">Hours of Work <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <input name="work_hours" type="number" ng-model="volunteeringPostObject.volunteering_job.general_info.work_hours" ng-pattern='/^[0-9]+$/' placeholder="Work hours">
-                <div ng-messages="myForm.work_hours.$error" ng-if="myForm.work_hours.$touched">
+            </label>
+            <div ng-messages="myForm.work_hours.$error" ng-if="myForm.work_hours.$touched">
                     <div ng-message="required" id="input-error">The work hours field is required!</div>
                     <div ng-message="pattern" id="input-error">The work hours can only in digits!</div>
                 </div>
-            </label>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Volunteers Quantity</span>
+            <span class="input-label span-fix input-label-fix">Volunteers Quantity <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <input name="num_of_ppl" type="number" ng-model="volunteeringPostObject.volunteering_job.general_info.num_of_ppl" ng-pattern='/^[0-9]+$/' placeholder="Quantity of volunteers">
-                <div ng-messages="myForm.num_of_ppl.$error" ng-if="myForm.num_of_ppl.$touched">
+            </label>
+            <div ng-messages="myForm.num_of_ppl.$error" ng-if="myForm.num_of_ppl.$touched">
                     <div ng-message="pattern" id="input-error">The work hours can only be in digits!</div>
-                </div>
-            </label>
+            </div>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Start Time</span>Start time
+            <span class="input-label span-fix input-label-fix">Start Time <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <input name="start_time" type="datetime-local" ng-model="volunteeringPostObject.volunteering_job.general_info.start_time" ng-required="true">
-                <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
+            </label>
+            <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
                     <div ng-message="required" id="input-error">A starting time for the event is required!</div>
-                </div>
-            </label>
+            </div>
 
-            <label class="item item-input item-floating-label">End time
-                <span class="input-label">End Time</span>
+            <span class="input-label span-fix input-label-fix">End Time <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <input name="end_time" type="datetime-local" ng-model="volunteeringPostObject.volunteering_job.general_info.end_time" ng-required="true">
+                
             </label>
+            <div ng-messages="myForm.end_time.$error" ng-if="myForm.end_time.$touched">
+                <div ng-message="required" id="input-error">An ending time for the event is required!</div>
+            </div>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Website url</span>
+            <span class="input-label span-fix input-label-fix">Website url</span>
+            <label class="item item-input label-fix item-fix">
                 <input name="web" type="url" ng-model="volunteeringPostObject.volunteering_job.general_info.web" placeholder="Website url" ng-minlength="7">
-                <div ng-messages="myForm.web.$error" ng-if="myForm.web.$touched">
-                    <div ng-message="minlength" id="input-error">The website url needs to be at least 7 (including http://) characters long.</div>
-                </div>
             </label>
-            
-            <div class="item item-divider custom-item-divider">Required Skills
-                <i class="icon ion-chevron-down" ng-click="volunteeringShowSkills()"></i>
+            <div ng-messages="myForm.web.$error" ng-if="myForm.web.$touched">
+                <div ng-message="minlength" id="input-error">The website url needs to be at least 7 (including http://) characters long.</div>
             </div>
             
-            <label class="item item-input item-floating-label" ng-show="showVolunteeringSkills">
-                <ion-checkbox ng-repeat="skill in info" class="item item-checkbox" ng-checked="skill.checked" ng-model="skill.checked">
-                    {{skill.text}}
-                </ion-checkbox>
-            </label>
+            <div class="item item-divider custom-item-divider" ng-click="volunteeringShowSkills()">Required Skills
+                <i class="icon ion-chevron-down" style="float:right"></i>
+            </div>
+            
+             <ion-list ng-show="showVolunteeringSkills">
+                    <ion-checkbox class="checkbox-royal" ng-repeat="skill in info" ng-checked="skill.checked" ng-model="skill.checked" id="label-fix">
+                        {{skill.text}}
+                    </ion-checkbox>
+            </ion-list>
             
             <div class="item item-divider custom-item-divider">Address information</div>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Street address 1</span>
-                <input name="address1" type="text" ng-model="volunteeringPostObject.volunteering_job.address_information.address1" placeholder="Street address 1" ng-required="true" ng-pattern="/^[a-zA-Z0-9,.:#- ]+$/" ng-minlength="3">
-                
-                <div ng-messages="myForm.address1.$error" ng-if="myForm.address1.$touched">
-                    <div ng-message="required" id="input-error">The address field is required!</div>
-                    <div ng-message="pattern" id="input-error">The address cannot have special characters!</div>
-                    <div ng-message="minlength" id="input-error">The address needs to be at least 3 characters long!</div>
-                </div>
+            <span class="input-label span-fix input-label-fix">Street address 1 <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
+                <input name="address1" type="text" ng-model="volunteeringPostObject.volunteering_job.address_information.address1" placeholder="Street address 1" ng-required="true"  ng-minlength="3">
             </label>
+            <div ng-messages="myForm.address1.$error" ng-if="myForm.address1.$touched">
+                <div ng-message="required" id="input-error">The address field is required!</div>
+                <div ng-message="minlength" id="input-error">The address needs to be at least 3 characters long!</div>
+            </div>
 
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Street address 2</span>
-                <input name="address2" type="text" ng-model="volunteeringPostObject.volunteering_job.address_information.address2" placeholder="Street address 2" ng-pattern="/^[a-zA-Z0-9,.:#- ]+$/" ng-minlength="3">
-                
-                <div ng-messages="myForm.address2.$error" ng-if="myForm.address2.$touched">
-                    <div ng-message="pattern" id="input-error">The address cannot have special characters!</div>
-                    <div ng-message="minlength" id="input-error">The address needs to be at least 3 characters long!</div>
-                </div>
+            <span class="input-label span-fix input-label-fix">Street address 2</span>
+            <label class="item item-input label-fix item-fix">
+                <input name="address2" type="text" ng-model="volunteeringPostObject.volunteering_job.address_information.address2" placeholder="Street address 2" ng-minlength="3">
             </label>
+            <div ng-messages="myForm.address2.$error" ng-if="myForm.address2.$touched">
+                <div ng-message="minlength" id="input-error">The address needs to be at least 3 characters long!</div>
+            </div>
             
-            <label class="item item-input item-select">
-                <div class="input-label">
-                    City     
-                </div>           
-<!--                <span class="input-label">City</span>-->
+            <span class="input-label span-fix input-label-fix">City <b style="color:red;">*</b></span>  
+            <label class="item item-input item-select" id="selector-dropdown-fix">         
                 <select name="city" ng-model="volunteeringPostObject.volunteering_job.address_information.city">
                     <option value="Adjuntas">Adjuntas</option>
                     <option value="Aguada">Aguada</option>
@@ -212,64 +244,61 @@
                     <option value="Yabucoa">Yabucoa</option>
                     <option value="Yauco">Yauco</option>
                 </select>
-                
-                <div ng-messages="myForm.city.$error" ng-if="myForm.city.$touched">
-                    <div ng-message="required" id="input-error">The city field is required! Please select a city.</div>
-                </div>
             </label>
+            <div ng-messages="myForm.city.$error" ng-if="myForm.city.$touched">
+                <div ng-message="required" id="input-error">The city field is required! Please select a city.</div>
+            </div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">ZIP Code</span>
+            <span class="input-label span-fix input-label-fix">Zip code <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <input name="zip" type="tel" ng-model="volunteeringPostObject.volunteering_job.address_information.zip" placeholder="zipcode" ng-pattern="/^(\d{5}([\-]\d{4})?)$/">
-                
-                <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
-                    <div ng-message="required" id="input-error">The zip field is required!</div>
-                    <div ng-message="pattern" id="input-error">The zip needs to be as: NNNNN or nnnnn-mmmm!</div>
-                </div>
             </label>
+            <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
+                <div ng-message="required" id="input-error">The zip field is required!</div>
+                <div ng-message="pattern" id="input-error">The zip needs to be as: NNNNN or nnnnn-mmmm!</div>
+            </div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Location<br>specific<br>description</span>
+            <span class="input-label span-fix input-label-fix">Location specific description <b style="color:red;">*</b></span>
+            <label class="item item-input label-fix item-fix">
                 <textarea type="text" name="location_description" ng-model="volunteeringPostObject.volunteering_job.address_information.location_description" rows="5" placeholder="Description" ng-minlength="3"></textarea>
-                
-                <div ng-messages="myForm.location_description.$error" ng-if="myForm.location_description.$touched">
-                    <div ng-message="minlength" id="input-error">The location specific description needs to be at least 3 characters long!</div>
-                </div>
             </label>
+            <div ng-messages="myForm.location_description.$error" ng-if="myForm.location_description.$touched">
+                <div ng-message="minlength" id="input-error">The location specific description needs to be at least 3 characters long!</div>
+            </div>
             
             <div class="item item-divider custom-item-divider">Volunteering post registrar's information</div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Registrar Name</span>
+            <span class="input-label span-fix input-label-fix">Registrar Name</span>
+            <label class="item item-input label-fix item-fix">
                 <input name="supervisor_name" type="text" ng-model="volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_name" placeholder="Registrar's name" ng-pattern="/^[a-zA-Z. ]+$/" ng-minlength="2">
-                
-                <div ng-messages="myForm.supervisor_name.$error" ng-if="myForm.supervisor_name.$touched">
-                    <div ng-message="pattern" id="input-error">The supervisor's name cannot have numbers or special characters!</div>
-                    <div ng-message="minlength">The supervisor's name needs to be at least 2 characters.</div>
-                </div>
             </label>
+            <div ng-messages="myForm.supervisor_name.$error" ng-if="myForm.supervisor_name.$touched">
+                <div ng-message="pattern" id="input-error">The supervisor's name cannot have numbers or special characters!</div>
+                <div ng-message="minlength">The supervisor's name needs to be at least 2 characters.</div>
+            </div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Email</span>
+            <span class="input-label span-fix input-label-fix">Email</span>
+            <label class="item item-input label-fix item-fix">
                 <input name="supervisor_email" type="email" ng-model="volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_email" placeholder="Registrar's email">
-                
-                <div ng-messages="myForm.supervisor_email.$error" ng-if="myForm.supervisor_email.$touched">
-                    <div ng-message="email" id="input-error">The supervisor's email needs in the email format!</div>
-                </div>
             </label>
+            <div ng-messages="myForm.supervisor_email.$error" ng-if="myForm.supervisor_email.$touched">
+                <div ng-message="email" id="input-error">The supervisor's email needs in the email format!</div>
+            </div>
             
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Registrar's phone number</span>
+            <span class="input-label span-fix input-label-fix">Registrar's phone number</span>
+            <label class="item item-input label-fix item-fix">
                 <input name="supervisor_phone" type="tel" ng-model="volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_phone" placeholder="Registrar's phone number" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">
-                
-                <div ng-messages="myForm.supervisor_phone.$error" ng-if="myForm.supervisor_phone.$touched">
-                    <div ng-message="tel" id="input-error">The supervisor's phone needs to be in a telephone format!</div>
-                    <div ng-message="pattern" id="input-error">The supervisor's phone needs to be as: nnnNNNnnnn!</div>
-                </div>
             </label>
+            <div ng-messages="myForm.supervisor_phone.$error" ng-if="myForm.supervisor_phone.$touched">
+                <div ng-message="tel" id="input-error">The supervisor's phone needs to be in a telephone format!</div>
+                <div ng-message="pattern" id="input-error">The supervisor's phone needs to be as: nnnNNNnnnn!</div>
+            </div>
         </form>
         
         <a ng-click="postVolunt()" class=" button button-royal button-block">Create Volunteering Opportunity</a>
-    
+        <button class="button button-block button-assertive" ng-click="cancelEdit()">
+            Cancel
+        </button>
+        
     </ion-content>
 </ion-view>

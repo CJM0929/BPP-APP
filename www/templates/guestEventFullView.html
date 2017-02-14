@@ -47,29 +47,29 @@
 
             </div>
             
-            <div class="item item-body">
+           <div class="item item-body">
                 <div class="list">
                 
                    
                     <img class="full-image" ng-show="event_photo !== null" ng-src="{{event_photo}}">
                     <p>
-                        <b  class="calmer">Details:</b><p>{{post.description}}</p>
-                    </p>
+                        <br>
+                        <b  class="royal">Details: </b><br>{{post.description}}<br>
                     
-                    <p>
-                        <b class="calmer">Address:</b> <p>{{post.address}}</p>
-
-                    </p> 
-                    <p>
-                        <b  class="calmer">Supervisor name:</b> <p>{{post.supervisor_name}}</p>
-                    </p>
-                    
-                    <p>
-                        <b class="calmer">Supervisor telephone #:</b> <p>{{post.supervisor_phone}}</p>
-                    </p>
-                    
-                    <p>
-                        <b class="calmer">Supervisor email:</b> <p>{{post.supervisor_email}}</p>
+                        <br>
+                        <b class="royal">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
+                        <br>
+                        <br>
+                        <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}
+                        <br>
+                        <br>
+                        <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
+                        <br>
+                        <br>
+                        <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}
+                        <br>
+                        <br>
+                        <b class="royal">Website:</b><br> {{post.web}}
                     </p>
                 
                 </div>

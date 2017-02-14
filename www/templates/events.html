@@ -3,16 +3,20 @@
     <style>
         #ion-content-events
         {
-            background: url(img/testing.png) no-repeat center;
-            background-size:cover;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         }
     </style>
     
     <ion-content padding="false" id="ion-content-events" class="manual-ios-statusbar-padding">
         <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
         
-        <ion-list>
-            <div class="list" ng-repeat="post in posts | orderBy: '-event_created'">
+        <ion-list class="list">
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
                 <div class="item item-avatar item item-button-right" ng-click="goToEventView(post.id)">
                     <img src="{{i || 'img/EventIcon.jpg'}}">               
                     <h2><b>{{post.title}}</b></h2>

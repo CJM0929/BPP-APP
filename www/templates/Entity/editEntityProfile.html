@@ -5,10 +5,34 @@
         {
             color: black;
         }
+        
+        .label-fix
+        {
+            border-radius: 13px;
+        }
+        
+        span-fix
+        {
+            margin-left: 1%;
+        }
+        
+        .item-fix
+        {
+            margin: 1%;
+        }
+        
+        input-fix
+        {
+            width: 84%;
+        }
     </style>
     
     <ion-nav-buttons side="left">
-        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        <button ng-show='1' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ui-sref="entityProfile"><i class="icon ion-chevron-left" ></i> </button>
     </ion-nav-buttons>
     
     <ion-content padding="true" class="has-header">
@@ -23,55 +47,65 @@
         <input type="file" file-model="data.userfile">
         
         <ion-list>
-            <form class="list">
+            <form name="myForm" class="list">
                 <ion-item class="item-divider custom-item-divider">Edit information</ion-item>
                 
-                <label class="item item-input">
+                <span class="input-label span-fix">About entity</span>
+                <label class="item item-input label-fix item-fix">
                     <textarea ng-model="data.entity.about" id="edit-profile-entity-textarea" rows="5" cols="50" type="text" placeholder="{{info.ent_about}}" value="{{info.ent_about}}"></textarea>
                 </label>
                         
-                <label class="item item-input">
-                    <span class="input-label">Entity Name</span>
-                    <input type="text" name="ename" ng-model="data.entity.ent_name" placeholder="{{info.ent_name}}">
+                <span class="input-label span-fix">Entity Name</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="text" name="ename" ng-model="data.entity.ent_name" placeholder="{{info.ent_name}}">
                 </label>
                 
-                <label class="item item-input">
-                    <span class="input-label">Founded On</span>
-                    <input type="date" value="2012-10-01" ng-model="data.entity.founded" ng-required="true" name="founded_on">
+                <span class="input-label span-fix">Founded On</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="date" ng-model="data.entity.founded" ng-required="true" name="founded_on">
                 </label>
                 
-                <label class="item item-input">
-                    <span class="input-label">Phone</span>
-                    <input type="tel" ng-model="data.entity.phone" placeholder="{{info.ent_phone}}">
+                <span class="input-label span-fix">Phone</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="tel" ng-model="data.entity.phone" placeholder="Phone number" name="phone">
+                </label>
+                 <div ng-messages="myForm.phone.$error" ng-if="myForm.phone.$touched">
+                    <div ng-message="tel" id="input-error">The phone number field format is invalid!</div>
+                </div>
+
+                <span class="input-label span-fix">Fax</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="tel" ng-model="data.entity.fax" placeholder="Fax number" name="fax">
+                </label>
+                <div ng-messages="myForm.fax.$error" ng-if="myForm.fax.$touched">
+                    <div ng-message="tel" id="input-error">The fax number field format is invalid!</div>
+                </div>
+
+                <span class="input-label span-fix">Website</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="text" ng-model="data.entity.web" placeholder="{{info.ent_web}}">
                 </label>
 
-                <label class="item item-input">
-                    <span class="input-label">Fax</span>
-                    <input type="tel" ng-model="data.entity.fax" placeholder="{{info.ent_fax}}">
+<!--
+                 <span class="input-label span-fix">Email</span>
+                <label class="item item-input label-fix item-fix">
+                    <input class="input-fix" type="email" ng-model="data.entity.email" placeholder="{{info.web_email}}">
                 </label>
-
-                <label class="item item-input">
-                    <span class="input-label">Website</span>
-                    <input type="text" ng-model="data.entity.web" placeholder="{{info.ent_web}}">
-                </label>
-
-                <label class="item item-input">
-                    <span class="input-label">Email</span>
-                    <input type="email" ng-model="data.entity.email" placeholder="{{info.web_email}}">
-                </label>
-                
-                    <label class="item item-input">
-                        <span class="input-label">Street Line 1</span>
-                        <input type="text" ng-model="data.entity.address1" placeholder="{{info.ent_address1}}">
+-->
+                <span class="input-label span-fix">Street Line 1</span>
+                    <label class="item item-input label-fix item-fix">
+                        <input class="input-fix" type="text" ng-model="data.entity.address1" placeholder="{{info.ent_address1}}">
                     </label>
                 
-                    <label class="item item-input">
-                        <span class="input-label">Street Line 2</span>
-                        <input type="text" ng-model="data.entity.address2" placeholder="{{info.ent_address2}}">
+                <span class="input-label span-fix">Street Line 2</span>
+                    <label class="item item-input label-fix item-fix">
+                        
+                        <input class="input-fix" type="text" ng-model="data.entity.address2" placeholder="{{info.ent_address2}}">
                     </label>
                     
+                 <span class="input-label span-fix">City</span>
                     <label class="item item-select">
-                        <span class="input-label">City</span>
+                       
                         <select ng-model="data.entity.city">
                             <option value="Adjuntas">Adjuntas</option>
                             <option value="Aguada">Aguada</option>
@@ -161,18 +195,21 @@
                         </select>
                     </label>
                     
+                <span class="input-label span-fix">State</span>
                     <label class="item item-select">
-                        <span class="input-label">State</span>
                         <select ng-model="data.entity.country">
                             <option value="Puerto Rico">Puerto Rico</option>
                         </select>
                     </label>
                     
-                    <label class="item item-input">
-                        <span class="input-label">Zip Code</span>
-                        <input type="text" placeholder="{{info.ent_zip}}" ng-model="data.entity.zip">
+                <span class="input-label span-fix">Zip Code</span>
+                    <label class="item item-input label-fix item-fix">
+                        
+                        <input class="input-fix" type="text" placeholder="{{info.ent_zip}}" ng-model="data.entity.zip">
                     </label>
-                <a ng-click="UpdateData()" class="button button-balanced button-block">Save</a>
+                
+                <a ng-click="UpdateData()" class="button button-balanced button-block">Save profile</a>
+                
                 <button class="button button-block button-assertive" ng-click="cancelEdit()">
                     Cancel
                 </button>

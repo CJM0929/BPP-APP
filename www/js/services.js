@@ -1151,75 +1151,78 @@ void set_max_resources();                             //
         .module('app.services')
         .service('Events', EventsFunction); 
                  
-    function EventsFunction($q, $cordovaCalendar)
+    function EventsFunction($q, $cordovaCalendar, $ionicPopup, moment)
     {
-       
-//        var incrementDate = function (date, amount) {
-//            var tmpDate = new Date(date);
-//            tmpDate.setDate(tmpDate.getDate() + amount);
-//            tmpDate.setHours(13);
-//            tmpDate.setMinutes(0);
-//            tmpDate.setSeconds(0);
-//            tmpDate.setMilliseconds(0);
-//            return tmpDate;
-//        };
-//        
-//        var incrementHour = function(date, amount) {
-//    
-//            var tmpDate = new Date(date);
-//            tmpDate.setHours(tmpDate.getHours() + amount);
-//            
-//            return tmpDate;
-//	};
-//	
-//	
-//	
-//	var getEvents = function() {
-//			var deferred = $q.defer();
-//  	
-//			/*
-//			Logic is:
-//			For each, see if it exists an event.
-//			*/
-//			var promises = [];
-//			fakeEvents.forEach(function(ev) {
-//				//add enddate as 1 hour plus
-//				ev.enddate = incrementHour(ev.date, 1);
-//				console.log('try to find '+JSON.stringify(ev));
-//				promises.push($cordovaCalendar.findEvent({
-//					title:ev.title,
-//					startDate:ev.date
-//				}));
-//			});
-//			
-//			$q.all(promises).then(function(results) {
-//				console.log("in the all done");	
-//				//should be the same len as events
-//				for(var i=0;i<results.length;i++) {
-//					fakeEvents[i].status = results[i].length === 1;
-//				}
-//				deferred.resolve(fakeEvents);
-//			});
-//			
-//			return deferred.promise;
-//	}
+        console.log(moment);
+        
+        var incrementDate = function (date, amount) {
+            var tmpDate = new Date(date);
+            tmpDate.setDate(tmpDate.getDate() + amount);
+            tmpDate.setHours(13);
+            tmpDate.setMinutes(0);
+            tmpDate.setSeconds(0);
+            tmpDate.setMilliseconds(0);
+            return tmpDate;
+        };
+        
+        var incrementHour = function(date, amount) {
+    
+            var tmpDate = new Date(date);
+            tmpDate.setHours(tmpDate.getHours() + amount);
+            
+            return tmpDate;
+	};
+	
+	
+	
+	var getEvents = function(event) {
+			var deferred = $q.defer();
+  	
+			/*
+			Logic is:
+			For each, see if it exists an event.
+			*/
+			var promises = [];
+        
+				event.end_time = incrementHour(event.end_time, 1);
+				//console.log('try to find '+JSON.stringify(event));
+				promises.push($cordovaCalendar.findEvent({
+					title:event.title,
+					startDate:event.start_time
+				}));
+			
+			$q.all(promises).then(function(results) {
+				console.log("in the all done");	
+				//should be the same len as events
+				for(var i=0;i<results.length;i++) {
+					event.status = results[i].length === 1;
+				}
+                
+				deferred.resolve(event);
+			});
+			
+			return deferred.promise;
+	}
 	
 	var addEvent = function(event) {
-        
+        event.start_time = new Date(event.start_time);
+        event.end_time = new Date(event.end_time);
+        console.log(event);
 		var deferred = $q.defer();
-
 		$cordovaCalendar.createEvent({
 			title: event.title,
 			notes: event.description,
 			startDate: event.start_time,
 			endDate:event.end_time
             
-		}).then(function (result)
+		}).then(function(result)
                 {
+            
             $ionicPopup.alert({
                 title: 'Added to your calendar!',
                 template: 'The event was successfully added to your native calendar!'
             });
+            
             deferred.resolve(1);
         
         }, function (err) {
@@ -1236,7 +1239,7 @@ void set_max_resources();                             //
 	};
     
     return {
-//		get:getEvents,
+        get: getEvents,
 		add:addEvent
 	};
    }})();

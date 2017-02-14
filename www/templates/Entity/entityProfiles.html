@@ -28,6 +28,17 @@
         {
             margin-left: 3%;
         }
+        
+        #list-background-gradient
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+        }
     </style>
     
     <ion-nav-buttons side="left">
@@ -51,7 +62,7 @@
                     <div class="profile-details">
                         <h2 class="color-white"><b>{{entityAdmin.name}}</b></h2>
                     </div>
-                    <img ng-src="{{info.background || 'img/default.png'}}" class="about-image profile-background-image" id="img-entity-profile">
+                    <img ng-src="{{entityPicture || 'img/default.png'}}" class="about-image profile-background-image" id="img-entity-profile">
                 </div>
                 
             </ion-slide-box>
@@ -80,7 +91,7 @@
         <h4 class="calm" id="info-headers">Events and volunteering <a style="color: black;">({{posts.length}})</a></h4>
             <hr>
             <h5 ng-if="postsQuantity === 0" style="text-align: center;">{{info.ent_name}} has not yet made any event and volunteering posts yet.</h5>
-            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'" id="list-background-gradient">
             
                 <div class="item item-avatar item" ng-if="post.category === 'volunteering' && post.active" ng-click="goToVoluntView(post.id)">
                     <img src="{{i || 'img/volunteer.png'}}">

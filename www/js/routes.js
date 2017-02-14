@@ -509,6 +509,11 @@ angular.module('app.routes', ['angular-jwt'])
         templateUrl: 'templates/guestVolunteeringFullView.html',
         controller: 'guestVolunteeringFullViewCtrl'
 
+        }).state('termsAndConditions',{
+        url: '/terms_and_Condition',
+        templateUrl: 'templates/termsAndConditions.html',
+        controller: 'termsAndConditionsCtrl'
+
         });
 
 

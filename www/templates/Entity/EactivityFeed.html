@@ -3,7 +3,12 @@
     <style>
         #ion-content-post
         {
-            background: #f6f7f8;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         }
     </style>
     
@@ -19,15 +24,29 @@
            
             <div class="list card" ng-repeat="post in posts | orderBy: '-post_created'">
             
+                
+                 <div class="item item-avatar item item-button-right" >
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                      <a ng-click="alterPost({{post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                    <h2>{{post.post_message}}</h2>
+                    <p>Posted: <span am-time-ago="post.post_created"></span></p>
+                </div>
+<!--
                 <div class="item item-avatar item item-button-right" >
                     <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
                     <a ng-click="alterPost({{post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
                     <h2>{{info.ent_name}}</h2>
+                     <div class="item item-body">
+                    <h3>{{post.post_message}}</h3>
+                </div>
                     <p>Posted: <span am-time-ago="post.post_created"></span></p>
                 </div>
+-->
+<!--
                 <div class="item item-body">
                     <h3>{{post.post_message}}</h3>
                 </div>
+-->
             
             </div>
         
