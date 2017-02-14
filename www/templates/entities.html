@@ -1,22 +1,52 @@
+<!--Entities view-->
 <ion-view view-title="Entities">
-    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+   
+    <style>
+        #spacer-entities
+        {
+            width: 300px;
+            height: 50px;
+        }
+       
+        #ion-content-entities
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+    </style>
+    
+     <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    
+    <form class="list bar-subheader">
+        <label class="item item-input" name="search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" ng-model="query" placeholder="Search">
+        </label>
+    </form>
+    
+    <ion-content id="ion-content-entities" padding="true">
         
-          <form class="list ">
-            <label class="item item-input" name="search">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" ng-model = "query" placeholder="Search">
-            </label>
-        </form>
+        <div class="spacer" id="spacer-entities"></div>    
         
-        <ion-list >
-<!--            <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-avatar-left item-icon-right" href="#/animal/{{profilelist.id}}">-->
-         <ion-item ng-repeat="profilelist in profiles | filter: query" class="item-avatar-left item-icon-right" href="#/entityProfiles/{{profilelist.id}}">
-		<img ng-src="{{profilelist.avatar}}">
-        <h2>{{profilelist.name}}</h2>
-        <i class="icon ion-chevron-right royal"></i>
-      </ion-item>
-                  
-    </ion-list>
+        <ion-list>
+    
+            <ion-item ng-repeat="profilelist in cate | filter: query" class="item-avatar-left item-icon-right" ng-click="selectEnt({{profilelist.ent_id}})">
+                <img ng-src="{{profilelist.avatar || 'img/default.png'}}">
+                <h2>{{profilelist.ent_name}}</h2>
+                <i class="icon ion-chevron-right royal"></i>
+            </ion-item>
+            
+        </ion-list>
         
-  </ion-content>
+    </ion-content>
 </ion-view>
+
+
+

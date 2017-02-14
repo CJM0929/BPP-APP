@@ -1,31 +1,40 @@
-<ion-view title="Activity Feed" id="page18" class=" ">
-    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+<ion-view cache-view="false" title="Post">
+ 
+    <style>
+        #ion-content-post
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+        }
         
-             
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
+        #spacer
+        {
+            width: 0px; height: 50px;
+        }
         
-        <div id="activityFeed-button-bar1" class=" button-bar "></div>
-       
-        <div class="list card " id="afeed1">
-          
-            <ion-item class="item-avatar">
-                <h2>Item</h2>
-                <p>1 min ago</p>
-            </ion-item>
-            <p style="padding: 15px">Some friendly
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            </p>
-            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+    </style>
+    
+    <ion-content padding="false" id="ion-content-post" class="manual-ios-statusbar-padding">    
+        
+        <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
+    
+        <ion-list>  
+            <div class="list card" ng-repeat="post in posts | orderBy: '-post_created'">
+                <div class="item item-avatar item item-button-right">
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                    <h2><b>{{post.ent_name}}</b></h2>
+                    <p>Posted: <span am-time-ago="post.post_created"></span></p>
+                    <br>
+                    <h3>{{post.post_message}}</h3>      
+                    <div class="spacer"></div>
+                </div>
             </div>
-           
-    <p style="padding: 20px 2% 10px 10px; font-size:large;">
-      <a href="#" class="subdued">Share</a>
-    </p> 
-            
-    </div>
+        </ion-list>
+    
     </ion-content>
 </ion-view>

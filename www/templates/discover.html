@@ -1,0 +1,81 @@
+<ion-view title="Discover">
+    
+    <style>
+        
+        #spacer
+        {
+            width: 300px; 
+            height: 25px;
+        }
+        
+        #ion-content-role-decision
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+        }
+        
+        #discover_events_and_volunteering_header
+        {
+            padding: -5px 0px -5px 0px; color:white; text-align:center;
+        }
+        
+        #discover_buttons_styling
+        {
+            font-weight:600; 
+            color: #56a0ce;
+            opacity: 1;
+        }
+
+    </style>
+    
+   <ion-content scroll="true" padding="false" id="ion-content-role-decision" class="manual-ios-statusbar-padding">
+    
+        <div class="spacer" id="spacer"></div>
+        
+        <h1 style="color: white; text-align: center;" class="calm">Explore and discover!</h1>
+        
+        <div class="list" style="margin-left: 10px; margin-right: 10px;">
+            
+            <div class="spacer" id="spacer"></div>
+            <div>
+                <div ui-sref="categories">
+                    <a ui-sref="categories" id="discover_buttons_styling" class="button button-stable button-large button-inline block icon-left ion-ios-paper">
+                        <b>Entities</b>
+                    </a>
+                </div>
+            </div>
+                    <div class="spacer" id="spacer"></div>
+
+                <div>
+            <div ui-sref="allEvents">
+                <a ui-sref="home.activityFeed" id="discover_buttons_styling" class="button button-stable button-large button-inline block icon-left ion-ios-paper">
+                    <b>Recent Events</b>
+                </a>
+            </div>
+        </div>
+        
+        <div class="spacer" id="spacer"></div>
+        
+        <div>
+            <div ui-sref="allVolunteerings" >
+                <a ui-sref="home.activityFeed" id="discover_buttons_styling" class="button button-stable button-large button-inline block icon-left ion-ios-paper">
+                    <b>Recent Volunteerings</b>
+                </a>
+            </div>
+        </div>
+                    <div class="spacer" id="spacer"></div>
+            
+            <a ui-sref="allPosts" id="discover_buttons_styling" class="button button-stable button-large button-block icon-left ion-ios-paper">
+            <b>See What's Going On!</b>
+        </a>
+        
+            
+        </div>
+    </ion-content>
+
+</ion-view>

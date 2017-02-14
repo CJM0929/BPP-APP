@@ -1,0 +1,37 @@
+<ion-view cache-view="false" hide-nav-bar="0" title="Introduction" hide-back-button="0">
+    
+    <style>
+        #ion-content-introduction
+        {
+            background: url(img/introduction-logo.png) no-repeat center;
+            background-size:cover;
+        }
+        
+        #get-started-button
+        {
+            border-color:white;
+            border-width: medium;
+            font-weight: 1.618em; 
+            top: 72%; 
+        }
+    
+    </style>
+    
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-content padding="true" scroll="false"  scrollbar-x="false" class="manual-ios-statusbar-padding" id="ion-content-introduction">
+        
+        <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
+            
+            <ion-slide-page>
+                <a ui-sref="guestPage" id="get-started-button" class="button button-outline button-large button-inline block">
+                    <h2 id="NameL"> Get Started!</h2>
+                </a>
+            </ion-slide-page>
+        
+        </ion-slides>
+        
+    </ion-content>
+</ion-view>

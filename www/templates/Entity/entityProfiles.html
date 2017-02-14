@@ -1,248 +1,137 @@
-    <ion-view title="{{profile.name}}">
-
+<ion-view cache-view="false" title="{{info.ent_name}}">
+  
+    <style>
+        #spacer-entity-profiles
+        {
+            height: 0px;
+            width: 300px;
+        }
         
-<!-- Como poner boton en el header a la derecha
-            <ion-nav-bar class="bar-royal">
-                <ion-nav-back-button></ion-nav-back-button>
-                 <ion-nav-buttons side="right">
-                    <button class="button button-icon button-clear ion-compose" ui-sref="roleDecision"></button>
-                </ion-nav-buttons>
-            </ion-nav-bar>
+        #entity-name-entity-profiles
+        {
+            color: #262627;
+            font-size: 170%;
+        }
 
-on-scroll="onUserDetailContentScroll()"
--->
+        #entity-about-entity-profiles
+        {
+            color: #56a0ce;
+            margin-left: 5%;
+        }
+        
+        #img-entity-profile
+        {
+            vertical-align: middle;
+        }
+        
+        #info-headers
+        {
+            margin-left: 3%;
+        }
+        
+        #list-background-gradient
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+        }
+    </style>
     
-      <ion-content  overflow-scroll='false' delegate-handle="userDetailContent"  header-shrink scroll-event-interval="5" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-content overflow-scroll='false' delegate-handle="userDetailContent" header-shrink scroll-event-interval="5">
+    </ion-content>
+    
+    <ion-content has-header="true">
         
-
-  
-     
-          
-    <div class="spacer" style="width: 300px; height: 0px;"></div>
-    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-          
-      <div class="about-header">
-          <ion-slide-box auto-play="false" show-pager="false">
-                       
-
-              
-               <div class="profile-media">
-              <div class="profile-details">
-          <!--      <img  ng-src="{{profile.avatar}}" class="img-circle profile-image">-->  
-                <h2 class="color-white">
-                 <b> {{profile.name}} </b>
-               
-                </h2>
-                  
-                  
-        <!-- -->       
-              </div>
-              <img ng-src="{{profile.background}}" class="about-image profile-background-image" style="vertical-align:middle;">
-            </div>
-  
-              
-               <img ng-src="{{profile.background}}" width="300" height="225" >
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <div class="spacer" id="spacer-entity-profiles"></div>
+        
+        <div class="about-header">
             
-              </div>
-          
-              
-    <div id="profile-bg"></div>
-      <div id="content">
-        <div id="profile-info">
-          <img id="profile-image" src="{{profile.avatar}}">
-<!--          <h3 id="profile-name">{{profile.name}}</h3>-->
-         
-    </div>
-        <!--
-           <ion-item class="item-avatar-right  " id="animalAid-list-item35">
-                <img src="img/animalaid2_500280.jpg">
-                <h2>{{profile.name}}</h2>
-            </ion-item>
-          -->
-          
-          
-          
-
-<!--
-          <div id="mydiv" class="item tabs tabs-secondary tabs-stable tabs-icon-left">
-    <a class="tab-item custom-tabs" ui-sref="post" ><i class="icon ion-compose"></i><b>Posts</b> </a>
-	<a class="tab-item custom-tabs" ui-sref="entitySignUp"><i class="icon ion-edit"></i><b>Edit Profile</b></a>
-    </div>
--->
+            <ion-slide-box auto-play="false" show-pager="false">
+                
+                <div class="profile-media">
+                    <div class="profile-details">
+                        <h2 class="color-white"><b>{{entityAdmin.name}}</b></h2>
+                    </div>
+                    <img ng-src="{{entityPicture || 'img/default.png'}}" class="about-image profile-background-image" id="img-entity-profile">
+                </div>
+                
+            </ion-slide-box>
+            
+        </div>
         
-
-          
-          
-          
-<!--
-<ion-list>
-        <ion-item class="item-divider item-icon-right custom-item-divider2" ><b>About</b> <i class="icon ion-information"></i></ion-item>
-  
-          <ion-item ng-repeat="item in items" class="item item-text-wrap">
-          <div ng-class="isItemShown(item) ? 'item-expand active' : 'item-expand inactive'">
-            <p style="color:#583faa">{{ item.text }}</p>
-          </div>
-          <div ng-click="toggleItem(item)" class="item-expand-footer">
-            <i ng-class="isItemShown(item) ? 'ion-ios-minus-outline' : 'ion-ios-plus-outline'"></i>
-            {{ isItemShown(item) ? 'Less' : 'More' }}
-          </div>
-        </ion-item>
-     </ion-list>
--->
-<!--*******************************************************************-->
-<!--*******************************************************************-->
-<!--*******************************************************************-->   
-          <div class="list card">
-
-          
-          <ion-item ng-click="myFunc4()"class="item-divider item-icon-right custom-item-divider"><b>About</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--    <i class="icon ion-information"></i>-->
-<div ng-show="showMe4" class="drodpown">
-   
-  <div class="item item-text-wrap">
-     {{profile.about}}
-   </div>
-    
-</div>
-          
-          
-<ion-item ng-click="myFunc2()"class="item-divider item-icon-right custom-item-divider"><b>Address</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--    <i class="icon ion-location"> </i> -->
-<div ng-show="showMe2" class="drodpown">
-   
-    <ion-item class="item-icon-right" ng-click="">
-    <i class="icon ion-map"></i>
-     {{profile.city}}, {{profile.state}} PR<br>
-     {{profile.streetline1}}<br> 
-     {{profile.streetline2}}
-    </ion-item>
-    
-</div>
-          
-    <ion-item ng-click="myFunc3()" class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--    <i class="icon ion-chatboxes"></i>-->
-<div ng-show="showMe3" class="dropdown">
-        <ion-item class="item-icon-right" ng-click="call()">
-<!-- Call us-->
-            {{profile.phone}}
-          <i class="icon ion-android-call"></i>
-        </ion-item>
-        <ion-item class="item-icon-right" ng-click="mail()">
-<!--Send us an e-mail-->
-            {{profile.email}}
-          <i class="icon ion-ios-email"></i>
-        </ion-item>
-        <ion-item class="item-icon-right " ng-click="website()">
-<!--Visit our homepage-->
-            {{profile.website}}
-          <i class="icon ion-ios-home"></i>
-        </ion-item>
-</div>
-<!--*******************************************************************-->    
-<!--*******************************************************************-->
-<!--*******************************************************************-->
-       
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-<!-- <a ui-sref="aboutAddressContactInformation" id="aboutid" class=" button button-full button-large button-royal ">Address &amp; Contact Information</a>-->
-          
+        <div id="profile-bg"></div>
+        <div id="content">
+            <div id="profile-info"></div>
+        </div>
+        
+        <div class="row">
+            
+            <div class="col text-right">
+                <a ng-if="!following" ng-show="u" ng-click="follow({{info.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Follow</a>
+                <a ng-if="following" ng-click="unfollow({{info.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Unfollow</a>
+                <h2 align="center" id="entity-name-entity-profiles"><b>{{info.ent_name}}</b></h2>
+            </div>
+        </div>
+        <h4 class="calm" id="info-headers">About</h4>
+        <hr>
+        <p id="entity-about-entity-profiles">{{info.ent_about}}</p>
+        <p class="button button-small icon-left ion-android-list button-royal" style="border-radius: 34px; margin: 8px 13px 13px 8px;" ui-sref="publicAbout"> View more</p>
+        
         <ion-list>
-               <ion-item class="item-divider item-icon-left royal" ><b>Feed</b><i class="icon ion-ios-list royal"></i></ion-item>
-        </ion-list>
-          
-          
-    <div id="mydiv" class="item tabs tabs-secondary tabs-stable ">
-    <a class="tab-item custom-tabs" href="#"> <b>Posts</b> </a>
-	<a class="tab-item custom-tabs" href="#"> <b>Events</b></a>
-    <a class="tab-item custom-tabs" href="#"><b>Volunteer</b></a>
-    <a class="tab-item custom-tabs" href="#"><b>Donations</b></a>
-    </div>
-    
+        <h4 class="calm" id="info-headers">Events and volunteering <a style="color: black;">({{posts.length}})</a></h4>
+            <hr>
+            <h5 ng-if="postsQuantity === 0" style="text-align: center;">{{info.ent_name}} has not yet made any event and volunteering posts yet.</h5>
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'" id="list-background-gradient">
+            
+                <div class="item item-avatar item" ng-if="post.category === 'volunteering' && post.active" ng-click="goToVoluntView(post.id)">
+                    <img src="{{i || 'img/volunteer.png'}}">
+                    <i style="float: right;" class="icon ion-chevron-right"></i>
+                    <h2><b>Volunteering</b></h2>{{post.title}}
+                    <h2><b></b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}                   
 
-          </ion-slide-box>       
-</div>
+                    <br><br>
+                </div>
+                
+                <div class="item item-avatar item" ng-if="post.category === 'event' && post.active" ng-click="goToEventView(post.id)">
+                    <img src="{{i || 'img/EventIcon.jpg'}}">
+                    <i style="float: right;" class="icon ion-chevron-right"></i>
+                    <h2><b>Event</b></h2>
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
     
-   
-          
-           <div class="list card " id="afeed1">
-          
-            <ion-item class="item-avatar  " id="activityFeed-list-item39">
-                <h2>Item</h2>
-                <p>1 min ago</p>
-            </ion-item>
-            <p style="padding: 15px">Some friendly
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            </p>
-            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-            </div>
-           
-    <p style="padding: 20px 2% 10px 10px; font-size:large;">
-      <a href="#" class="subdued">Like</a>
-      <a href="#" class="subdued">Share</a>
-    </p> 
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'post'">
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                     <h2><b>Post</b></h2>
+                    <h2>{{post.title}}</h2>
+                    <p>Posted: <span am-time-ago="post.created"></span></p>
+                </div>
             
-    </div>
-        
-        
-        <div class="list card " id="afeed1">
-          
-            <ion-item class="item-avatar  " id="activityFeed-list-item39">
-                <h2>Item</h2>
-                <p>1 min ago</p>
-            </ion-item>
-            <p style="padding: 15px">Some friendly
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            </p>
-            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
             </div>
-           
-    <p style="padding: 20px 2% 10px 10px; font-size:large;">
-      <a href="#" class="subdued">Like</a>
-      <a href="#" class="subdued">Share</a>
-    </p> 
-            
-    </div>
-          
-          
-          <div class="list card " id="afeed1">
-          
-            <ion-item class="item-avatar  " id="activityFeed-list-item39">
-                <h2>Item</h2>
-                <p>1 min ago</p>
-            </ion-item>
-            <p style="padding: 15px">Some friendly
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            </p>
-            <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-            </div>
-           
-    <p style="padding: 20px 2% 10px 10px; font-size:large;">
-      <a href="#" class="subdued">Like</a>
-      <a href="#" class="subdued">Share</a>
-    </p> 
-            
-    </div>
-          </div>
         
-  </ion-content>
-    
+        </ion-list>
+        
+        <div>
+            <button class="button button-block button-royal" ng-click="scrollTop()" ng-if="scrollToTheTopButton">Scroll to Top!</button>
+        </div>
+
+    </ion-content>
 </ion-view>

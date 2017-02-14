@@ -1,41 +1,44 @@
-<ion-view cache-view="false" title="Activity Feed"  id="page18" class=" ">
-   
-     <ion-nav-buttons side="right">
-    <button class="button icon-left ion-edit" ng-click="newPost()"></button>
+<!--!YA-->
+<ion-view cache-view="false" title="Create a post activity feed" id="page18">
+    
+    <style>
+        #textarea-text
+        {
+            color: black;
+        }
+        
+        #button-text-size-create-post-activity
+        {
+            font-size: 20px;
+        }
+    </style>
+    
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
     
-    <ion-content  class="has-header" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;">
+    <ion-nav-buttons side="left">
+ <button class="button button-clear" ui-sref="dashboard.EactivityFeed"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+    
+    <ion-content class="has-header">
         
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
         
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-        
-        <div class="spacer" style="width: 300px; height: 20px;"></div>
-        
-        <label class="item item-input">
-            <textarea style="color:black" ng-model="data.message" maxlength="2000" rows="3" placeholder="What's happening ?"></textarea>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">What's going on right now?</span>
+            <textarea #id="textarea-text" ng-model="data.message" maxlength="2000" rows="3" placeholder="Please enter your activity message here..."></textarea>
         </label>
-        
-<!--        <a ng-click="postData()" ui-sref="dashboard.EactivityFeed" class=" button button-royal  button-block " style="font-size: 20px;">Post</a>-->
-
+    
     </ion-content>
     
     <ion-footer-bar align-title="right" keyboard-attach class="bar-royal">
-     
-    <div class="buttons">
-      <button class="button button-icon-left button-clear ion-image" ng-click="addImage()"></button>
-    </div>
+        
+        <h1 class="title"></h1>
+        
+        <div class="buttons" ng-click="doSomething()">
+            <button class="button button-royal ion-android-send" id="button-text-size-create-post-activity" ng-click="postData()" ui-sref="dashboard.EactivityFeed"></button>
+        </div>
     
-    <h1 class="title"></h1>
-    
-    <div class="buttons" ng-click="doSomething()">
-<!--      <button class="button">{{returnCount()}}</button>-->
-      <button class="button button-royal ion-android-send" style="font-size: 20px;"ng-click="postData()" ui-sref="dashboard.EactivityFeed"></button>
-    </div>
-     
-  </ion-footer-bar>
-    
-    
+    </ion-footer-bar>
 </ion-view>

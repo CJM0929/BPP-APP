@@ -1,36 +1,119 @@
-<ion-view cache-view="false" title="Login" hide-back-button="true" >
-    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class=" manual-remove-top-padding has-header">
-      
+<!--Login view-->
+<!--
+There is nothing to change in this page, only add css to a new different .css, good.
+To do:
+Add classes and this to the .css file as attribute_pageName_label etc.
+-->
+<ion-view cache-view="false" title="Involukrat" hide-back-button="true">
+ 
+    <style>
         
-        <form id="login-form2" class="list ">
+        h1
+        {
+            text-align: center;
+        }
+        
+        label
+        {   
+            font-size: 1.618em;
+            margin: 13px 0 0 10px;
+            border-radius: 8px;
+        }
+        
+        input
+        {
+            font-size: 1.618em;
+            border-radius: 8px;
+            border-color: gray;
+        }
+        
+        .input-box
+        {
+            margin: center;
+            font-size: 1.618em;
+        }
+        
+        .list-card
+        {
+            background-color: aqua;
+        }
+       
+        .login-button
+        {
+            margin: 10px 0 0 0px;
+            width: 100%;
+        }    
+        
+        .guest-button
+        {
+            margin: 10px 0 0 0px;
+            width: 100%;
+            border-color: #5aa3d0;
+        }    
+        
+        .forgot-password
+        {
+            float: left;
+        }
+       
+        .registering
+        {
+            float: right;
+        }
+        
+        .img-banner-login
+        {
+            width: 100%;
+            height: 30%;
+        }
+        
+        #input-error
+        {
+            color: red;
+            text-align:center;
+        }
+        
+    </style>
+    
+    <ion-content fixed padding="false" class="Shas-header" scroll="false">  
+        
+        <img ng-src="img/involukrate.png" class="img-banner-login">
+        
+        <div class="item item-body">                
             
-            <div class="spacer" style="width: 300px; height: 36px;"></div>
-            
-            <h1 id="NameL" style="color:white; text-align:center;" class=" ">Hoy por ti,<br>mañana por mí.</h1>
-            
-            <div class="spacer" style="width: 300px; height: 41px;"></div>
-            <div class="spacer" style="width: 300px; height: 25px;"></div>
-
-    <!-- //////////////////////////////////////////////////// -->
-                <label href="#" class="item item-input " >
-                    <input type="text" ng-model="user.username" placeholder="Username">
+            <form name="loginForm" class="list" style="margin-bottom: 0px;">    
+                
+                <span class="input-label">Username</span>
+                <label class="item item-input item-stacked-label">
+                    <input name="loginUsername" type="text" ng-model="user.username" ng-minlength="6" ng-maxlength="20" placeholder="Username" ng-required="true" ng-pattern="/^[a-z\d\._-]{5,}$/i">
                 </label>
-           
-     <!-- /////////////////////////////////////////////////// -->
-     <!-- /////////////////////////////////////////////////// -->
-
-            <label href="#" class="item item-input ">
-                <input type="password" ng-model="user.password"  placeholder="Password">
-            </label>
-
-    <!-- //////////////////////////////////////////////////// -->
-
-            <a ng-click="login(user);"  class=" button button-royal button-inline block ">Log in</a>
-            
-        </form>
-        <a ui-sref="forgotPassword" style="margin: 0 120px 10px 0; color:#5b12b1; text-decoration:none;" >Forgot Password?</a>
-        <a ui-sref="roleDecision" style="color:#5b12b1; text-decoration:none;">Join Now</a>
-
-<!--     style="color:#5b12b1;"   class="button button-royal button-outline"-->
+                
+                <div ng-messages="loginForm.loginUsername.$error" ng-if="loginForm.loginUsername.$touched">
+                    <div ng-message when="required" id="input-error">The username field is required!</div>
+                    <div ng-message when="pattern" id="input-error">The username needs to not have special characters!</div>
+                    <div ng-message when="minlength" id="input-error">The username needs at least 6 characters long.</div>
+                    <div ng-message when="maxlength" id="input-error">The username needs at less or equal than 20 characters long.
+                    </div>
+                </div>
+                
+                <span class="input-label">Password</span>
+                <label class="item item-input item-stacked-label">
+                    <input name="loginPassword" type="password" ng-model="user.password" placeholder="Password" ng-minlength="8" ng-maxlength="25" placeholder="password" ng-required="true" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*/">
+                </label>
+                
+                <div ng-messages="loginForm.loginPassword.$error" ng-if="loginForm.loginPassword.$touched">
+                    <div ng-message="required" id="input-error">The password field is required!</div>
+                    <div ng-message="pattern" id="input-error">The password needs to have at least one uppercase and one number!</div>
+                    <div ng-message="minlength" id="input-error">The password needs at least 8 characters long.</div>
+                    <div ng-message="maxlength" id="input-error">The password needs at less or equal than 25 characters long.</div>
+                </div>
+                <button ng-click="login(user)" class="login-button button button-positive" ng-disabled="loginForm.loginPassword.$invalid || loginForm.loginUsername.$invalid">Log in</button>  
+                <h3 style="text-align: center; margin: 8px 0 8px 0;">-Or-</h3>
+                <button ui-sref="intro" class="button button-block button-outline button-royal">Continue as a Guest</button>
+            </form>
+             
+            <a ui-sref="forgotPassword" class="forgot-password">Forgot Password?</a>
+            <a ui-sref="roleDecision" class="registering">Join Now</a>
+        </div>
     </ion-content>
 </ion-view>

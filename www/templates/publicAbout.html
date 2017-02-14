@@ -1,0 +1,154 @@
+<ion-view cache-view="false" title="Involukrat">
+    
+    <style>
+        #spacer-entity-profile
+        {
+            height: 0px;
+            width: 300px;
+        }
+        
+        #img-entity-profile
+        {
+            vertical-align: middle;
+        }
+        
+        #entity-name-entity-profile
+        {
+            color: #262627;
+            font-size: 170%;
+        }
+        
+        #entity-about-entity-profile
+        {
+            color: black;
+            margin-left: 5%;
+        }
+        
+        #info-headers
+        {
+            margin-left: 3%;
+        }
+        .map
+        {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+    </style>
+    
+    <ion-content overflow-scroll='false' delegate-handle="userDetailContent" header-shrink scroll-event-interval="5">
+    </ion-content>
+    
+    <ion-content has-header="true">
+        
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <div class="spacer" id="spacer-entity-profile"></div>
+        
+        <div class="about-header">
+            <ion-slide-box auto-play="false" show-pager="false">
+                
+                <div class="profile-media">
+                    <div class="profile-details">
+                        <h2 class="color-white">
+                            {{entityAdmin.name}}
+                        </h2>
+                    </div>
+                    <img ng-src="{{entityPicture || 'img/default.png'}}" class="about-image profile-background-image" id="img-entity-profile">
+                </div>
+                
+            </ion-slide-box>
+		</div>
+        
+        <div id="profile-bg"></div>
+        
+        <div id="content">
+            <div id="profile-info"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col text-right">
+
+                <h2 align="center" id="entity-name-entity-profile"><b>{{info.ent_name}}</b></h2>
+            </div>
+        </div>
+        
+        <h4 class="royal" id="info-headers">About</h4>
+        <hr>
+        <div class="list">
+            <p id="entity-about-entity-profile">{{info.ent_about}}</p>
+        </div>
+        
+        <h4 class="royal" id="info-headers">website</h4>
+        <hr>
+        <div class="list">
+            <p id="entity-about-entity-profile">{{info.ent_web}}</p>
+        </div>
+        
+        <h4 class="royal" id="info-headers">Address</h4>
+        
+        <div class="map">
+            <ng-map disableDefaultUI="true" gestureHandling="none" zoomControl="false" draggable="false" center="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}">
+                    <marker position="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}" title="marker" animation="Animation.DROP"></marker>
+            </ng-map>
+            
+            <p>{{info.ent_address1}}
+            <br>{{info.ent_address}}
+                {{info.city_name}}, {{info.country_name}}, {{info.ent_zip}}</p>
+        </div>
+        
+        
+        <div class="dropdown">
+            <h4 class="royal" id="info-headers">Contact</h4>
+            <ion-item class="item-icon-right" ng-click="call()">
+                {{info.ent_phone || 'Not set!'}}
+                <i class="icon ion-android-call" id="contact-icon-entity-about"></i>
+            </ion-item>
+            
+            <ion-item class="item-icon-right">
+                {{info.ent_fax || 'Not set!'}}
+                <i class="icon ion-ios-printer" id="contact-icon-entity-about"></i>
+            </ion-item>
+    
+            <ion-item class="item-icon-right" ng-click="mail()">
+                {{info.web_email || 'Not set!'}}
+                <i class="icon ion-ios-email" id="contact-icon-entity-about"></i>
+            </ion-item>
+        </div>
+        
+<!--        <a class="button button-small icon-left ion-android-list button-royal" ui-sref="aboutAddressContactInformation"> View more</a>-->
+        
+<!--
+        <ion-list class="list">
+            <h4 class="royal" id="info-headers">Activity</h4>
+            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'volunteering'" ng-click="goToVoluntView(post.id)">
+                    <img src="{{i || 'img/ionic2.png'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
+                
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'event'" ng-click="goToEventView(post.id)">
+                    <img src="{{i || 'img/ionic2.png'}}">               
+                    <h2><b>{{post.title}}</b></h2>
+                    Hosted by: {{post.ent_name}}<br><br>
+                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{post.city_name}}
+                    <br><br>
+                </div>
+    
+                <div class="item item-avatar item item-button-right" ng-if="post.category === 'post'">
+                    <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
+                    <h2>{{post.title}}</h2>
+                    <p>Posted: <span am-time-ago="post.created"></span></p>
+                </div>
+            </div>
+        </ion-list>
+-->
+
+    </ion-content>
+</ion-view>

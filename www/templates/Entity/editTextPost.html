@@ -1,0 +1,46 @@
+<ion-view cache-view="false" title="Edit Post"  id="page18">
+    
+    <style>
+        #ion-content-edit-text-post
+        {
+            background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;
+            background-size:cover;
+        }
+        
+        #spacer-edit-text-post
+        {
+            height: 20px;
+            width: 300px;
+        }
+        
+        #textarea-text
+        {
+            color: black;
+        }
+        
+        #button-text-edit-text-post
+        {
+            font-size: 20px;
+        }
+        
+    </style>
+    
+    <ion-content class="has-header" id="ion-content-edit-text-post">
+        
+        <div class="spacer" id="spacer-edit-text-post"></div>
+        
+        <label class="item item-input">
+            <textarea id="textarea-text" ng-model="data.message" maxlength="2000" rows="3" placeholder="What's happening ?"></textarea>
+        </label>
+    
+    </ion-content>
+    
+    <ion-footer-bar align-title="right" keyboard-attach class="bar-royal">
+        
+        <div class="buttons">
+            <button class="button button-royal ion-android-send" id="button-text-edit-text-post" ng-click="alterPost()" ui-sref="dashboard.EactivityFeed"></button>
+        </div>
+    
+    </ion-footer-bar>
+
+</ion-view>

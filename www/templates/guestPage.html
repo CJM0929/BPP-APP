@@ -1,0 +1,62 @@
+<!--Guest page html-->
+<!--I need to pass css to file.-->
+<ion-view title="Explore & Discover">
+    <style>
+        
+        #explore_header
+        {
+            text-align:center; 
+            font-size: large;
+        }
+        
+        #role_card_img
+        {
+            margin-top: 3px; 
+            margin-bottom: 5px;
+        }
+        
+        #role_card_button
+        {
+           font-weight:600; 
+        }
+        
+        #role_card_supporter
+        {
+            margin-bottom: 13px;
+        }
+        
+    </style>
+
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-content scroll="true" padding="false">    
+        
+        <div class="card" id="explore_header">
+            <div class="item item-text-wrap">
+                <b>Explore Organizations and Opportunities</b>
+            </div>
+        </div>
+        
+        <div class="list card">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/involukrate.png">
+            </div>
+            <a ui-sref="guest.events" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Activity Feed</b>
+            </a>
+        </div>
+        
+        <div class="list card" id="role_card_supporter">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/W6jOONApRfyHCzVm1Xfc_Help_the_elders.jpg">
+            </div>
+            
+            <a ui-sref="categories" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-search">
+                <b>Discover Entities</b>
+            </a>
+        </div>
+        
+    </ion-content>
+</ion-view>

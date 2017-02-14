@@ -1,75 +1,107 @@
-
-<ion-view cache-view="false" title="About, Address &amp; Contact Information" id="page20" class=" ">
-
-    <ion-content padding="true" style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" class="has-header;">    
-<!--<div class="list card">-->
-
-<ion-item class="item item-avatar-left">
-  <img ng-src="{{info.background || 'img/ionic2.png'}}">
-  <h2 align="center" style="color: #583faa; font-size:170%;"><b>{{info.ent_name}}</b></h2>
-    <hr>
-     <a class="button ion-star button-block button-royal "> Follow</a>
-</ion-item>
-
-<!--          ng-click="myFunc4()"-->
-<ion-item class="item-divider item-icon-right custom-item-divider"><b>About</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!-- ng-show="showMe4"-->
+<ion-view cache-view="false" title="About Information" id="page20">
+    
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <style>
+        ng-map 
+        {
+            display:inline-block !important; 
+            height:200px; 
+            padding: 1px;
+            vertical-align:top; 
+            width:113%; 
+        }
+        
+        #ion-content-entity-about-information
+        {
+            background: #56a0ce;
+        }
+        
+        #entity-name-about-information
+        {
+            color: #56a0ce; 
+            font-size:170%;
+        }
+        
+        #contact-icon-entity-about
+        {
+            color:#5aa3d0
+        }
+    </style>
+    
+    <ion-content padding="true" class="has-header">    
+        
+        <ion-item class="item item-avatar-left">
+            <img ng-src="{{info.background || 'img/ionic2.png'}}">
+            <h2 align="center" id="entity-name-about-information">
+                <b>{{info.ent_name}}</b>
+            </h2>
+            <hr>
+            <a ng-if="disableFollowButton" class="button ion-star button-block button-royal"> Follow
+            </a>
+        </ion-item>
+        
+        <ion-item class="item-divider item-icon-right custom-item-divider">
+            <b>About</b> 
+        </ion-item>
+        
         <div class="drodpown">
-   
-  <div class="item item-text-wrap">
-     {{info.ent_about || 'Not set!'}}
-      <br><hr>
-      Founded in : {{info.ent_founded || 'Not set!'}}
-<!--                  <span am-time-ago="{{info.ent_founded}}"></span>-->
+            <div class="item item-text-wrap">
+                {{info.ent_about || 'Not set!'}}
+                <br>
+                <hr>
+                <b>
+                    Founded in: 
+                    <span>{{info.ent_founded | amDateFormat:'dddd, MMMM Do YYYY'}}</span>
+                </b>
+            </div>
+        </div>
+        
+        <ion-item class="item-divider item-icon-right custom-item-divider">
+            <b>Website</b>
+        </ion-item>
+        
+        <ion-item class="item-icon-right" ng-click="website()">
+            <b>{{info.ent_web || 'Not set!'}}</b><br><br>
+        </ion-item>
+        
+        <ion-item class="item-divider item-icon-right custom-item-divider">
+            <b>Address</b>
+        </ion-item>
+        
+        <div class="drodpown">
+            <ion-item class="item-icon-right" href="https://maps.google.com/maps?q={{info.ent_address1}} {{info.ent_address2}} {{info.city_name}} PR, {{info.ent_zip}} {{info.country_name}}">
+                {{info.ent_address1}} {{info.ent_address2}}
+                {{info.city_name}}, 
+                {{info.ent_zip}}, {{info.country_name}}
+                <br>
+                <ng-map center="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}">
+                </ng-map>
+            </ion-item>
+        </div>
+        
+        <ion-item class="item-divider item-icon-right custom-item-divider">
+            <b>Contact</b>
+        </ion-item>
+        
+        <div class="dropdown">
+            <ion-item class="item-icon-right" ng-click="call()">
+                {{info.ent_phone || 'Not set!'}}
+                <i class="icon ion-android-call" id="contact-icon-entity-about"></i>
+            </ion-item>
+            
+            <ion-item class="item-icon-right" ng-click="call()">
+                {{info.ent_fax || 'Not set!'}}
+                <i class="icon ion-ios-printer" id="contact-icon-entity-about"></i>
+            </ion-item>
+    
+            <ion-item class="item-icon-right" ng-click="mail()">
+                {{info.web_email || 'Not set!'}}
+                <i class="icon ion-ios-email" id="contact-icon-entity-about"></i>
+            </ion-item>
+        </div>
 
-   </div>
-    
-</div>
-<!--          ng-click="myFunc2()"-->
-<ion-item class="item-divider item-icon-right custom-item-divider"><b>Address</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--ng-show="showMe2"-->
-        <div  class="drodpown">
-   
-    <ion-item class="item-icon-right" ng-click="">
-    <i class="icon ion-map"></i>
-     {{info.city_name || 'Not set!'}}, {{info.country_name || 'Not set!'}} (PR) {{info.ent_zip || 'Not set!'}}<br>
-     {{info.ent_address1 || 'Not set!'}}<br> 
-     {{info.ent_address2 || 'Not set!'}}
-        
-    </ion-item>
-    
-</div>
-<!--          ng-click="myFunc3()"-->
-    <ion-item  class="item-divider item-icon-right custom-item-divider"><b>Contact</b> <i class="icon ion-chevron-down"></i></ion-item>
-<!--          -->
-<div class="dropdown">
-       
-        <ion-item class="item-icon-right" ng-click="call()">
-            {{info.ent_phone || 'Not set!'}}
-          <i class="icon ion-android-call"></i>
-        </ion-item>
-    
-        <ion-item class="item-icon-right" ng-click="call()">
-            {{info.ent_fax || 'Not set!'}}
-          <i class="icon ion-ios-printer"></i>
-        </ion-item>
-    
-        <ion-item class="item-icon-right" ng-click="mail()">
-            {{info.web_email || 'Not set!'}}
-          <i class="icon ion-ios-email"></i>
-        </ion-item>
-    
-        <ion-item class="item-icon-right " ng-click="website()">
-            {{info.ent_web || 'Not set!'}}
-          <i class="icon ion-ios-home"></i>
-        </ion-item>
-</div>
-        
-        <div class="spacer" style="width: 300px; height: 41px;"></div>
-
-        
-        <div id="map" data-tap-disabled="true"></div>
-
-        
     </ion-content>
 </ion-view>

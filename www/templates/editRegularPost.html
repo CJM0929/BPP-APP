@@ -1,0 +1,25 @@
+<ion-view cache-view="false" title="Login" hide-back-button="true">
+    
+    <style>   
+        #ion-content-edit-regular-post
+        {
+            background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;
+            background-size: cover; 
+        }
+    </style>
+    
+    <ion-content padding="true" class=" manual-remove-top-padding has-header">
+        
+        <div class="item item-avatar" ng-click="deletePost({{post.id}})">
+            <img src="{{entityAdmin.photo || 'img/ionic2.png'}}">
+            <h2>{{info.ent_name}}</h2>
+            <span am-time-ago="post.post_created"></span>
+            <div item class="item-button-right"></div>
+        </div>
+        
+        <div class="item item-body">
+            <p>{{post.post_message}}</p>
+        </div>
+        
+    </ion-content>
+</ion-view>

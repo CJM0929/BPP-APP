@@ -1,40 +1,21 @@
-<ion-view title="Settings" id="page23" class=" ">
-    <ion-content style="background: url(img/blurry_abstract-2560x1600.jpg) no-repeat center;background-size:cover;" padding="true" class="has-header">
-<!--
-        <ion-list id="settings-list34" class=" ">
-           <ion-item class="item-divider " id="settings-list-item-divider10">Edit</ion-item>
-        </ion-list>
--->
-        <ion-list >
-<!--
-            <ion-item ng-if="u" class="item-icon-left  " ui-sref="editSupportersProfile">
-                <i class="icon ion-edit"></i>Edit Profile</ion-item>
--->
-            
-<!--
-            <ion-item ng-if="e" class="item-icon-left" ui-sref="editEntityProfile">
-                <i class="icon ion-edit"></i>Edit Entity</ion-item>
-     
-        <br>
--->
+<!--Settings view-->
+<ion-view title="Settings" id="page23">
+   
+    <ion-content padding="true" class="has-header" scroll="false">    
         
-            <ion-item ng-if="e" class="item-divider custom-item-divider">Change Password</ion-item>
-            <ion-item ng-if="e" ui-sref="changePassword">
-                Choose a unique password to protect <br>your account</ion-item>
+        <div class="list" ng-if="u || e">
             
-            <ion-item ng-if="u" class="item-divider ">Change Password</ion-item>
-            <ion-item ng-if="u" ui-sref="changePassword">
-                Choose a unique password to protect <br>your account</ion-item>
+            <div class="item item-divider custom-item-divider">
+                Account Settings
+            </div>
             
-            <br>
-<!--        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>-->
-            
-     <ion-item class="item-icon-left royal" ng-click="logout()">
-     <i class="icon ion-log-out"></i>Logout</ion-item>
+            <a class="item item-icon-left" ui-sref="changePassword">
+                <i class="icon ion-key"></i>
+                Change account password
+            </a>
         
-        </ion-list>
-        
-        
+        </div>
+    
     </ion-content>
 </ion-view>
 

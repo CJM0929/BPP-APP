@@ -1,0 +1,249 @@
+<ion-view title="Edit Event" id="page9">
+    
+     <style>
+        #input-error
+        {
+            color: red;
+        }
+        
+        #textarea-text
+        {
+            color: black;
+        }
+        
+        .label-fix
+        {
+            border-radius: 13px;
+            padding: 10px;
+        }
+        
+        span-fix
+        {
+            margin-left: 1.618%;
+        }
+         
+        .item-fix 
+        {
+            margin-bottom: 10px;
+            padding: 8px 5px;
+        }
+         
+        #selector-dropdown-fix
+        {
+            padding: 21px;
+            border-radius: 13px;
+        }
+         
+        .input-fix
+        {
+            width: 100%;
+        }
+         
+         .textarea-fix
+         {
+             width: 100%;
+         }
+    </style>
+
+     <button class="button button-clear" ui-sref="eventFullView"><i class="icon ion-chevron-left" ></i> </button>
+    
+    <ion-content padding="true" class="has-header">
+        <form name="myForm" class="list" novalidate>
+            
+            <label class="item item-input">
+                
+                <a class="item-avatar">
+              <img ng-src="{{event_photo}}">
+               </a>
+                
+                <span class="input-label span-fix"><b>Event Picture</b></span>
+                <input type="file" file-model="data.userfile">
+            </label>
+            
+            <div class="item item-divider custom-item-divider">Event general information</div>
+            
+            <span class="input-label span-fix">Event Title</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" name="title" type="text" ng-model="eventData.individualEventPost.title" placeholder="Title here..." ng-required="true" ng-minlength="3" ng-maxlength="64">
+            </label>
+             <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+                    <div ng-message="required" id="input-error">The event title field is required!</div>
+                    <div ng-message="minlength" id="input-error">The event title needs at least 3 characters long.</div>
+                    <div ng-message="maxlength" id="input-error">The event title needs at less or equal than 64 characters long.</div>
+                </div>
+            
+            <span class="input-label span-fix">Event Description</span>
+            <label class="item label-fix item-fix">
+                <textarea class="textarea-fix" type="text" rows="6" style="color:black" ng-model="eventData.individualEventPost.description" placeholder="Event Description" name="description" ng-required="true" ng-minlength="3">Event Description</textarea>
+            </label>
+            <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
+                <div ng-message="required" id="input-error">The event description field is required!</div>
+                <div ng-message="minlength" id="input-error">The event description needs at least 6 characters long.</div>
+            </div>
+            
+            <span class="input-label span-fix">Start Time:</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" name="start_time" type="datetime-local" ng-model="eventData.individualEventPost.start_time" ng-required="true" step="1">
+            </label>
+            <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
+                <div ng-message="required" id="input-error">A starting time for the event is required!</div>
+            </div>
+            
+            <span class="input-label span-fix">End time</span>
+            <label class="item label-fix item-fix">
+                {{eventData.individualEventPost.end_time}}
+                <input class="input-fix" type="datetime-local" ng-model="eventData.individualEventPost.end_time" step="1">
+            </label>
+
+            <span class="input-label span-fix">Full event address</span>
+            <label class="item label-fix item-fix">
+                <textarea class="textarea-fix" type="text" name="address" style="color:black" ng-model="eventData.individualEventPost.address" rows="3" placeholder="Enter Full Address Here" ng-required="true" ng-minlength="3"></textarea>
+            </label>
+            <div ng-messages="myForm.address.$error" ng-if="myForm.address.$touched">
+                <div ng-message="required" id="input-error">The event full address field is required!</div>
+                <div ng-message="minlength" id="input-error">The event full address needs at least 3 characters long.</div>
+            </div>
+            
+            <span class="input-label span-fix">City</span>
+            <label class="item item-select" style="padding: 21px 0;">
+                <select ng-model="eventData.individualEventPost.city" ng-required="true" name="city">
+                    <option value="Adjuntas">Adjuntas</option>
+                    <option value="Aguada">Aguada</option>
+                    <option value="Aguadilla">Aguadilla</option>
+                    <option value="Aguas Buenas">Aguas Buenas</option>
+                    <option value="Aibonito">Aibonito</option>
+                    <option value="Añasco">Añasco</option>
+                    <option value="Arecibo">Arecibo</option>
+                    <option value="Arroyo">Arroyo</option>
+                    <option value="Barceloneta">Barceloneta</option>
+                    <option value="Barranquitas">Barranquitas</option>
+                    <option value="Bayamón">Bayamón</option>
+                    <option value="Cabo Rojo">Cabo Rojo</option>
+                    <option value="Caguas">Caguas</option>
+                    <option value="Camuy">Camuy</option>
+                    <option value="Canóvanas">Canóvanas</option>
+                    <option value="Carolina">Carolina</option>
+                    <option value="Carolina-Isla Verde">Carolina-Isla Verde</option>
+                    <option value="Cataño">Cataño</option>
+                    <option value="Cayey">Cayey</option>
+                    <option value="Ceiba">Ceiba</option>
+                    <option value="Ciales">Ciales</option>
+                    <option value="Cidra">Cidra</option>
+                    <option value="Coamo">Coamo</option>
+                    <option value="Comerío">Comerío</option>
+                    <option value="Corozal">Corozal</option>
+                    <option value="Culebra">Culebra</option>
+                    <option value="Dorado">Dorado</option>
+                    <option value="Fajardo">Fajardo</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Guánica">Guánica</option>
+                    <option value="Guayama">Guayama</option>
+                    <option value="Guayanilla">Guayanilla</option>
+                    <option value="Guaynabo">Guaynabo</option>
+                    <option value="Gurabo">Gurabo</option>
+                    <option value="Hatillo">Hatillo</option>
+                    <option value="Hormigueros">Hormigueros</option>
+                    <option value="Humacao">Humacao</option>
+                    <option value="Humacao-Palmas">Humacao-Palmas</option>
+                    <option value="Isabela">Isabela</option>
+                    <option value="Jayuya">Jayuya</option>
+                    <option value="Juana Díaz">Juana Díaz</option>
+                    <option value="Juncos">Juncos</option>
+                    <option value="Lajas">Lajas</option>
+                    <option value="Lares">Lares</option>
+                    <option value="Las Marías">Las Marías</option>
+                    <option value="Las Piedras">Las Piedras</option>
+                    <option value="Loíza">Loíza</option>
+                    <option value="Luquillo">Luquillo</option>
+                    <option value="Manatí">Manatí</option>
+                    <option value="Maricao">Maricao</option>
+                    <option value="Maunabo">Maunabo</option>
+                    <option value="Mayagüez">Mayagüez</option>
+                    <option value="Moca">Moca</option>
+                    <option value="Morovis">Morovis</option>
+                    <option value="Naguabo">Naguabo</option>
+                    <option value="Narajitos">Naranjitos</option>
+                    <option value="Orocovis">Orocovis</option>
+                    <option value="Patillas">Patillas</option>
+                    <option value="Peñuelas">Peñuelas</option>
+                    <option value="Ponce">Ponce</option>
+                    <option value="Quebradillas">Quebradillas</option>
+                    <option value="Rincón">Rincón</option>
+                    <option value="Río Grande">Río Grande</option>
+                    <option value="Sabana Grande">Sabana Grande</option>
+                    <option value="Salinas">Salinas</option>
+                    <option value="San Germán">San Germán</option>
+                    <option value="San Juan">San Juan</option>
+                    <option value="San Juan, Condado">San Juan, Condado</option>
+                    <option value="San Juan, Hato Rey">San Juan, Hato Rey</option>
+                    <option value="San Juan, Santurce">San Juan, Santurce</option>
+                    <option value="San Juan, Viejo San Juan">San Juan, Viejo San Juan</option>
+                    <option value="San Lorenzo">San Lorenzo</option>
+                    <option value="San Sebastián">San Sebastián</option>
+                    <option value="Santa Isabel">Santa Isabel</option>
+                    <option value="Toa Alta">Toa Alta</option>
+                    <option value="Toa Baja">Toa Baja</option>
+                    <option value="Toa Baja, Levittown">Toa Baja, Levittown</option>
+                    <option value="Trujillo Alto">Trujillo Alto</option>
+                    <option value="Utuado">Utuado</option>
+                    <option value="Vega Alta">Vega Alta</option>
+                    <option value="Vega Baja">Vega Baja</option>
+                    <option value="Vieques">Vieques</option>
+                    <option value="Villalba">Villalba</option>
+                    <option value="Yabucoa">Yabucoa</option>
+                    <option value="Yauco">Yauco</option>
+                </select>
+            </label>
+        
+            <span class="input-label span-fix">Zip Code</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" type="tel" name="zip" ng-model="eventData.individualEventPost.zip" placeholder="Zip code" ng-required="true" ng-pattern="/^(\d{5}([\-]\d{4})?)$/i">
+            </label>
+            <div ng-messages="myForm.zip.$error" ng-if="myForm.zip.$touched">
+                <div ng-message="required" id="input-error">The zipcode field is required!</div>
+                <div ng-message="pattern" id="input-error">The zipcode needs to be this and that!</div>
+            </div>
+            
+            <span class="input-label span-fix">event url</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" name="eventurl" type="text" ng-model="eventData.individualEventPost.web" placeholder="event url" ng-minlength="7">        
+            </label>
+            <div ng-messages="myForm.eventurl.$error" ng-if="myForm.eventurl.$touched">
+                <div ng-message="minlength" id="input-error">The website of the event needs at least 7 (include http:// at the beginning) characters long.</div>
+            </div>
+            
+            <div class="item item-divider custom-item-divider">Event registrar information</div>
+            
+            <span class="input-label span-fix">Contact person</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" name="contact_person" type="text" ng-model="eventData.individualEventPost.supervisor_name" placeholder="Contact person" ng-minlength="2" ng-maxlength="48" ng-pattern="/^[a-zA-Z ]+$/">
+            </label>
+            <div ng-messages="myForm.contact_person.$error" ng-if="myForm.contact_person.$touched">
+                <div ng-message="pattern" id="input-error">The contact's name cannot have special characters!</div>
+                <div ng-message="minlength" id="input-error">The contact's name need at least be 2 characters long.</div>
+                <div ng-message="maxlength" id="input-error">The contact's name need at least 2 or equal than 30 characters long.</div>
+            </div>
+            
+            <span class="input-label span-fix">Phone</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" name="registrar_phone" type="tel" ng-model="eventData.individualEventPost.supervisor_phone" placeholder="phone number">
+            </label>
+            <div ng-messages="myForm.registrar_phone.$error" ng-if="myForm.registrar_phone.$touched">
+                <div ng-message="tel" id="input-error">The phone needs to be this and that!</div>
+            </div>
+            
+            <span class="input-label span-fix">email</span>
+            <label class="item label-fix item-fix">
+                <input class="input-fix" type="email" name="registrar_email" ng-model="eventData.individualEventPost.supervisor_email" placeholder="email">
+            </label>
+            <div ng-messages="myForm.registrar_email.$error" ng-if="myForm.registrar_email.$touched">
+                <div ng-message="email" id="input-error">The email has to be in its real format!</div>
+            </div>
+        </form>
+        
+        <a ng-click="alterPost()" class="button button-royal button-block">Save Event</a>
+        
+        <button class="button button-block button-assertive" ng-click="cancelEdit()">Cancel</button>
+        
+    </ion-content>
+</ion-view>
