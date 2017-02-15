@@ -987,11 +987,11 @@ $http({
         method: 'GET',
         url: 'https://hoyportibppr.com/api/entities/event_report/'+eventPost_id,
          headers: {
-                    'responseType': 'arraybuffer',
                    'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456',
-                  'TOKEN': store.get('token')}
+                  'TOKEN': store.get('token')},
+       responseType: 'arraybuffer' 
     })
     .success(function (response) {
        
