@@ -9,7 +9,6 @@
             background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
             background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
         }
     </style>
     
@@ -26,7 +25,6 @@
                     Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
                     Place: {{post.city_name}}
                     <br><br>
-                    <i class="icon ion-calendar" ng-click="addEventToCalendar(post, $event)"> add to calendar</i>
                 </div>
                 
                 <div class="item item-avatar item item-button-right" ng-if="post.category === 'event'" ng-click="goToEventView(post.id)">
@@ -38,7 +36,6 @@
                     Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
                     Place: {{post.city_name}}
                     <br><br>
-                    <i class="icon ion-calendar" ng-click="addEventToCalendar(post, $event)"> add to calendar</i>
                 </div>
             </div>
         </ion-list>

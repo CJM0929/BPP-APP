@@ -35,12 +35,13 @@
     
    <ion-content scroll="true" padding="false" id="ion-content-role-decision" class="manual-ios-statusbar-padding">
     
-        <div class="spacer" id="spacer"></div>
+<!--        <div class="spacer" id="spacer"></div>-->
         
         <h1 style="color: white; text-align: center;" class="calm">Explore and discover!</h1>
         
         <div class="list" style="margin-left: 10px; margin-right: 10px;">
             
+<!--
             <div class="spacer" id="spacer"></div>
             <div>
                 <div ui-sref="categories">
@@ -73,7 +74,48 @@
             <a ui-sref="allPosts" id="discover_buttons_styling" class="button button-stable button-large button-block icon-left ion-ios-paper">
             <b>See What's Going On!</b>
         </a>
-        
+-->
+            
+                 
+        <div class="list card" id="role_card_supporter">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/involukrate.png">
+            </div>
+            
+            <a ui-sref="categories" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-search">
+                <b>Discover Entities</b>
+            </a>
+        </div>
+            
+             <div class="list card">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/involukrate.png">
+            </div>
+            <a ui-sref="allEvents" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Recent Events</b>
+            </a>
+        </div>
+   
+            
+            <div class="list card" id="role_card_supporter">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/involukrate.png">
+            </div>
+            
+            <a ui-sref="allVolunteerings" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Recent Volunteerings</b>
+            </a>
+        </div>
+            
+            <div class="list card" id="role_card_supporter">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/involukrate.png">
+            </div>
+            
+            <a ui-sref="allPosts" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>See What's Going On!</b>
+            </a>
+        </div>
             
         </div>
     </ion-content>
