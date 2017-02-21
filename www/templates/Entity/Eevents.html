@@ -34,15 +34,17 @@
                     Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
                     Place: {{post.city_name}}
                     <br><br>
-                    <i class="icon ion-calendar" ng-click="event_report(post.id, $event)"> Generate Report</i>
+<!--                    <i class="icon ion-calendar" ng-click="event_report(post.id, $event)"> Generate Report</i>-->
                 </div>
                 <div class="button-bar">
                     <a class="button"><b>Going {{post.going}}</b></a>
                     <a class="button"><b>Interested {{post.interested}}</b></a>
                 </div>
                 
+                
             </div>
         </ion-list>
-    
+<!--<object ng-show="content" data="{{content}}" type="application/pdf" style="width: 100%; height: 400px;"></object>-->
+
     </ion-content>
 </ion-view>

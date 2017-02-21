@@ -20,6 +20,20 @@
         
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
     
+        
+<!--
+          <div ng-if="error !== failure" class="list card">
+         
+            <div class="item item-image">
+              
+                <img id="profile-image-login role_card_img" src="img/empty.png">
+            </div>
+            <a ui-sref="entityPost" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-plus-round">
+                <b>Create a text post</b>
+            </a>
+        </div>
+-->
+        
         <ion-list>
            
             <div class="list card" ng-repeat="post in posts | orderBy: '-post_created'">

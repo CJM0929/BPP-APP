@@ -18,8 +18,8 @@
         
         #add-to-calendar
         {
-            float: right;
-            font-size: 2.618em;
+            float: left;
+            font-size: 1.618em;
         }
     </style>
 
@@ -31,7 +31,11 @@
     
     <ion-content class="has-header" id="ion-content-public-events" scroll="true">
         
-   
+    <div ng-click="selectEnt({{post.ent_id}})" class="item item-avatar">
+    <img ng-src="{{entityPicture || 'img/default.png'}}" >
+    <h2>{{post.ent_name}}</h2>
+    <p>Posted: <span am-time-ago="post.event_created"></span></p>
+  </div>
          <div class="list">
             
             <div class="item">
@@ -41,7 +45,8 @@
                 <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
                 <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
                 <p><b class="royal">Place: </b> {{post.city_name}}</p>
-                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)" ng-if="u"></i>
+                <br>
+                <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)" > Add to Calendar</i>
 
             </div>
             
@@ -54,19 +59,19 @@
                     </div>
                     <p>
                         <br>
-                        <b  class="calm">Details: </b><br>{{post.description}}<br>
+                        <b  class="royal">Details: </b><br>{{post.description}}<br>
                     
                         <br>
-                        <b class="calm">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
+                        <b class="royal">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
                         <br>
                         <br>
-                        <b  class="calm">Supervisor name:</b><br> {{post.supervisor_name}}
+                        <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}
                         <br>
                         <br>
-                        <b class="calm">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
+                        <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
                         <br>
                         <br>
-                        <b class="calm">Supervisor email:</b><br> {{post.supervisor_email}}
+                        <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}
                         <br>
                         <br>
                         <b class="royal">Website:</b><br> {{post.web}}

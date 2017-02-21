@@ -77,19 +77,26 @@
             </div>
         </div>
         
-        <h4 class="calm" id="info-headers">About</h4>
+        <h4 class="royal" id="info-headers">About</h4>
         <hr>
         <div class="list">
             <p id="entity-about-entity-profile">{{info.ent_about}}</p>
         </div>
         
-        <h4 class="calm" id="info-headers">website</h4>
+        <h4 class="royal" id="info-headers">website</h4>
         <hr>
         <div class="list">
             <p id="entity-about-entity-profile">{{info.ent_web}}</p>
         </div>
         
-        <h4 class="calm" id="info-headers">Address</h4>
+<h4 class="royal" id="info-headers">Founded in</h4>
+<div class="list">
+       <p id="entity-about-entity-profile">{{info.ent_founded | amDateFormat:'MMMM Do YYYY'}}</p
+
+        </div>
+        
+       <br>
+        <h4 class="royal" id="info-headers">Address</h4>
         
         <div class="map">
             <ng-map disableDefaultUI="true" gestureHandling="none" zoomControl="false" draggable="false" center="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}">
@@ -103,7 +110,7 @@
         
         
         <div class="dropdown">
-            <h4 class="calm" id="info-headers">Contact</h4>
+            <h4 class="royal" id="info-headers">Contact</h4>
             <ion-item class="item-icon-right" ng-click="call()">
                 {{info.ent_phone || 'Not set!'}}
                 <i class="icon ion-android-call" id="contact-icon-entity-about"></i>

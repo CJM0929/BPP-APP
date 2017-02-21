@@ -474,16 +474,35 @@ angular.module('app.routes', ['angular-jwt'])
         templateUrl: 'templates/publicVolunteeringFullView.html',
         controller: 'publicVolunteeringFullViewCtrl'
         
-        }).state('privateEventFullView',{
-        url: '/peivateEventFullView',
-        templateUrl: 'templates/privateEventFullView.html',
+        
+        
+        
+        
+        
+        
+        
+        
+        }).state('discoverEventFullView',{
+        url: '/discoverEventFullView',
+        templateUrl: 'templates/discoverEventFullView.html',
         controller: 'publicEventFullViewCtrl'
 
-      }).state('privateVolunteeringFullView',{
-        url: '/privateVolunteeringFullView',
-        templateUrl: 'templates/privateVolunteeringFullView.html',
-        controller: 'privateVolunteeringFullViewCtrl'
+      }).state('discoverVolunteeringFullView',{
+        url: '/discoverVolunteeringFullView',
+        templateUrl: 'templates/discoverVolunteeringFullView.html',
+        controller: 'publicVolunteeringFullViewCtrl'
     
+        
+        
+         }).state('discoverCategories', {
+        url: '/discoverCategories',
+        templateUrl: 'templates/discoverCategories.html',
+        controller: 'categoriesCtrl'
+        
+        
+        
+        
+        
         }).state('allPosts',{
             url: '/allPosts',
             templateUrl: 'templates/allPosts.html',

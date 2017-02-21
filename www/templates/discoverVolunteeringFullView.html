@@ -1,0 +1,56 @@
+<ion-view cache-view="false" title="Volunteering Opportunities">
+    
+    <style>
+        #add-to-calendar
+        {
+            float: right;
+            font-size: 2.618em;
+        }
+    </style>
+
+<!--
+ <ion-nav-buttons side="left">
+ <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+-->
+    
+
+    
+    <ion-content class="has-header">
+        
+        <div class="list">
+            <div class="item">
+                <h1 class="royal" id="align-text-events">{{post.title}}</h1><br>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.vol_created"></span><br>
+                <b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Place: </b> {{post.city_name}}
+                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)"></i>
+            </div>
+            
+            <div class="item item-body">
+                <img class="full-image" ng-show="volunteering_photo !== null" ng-src="{{volunteering_photo}}">
+                <b class="royal">Details:</b><br>{{post.description}}<br><br>
+                <b class="royal">Application procedure:</b><br>{{post.app_procedure}}<br>
+                <p><b class="royal">Skills Recommended</b></p>
+                
+               
+                    <p class="icon ion-ios-lightbulb" ng-if="skill.checked === true" ng-repeat="skill in post.skills" ng-if="skill.checked === true"> 
+                        {{skill.text}}
+                    </p>
+                    
+                    <b class="royal">Work hours:</b> <br>{{post.work_hours}}<br><br>
+                    <b class="royal">Address:</b><br>{{post.address1}}{{post.address}}<br>
+                    {{post.city_name}}, Puerto Rico, {{post.zip}}<br><br>
+                    <b class="royal">Location description:</b><br> {{post.location_description}}<br><br>
+                    <b class="royal">Website:</b><br> {{post.web}}<br><br>
+                    <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}<br><br>
+                    <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}<br><br>
+                    <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}<br><br>
+            </div>
+            <a ng-click="going({{post.id}})" class="button ion-android-hand icon-left button button-block button-large button-balanced" ng-if="u && goingg">I want to go!</a>
+            <a ng-if="u && notGoing" ng-click="ungoing({{post.id}})" class="button icon-left ion-sad-outline button-large button-block button-assertive">Not Going</a>
+        </div>
+        
+    </ion-content>
+</ion-view>

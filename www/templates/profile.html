@@ -59,24 +59,24 @@
         </div>
         
      <div class="button-bar">
-  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p class="calm" style="margin: 0 0 -5px;">Age:</p>{{info.sup_age || 'Not set!'}}</a>
-          <a class="button calmer"  style="margin: 0 0 10px; border-top: 2px solid #5aa3d0; border-bottom: 2px solid #5aa3d0;"><p class="calm" style="margin: 0 0 -5px;">Gender: <p>{{info.sup_gender || 'Not set!'}}</p></p> </a>
-  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p style="margin: 0 0 -5px;" class="calm">Area:<p>{{info.city_name}}</p></p></a>
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Age:</p>{{info.sup_age || 'Not set!'}}</a>
+          <a class="button calmer"  style="margin: 0 0 10px; border-top: 2px solid #5aa3d0; border-bottom: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Gender: <p>{{info.sup_gender || 'Not set!'}}</p></p> </a>
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p style="margin: 0 0 -5px;" class="royal">Area:<p>{{info.city_name}}</p></p></a>
 </div>
-<h4 class="calm" id="info-margin">Bio:</h4>
+<h4 class="royal" id="info-margin">Bio:</h4>
 <p id="info-margin-2">{{info.sup_about || 'Not set!'}}</p>
              
-            <h4 class="calm">Contact information</h4>
+            <h4 class="royal"  id="info-margin">Contact information</h4>
             
                
                 <ion-item class="item-icon-right"  ng-click="call()">
-                    <b> Phone Number : </b>{{info.sup_phone || 'Not set!'}}
-                    <i class="icon ion-android-call"></i>
+                    <b> Phone # : </b>{{info.sup_phone || 'Not set!'}}
+                    <i class="icon ion-android-call royal"></i>
                 </ion-item>
             
                 <ion-item class="item-icon-right" id="about-information-supporter-profile" ng-click="mail()">
                     <b>Email :</b> {{info.web_email || 'Not set!'}}
-                    <i class="icon ion-ios-email"></i>
+                    <i class="icon ion-ios-email royal"></i>
                 </ion-item>
             
 

@@ -3,8 +3,8 @@
     <style>
         #add-to-calendar
         {
-            float: right;
-            font-size: 2.618em;
+            float: left;
+            font-size: 1.618em;
         }
     </style>
 
@@ -16,11 +16,18 @@
     
     <ion-nav-buttons side="left">
  <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+        
 
-<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+<button ng-hide="u" class="button button-clear" ui-sref="guest.volunteering"><i class="icon ion-chevron-left" ></i> </button>
 </ion-nav-buttons>
     
     <ion-content class="has-header">
+        
+    <div class="item item-avatar">
+    <img ng-src="{{entityPicture || 'img/default.png'}}" >
+    <h2>{{post.ent_name}}</h2>
+    <p>Posted: <span am-time-ago="post.vol_created"></span></p>
+  </div>
         
         <div class="list">
             <div class="item">
@@ -29,7 +36,8 @@
                 <b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
                 <b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
                 <b class="royal">Place: </b> {{post.city_name}}
-                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)"></i>
+                    <br>
+                <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)"> Add to Calendar</i>
             </div>
             
             <div class="item item-body">

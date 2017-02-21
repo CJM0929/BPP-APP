@@ -20,6 +20,15 @@
         
         <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>    
         
+        
+        <div ng-if="post == 'undefined'" class="list card">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/emptyEvents.png">
+            </div>
+            <a ui-sref="home.discover" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Explore Activites</b>
+            </a>
+        </div>
         <ion-list>
             
             <div class="card list" ng-repeat="post in posts | orderBy: '-vol_created'">

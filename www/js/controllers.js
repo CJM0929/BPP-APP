@@ -145,9 +145,9 @@ void set_max_resources();                             //
         .module('app')
         .controller('aboutAddressContactInformationCtrl', aboutAddressContactInformationCtrlFunction);
 
-    aboutAddressContactInformationCtrlFunction.$inject = ['$scope', '$log', '$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation'];
+    aboutAddressContactInformationCtrlFunction.$inject = ['$scope', '$log', '$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation'];
 
-        function aboutAddressContactInformationCtrlFunction($scope, $log, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation)
+        function aboutAddressContactInformationCtrlFunction($scope, $log, $stateParams, CONFIG, jwtHelper, store,  $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation)
 {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
@@ -521,7 +521,7 @@ void set_max_resources();                             //
                 destructiveButtonClicked: function() {
                     
                     var confirmPopup = $ionicPopup.confirm({
-         title: 'Event post deletion',
+         title: 'Text post deletion',
          template: " This post will be deleted and you won't be able to find it anymore. You can also edit this post, if you just want to change something."
      });
                     
@@ -572,6 +572,9 @@ void set_max_resources();                             //
         }).success(function (data) {
             $scope.posts = data.message.posts;
 
+        }).error(function (error) {
+      $state.go($state.current, $stateParams, {reload: true, inherit: false});
+
         }).finally(function() {
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
@@ -610,7 +613,10 @@ void set_max_resources();                             //
 
     }).success(function (data) {
         $scope.posts = data.message.posts;
-    });
+    }).error(function (error) {
+        $scope.error = error.status;
+        console.log($scope.error);
+    })
 }
 
 })();
@@ -620,7 +626,7 @@ void set_max_resources();                             //
     
     'use strict';
 
-    function editentityProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$ionicPopup,$ionicLoading,$state, $cordovaCamera, multipartForm, $rootScope, eventData)
+    function editentityProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$ionicPopup,$ionicLoading,$state,  multipartForm, $rootScope, eventData)
 {
      // Token retrieval
     var t1 = store.get('token');
@@ -792,7 +798,7 @@ void set_max_resources();                             //
 
 }
 
-    editentityProfileCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','$ionicLoading','$state', '$cordovaCamera', 'multipartForm', '$rootScope', 'eventData'];
+    editentityProfileCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','$ionicLoading','$state',  'multipartForm', '$rootScope', 'eventData'];
 
     angular
         .module('app')
@@ -805,7 +811,7 @@ void set_max_resources();                             //
 
     'use strict';
 
-    function editSupportersProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $cordovaCamera,$ionicPopup,multipartForm,$ionicLoading,Upload,$state,CordovaCamera)
+    function editSupportersProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $ionicPopup,multipartForm,$ionicLoading,Upload,$state)
     {
         
         $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -839,7 +845,7 @@ void set_max_resources();                             //
                 "skills": $scope.info.message.skills,
                 "interests": $scope.info.message.interests,
                 "sup_privacy": $scope.info.message.sup_privacy,
-                "city_name": $scope.info.message.city_name
+                "city": $scope.info.message.city
             }
         };
         
@@ -907,6 +913,8 @@ $http({
     .success(function (data) {
        $scope.info = data;
     $scope.info.message.sup_age = Number($scope.info.message.sup_age);
+    
+$scope.info.message.city = $scope.info.message.city_name;
        console.log($scope.info);
 
         $scope.img={}
@@ -960,7 +968,7 @@ $http({
         .module('app')
         .controller('editSupportersProfileCtrl', editSupportersProfileCtrlFunction);
 
-     editSupportersProfileCtrlFunction.$inject = ['$scope','$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$cordovaCamera','$ionicPopup','multipartForm','$ionicLoading','Upload','$state','CordovaCamera'];
+     editSupportersProfileCtrlFunction.$inject = ['$scope','$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','multipartForm','$ionicLoading','Upload','$state','$sce'];
 
 })();
 
@@ -968,7 +976,7 @@ $http({
 (function(){
     'use strict';
 
-    function EeventsCtrlFunction($scope, $rootScope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment, eventData, Events)
+    function EeventsCtrlFunction($scope, $rootScope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment, eventData, Events,$cordovaFileOpener2,$sce,$window)
 {
     //Variables
     var t1 = store.get('token');
@@ -986,23 +994,36 @@ $http({
    $http({
         method: 'GET',
         url: 'https://hoyportibppr.com/api/entities/event_report/'+eventPost_id,
-         headers: {'Content-Type': 'application/x-www-form-urlencoded',
+         headers: {
+                   'Content-Type': 'text/html',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456',
-                  'TOKEN': store.get('token')}
+                  'TOKEN': store.get('token')},
+       responseType: 'arraybuffer' 
     })
-    .success(function (data) {
-        $scope.posts = data.message;
-            
-        var confirmPopup = $ionicPopup.alert({
-         title: 'SUCCESS!',
-    });
+    .success(function (response) {
        
+//       console.log(response)
+       
+    var file = new Blob([response], {type: 'application/pdf'});
+    console.log(file);
+    var fileURL = URL.createObjectURL(file);
+       
+         $window.open(fileURL, '_blank', 'location=no');
+
+//    console.log(fileURL);
+//    $window.open(fileURL);
+//$window.open(fileURL, '_blanc', '');
+//       $scope.content = $sce.trustAsResourceUrl(fileURL);
+//   console.log($scope.content);
+
      });   
         };
     
-    
-    
+//       var confirmPopup = $ionicPopup.alert({
+//         title: 'SUCCESS!',
+//    });
+//    
     
     
     
@@ -1224,7 +1245,7 @@ $http({
 }
 
      EeventsCtrlFunction.$inject =
-    ['$scope','$rootScope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state','$ionicPopup','moment', 'eventData', 'Events'];
+    ['$scope','$rootScope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state','$ionicPopup','moment', 'eventData', 'Events','$cordovaFileOpener2','$sce','$window'];
 
     angular
         .module('app')
@@ -1252,7 +1273,34 @@ $http({
 
     'use strict';
 
-    function entitiesCtrlFunction($scope, $stateParams, entityProfiles, $state, $http) {
+    function entitiesCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$state, $ionicPopup,moment, $ionicActionSheet, eventData,editEventPost, $ionicPopover, $rootScope,entityProfiles) {
+        
+        
+        
+//       var token = store.get('token');
+//    var tokenPayload = jwtHelper.decodeToken(token);
+//    $rootScope.supporter = tokenPayload;
+    
+    $http({
+        method: 'GET',
+        skipAuthorization: true,//es necesario enviar el token
+        url: 'https://hoyportibppr.com/api/supporters/',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/x-www-form-urlencoded',
+            'X-API-KEY' : '123456',
+         'TOKEN': store.get('token')}
+
+    }).success(function(data) {
+
+        $scope.info = data.message;
+            if($scope.info.followed_entities === null)
+                {
+                    $scope.info.followed_entities = [];
+                }
+            
+        $rootScope.supporter_data = data.message;
+    });
 
       $scope.cate = entityProfiles.entList;
 
@@ -1275,7 +1323,7 @@ $http({
       };
     }// entitiesCtrlFunction function definition end.
 
-    entitiesCtrlFunction.$inject = ['$scope', '$stateParams', 'entityProfiles', '$state','$http'];
+    entitiesCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$state', '$ionicPopup','moment','$ionicActionSheet','eventData','editEventPost','$ionicPopover', '$rootScope','entityProfiles'];
 
     angular
         .module('app')
@@ -1342,7 +1390,7 @@ angular
     .module('app')
     .controller('entityProfilesCtrl', entityProfilesCtrlFunction);
 
-     function entityProfilesCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,
+     function entityProfilesCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,
                                          $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,
                                          $ionicPopup,$httpParamSerializerJQLike,entityProfiles, eventData, volunteeringData)
   {
@@ -1353,6 +1401,10 @@ angular
       
                 $scope.img={};
         $scope.img = $scope.info.ent_pic;
+      console.log($scope.img);
+      
+      
+      if($scope.img !== null){
          $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -1365,6 +1417,7 @@ angular
                 .success(function (data) {
                     $scope.entityPicture = data;
               });
+      }
       
       $scope.goToVoluntView = function(voluntPost_id){
           
@@ -1548,7 +1601,7 @@ angular
 
   }
 
-      entityProfilesCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope',
+      entityProfilesCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope',
       '$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet',
       '$ionicPopup','$httpParamSerializerJQLike','entityProfiles', 'eventData','volunteeringData'];
 })();
@@ -1562,7 +1615,7 @@ angular
     .module('app')
     .controller('followedEntitiesCtrl', followedEntitiesCtrl);
 
-     function followedEntitiesCtrl($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,$ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,
+     function followedEntitiesCtrl($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,$ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,
                                          $ionicPopup,$httpParamSerializerJQLike,entityProfiles)
   {
     $scope.info = entityProfiles.individualEntity;
@@ -1738,7 +1791,7 @@ var myNewObject = store.get('token');
       
   }
 
-      followedEntitiesCtrl.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope',
+      followedEntitiesCtrl.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope',
       '$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet',
       '$ionicPopup','$httpParamSerializerJQLike','entityProfiles'];
 
@@ -1753,9 +1806,9 @@ var myNewObject = store.get('token');
         .module('app')
         .controller('entityProfileCtrl', entityProfileCtrlFunction);
 
-    entityProfileCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet','$ionicPopup','$httpParamSerializerJQLike', 'eventData', 'volunteeringData'];
+    entityProfileCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$ionicActionSheet','$ionicPopup','$httpParamSerializerJQLike', 'eventData', 'volunteeringData'];
 
-    function entityProfileCtrlFunction ($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,$ionicPopup,$httpParamSerializerJQLike, eventData, volunteeringData)
+    function entityProfileCtrlFunction ($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$ionicActionSheet,$ionicPopup,$httpParamSerializerJQLike, eventData, volunteeringData)
 {
     $scope.goToVoluntView = function(voluntPost_id){
         $http({
@@ -2188,7 +2241,7 @@ var myNewObject = store.get('token');
         
            
      var confirmPopup = $ionicPopup.confirm({
-         title: 'Event post deletion',
+         title: 'Volunteering post deletion',
          template: "This post will be deleted and you won't be able to find it anymore. You can also edit this post, if you just want to change something."
      });
      
@@ -2257,7 +2310,10 @@ var myNewObject = store.get('token');
         $scope.posts = data.message;
         $scope.volunt = data.message;
         console.log($scope.posts)
-    }).finally(function() {
+    }).error(function (error) {
+      $state.go($state.current, $stateParams, {reload: true, inherit: false});
+
+        }).finally(function() {
        // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');
      });
@@ -2276,6 +2332,9 @@ var myNewObject = store.get('token');
           $scope.posts = data.message;
           console.log($scope.posts);
           $scope.volunt = data.message;
+        }).error(function (error) {
+       $scope.error = error.status;
+        console.log($scope.error);
         });
 
       $scope.goToVoluntView = function(voluntPost_id){
@@ -2780,9 +2839,9 @@ $rootScope.disableFollowButton = true;
         .module('app')
         .controller('profileCtrl',  profileCtrlFunction);
 
-    profileCtrlFunction.$inject = ['$scope','$stateParams','CONFIG','jwtHelper','store','userData','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
+    profileCtrlFunction.$inject = ['$scope','$stateParams','CONFIG','jwtHelper','store','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
 
-    function profileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
+    function profileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
     
     var token = store.get('token');
     //decodificamos para obtener los datos del user
@@ -2895,9 +2954,9 @@ $rootScope.disableFollowButton = true;
         .module('app')
         .controller('profileCtrl', profileCtrlFunction);
 
-    profileCtrlFunction.$inject =  ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
+    profileCtrlFunction.$inject =  ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
 
-    function profileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
+    function profileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
     //Local function variables:
     //-------------------------
     //obtenemos el token en localStorage
@@ -3281,6 +3340,9 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
       var img =  eventData.individualEventPost.photo;
       var type="event";
       $scope.post = eventData.individualEventPost;
+      console.log(eventData.individualEventPost.start_time);
+            console.log(moment(eventData.individualEventPost.start_time))
+
       
       console.log($scope.post);
 
@@ -3371,7 +3433,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 (function(){
   'use strict';
 
-  function publicAboutCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store, userData, $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation,entityProfiles)
+  function publicAboutCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation,entityProfiles)
   {
       $scope.info = entityProfiles.individualEntity;
                 $scope.img={};
@@ -3455,7 +3517,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 
   angular.module('app').controller('publicAboutCtrl', publicAboutCtrlFunction);
 
-  publicAboutCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','userData','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation','entityProfiles'];
+  publicAboutCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation','entityProfiles'];
 
 })();
 
@@ -3488,7 +3550,11 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
       }
       
       $scope.eventData = eventData;
-      console.log($scope.eventData.individualEventPost.photo);
+      var time=eventData.individualEventPost;
+      $scope.eventData.individualEventPost.start_time =new Date(time.start_time);
+            $scope.eventData.individualEventPost.end_time =new Date(time.end_time);
+
+      console.log($scope.eventData.individualEventPost.start_time);
       
       
                $http({
@@ -3506,20 +3572,6 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
               }).error(function(data) {
                    $scope.photoExists = false;
                });
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
       
       
       $scope.alterPost = function()
@@ -3638,8 +3690,13 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }
         }};
     
-    $scope.voluntData=volunteeringData.getVoluntPost();    
-    
+    $scope.voluntData=volunteeringData.getVoluntPost();  
+    var time=volunteeringData.getVoluntPost();  
+    $scope.voluntData.start_time = new Date(time.start_time);
+    $scope.voluntData.end_time = new Date(time.end_time);
+    console.log($scope.voluntData);
+    console.log($scope.voluntData.start_time);
+
      $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -3657,6 +3714,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         });
     $scope.data={};
     
+    
+    
     $scope.alterPost = function()
     {
          $scope.picData = {
@@ -3672,7 +3731,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                 multipartForm.post(uploadUrl, $scope.picData);
                    console.log("Hello!");
             });
-        
         
         $scope.volunteeringPostObject.volunteering_job.general_info.title = $scope.voluntData.title;
         $scope.volunteeringPostObject.volunteering_job.general_info.description = $scope.voluntData.description;
@@ -4125,6 +4183,9 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 }
 })();
 
+
+
+
 //publicEventFullViewCtrl
 (function(){
 
@@ -4136,6 +4197,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
       $scope.goingg = false;
       $scope.notgoingg = true;
       $scope.post = eventData.individualEventPost;
+      
+     
       
       if($rootScope.u === true){
       if($rootScope.supporter_data.participation !== null)   
@@ -4155,6 +4218,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
       
       var img =  eventData.individualEventPost.photo;
       var id = eventData.individualEventPost.id;
+      
        
       var type="event";
                $http({
@@ -4168,7 +4232,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                 })
                 .success(function (data) {
                     $scope.event_photo = data;
-                   console.log(data);
+//                   console.log(data);
               }).error(function(data)
                        {
             $scope.photoExists = false;
@@ -4352,7 +4416,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         $rootScope.supporter_data = data.message;
     });
             $scope.info1 = data.message;
-//            console.log($rootScope.supporter_data.vol_going);
 
             var alertPopup = $ionicPopup.alert({
                   title: 'No problem!'
@@ -4364,12 +4427,68 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
       {
           console.log(Events.add($scope.post));
       };
-      
   }
 
   publicEventFullViewCtrlFunction.$inject = ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','eventData', '$timeout','$ionicPopup','$ionicActionSheet', 'Events'];
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //myEntityEventsCtrl
 (function(){
@@ -4439,6 +4558,9 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     }).success(function (data) {
         $scope.posts = data.message;
          console.log( $scope.posts);
+    }).error(function (error) {
+      $state.go($state.current, $stateParams, {reload: true, inherit: false});
+
     })
     .finally(function() {
        $scope.$broadcast('scroll.refreshComplete');
@@ -4458,7 +4580,10 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     }).success(function (data) {
         $scope.posts = data.message;
          console.log( $scope.posts);
-    });
+    }).error(function (error) {
+        $scope.error = error.status;
+         console.log($scope.error);
+    })
 
 }
 
@@ -4486,9 +4611,10 @@ $http({
             'X-API-KEY' : '123456',
          'TOKEN': store.get('token')}
     }).success(function(data) {
-            
+    $scope.error=data.message.participation;
+            console.log(data.message.participation);
          $scope.my_activities = [];
-
+    
         data.message.participation.forEach(function(element){
             
                 var temp = {
@@ -4499,7 +4625,8 @@ $http({
                                 needed: element.needed,
                                 title: element.title,
                                 id: element.id,
-                                start_time: element.start_time
+                                start_time: element.start_time,
+                                decision: element.decision
                             };
                  $scope.my_activities.push(temp);            
         })
@@ -4757,7 +4884,7 @@ $http({
             
         eventData.individualEventPost = $scope.event;
         
-        $state.go('publicEventFullView');
+        $state.go('discoverEventFullView');
     });
         
     };
@@ -5042,6 +5169,25 @@ $http({
 
   function publicEventFullViewCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, eventData, $timeout,$ionicPopup,$ionicActionSheet, Events)
   {  
+      
+ $scope.selectEnt = function(val) {
+
+        $http({
+          method: 'GET',
+          skipAuthorization: true,//es necesario enviar el token
+          url: 'https://hoyportibppr.com/api/entities/' + val,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/x-www-form-urlencoded',
+            'X-API-KEY' : '123456'}
+        })
+          .success(function (data) {
+            $scope.info = data.message;
+            entityProfiles.individualEntity = $scope.info;
+
+            $state.go('entityProfiles');
+          });
+      };
+      
       $scope.goingg = false;
       $scope.notgoingg = true;
       

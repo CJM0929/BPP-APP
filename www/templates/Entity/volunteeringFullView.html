@@ -3,8 +3,8 @@
     <style>
         #add-to-calendar
         {
-            float: right;
-            font-size: 2.618em;
+            float: left;
+            font-size: 1.618em;
         }
     </style>
     
@@ -17,6 +17,7 @@
 </ion-nav-buttons>
     <ion-content class="has-header">
         
+        
         <div class="list">
             <div class="item">
                 <h1 class="royal" id="align-text-events">{{post.title}}</h1><br>
@@ -24,8 +25,8 @@
                 <b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
                 <b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
                 <b class="royal">Place: </b> {{post.city_name}}
-                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)"></i>
-            </div>
+                    <br>
+   <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)" > Add to Calendar</i>            </div>
             
             <div class="item item-body">
                 <img class="full-image" ng-show="volunteering_photo !== null" ng-src="{{volunteering_photo}}">

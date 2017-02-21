@@ -1,0 +1,81 @@
+<ion-view cache-view="false" title="Events">
+    
+    <style>
+        #ion-content-public-events
+        {
+            background: #f6f7f8;
+        }
+        
+        #text-center-public-events
+        {
+            text-align: center;
+        }
+        
+        .calmer
+        {
+            color: #56a0ce;
+        }
+        
+        #add-to-calendar
+        {
+            float: right;
+            font-size: 2.618em;
+        }
+    </style>
+
+   
+    
+    <ion-content class="has-header" id="ion-content-public-events" scroll="true">
+        
+   
+         <div class="list">
+            
+            <div class="item">
+                
+                <h1 class="royal" id="align-text-events">{{post.title}}</h1><br>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.event_created"></span></p><br>
+                <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
+                <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Place: </b> {{post.city_name}}</p>
+                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)" ng-if="u"></i>
+
+            </div>
+            
+            <div class="item item-body">
+                <div class="list">
+                
+                     <div class="item ">
+
+                    <img class="full-image" ng-show="event_photo !== null" ng-src="{{event_photo}}">
+                    </div>
+                    <p>
+                        <br>
+                        <b  class="calm">Details: </b><br>{{post.description}}<br>
+                    
+                        <br>
+                        <b class="calm">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
+                        <br>
+                        <br>
+                        <b  class="calm">Supervisor name:</b><br> {{post.supervisor_name}}
+                        <br>
+                        <br>
+                        <b class="calm">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
+                        <br>
+                        <br>
+                        <b class="calm">Supervisor email:</b><br> {{post.supervisor_email}}
+                        <br>
+                        <br>
+                        <b class="royal">Website:</b><br> {{post.web}}
+                    </p>
+                
+                </div>
+            </div>
+             <div class="button-bar">
+              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="u && notgoingg">Going</a>
+              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="u && notgoingg">Interested</a>
+            </div>
+             <a ng-if="u && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
+        </div>
+        
+    </ion-content>
+</ion-view>

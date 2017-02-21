@@ -47,6 +47,9 @@
     
     </style>
     
+     <ion-nav-buttons side="left">
+ <button class="button button-clear" ui-sref="volunteeringFullView"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
     
     
     <ion-content padding="true" class="has-header">      
@@ -111,16 +114,16 @@
             </div>
 
             <span class="input-label span-fix input-label-fix">Start Time</span>
-            <label class="item item-fix label-fix">
-                <input class="input-fix" name="start_time" type="datetime-local" ng-model="voluntData.start_time" ng-required="true">
+  <label class="item item-input item-select">
+                <input type="datetime-local" ng-model="voluntData.start_time" ng-required="true">
             </label>
             <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
                 <div ng-message="required" id="input-error">A starting time for the event is required!</div>
             </div>
             
             <span class="input-label span-fix input-label-fix">End Time</span>
-            <label class="item item-fix label-fix">
-                <input class="input-fix" name="end_time" type="datetime-local" ng-model="voluntData.end_time" ng-required="true">
+  <label class="item item-input item-select">
+                <input type="datetime-local" ng-model="voluntData.end_time" ng-required="true">
             </label>
 
             <span class="input-label span-fix input-label-fix">Website url</span>
