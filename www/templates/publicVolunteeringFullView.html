@@ -8,17 +8,13 @@
         }
     </style>
 
-<!--
- <ion-nav-buttons side="left">
- <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
-</ion-nav-buttons>
--->
+
     
     <ion-nav-buttons side="left">
- <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+ <button ng-show="supporter" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
         
 
-<button ng-hide="u" class="button button-clear" ui-sref="guest.volunteering"><i class="icon ion-chevron-left" ></i> </button>
+<button ng-hide="supporter" class="button button-clear" ui-sref="guest.volunteering"><i class="icon ion-chevron-left" ></i> </button>
 </ion-nav-buttons>
     
     <ion-content class="has-header">
@@ -60,8 +56,8 @@
                     <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}<br><br>
                     <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}<br><br>
             </div>
-            <a ng-click="going({{post.id}})" class="button ion-android-hand icon-left button button-block button-large button-balanced" ng-if="u && goingg">I want to go!</a>
-            <a ng-if="u && notGoing" ng-click="ungoing({{post.id}})" class="button icon-left ion-sad-outline button-large button-block button-assertive">Not Going</a>
+            <a ng-click="going({{post.id}})" class="button ion-android-hand icon-left button button-block button-large button-balanced" ng-if="supporter && goingg">I want to go!</a>
+            <a ng-if="supporter && notGoing" ng-click="ungoing({{post.id}})" class="button icon-left ion-sad-outline button-large button-block button-assertive">Not Going</a>
         </div>
         
     </ion-content>

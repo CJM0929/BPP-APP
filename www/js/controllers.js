@@ -1,300 +1,62 @@
-/*******************************************************************************************************/
-//                                     بسم الله الرحمن الرحيم                                             //
-/*******************************************************************************************************/
-
-/*
-//=====================================================================================================//
-//-----------------------------------------------------------------------------------------------------//
-// File name: main.c                                                                                   //
-//-----------------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------------//
-// Author: Pedro Grillo (Coder)                                                                        //
-//         Jose Freytes (Tester)                                                                       //
-// Group: Codiceaeneas                                                                                 //
-//-----------------------------------------------------------------------------------------------------//
-// Purpose: The purpose of this program is to simulate a console environment where the program         //
-// displays the types and amount of resources that a process uses. Resources can be classified         //
-// in different types.                                                                                 //
-//                                                                                                     //
-// Inputs : The available inputs in the console program are:                                           //
-// a) -t : means the types of resources that are available in the program for the processes            //
-// b) -r : the resources that are gonna run in the program, the user can input as many as they can     //
-//         (be sure to match the same number of processes that are gonna run, this is explained on     //
-//         the next point).                                                                            //
-// c) -p : the amount of processes that are gonna run in the program, this has to match with the same  //
-//         amount of resources in -r.                                                                  //
-//                                                                                                     //
-// Note: before writing all these commands, remember to write the name of the program.                 //
-//                                                                                                     //
-// Outputs:                                                                                            //
-//                                                                                                     //
-// Last date of Modification, by:  1/26/16                                                             //
-// Reasons for Modification: Finishing touches on the program, everything has been implemented.        //
-//                                                                                                     //
-// Compatibility: Windows Operating systems.                                                           //
-// Compilator used: Code::Block, GNU GCC Compiler.                                                     //
-// Modifications:                                                                                      //
-// Implementation for optional functions for further implementation for user interface improvement.    //
-// ---                                                                                                 //
-// Last debug stage test: 1/26/16; on 10:00 A.M.                                                       //
-// Result of the last date of test: The program is running successful, but still needs implementation  //
-// for optional functions for further implementation for user interface improvement.                   //
-=========================================================================================================
 
 
-==========================================================
-/Program's template index:                              //
---------------------------------------------------------//
-The program template is organized in the form as:       //
-                                                        //
-A) Preprocessor's library implementation declarations.  //
-B) Macro declarations.                                  //
-C) Global variables.                                    //
-E) Function Prototypes.                                 //
-F) Main function source code definition.                //
-G) Functions' definitions.                              //
-                                                        //
-Template of organization:                               //
-                                                        //
-//Libraries                                             //
-//Macros.                                               //
-//Global variables.                                     //
-//Function prototypes.                                  //
-//Main function source code: int main(void).            //
-//Functions' definitions.                               //
-========================================================//
+(function() {
 
-========================================================
-Controllers' list:                                    //
-------------------------------------------------------//
-Purpose: Function prototypes are to make the function //
-definitions and types of the functions available      //
-before the program compiles, to be able to determine  //
-pre-bugs before they happen very uncertain            //
-to the human eyes.                                    //
-------------------------------------------------------//
-------------------------------------------------------//
-COntroller's name: function controllerFunctionName Example, please use.//
-int examine_string(char a[]);                         //
-int examine_t_part(char a[]);                         //
-int examine_r_part(char a[]);                         //
-int examine_p_part(char a[]);                         //
-------------------------------------------------------//
-int examine_input_data();                             //
-void set_resources();                                 //
-void set_resources_needs();                           //
-------------------------------------------------------//
-int deadlock_algorithm();                             //
-int verify_resources_for_p_n(int p);                  //
-------------------------------------------------------//
-void allocate_resources_for_p_n();                    //
-void deallocate_resources(int const p);               //
-void set_max_resources();                             //
-------------------------------------------------------//
-------------------------------------------------------//
-======================================================//
-*/
-
-(function(){
+        "use strict";
 
     angular
      .module('app')
      .run(function ($rootScope, $state, $http, $ionicActionSheet, $ionicPopup, store,$window)
     {
-     $rootScope.logoutFunction = function (){
+    
+        //this function is for logout button in the side menu
+        $rootScope.logoutFunction = function (){
 
-                    $rootScope.authToken = undefined; // when logout authToken will be set to undefined
-                    $rootScope.isAuthenticated = false; // when logout isAuthenticated will be set to false
-                    store.remove('token'); // when logout the token containing the credentials of the user will be deleted
+            // when logout authToken will be set to undefined
+            $rootScope.authToken = undefined; 
+            // when logout isAuthenticated will be set to false
+            $rootScope.isAuthenticated = false; 
+            // when logout the token containing the credentials of the user will be deleted
+            store.remove('token'); 
+            // when logout the user will automatically go to the login page
+            $state.go('login'); 
+            // when user logout the profile page of user button will dissapear from the html DOM
+            $rootScope.supporter = false; 
+            // when user logout the profile page of entity button will dissapear from the html DOM
+            $rootScope.entity = false; 
+            // when user logout the login button will dissapear from the html DOM
+            $rootScope.login = true;  
+            // when user logout the signup button will dissapear from the html DOM
+            $rootScope.signin = true;  
+            // when logout everything will be set to undefined and default.
+            $http.defaults.headers.common.Authorization = undefined; 
 
-
-
-                    $state.go('login'); // when logout the user will automatically go to the login page
-                    $rootScope.u = false; // when user logout the profile page of user button will dissapear from the html DOM
-                    $rootScope.e = false; // when user logout the profile page of entity button will dissapear from the html DOM
-                    $rootScope.l = true;  // when user logout the login button will dissapear from the html DOM
-                    $rootScope.s = true;  // when user logout the signup button will dissapear from the html DOM
-                    $http.defaults.headers.common.Authorization = undefined; // when logout everything will be set to undefined and default.
-                    
-         
-                        var alertPopup = $ionicPopup.alert({
-                             title: "Logout",
-                             template: "You've been logged out!"
-                         });
-                };          
+           // Popup notifying that the user log out from his account
+                var alertPopup = $ionicPopup.alert({
+                     title: "Logout",
+                     template: "You've been logged out!"
+                 });
+        };          
         
-                        $rootScope.editSupporterProfile = function() {
-                    $state.go('editSupportersProfile');
-                    };
+            // this function is for the edit entity profile button in the side menu
+            // when the user click's the button it will go to the editSupportersProfile.html
+            $rootScope.editSupporterProfile = function() {
+            $state.go('editSupportersProfile');
+            };
 
-                    
-                    $rootScope.editEntityProfile = function() {
-                    $state.go('editEntityProfile');
-                    };
-
-            });
-
-})();
-
-//aboutAddressContactInformationCtrl
-(function(){
-
-    'use strict';
-
-    angular
-        .module('app')
-        .controller('aboutAddressContactInformationCtrl', aboutAddressContactInformationCtrlFunction);
-
-    aboutAddressContactInformationCtrlFunction.$inject = ['$scope', '$log', '$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$ionicScrollDelegate','$ionicSlideBoxDelegate','$http','$window','$state','$cordovaGeolocation'];
-
-        function aboutAddressContactInformationCtrlFunction($scope, $log, $stateParams, CONFIG, jwtHelper, store,  $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation)
-{
-  var options = {timeout: 10000, enableHighAccuracy: true};
-
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-    var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
-
-      var marker = new google.maps.Marker({
-        map: $scope.map,
-        animation: google.maps.Animation.DROP,
-        position: latLng
-      });
-
-      var infoWindow = new google.maps.InfoWindow({
-        content: "Here I am!"
-      });
-
-      google.maps.event.addListener(marker, 'click', function () {
-        infoWindow.open($scope.map, marker);
-      });
+            // this function is for the edit supporter profile button in the side menu
+            // when the user click's the button it will go to the editEntityProfile.html
+            $rootScope.editEntityProfile = function() {
+            $state.go('editEntityProfile');
+            };
     });
-
-  }, function(error){
-    console.log("Could not get location");
-  });
-
-          //obtenemos el token en localStorage
-          var token = store.get('token');
-          //decodificamos para obtener los datos del user
-          var tokenPayload = jwtHelper.decodeToken(token);
-          console.log(tokenPayload);
-          //los mandamos a la vista como user
-          $rootScope.entityAdmin = tokenPayload;
-
-          $http({
-            method: 'GET',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/entities/' + $rootScope.entityAdmin.role_id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded',
-              'Accept': 'application/x-www-form-urlencoded',
-              'X-API-KEY' : '123456'}
-          })
-            .success(function (data) {
-              $scope.info = data.message;
-            });
-
-          $http({
-            method: 'GET',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/entities/posts/'+ $rootScope.entityAdmin.role_id ,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded',
-              'Accept': 'application/x-www-form-urlencoded',
-              'X-API-KEY' : '123456'}
-          })
-            .success(function (data) {
-              $scope.posts = data.message.posts;
-            })
-            .finally(function() {
-              // Stop the ion-refresher from spinning
-              $scope.$broadcast('scroll.refreshComplete');
-            });
-
-
-          $scope.doRefresh = function() {
-            $http({
-              method: 'GET',
-              skipAuthorization: true,//es necesario enviar el token
-              url: 'https://hoyportibppr.com/api/entities/' + $rootScope.entityAdmin.role_id,
-              headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/x-www-form-urlencoded',
-                'X-API-KEY' : '123456'}
-            })
-              .success(function (data) {
-                $scope.info = data.message;
-                $scope.skills = {};
-                $scope.skills = data.message.skills;
-                console.log($scope.skills);
-                console.log($scope.info);
-              })
-              .finally(function() {
-                // Stop the ion-refresher from spinning
-                $scope.$broadcast('scroll.refreshComplete');
-              });
-
-            $http({
-              method: 'GET',
-              skipAuthorization: true,//es necesario enviar el token
-              url: 'https://hoyportibppr.com/api/entities/posts/'+ $rootScope.entityAdmin.role_id ,
-              headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/x-www-form-urlencoded',
-                'X-API-KEY' : '123456'}
-            })
-              .success(function (data) {
-                $scope.posts = data.message.posts;
-              })
-              .finally(function() {
-                // Stop the ion-refresher from spinning
-                $scope.$broadcast('scroll.refreshComplete');
-              });
-
-          };
-
-          $scope.call = function () {
-            $window.open('tel:' + $scope.info.sup_phone, '_system');
-          };
-
-          $scope.mail = function () {
-            $window.open('mailto:' + $scope.info.email, '_system');
-          };
-
-          $ionicSlideBoxDelegate.update();
-          $scope.onUserDetailContentScroll = onUserDetailContentScroll;
-
-
-          function onUserDetailContentScroll(){
-            var scrollDelegate = $ionicScrollDelegate.$getByHandle('userDetailContent');
-            var scrollView = scrollDelegate.getScrollView();
-            $scope.$broadcast('userDetailContent.scroll', scrollView);
-          }
-          $scope.toggleItem= function(item) {
-            if ($scope.isItemShown(item)) {
-              $scope.shownItem = null;
-            } else {
-              $scope.shownItem = item;
-            }
-          };
-          $scope.isItemShown = function(item) {
-            return $scope.shownItem === item;
-          };
-}
-
+    
 })();
 
 //categoriesCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -304,9 +66,8 @@ void set_max_resources();                             //
 
     function categoriesCtrlFunction($scope, $stateParams, $http, $state,entityProfiles,$ionicPopup, $rootScope) {
         
-      $scope.cate = undefined;
-      $scope.cate1 = undefined;
-
+      $scope.categories = undefined;
+      // this http request give us all the existing categories
       $http({
         url: 'https://hoyportibppr.com/api/entities/categories',
         method: 'GET',
@@ -314,14 +75,17 @@ void set_max_resources();                             //
           'Content-Type': 'application/x-www-form-urlencoded',
           'X-API-KEY' : '123456'
         }
-      })
-        .then( function(response) {
-          $scope.cate = response.data.message.categories;
-        console.log($scope.cate);
-        });
-
+      }).then( function(response) {
+        // the categories variable will contain a json of all existing categories
+        $scope.categories = response.data.message.categories;
+        });// end of http (https://hoyportibppr.com/api/entities/categories)
+        
+      // this function is attached to a button and is in charge of 
+      // selecting a specific category and retrieve all the available 
+      // entities for such category
       $scope.categorySelection = function(val) {
 
+        // this http request give us all the existing entities for a specific category
         $http({
           url: 'https://hoyportibppr.com/api/entities/category/'+val,
           method: 'GET',
@@ -329,18 +93,14 @@ void set_max_resources();                             //
             'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456'
           }
-        })
+        }) // if entities exist for the selected category the successCallback will run
           .then( function successCallback(response) {
-            $scope.cate1 = response.data.message;
-            console.log($scope.cate1);
-            entityProfiles.entList = $scope.cate1;
+            entityProfiles.entList = response.data.message;
             $state.go('entities');
-
+        // if entities does not exist for the selected category the errorCallback will run
           }, function errorCallback(response){
-            $scope.ResponseDetails = response.data.status;
-            console.log( $scope.ResponseDetails);
-
-            if($scope.ResponseDetails == "failure"){
+            
+            if(response.data.status == "failure"){
 
               var alertPopup = $ionicPopup.alert({
                 title: 'No entities registered in this category.'
@@ -350,7 +110,7 @@ void set_max_resources();                             //
 
           });
 
-      };
+      };// end of categorySelection function
 
     }// categoriesCtrlFunction function definition end.
 
@@ -359,14 +119,12 @@ void set_max_resources();                             //
 //changePasswordCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     function changePasswordCtrlFunction($scope, $stateParams, authFactory, jwtHelper, store, $rootScope, $http, $httpParamSerializerJQLike, $state, $ionicPopup)
 {
     //Variables:
     $scope.data = {};
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
     $scope.submit = submitFunction;
 
     //Function declarations:
@@ -380,18 +138,16 @@ void set_max_resources();                             //
             {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-API-KEY' : '123456',
-                'TOKEN' : t1
+                'TOKEN' : store.get('token')
             }
 
         }).success(function (data, status, headers, config) {
 
-            $scope.PostDataResponse = data.status;
-
-            if($scope.PostDataResponse == "success")
+            if(data.status == "success")
             { // this if condition verify the response was an error and display the error to the user
 
                 var alertPopup = $ionicPopup.alert(
-                    { // Pop up which shows the errors to the user
+                    {   // Pop up which shows the errors to the user
                         title: 'Password Changed!',
                         template: 'Password has been change succesfully. Please sign in again with the new password.'
                     });
@@ -400,18 +156,19 @@ void set_max_resources();                             //
                 $rootScope.isAuthenticated = false; // when logout isAuthenticated will be set to false
                 store.remove('token'); // when logout the token containing the credentials of the user will be deleted
                 $state.go('login'); // when logout the user will automatically go to the login page
-                $rootScope.u = false; // when user logout the profile page of user button will dissapear from the html DOM
-                $rootScope.e = false; // when user logout the profile page of entity button will dissapear from the html DOM
-                $rootScope.l = true;  // when user logout the login button will dissapear from the html DOM
-                $rootScope.s = true;  // when user logout the signup button will dissapear from the html DOM
+                $rootScope.supporter = false; // when user logout the profile page of user button will dissapear from the html DOM
+                $rootScope.entity = false; // when user logout the profile page of entity button will dissapear from the html DOM
+                $rootScope.login = true;  // when user logout the login button will dissapear from the html DOM
+                $rootScope.signin = true;  // when user logout the signup button will dissapear from the html DOM
                 $http.defaults.headers.common.Authorization = undefined; // when logout everything will be set to undefined and default
                 $state.transitionTo($state.current, $state.params, { reload: true, inherit: true, notify: true });//reload pg when transition to login page
             }// end of if
 
         }).error(function (data, status, header, config) {
 
+            // error response from the backend
             $scope.ResponseDetails = data.status;
-            $scope.error1 = data.message.current_password;
+            $scope.error1 = data.message.current_password; 
             $scope.error2 = data.message.new_password;
             $scope.error3 = data.message.new_passconf;
 
@@ -440,7 +197,7 @@ void set_max_resources();                             //
 //EactivityFeedCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -452,9 +209,9 @@ void set_max_resources();                             //
 {
     //Variables:
 
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
      
     $scope.alterPost = alterPostFunction;
     $scope.data={};
@@ -497,7 +254,7 @@ void set_max_resources();                             //
                                                headers: {
                                                    'Content-Type': 'application/x-www-form-urlencoded',
                                                    'X-API-KEY' : '123456',
-                                                   'TOKEN' : t1
+                                                   'TOKEN' : tokenEncoded
                                                }
                                            }).success(function (data, status, headers, config) {
 
@@ -538,7 +295,7 @@ void set_max_resources();                             //
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Accept': 'application/x-www-form-urlencoded',
                             'X-API-KEY' : '123456',
-                            TOKEN: t1
+                            TOKEN: tokenEncoded
                         }
 
                     }).success(function (data) {
@@ -562,7 +319,7 @@ void set_max_resources();                             //
         $http({
             method: 'GET',
             skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/entities/posts/'+ent.role_id ,
+            url: 'https://hoyportibppr.com/api/entities/posts/'+tokenDecoded.role_id ,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/x-www-form-urlencoded',
@@ -590,13 +347,12 @@ void set_max_resources();                             //
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456'
         }
-
     }).success(function (data) {
         $scope.info = data.message;
     });
@@ -604,7 +360,7 @@ void set_max_resources();                             //
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/posts/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/posts/'+tokenDecoded.role_id,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/x-www-form-urlencoded',
@@ -624,15 +380,15 @@ void set_max_resources();                             //
 //editentityProfileCtrl
 (function(){
     
-    'use strict';
+    "use strict";
 
     function editentityProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$ionicPopup,$ionicLoading,$state,  multipartForm, $rootScope, eventData)
 {
      // Token retrieval
-    var t1 = store.get('token');
+    var tokenEncoded = store.get('token');
     // Function to decode token
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
     
       $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = false;
@@ -676,7 +432,7 @@ void set_max_resources();                             //
         headers: { 
           'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
-            'TOKEN' : t1 
+            'TOKEN' : tokenEncoded 
         }// end of header
       }) 
            
@@ -720,7 +476,7 @@ void set_max_resources();                             //
      $http({
         method: 'GET',
         skipAuthorization: true,//it's necessary to send the token
-        url: 'https://hoyportibppr.com/api/entities/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id,
         headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456'}
@@ -809,7 +565,7 @@ void set_max_resources();                             //
 //editSupportersProfileCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     function editSupportersProfileCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet, $ionicPopup,multipartForm,$ionicLoading,Upload,$state)
     {
@@ -820,14 +576,14 @@ void set_max_resources();                             //
  
 ////////////////////////////////////
     //    TOKEN RETRIEVAL
-    var t1 = store.get('token');// get the encoded token
-    var tp = jwtHelper.decodeToken(t1);// decode the encoded token
-    var sup = tp;
+    var tokenEncoded = store.get('token');// get the encoded token
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);// decode the encoded token
+    var sup = tokenDecoded;
     $scope.data = {};
         
         $scope.cancelEdit = function()
         {
-            $state.go('profile')
+            $state.go('supporterProfile')
         }
         
     $scope.UpdateData = function() { 
@@ -861,7 +617,7 @@ void set_max_resources();                             //
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
-            'TOKEN' : t1
+            'TOKEN' : tokenEncoded
         }
       }).success(function (data, status, headers, config) {
             
@@ -870,7 +626,7 @@ void set_max_resources();                             //
                        template: 'Your profile information was successfuly edited.'
               });     
               
-              $state.go('profile');
+              $state.go('supporterProfile');
              // $state.go($state.current, $stateParams, {reload: true, inherit: false});
               $scope.PostDataResponse = data;
             
@@ -974,16 +730,16 @@ $scope.info.message.city = $scope.info.message.city_name;
 
 //EeventsCtrl
 (function(){
-    'use strict';
+    "use strict";
 
     function EeventsCtrlFunction($scope, $rootScope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment, eventData, Events,$cordovaFileOpener2,$sce,$window)
 {
     //Variables
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;   
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;   
     
-    $rootScope.entityAdmin = tp;
+    $rootScope.entityAdmin = tokenDecoded;
     
     
     
@@ -1100,7 +856,7 @@ $scope.info.message.city = $scope.info.message.city_name;
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/events/'+ent.role_id ,
+        url: 'https://hoyportibppr.com/api/entities/events/'+tokenDecoded.role_id ,
          headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456'}
@@ -1191,7 +947,7 @@ $scope.info.message.city = $scope.info.message.city_name;
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Accept': 'application/x-www-form-urlencoded',
                             'X-API-KEY' : '123456',
-                            TOKEN: t1
+                            TOKEN: tokenEncoded
                         }
 
                     }).success(function (data) {
@@ -1218,7 +974,7 @@ $scope.info.message.city = $scope.info.message.city_name;
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/x-www-form-urlencoded',
@@ -1231,7 +987,7 @@ $scope.info.message.city = $scope.info.message.city_name;
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/events/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/events/'+tokenDecoded.role_id,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/x-www-form-urlencoded',
@@ -1254,7 +1010,7 @@ $scope.info.message.city = $scope.info.message.city_name;
 
 //emailSentCtrl
 (function(){
-    'use strict';
+    "use strict";
 
     function emailSentCtrlFunction($scope, $stateParams)
 {
@@ -1271,7 +1027,7 @@ $scope.info.message.city = $scope.info.message.city_name;
 //entitiesCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     function entitiesCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$state, $ionicPopup,moment, $ionicActionSheet, eventData,editEventPost, $ionicPopover, $rootScope,entityProfiles) {
         
@@ -1279,7 +1035,7 @@ $scope.info.message.city = $scope.info.message.city_name;
         
 //       var token = store.get('token');
 //    var tokenPayload = jwtHelper.decodeToken(token);
-//    $rootScope.supporter = tokenPayload;
+//    $rootScope.supporter_token= tokenPayload;
     
     $http({
         method: 'GET',
@@ -1334,7 +1090,7 @@ $scope.info.message.city = $scope.info.message.city_name;
 //entityPostCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -1346,9 +1102,9 @@ $scope.info.message.city = $scope.info.message.city_name;
      function entityPostCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, $ionicPopup)
 {
     //Variables:
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
     $scope.data = {};
     $scope.postData = postDataFunction;
 
@@ -1363,7 +1119,7 @@ $scope.info.message.city = $scope.info.message.city_name;
             {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-API-KEY' : '123456',
-                'TOKEN' : t1
+                'TOKEN' : tokenEncoded
             }
 
         }).success(function (data, status, headers, config) {
@@ -1384,7 +1140,7 @@ $scope.info.message.city = $scope.info.message.city_name;
 //entityProfilesCtrl
 (function(){
 
-  'use strict';
+  "use strict";
 
 angular
     .module('app')
@@ -1454,17 +1210,16 @@ angular
         
     };
       
-      if($rootScope.u === true)
+      console.log($rootScope.supporter);
+      if($rootScope.supporter === true)
           {
-            $rootScope.supporter_data.followed_entities.forEach(function(element){
-
+        $rootScope.supporter_data.followed_entities.forEach(function(element){
                 if(element.ent_id === $scope.info.ent_id)
               {
                   $scope.following = true;
-                  console.log($scope.following);
+                  console.log(element.ent_id);
               }
             });
-      
           }
       
         $scope.scrollTop = function() {
@@ -1585,20 +1340,6 @@ angular
             });
         };
 
-          $scope.toggleItem= function(item) {
-
-        if ($scope.isItemShown(item)) {
-          $scope.shownItem = null;
-        } else {
-          $scope.shownItem = item;
-        }
-
-      };
-
-      $scope.isItemShown = function(item) {
-        return $scope.shownItem === item;
-      };
-
   }
 
       entityProfilesCtrlFunction.$inject = ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope',
@@ -1609,7 +1350,7 @@ angular
 //followedEntitiesCtrl
 (function(){
 
-  'use strict';
+  "use strict";
 
 angular
     .module('app')
@@ -1673,6 +1414,8 @@ $http({
         $scope.img = data.message.ent_pic;
     console.log($scope.img);
        
+                if($scope.img !== null){
+
          $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -1689,7 +1432,10 @@ $http({
                 $state.go($state.current, $stateParams, {reload: true, inherit: false});
             }
               });
+                }
         });
+                
+
       
     $scope.doRefresh = function() {
 
@@ -1800,7 +1546,7 @@ var myNewObject = store.get('token');
 //entityProfileCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -1979,7 +1725,7 @@ var myNewObject = store.get('token');
 //entityRegistrationCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2170,7 +1916,7 @@ var myNewObject = store.get('token');
 //eventPageCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2188,7 +1934,7 @@ var myNewObject = store.get('token');
 //EvolunteeringCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2255,7 +2001,7 @@ var myNewObject = store.get('token');
          headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456',
-                  TOKEN: t1}
+                  TOKEN: tokenEncoded}
     }).success(function (data) {
             $ionicPopup.alert({
      title: 'Volunteering post deleted',
@@ -2279,15 +2025,15 @@ var myNewObject = store.get('token');
         $state.go('postVolunt');
       };
 
-      var t1 = store.get('token');
-      var tp = jwtHelper.decodeToken(t1);
-      console.log(tp);
-      var ent = tp;
+      var tokenEncoded = store.get('token');
+      var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+      console.log(tokenDecoded);
+      var ent = tokenDecoded;
 
       $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/'+ent.role_id ,
+        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id ,
         headers: {'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/x-www-form-urlencoded',
           'X-API-KEY' : '123456'}
@@ -2301,7 +2047,7 @@ var myNewObject = store.get('token');
              $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/volunteerings/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/volunteerings/'+tokenDecoded.role_id,
          headers: {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'application/x-www-form-urlencoded',
                   'X-API-KEY' : '123456'}
@@ -2323,7 +2069,7 @@ var myNewObject = store.get('token');
       $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/volunteerings/'+ent.role_id,
+        url: 'https://hoyportibppr.com/api/entities/volunteerings/'+tokenDecoded.role_id,
         headers: {'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/x-www-form-urlencoded',
           'X-API-KEY' : '123456'}
@@ -2358,7 +2104,7 @@ var myNewObject = store.get('token');
 //forgotPasswordCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2434,7 +2180,7 @@ var myNewObject = store.get('token');
 //loginCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2451,11 +2197,11 @@ var myNewObject = store.get('token');
      }
     
     $rootScope.isAuthenticated = false;
-    $rootScope.e = false;
+    $rootScope.entity = false;
     
-    $rootScope.l = true;
-    $rootScope.s = true;
-    $rootScope.u = false;
+    $rootScope.login = true;
+    $rootScope.signin = true;
+    $rootScope.supporter = false;
     $scope.user = { username:"",
                     password:""
                   };
@@ -2487,9 +2233,9 @@ $rootScope.disableFollowButton = true;
                 store.set('token', res.data.response.token);
                 $rootScope.isAuthenticated = true;
                 $state.go('dashboard.Eevents');
-                $rootScope.e = !$rootScope.e;
-                $rootScope.l = !$rootScope.l;
-                $rootScope.s = !$rootScope.s;
+                $rootScope.entity = !$rootScope.entity;
+                $rootScope.login = !$rootScope.login;
+                $rootScope.signin = !$rootScope.signin;
                 $rootScope.disableFollowButton = !$rootScope.disableFollowButton;  
             }
             
@@ -2498,9 +2244,9 @@ $rootScope.disableFollowButton = true;
                 store.set('token', res.data.response.token);
                 $rootScope.isAuthenticated = true;
                 $state.go('home.discover');
-                $rootScope.u = !$rootScope.u;
-                $rootScope.l = !$rootScope.l;
-                $rootScope.s = !$rootScope.s;
+                $rootScope.supporter = !$rootScope.supporter;
+                $rootScope.login = !$rootScope.login;
+                $rootScope.signin = !$rootScope.signin;
             }
             
             else
@@ -2518,7 +2264,7 @@ $rootScope.disableFollowButton = true;
 //postEventCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2529,9 +2275,9 @@ $rootScope.disableFollowButton = true;
     function postEventCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,$cordovaDatePicker,$ionicPopup, multipartForm)
 {
     //Variables:
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
     $scope.cancelEdit = function()
       {
           $state.go('dashboard.Eevents');
@@ -2555,7 +2301,7 @@ $rootScope.disableFollowButton = true;
             {
                 'Content-Type': 'application/json; charset=UTF-8',
                 'X-API-KEY' : '123456',
-                'TOKEN' : t1
+                'TOKEN' : tokenEncoded
             }
 
         }).success(function (data, status, headers, config) {
@@ -2610,7 +2356,7 @@ $rootScope.disableFollowButton = true;
 //postVoluntCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2625,9 +2371,9 @@ $rootScope.disableFollowButton = true;
   });// disable backbutton
     
         //Variables:
-        var t1 = store.get('token');
-        var tp = jwtHelper.decodeToken(t1);
-        var ent = tp;
+        var tokenEncoded = store.get('token');
+        var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+        var ent = tokenDecoded;
         $scope.cancelEdit = function()
       {
           $state.go('dashboard.Evolunteering');
@@ -2763,7 +2509,7 @@ $rootScope.disableFollowButton = true;
             headers: {
               'Content-Type': 'application/json; charset=UTF-8',
                 'X-API-KEY' : '123456',
-                'TOKEN' : t1
+                'TOKEN' : tokenEncoded
             }
 
       }).success(function (data, status, headers, config) {
@@ -2833,7 +2579,7 @@ $rootScope.disableFollowButton = true;
 //profileCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -2847,7 +2593,7 @@ $rootScope.disableFollowButton = true;
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
-    $rootScope.supporter = tokenPayload;
+    $rootScope.supporter_token= tokenPayload;
 
     //Function definitions:
     
@@ -2945,18 +2691,18 @@ $rootScope.disableFollowButton = true;
 
 })();
 
-//profileCtrlFunction:
+//supporterProfileCtrlFunction:
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
-        .controller('profileCtrl', profileCtrlFunction);
+        .controller('supporterProfileCtrl', supporterProfileCtrlFunction);
 
-    profileCtrlFunction.$inject =  ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
+    supporterProfileCtrlFunction.$inject =  ['$scope','$stateParams','CONFIG', 'jwtHelper', 'store','$rootScope','$http','$window','$state','$httpParamSerializerJQLike'];
 
-    function profileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
+    function supporterProfileCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope,$http,$window,$state,$httpParamSerializerJQLike) {
     //Local function variables:
     //-------------------------
     //obtenemos el token en localStorage
@@ -2964,7 +2710,7 @@ $rootScope.disableFollowButton = true;
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
-    $rootScope.supporter = tokenPayload;
+    $rootScope.supporter_token = tokenPayload;
         $scope.showInterests = false;
         $scope.showSkills = false;
         
@@ -3023,7 +2769,7 @@ $rootScope.disableFollowButton = true;
     $scope.editProfile = editProfileGoFunction;
     $scope.mail = mailFunction;
 
-    //profileCtrlFunction controller code:
+    //supporterProfileCtrlFunction controller code:
     //------------------------------------
     $scope.$on('$ionicView.beforeEnter', beforeEnterFunction);
 
@@ -3064,13 +2810,13 @@ $rootScope.disableFollowButton = true;
             $rootScope.info1 = data.message;
         });
     });
-}// profileCtrlFunction function end.
+}// supporterProfileCtrlFunction function end.
 
 })();
 
 //roleDecisionCtrl
 (function(){
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -3088,7 +2834,7 @@ $rootScope.disableFollowButton = true;
 //searchSupporters
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -3113,7 +2859,7 @@ $rootScope.disableFollowButton = true;
 //settingsCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -3126,12 +2872,12 @@ $rootScope.disableFollowButton = true;
     {
         $scope.editProfile = function ()
         {
-        if($rootScope.e === true && $rootScope.u === false)
+        if($rootScope.entity === true && $rootScope.supporter === false)
         {
                 $state.go('editEntityProfile');
         }
             
-        else if($rootScope.u === true && $rootScope.e === false)
+        else if($rootScope.supporter === true && $rootScope.entity === false)
             {
                 $state.go('editSupportersProfile');
             }
@@ -3143,7 +2889,7 @@ $rootScope.disableFollowButton = true;
 //supporter Registration controller:
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app.controllers', ['ngFileUpload',])
@@ -3246,7 +2992,7 @@ $rootScope.disableFollowButton = true;
 //voluntPageCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -3264,7 +3010,7 @@ $rootScope.disableFollowButton = true;
 //introCtrl
 (function(){
 
-    'use strict';
+    "use strict";
 
     angular
         .module('app')
@@ -3326,7 +3072,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 //eventFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
 
   angular.module('app').controller('eventFullViewCtrl', eventFullViewCtrlFunction);
 
@@ -3381,7 +3127,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 //volunteeringFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('volunteeringFullViewCtrl', volunteeringFullViewCtrl);
@@ -3431,7 +3177,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 
 //publicAboutCtrl
 (function(){
-  'use strict';
+  "use strict";
 
   function publicAboutCtrlFunction($scope, $stateParams, CONFIG, jwtHelper, store,  $rootScope, $ionicScrollDelegate,$ionicSlideBoxDelegate,$http,$window,$state,$cordovaGeolocation,entityProfiles)
   {
@@ -3523,7 +3269,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 
 //editEventCtrl
 (function() {
-  'use strict';
+  "use strict";
 
   angular
   .module('app')
@@ -3534,9 +3280,9 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 
   function editEventCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,editEventPost, eventData, $ionicPopup, $log, multipartForm)
   {
-      var t1 = store.get('token');
-      var tp = jwtHelper.decodeToken(t1);
-      var ent = tp;
+      var tokenEncoded = store.get('token');
+      var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+      var ent = tokenDecoded;
       
        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = false;
@@ -3584,7 +3330,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'X-API-KEY' : '123456',
-          'TOKEN' : t1
+          'TOKEN' : tokenEncoded
           }
 
         }).success(function (data, status, headers, config)
@@ -3621,7 +3367,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 //editVolunteering
 (function(){
 
-  'use strict';
+  "use strict";
 
 angular.module('app').controller('editVolunteeringCtrl', editVolunteeringCtrlFunction);
 
@@ -3629,9 +3375,9 @@ editVolunteeringCtrlFunction.$inject = ['$scope', '$stateParams','authFactory','
 
 function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, volunteeringData, $ionicPopup,multipartForm)
 {
-    var t1 = store.get('token');
-    var tp = jwtHelper.decodeToken(t1);
-    var ent = tp;
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
     $scope.initializing = true;
     
      $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -3758,7 +3504,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-API-KEY' : '123456',
-                    'TOKEN' : t1
+                    'TOKEN' : tokenEncoded
                 }
         
         }).success(function (data, status, headers, config) {
@@ -3803,7 +3549,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 
 //editTextPostCtrl
 (function() {
-    'use strict';
+    "use strict";
 
     angular
     .module('app')
@@ -3820,9 +3566,9 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         $rootScope.previousState = from.name;
       });
 
-      var t1 = store.get('token');
-      var tp = jwtHelper.decodeToken(t1);
-      var ent = tp;
+      var tokenEncoded = store.get('token');
+      var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+      var ent = tokenDecoded;
       $scope.data={};
       var val = editTextPost.editTextPostVar;
 
@@ -3835,7 +3581,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
-            'TOKEN' : t1
+            'TOKEN' : tokenEncoded
           }
 
         }).success(function (data, status, headers, config)
@@ -3854,7 +3600,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 
 //ActivityFeedCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     function activityFeedCtrlFunction ($scope, $stateParams, $timeout, $http, store, jwtHelper, $httpParamSerializerJQLike, $ionicActionSheet, $state, $ionicPopup, moment, editTextPost) {
         
@@ -3903,7 +3649,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 
 //volunteeringCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     angular
         .module('app')
@@ -3992,7 +3738,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 
 //eventCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     angular
         .module('app')
@@ -4059,7 +3805,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 //publicVolunteeringFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('publicVolunteeringFullViewCtrl', publicVolunteeringFullViewCtrl);
@@ -4092,7 +3838,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             
         $rootScope.supporter_data = data.message;
         console.log($rootScope.supporter_data);
-                     if($rootScope.u)
+                     if($rootScope.supporter)
         {
             $rootScope.supporter_data.participation.forEach(function(element){
 
@@ -4184,12 +3930,10 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 })();
 
 
-
-
 //publicEventFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular.module('app').controller('publicEventFullViewCtrl', publicEventFullViewCtrlFunction);
 
   function publicEventFullViewCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, eventData, $timeout,$ionicPopup,$ionicActionSheet, Events)
@@ -4200,7 +3944,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
       
      
       
-      if($rootScope.u === true){
+      if($rootScope.supporter === true){
       if($rootScope.supporter_data.participation !== null)   
       {
               $rootScope.supporter_data.participation.forEach(function(element){
@@ -4434,66 +4178,10 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 })();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //myEntityEventsCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('myEntityEventsCtrl', myEntityEventsCtrl);
@@ -4507,7 +4195,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
-    $rootScope.supporter = tokenPayload;
+    $rootScope.supporter_token= tokenPayload;
     
     $scope.goToEventView = function(eventPost_id){
         
@@ -4592,7 +4280,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 //registeredEventsCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('registeredEventsCtrl', registeredEventsCtrl);
@@ -4682,7 +4370,7 @@ $http({
 //myEntitiesCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('myEntitiesCtrl', myEntitiesCtrl);
@@ -4691,27 +4379,27 @@ $http({
 
   function myEntitiesCtrl($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,entityProfiles)
 {    
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });
+//            $http({
+//        method: 'GET',
+//        skipAuthorization: true,//es necesario enviar el token
+//        url: 'https://hoyportibppr.com/api/supporters/',
+//        headers: {
+//            'Content-Type': 'application/x-www-form-urlencoded',
+//            'Accept': 'application/x-www-form-urlencoded',
+//            'X-API-KEY' : '123456',
+//         'TOKEN': store.get('token')}
+//
+//    }).success(function(data) {
+//
+//        $scope.info = data.message;
+//            if($scope.info.followed_entities === null)
+//                {
+//                    $scope.info.followed_entities = [];
+//                }
+//            
+//        $rootScope.supporter_data = data.message;
+//        console.log($rootScope.supporter_data);
+//    });
     
       $scope.selectEnt = function(val) {
 
@@ -4750,7 +4438,7 @@ $http({
 //discoverCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('discoverCtrl', discoverCtrl);
@@ -4763,7 +4451,7 @@ $http({
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
-    $rootScope.supporter = tokenPayload;
+    $rootScope.supporter_token= tokenPayload;
     
     $http({
         method: 'GET',
@@ -4825,7 +4513,7 @@ $http({
 
 //allEventsCtrl
 (function(){
-    'use strict';
+    "use strict";
      
     angular
         .module('app')
@@ -4894,7 +4582,7 @@ $http({
 
 //volunteeringCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     angular
         .module('app')
@@ -4921,7 +4609,7 @@ $http({
             $scope.posts = data.message;
             console.log($scope.posts);
             volunteeringData.individualVoluntPost = $scope.posts;
-            $state.go('publicVolunteeringFullView');
+            $state.go('discoverVolunteeringFullView');
           });
       };
         
@@ -4989,7 +4677,7 @@ $http({
 
 //allPostsCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     function allPostsCtrl($scope, $stateParams, $timeout, $http, store, jwtHelper, $httpParamSerializerJQLike, $ionicActionSheet, $state, $ionicPopup, moment, editTextPost) {
         
@@ -5037,7 +4725,7 @@ $http({
 //publicVolunteeringFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular
     .module('app')
     .controller('guestVolunteeringFullViewCtrl', publicVolunteeringFullViewCtrl);
@@ -5071,7 +4759,7 @@ $http({
             
         $rootScope.supporter_data = data.message;
         console.log($rootScope.supporter_data);
-                     if($rootScope.u)
+                     if($rootScope.supporter)
         {
             $rootScope.supporter_data.participation.forEach(function(element){
 
@@ -5164,7 +4852,7 @@ $http({
 //publicEventFullViewCtrl
 (function(){
 
-  'use strict';
+  "use strict";
   angular.module('app').controller('guestEventFullViewCtrl', publicEventFullViewCtrlFunction);
 
   function publicEventFullViewCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, eventData, $timeout,$ionicPopup,$ionicActionSheet, Events)
@@ -5193,7 +4881,7 @@ $http({
       
       $scope.post = eventData.individualEventPost;
             
-      if($rootScope.u === true){
+      if($rootScope.supporter === true){
           
       if($rootScope.supporter_data.participation !== null)   
       {
@@ -5433,7 +5121,7 @@ $http({
 
 //termsAndConditionsCtrl
 (function(){
-    'use strict';
+    "use strict";
     
     function termsAndConditionsCtrlFunction($scope, $rootScope, $http, store, jwtHelper) {
 
@@ -5441,7 +5129,7 @@ $http({
     //decodificamos para obtener los datos del user
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
-    $rootScope.supporter = tokenPayload;
+    $rootScope.supporter_token= tokenPayload;
         
             $http({
         method: 'GET',

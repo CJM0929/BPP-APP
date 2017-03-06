@@ -36,10 +36,10 @@ padding="true">
         <ion-list>
                     <ion-item class="item-divider item-icon-right custom-item-divider">
                         Categories</ion-item>
-            <a class="item item-icon-left item-icon-right" ng-repeat="x in cate | orderBy:'cat_name'" ng-click="categorySelection({{x.cat_id}})">
+            <a class="item item-icon-left item-icon-right" ng-repeat="category in categories | orderBy:'cat_name'" ng-click="categorySelection({{category.cat_id}})">
                 <i class="icon ion-ios-people royal"></i>
-                <b>{{x.cat_name}}</b>          
-                <p>Entities: {{x.num_entities}}</p> 
+                <b>{{category.cat_name}}</b>          
+                <p>Entities: {{category.num_entities}}</p> 
                 <i class="icon ion-chevron-right royal"></i>
             </a>
         </ion-list>

@@ -24,9 +24,9 @@
     </style>
 
     <ion-nav-buttons side="left">
- <button ng-show="u" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
+ <button ng-show="supporter" class="button button-clear" ui-sref="home.myEntityEvents"><i class="icon ion-chevron-left" ></i> </button>
 
-<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+<button ng-hide="supporter" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
 </ion-nav-buttons>
     
     <ion-content class="has-header" id="ion-content-public-events" scroll="true">
@@ -80,10 +80,10 @@
                 </div>
             </div>
              <div class="button-bar">
-              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="u && notgoingg">Going</a>
-              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="u && notgoingg">Interested</a>
+              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="supporter && notgoingg">Going</a>
+              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="supporter && notgoingg">Interested</a>
             </div>
-             <a ng-if="u && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
+             <a ng-if="supporter && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
         </div>
         
     </ion-content>

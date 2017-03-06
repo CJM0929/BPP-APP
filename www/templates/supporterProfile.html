@@ -1,0 +1,107 @@
+<!--Profile view-->
+<ion-view cache-view="false" title="{{info.sup_fname}} {{info.sup_lname}}" id="page8" class="">
+    
+    <style>
+        
+        .backgound-img
+        {
+            opacity: 0.618;
+        }
+        
+        #about-username-supporter-profile
+        {
+            color:#525053; 
+            margin-top: -13px;
+        }
+        
+        #about-information-supporter-profile
+        {
+            color:#525053; 
+        }
+        
+        .calmer
+        {
+            background-color: #ddf0f6;
+        }
+        
+        #info-margin
+        {
+            margin-left: 3%;
+        } 
+        
+        #info-margin-2
+        {
+            margin-left: 5%;
+        }
+    </style>
+    
+    <ion-nav-buttons side="right">
+        <button class="button icon-left ion-edit" ng-click="editProfile()"></button>
+    </ion-nav-buttons>
+    
+    <ion-content has-header="true" padding="false">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <div class="background-img" id="contentUsers" ng-style="{'background-image': 'src(' + info1 + ')'}">
+            <div id="profile-info-user">
+                <p class="center profile">
+                    <img ng-src="{{ info1 || 'img/ionic2.png'}}" style="margin-bottom: 5px;"/>
+                </p>
+                
+                <h4 id="profile-name">
+                    <b>{{info.sup_fname}} {{info.sup_lname}}</b>
+                </h4>
+                
+                <h5 id="about-username-supporter-profile" style="margin-top: -10px;">
+                    <b>({{supporter_token.username}})</b>
+                </h5>
+            </div>
+        </div>
+        
+     <div class="button-bar">
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Age:</p>{{info.sup_age || 'Not set!'}}</a>
+          <a class="button calmer"  style="margin: 0 0 10px; border-top: 2px solid #5aa3d0; border-bottom: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Gender: <p>{{info.sup_gender || 'Not set!'}}</p></p> </a>
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p style="margin: 0 0 -5px;" class="royal">Area:<p>{{info.city_name}}</p></p></a>
+</div>
+<h4 class="royal" id="info-margin">Bio:</h4>
+<p id="info-margin-2">{{info.sup_about || 'Not set!'}}</p>
+             
+            <h4 class="royal"  id="info-margin">Contact information</h4>
+            
+               
+                <ion-item class="item-icon-right"  ng-click="call()">
+                    <b> Phone # : </b>{{info.sup_phone || 'Not set!'}}
+                    <i class="icon ion-android-call royal"></i>
+                </ion-item>
+            
+                <ion-item class="item-icon-right" id="about-information-supporter-profile" ng-click="mail()">
+                    <b>Email :</b> {{info.web_email || 'Not set!'}}
+                    <i class="icon ion-ios-email royal"></i>
+                </ion-item>
+            
+
+            
+            <div class="item item-divider custom-item-divider item-icon-right" ng-click="showSkillsFunction()">
+                Skills
+                <i class="icon ion-chevron-down"></i>
+            </div>
+            
+            <ion-list ng-repeat="skill in info.skills" ng-show="showSkills">
+                <ion-item ng-if="skill.checked === true"><b>{{skill.text}}</b></ion-item>
+            </ion-list>
+            
+            <div class="item item-divider custom-item-divider item-icon-right" ng-click="showInterestsFunction()">
+                Interests
+                <i class="icon ion-chevron-down"></i>
+            </div>
+                      
+            <ion-list ng-repeat="interest in info.interests" ng-show="showInterests">
+                
+                <ion-item ng-if="interest.checked === true"> 
+                    <b>{{interest.text}}</b>
+                </ion-item>
+            
+            </ion-list>
+            
+    </ion-content>
+</ion-view>

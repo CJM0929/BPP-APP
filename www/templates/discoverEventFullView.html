@@ -37,7 +37,7 @@
                 <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
                 <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
                 <p><b class="royal">Place: </b> {{post.city_name}}</p>
-                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)" ng-if="u"></i>
+                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)" ng-if="supporter"></i>
 
             </div>
             
@@ -71,10 +71,10 @@
                 </div>
             </div>
              <div class="button-bar">
-              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="u && notgoingg">Going</a>
-              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="u && notgoingg">Interested</a>
+              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="supporter && notgoingg">Going</a>
+              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="supporter && notgoingg">Interested</a>
             </div>
-             <a ng-if="u && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
+             <a ng-if="supporter && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
         </div>
         
     </ion-content>

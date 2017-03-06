@@ -35,10 +35,12 @@
                 <p><b class="royal">Skills Recommended</b></p>
                 
                
-                    <p class="icon ion-ios-lightbulb" ng-if="skill.checked === true" ng-repeat="skill in post.skills" ng-if="skill.checked === true"> 
+                    <p ng-if="skill.checked === true" ng-repeat="skill in post.skills" ng-if="skill.checked === true"> 
                         {{skill.text}}
                     </p>
-                    
+                
+                    <b class="royal">Needed:</b> <br>{{post.needed}}<br><br>
+
                     <b class="royal">Work hours:</b> <br>{{post.work_hours}}<br><br>
                     <b class="royal">Address:</b><br>{{post.address1}}{{post.address}}<br>
                     {{post.city_name}}, Puerto Rico, {{post.zip}}<br><br>

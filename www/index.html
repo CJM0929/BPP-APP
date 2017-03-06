@@ -98,7 +98,7 @@
                         <ion-list data-componentid="list5">
                             <ion-list data-componentid="list4">
 
-                                <ion-item ng-if="e" class="item-avatar" ui-sref="entityProfile" menu-close="" data-componentid="list-item15">
+                                <ion-item ng-if="entity" class="item-avatar" ui-sref="entityProfile" menu-close="" data-componentid="list-item15">
                                     <img src="{{profilePicture || 'img/ionic2.png'}}">
                                     <h2>
                                         <b>{{entityAdmin.ent_name}}<br><hr>
@@ -106,34 +106,36 @@
                                     </b></h2>
                                 </ion-item>
                                   
-                                 <ion-item ng-if="u" class="item-avatar custom-item-avatar" ui-sref="profile" menu-close="">
+                                 <ion-item ng-if="supporter" class="item-avatar custom-item-avatar" ui-sref="supporterProfile" menu-close="">
                                     <img src="{{info1 || 'img/ionic2.png'}}">
-                                    <h2>{{supporter.username}}</h2>
+                                    <h2>{{supporter_token.username}}</h2>
                                 </ion-item>
                                 
-                                 <ion-item ng-if="u" class="item-icon-left royal" ui-sref="home.discover" menu-close="" data-componentid="list-item62">
+                                 <ion-item ng-if="supporter" class="item-icon-left royal" ui-sref="home.discover" menu-close="" data-componentid="list-item62">
                                     <i class="icon ion-home"></i>My Home
                                 </ion-item>
 
-                                <ion-item ng-if="e" class="item-icon-left royal" ui-sref="dashboard.Eevents" menu-close="" data-componentid="list-item62">
+                                <ion-item ng-if="entity" class="item-icon-left royal" ui-sref="dashboard.Eevents" menu-close="" data-componentid="list-item62">
                                     <i class="icon ion-ios-speedometer"></i>Dashboard
                                 </ion-item>
                                 
                                 
-                            <ion-item ng-if="e" class="item-icon-left royal" ng-click="editEntityProfile()" menu-close="">
+<!--
+                            <ion-item ng-if="entity" class="item-icon-left royal" ng-click="editEntityProfile()" menu-close="">
                                 <i class="icon ion-edit"></i>Edit Profile
                                 </ion-item>
 
-                            <ion-item ng-if="u" class="item-icon-left royal" ng-click="editSupporterProfile()" menu-close="">
+                            <ion-item ng-if="supporter" class="item-icon-left royal" ng-click="editSupporterProfile()" menu-close="">
                                 <i class="icon ion-edit"></i>Edit Profile
                                 </ion-item>
                                
+-->
 
-                                <ion-item ng-if="l" class="item-icon-left royal  " ui-sref="login" menu-close="" data-componentid="list-item20">
+                                <ion-item ng-if="login" class="item-icon-left royal  " ui-sref="login" menu-close="" data-componentid="list-item20">
                                     <i class="icon ion-log-in"></i>Log in
                                 </ion-item>
 
-                                <ion-item ng-if="s" class="item-icon-left royal  " ui-sref="roleDecision" menu-toggle="" data-componentid="list-item14">
+                                <ion-item ng-if="signin" class="item-icon-left royal  " ui-sref="roleDecision" menu-toggle="" data-componentid="list-item14">
                                     <i class="icon ion-plus-circled"></i>SignUp
                                 </ion-item>
                             </ion-list>
@@ -141,11 +143,11 @@
                             <ion-item class="item-icon-left royal" id="menu-list-item63" ui-sref="categories" menu-close="" data-componentid="list-item63">
                                 <i class="icon ion-search"></i>Browse for Entities</ion-item>
 
-                            <ion-item ng-if="u || e" class="item-icon-left royal" ui-sref="settings" menu-close="" data-componentid="list-item9">
+                            <ion-item ng-if="supporter || entity" class="item-icon-left royal" ui-sref="settings" menu-close="" data-componentid="list-item9">
                                 <i class="icon ion-ios-gear"></i>Settings
                             </ion-item>
                             
-                                                            <ion-item ng-if="u || e" class="item-icon-left royal" ng-click="logoutFunction()" menu-close="true">
+                          <ion-item ng-if="supporter || entity" class="item-icon-left royal" ng-click="logoutFunction()" menu-close="true">
                                  <i class="icon ion-log-out"></i>
                                  Logout
                             </ion-item>
