@@ -1,0 +1,48 @@
+<!--!YA-->
+<ion-view cache-view="false" title="Create a post activity feed" id="page18">
+    
+    <style>
+        #textarea-text
+        {
+            color: black;
+        }
+        
+        #button-text-size-create-post-activity
+        {
+            font-size: 20px;
+        }
+    </style>
+    
+    <ion-nav-buttons side="left">
+        <button ng-show='0' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <ion-nav-buttons side="left">
+ <button class="button button-clear" ui-sref="dashboard.textPostFeed"><i class="icon ion-chevron-left" ></i> </button>
+</ion-nav-buttons>
+    
+    <ion-content class="has-header">
+        
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">What's going on right now?</span>
+            <textarea style="color:black"#id="textarea-text" ng-model="data.message" maxlength="2000" rows="3" placeholder="Please enter your activity message here..."></textarea>
+        </label>
+    
+    </ion-content>
+    
+    <ion-footer-bar align-title="right" keyboard-attach class="bar-royal">
+        
+        <h1 class="title"></h1>
+        
+        <div class="buttons" ng-click="doSomething()">
+            <button class="button button-royal ion-android-send" id="button-text-size-create-post-activity" ng-click="postData()"></button>
+        </div>
+        
+        <div class="buttons" ng-click="doSomething()">
+            <button class="button button-left button-light"  ui-sref="dashboard.textPostFeed">cancel</button>
+        </div>
+    
+    </ion-footer-bar>
+</ion-view>

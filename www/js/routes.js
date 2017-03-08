@@ -109,11 +109,11 @@ angular.module('app.routes', ['angular-jwt'])
 /**********************************************************************************************/
 
 
-    }).state('entityPost', {
+    }).state('entityTextPost', {
 
-        url: '/entityPost',
-        templateUrl: 'templates/Entity/entityPost.html',
-        controller: 'entityPostCtrl'
+        url: '/entityTextPost',
+        templateUrl: 'templates/Entity/entityTextPost.html',
+        controller: 'entityTextPostCtrl'
         
     }).state('dashboard', {
 
@@ -122,15 +122,15 @@ angular.module('app.routes', ['angular-jwt'])
         abstract:true
 
 
-    }).state('dashboard.EactivityFeed', {
+    }).state('dashboard.textPostFeed', {
 
-        url: '/EactivityFeed',
+        url: '/textPostFeed',
         views:
         {
             'tab33':
             {
-                templateUrl: 'templates/Entity/EactivityFeed.html',
-                controller: 'EactivityFeedCtrl'
+                templateUrl: 'templates/Entity/textPostFeed.html',
+                controller: 'textPostFeedCtrl'
             }
         }
 

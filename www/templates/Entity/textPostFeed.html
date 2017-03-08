@@ -1,0 +1,44 @@
+<ion-view cache-view="false" title="Post">
+    
+    <style>
+        #ion-content-post
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+    </style>
+    
+    <ion-nav-buttons side="right">
+        <button class="button icon-left ion-ios-plus-empty" ng-click="newPost()"> Post</button>
+    </ion-nav-buttons>
+    
+    <ion-content class="has-header" id="ion-content-post">
+        
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    
+
+        
+        <ion-list>
+           
+            <div class="list card" ng-repeat="text_post in text_posts | orderBy: '-post_created'">
+            
+                
+                 <div class="item item-avatar item item-button-right" >
+                    <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
+                      <a ng-click="alterPost({{post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                    
+                    <h2>{{text_post.post_message}}</h2>
+                    <p>Posted: <span am-time-ago="text_post.post_created"></span></p>
+                </div>
+
+            
+            </div>
+        
+        </ion-list>
+    </ion-content>
+</ion-view>
+

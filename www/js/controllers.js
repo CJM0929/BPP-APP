@@ -67,7 +67,7 @@
     function categoriesCtrlFunction($scope, $stateParams, $http, $state,entityProfiles,$ionicPopup, $rootScope) {
         
       $scope.categories = undefined;
-      // this http request give us all the existing categories
+      // this $http service give us all the existing categories
       $http({
         url: 'https://hoyportibppr.com/api/entities/categories',
         method: 'GET',
@@ -85,7 +85,7 @@
       // entities for such category
       $scope.categorySelection = function(val) {
 
-        // this http request give us all the existing entities for a specific category
+        // this $http service give us all the existing entities for a specific category
         $http({
           url: 'https://hoyportibppr.com/api/entities/category/'+val,
           method: 'GET',
@@ -194,52 +194,62 @@
 
 })();
 
-//EactivityFeedCtrl
+//textPostFeedCtrl
 (function(){
 
     "use strict";
 
     angular
         .module('app')
-        .controller('EactivityFeedCtrl', EactivityFeedCtrlFunction);
+        .controller('textPostFeedCtrl', textPostFeedCtrlFunction);
 
-    EactivityFeedCtrlFunction.$inject = ['$scope', '$rootScope','$stateParams', '$timeout', '$http', 'store', 'jwtHelper', '$httpParamSerializerJQLike', '$ionicActionSheet', '$state', '$ionicPopup', 'moment'];
+    textPostFeedCtrlFunction.$inject = ['$scope', '$rootScope','$stateParams', '$timeout', '$http', 'store', 'jwtHelper', '$httpParamSerializerJQLike', '$ionicActionSheet', '$state', '$ionicPopup', 'moment'];
 
-       function EactivityFeedCtrlFunction($scope, $rootScope,$stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment)
+    function textPostFeedCtrlFunction($scope, $rootScope,$stateParams, $timeout,$http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state,$ionicPopup,moment)
 {
     //Variables:
-
     var tokenEncoded = store.get('token');
     var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
     var ent = tokenDecoded;
-     
+    
+    //function variables
     $scope.alterPost = alterPostFunction;
-    $scope.data={};
     $scope.doRefresh = doRefreshFunction;
     $scope.newPost = newPostGoFunction;
-
+    
+    // this variable is used to post the data 
+    // and bind the data to the popup
+    $scope.data={};
 
     //Function definitons:
     function alterPostFunction(selectedPost)
     {
         $scope.selectedPost = selectedPost;
+        
+        // when this function is triggered, it will open
+        // an action sheet with the current text post
+        // the user has two options modify the code or cancel
         var hideSheet = $ionicActionSheet.show(
             {
                 buttons: [{ text: 'Edit' }],
                 destructiveText: 'Delete',
-                cancelText: 'Cancel',
+                cancelText: 'Cancel', 
                 cancel: function()
                 {
                     // add cancel code..
                 },
-
                 buttonClicked: function(index)
                 {
+                    //  here the slected current text post is binded to the view
+                    //  so the user can modify its selected current post 
+                    // without typing everything again
                     $scope.data.message = $scope.selectedPost.post_message;
-                    console.log($scope.selectedPost.post_message);
-                    var myPopup = $ionicPopup.show(
+                    
+                    // when the edit button is clicked the (more) icon a
+                    // popup will be released showing the current text post
+                    var optionsPopup = $ionicPopup.show(
                         {
-                            
+                            // here is the layout and information of the edit popup
                             template: "<textarea rows='10' type='text' ng-model='data.message'></textarea>",
                             title: 'Edit Post',
                             scope: $scope,
@@ -247,6 +257,7 @@
                                       {text: '<b>Save</b>', type: 'button-royal',
                                        onTap: function(e)
                                        {
+                                           // this http method is in charge of updating the data of the current text post
                                            $http({
                                                url: 'https://hoyportibppr.com/api/entities/post/'+selectedPost.id,
                                                method: 'PUT',
@@ -254,39 +265,51 @@
                                                headers: {
                                                    'Content-Type': 'application/x-www-form-urlencoded',
                                                    'X-API-KEY' : '123456',
-                                                   'TOKEN' : tokenEncoded
+                                                   'TOKEN' : store.get('token')
                                                }
-                                           }).success(function (data, status, headers, config) {
+                                               
+                                        // when success it will display popup notifying the user that the post was edited
+                                           }).success(function (data) {
 
-                                               $scope.PostDataResponse = data;
                                                $ionicPopup.alert(
                     {
                         title: 'Edit post successful',
                         template: 'Your activity post was successfuly edited!'
                     });
+                
+                    // this is to reload the current view and show the updated data
                     $state.go($state.current, $stateParams, {reload: true, inherit: false});
 
-                                           }).error(function (data, status, header, config) {
-
-                                               $scope.ResponseDetails = data;
+                                           }).error(function (data) {
+                                                // this is used to display errors from backend
                                            });
                                        }
+                                       
                                       }
                                      ]
                         });
-                },
+                },// end of buttonClicked function
+                
+                // this is activated when the user click the delete button
+                // it will delete the selected post
                 destructiveButtonClicked: function() {
                     
+                // confirmation popup to make sure the user did not 
+                // accidentally click the delete button
+                    
+                // popup message
                     var confirmPopup = $ionicPopup.confirm({
-         title: 'Text post deletion',
-         template: " This post will be deleted and you won't be able to find it anymore. You can also edit this post, if you just want to change something."
-     });
-                    
-                   
-     
+                         title: 'Text post deletion',
+                         template: " This post will be deleted and you won't be able to find it anymore. You can also edit this post, if you just want to change something."
+                     });
+
+    // this is when the user click the confirmation button to delete the 
+    // text post
      confirmPopup.then(function(res) {
+         
          if(res) {
-                    
+             
+                // $http service that is in charge of deleting the selected text post
                    $http({
                         method: 'DELETE',
                         skipAuthorization: true,//es necesario enviar el token
@@ -295,27 +318,32 @@
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Accept': 'application/x-www-form-urlencoded',
                             'X-API-KEY' : '123456',
-                            TOKEN: tokenEncoded
+                            TOKEN: store.get('token')
                         }
-
+                       
+                       // if the post was successfully deleted, the following function will run
                     }).success(function (data) {
+                       // alert popup notifying that the selected post is deleted
                          var alertPopup = $ionicPopup.alert({
-     title: 'Post deleted',
-     template: 'The post was successfuly deleted!'
-   });
+                             title: 'Post deleted',
+                             template: 'The post was successfuly deleted!'
+                           });
+                        
+                       // this is to reload the current view and show the updated data
                         $state.go($state.current, $stateParams, {reload: true, inherit: false});
-                        $scope.delete = data;
                     });    
-     } else {
-       console.log('You are not sure');
-     }
-   });
-                }
-            });
-    }
+                } // end of if 
+        });
+                } // end of destructiveButtonClicked function
+            });// end of $ionicActionSheet
+    } // end of alterPostFunction function
     
+    // this function is activated when the user do the pull down refresh
+    // it will refresh all the data obtaining any changes
     function doRefreshFunction()
     {
+        
+        // $http service in charge of retrieving all the text posts
         $http({
             method: 'GET',
             skipAuthorization: true,//es necesario enviar el token
@@ -325,38 +353,43 @@
                 'Accept': 'application/x-www-form-urlencoded',
                 'X-API-KEY' : '123456'
             }
-
         }).success(function (data) {
-            $scope.posts = data.message.posts;
-
+            
+            $scope.text_posts = data.message.posts;
+                
         }).error(function (error) {
-      $state.go($state.current, $stateParams, {reload: true, inherit: false});
-
+                
+            $state.go($state.current, $stateParams, {reload: true, inherit: false});
+            
         }).finally(function() {
             // Stop the ion-refresher from spinning
             $scope.$broadcast('scroll.refreshComplete');
         });
-    }// end of function.
+    }// end of doRefreshFunction function.
 
+    // this funcion is in charge of going to the text post view
+    // is activated when the user click the ( + post ) button
     function newPostGoFunction()
     {
-        $state.go('entityPost');
+        $state.go('entityTextPost');
     }
 
-    //Controller code:
-    $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456'
-        }
-    }).success(function (data) {
-        $scope.info = data.message;
-    });
+//    $http({
+//        method: 'GET',
+//        skipAuthorization: true,//es necesario enviar el token
+//        url: 'https://hoyportibppr.com/api/entities/'+tokenDecoded.role_id,
+//        headers: {
+//            'Content-Type': 'application/x-www-form-urlencoded',
+//            'Accept': 'application/x-www-form-urlencoded',
+//            'X-API-KEY' : '123456'
+//        }
+//    }).success(function (data) {
+//        $rootScope.entity = true;
+//        $scope.info = data.message;
+//        console.log($scope.info);
+//    });
 
+    // $http service in charge of retrieving all the text posts
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
@@ -366,18 +399,17 @@
             'Accept': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456'
         }
-
     }).success(function (data) {
-        $scope.posts = data.message.posts;
+        $scope.text_posts = data.message.posts;
     }).error(function (error) {
         $scope.error = error.status;
         console.log($scope.error);
     })
 }
-
+    
 })();
 
-//editentityProfileCtrl
+//editEntityProfileCtrl
 (function(){
     
     "use strict";
@@ -394,11 +426,15 @@
     viewData.enableBack = false;
   });// disable backbutton
     
+    // this function is triggered when the user clicks the cancel button
+    // it will send the user back to the profile page
     $scope.cancelEdit = function()
     {
         $state.go('entityProfile')
     }
     
+    // this is an object that contains all the variables that 
+    // the user can change
     $scope.data = { "entity": {
         "about":"",
         "ent_name":"",
@@ -418,13 +454,11 @@
     
     $scope.info1 = {};
   
+    // this function is triggered when the user click the save button
+    // in order to edit de profile
     $scope.UpdateData = function() {
-         console.log($scope.data);
-        $ionicLoading.show({
-                template: '<ion-spinner icon="spiral"></ion-spinner><div>Updating profile data...</div>',
-                duration: 1618
-            });    
-
+        
+    // this $http service is in charge overwriting the new data in the DB
     $http({
         url: 'https://hoyportibppr.com/api/entities/edit',
         method: 'POST', 
@@ -435,23 +469,24 @@
             'TOKEN' : tokenEncoded 
         }// end of header
       }) 
-           
-         .success(function (data, status, headers, config) {
+         .success(function (data) {
         
+        // if the $http service was successful and data was successfully updated it will go back to the main profile
         $state.go('entityProfile');
         
+        // this is a popup notification to let the user know that everything was successful
         var alertPopup = $ionicPopup.alert({
                              title: "Profile information edited",
                              template: "Your profile information was successfuly edited!"
                          });
-
             })
-    
-         .error(function (data, status, header, config) {
-        console.log(data);
-          // here we will get response errors
+         .error(function (data) {
+
+                // here we will get backend response errors
+        
                 $scope.ResponseDetails = data.status;
-                console.log( $scope.ResponseDetails);
+        
+                // backend response error for each field in the edit page
                 $scope.errorMessage = data.message.ent_name;
                 $scope.errorMessage1 = data.message.fax;
                 $scope.errorMessage2 = data.message.phone;
@@ -461,7 +496,9 @@
                 $scope.errorMessage6 = data.message.address1;
                 $scope.errorMessage7 = data.message.address2;
                 $scope.errorMessage8 = data.message;
-
+        
+        
+                // popup that is in charge of displaying all the errors
               if($scope.ResponseDetails === "failure"){ 
                    var alertPopup = $ionicPopup.alert({
                        title: 'Warning',
@@ -472,7 +509,7 @@
             });// end of .error 
         };// end of UpdateData function
     
-    //This $http service gets the current data that the user have to display it in the placeholder of the edit profile fields
+    //This $http service gets the current data that will be displayed in the placeholder of the edit profile fields
      $http({
         method: 'GET',
         skipAuthorization: true,//it's necessary to send the token
@@ -482,27 +519,29 @@
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-         
-         console.log(data);
-        
+                 
+        // this is all the data that will be binded to the model of the placeholder fields, so the user can see its current information
         $scope.data.entity.about=data.message.ent_about;
         $scope.data.entity.ent_name= "";
         $scope.data.entity.phone=data.message.ent_phone;
         $scope.data.entity.founded=data.message.ent_found;
-        $scope.data.entity.web=data.message.end_web;
+        $scope.data.entity.web=data.message.ent_web;
         $scope.data.entity.country=data.message.country_name;
         $scope.data.entity.address1=data.message.ent_address1;
         $scope.data.entity.address2=data.message.ent_address2;
         $scope.data.entity.city= data.message.city_name;
         $scope.data.entity.zip=data.message.ent_zip;
         $scope.data.entity.fax= data.message.ent_fax;
+                 
+         $scope.info = data.message;
          
-        $scope.info = data.message;
-        console.log($scope.data);
-        
+         // image extension in order to display the picture
          var img = data.message.ent_pic;
+         
+         // here we specify from what type of user we are getting the picture
          var type = "entity";
         
+         // this $http service is in charge of retrieving the entity picture raw data in order to display it
          $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -513,45 +552,38 @@
                           'X-API-KEY' : '123456'}
                 })
                 .success(function (data) {
-                    $scope.info1 = data;
-//            console.log($scope.info1);
-            if($scope.info1 === null){
+             
+             // variable containing the raw data of the image
+             $scope.entity_picture = data;
+             $rootScope.info2 = data.message;
+
+             // if there is an error the page will reload
+             if($scope.info === null){
                 $state.go($state.current, $stateParams, {reload: true, inherit: false});
             }
               })
         
+         
+        // in order to upload a picture, the following data need to be sended via parameters
         $scope.picData = {
+            // the type of picture uploaded
         'submit' : $scope.submit = "entity",
-        'userfile' : $scope.userfile
-    }
+        'userfile' : $scope.userfile // userfile contains the encoded data of the image
+        }
 
+   // uploadUrl variable is the direction where the picture is going to be uploaded
    var uploadUrl = 'https://hoyportibppr.com/api/entities/uploadpicture';
+         
+    // here AngularJS watches any changes in the data.userfile variable
+    // when it detect a change, it will automatically upload the picture
+    // and update the view
     $scope.$watch('data.userfile', function (img) {
         $scope.picData.userfile = img;
-        multipartForm.post(uploadUrl, $scope.picData);
-//        $state.go($state.current, $stateParams, {reload: true, inherit: false});
-    });
-   
-        $http({
-                method: 'POST',
-                skipAuthorization: true,//es necesario enviar el token
-                url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: "img=" + $scope.img,                
-                headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                           'Accept': 'application/x-www-form-urlencoded',
-                          'X-API-KEY' : '123456'}
-                })
-                .success(function (data) {
-            if($scope.info == null){
-                console.log(data);
-                $state.go($state.current, $stateParams, {reload: true, inherit: false});
-            
-                    $rootScope.info2 = data.message;
-            }
-                });
         
+        // multipartForm is a service in charge of uploading the image
+        multipartForm.post(uploadUrl, $scope.picData);
+        });
     }); // end of $http service
-
 }
 
     editentityProfileCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$ionicPopup','$ionicLoading','$state',  'multipartForm', '$rootScope', 'eventData'];
@@ -561,7 +593,6 @@
         .controller('editentityProfileCtrl', editentityProfileCtrlFunction);
 
 })();
-
 //editSupportersProfileCtrl
 (function(){
 
@@ -668,14 +699,15 @@ $http({
     })
     .success(function (data) {
        $scope.info = data;
-    $scope.info.message.sup_age = Number($scope.info.message.sup_age);
+       $scope.info.message.sup_age = Number($scope.info.message.sup_age);
     
-$scope.info.message.city = $scope.info.message.city_name;
+       $scope.info.message.city = $scope.info.message.city_name;
        console.log($scope.info);
 
         $scope.img={}
         $scope.img = data.message.sup_pic;
         console.log($scope.img);
+    
         $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -687,7 +719,7 @@ $scope.info.message.city = $scope.info.message.city_name;
                 })
                 .success(function (data) {
                     $scope.info1 = data.message;
-            
+//                    console.log($scope.info1);
             if($scope.info == null){
                 $state.go($state.current, $stateParams, {reload: true, inherit: false});
             }
@@ -1087,19 +1119,19 @@ $scope.info.message.city = $scope.info.message.city_name;
 
 })();
 
-//entityPostCtrl
+//entityTextPostCtrl
 (function(){
 
     "use strict";
 
     angular
         .module('app')
-        .controller('entityPostCtrl', entityPostCtrlFunction);
+        .controller('entityTextPostCtrl', entityTextPostCtrlFunction);
 
-      entityPostCtrlFunction.$inject =
+      entityTextPostCtrlFunction.$inject =
     ['$scope', '$stateParams', 'authFactory', '$state', 'jwtHelper', 'store','$rootScope', '$http', '$httpParamSerializerJQLike', 'moment', '$ionicPopup'];
 
-     function entityPostCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, $ionicPopup)
+     function entityTextPostCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, $ionicPopup)
 {
     //Variables:
     var tokenEncoded = store.get('token');
@@ -1124,14 +1156,20 @@ $scope.info.message.city = $scope.info.message.city_name;
 
         }).success(function (data, status, headers, config) {
             $scope.PostDataResponse = data;
+            
+            $state.go("dashboard.textPostFeed");
+            
             $ionicPopup.alert(
                     {
                         title: 'Activity post creted!',
                         template: 'Your post was successfuly created.'
                     });
 
-        }).error(function (data, status, header, config) {
-            $scope.ResponseDetails = data;
+        }).error(function (data) {            
+             $ionicPopup.alert(
+                    {
+                        title: 'These post appears to be blank. Please write something to post.'
+                    });
         });
     }
 }
@@ -1698,7 +1736,7 @@ var myNewObject = store.get('token');
                 })
                 .success(function (data) {
                     $scope.info1 = data;
-             $rootScope.profilePicture = data;
+                    $rootScope.profilePicture = data;
                          if($scope.info == null){
                 $state.go($state.current, $stateParams, {reload: true, inherit: false});
             }
@@ -2190,6 +2228,15 @@ var myNewObject = store.get('token');
 
     function loginCtrlFunction($scope, $stateParams, $ionicModal, $ionicPopover, $timeout, $state, $ionicPopup, $rootScope, CONFIG, authFactory, jwtHelper, store,$ionicLoading, $window)
 {
+    
+    
+    if(store.get('token') != null){
+        
+       $state.go('supporterProfile');
+    }
+    
+    
+    console.log(store.get('token'));
     
         if(!window.location.hash) {
        window.location = window.location + '#loaded';
@@ -2897,7 +2944,7 @@ $rootScope.disableFollowButton = true;
 
     supporterRegistrationCtrlFunction.$inject = ['$scope', '$http', '$stateParams', '$httpParamSerializerJQLike', '$state', '$ionicModal', '$ionicPopover', '$ionicPopup', '$timeout'];
 
-    //Error on the http request. Line 74? JSON PARSE function...
+    //Error on the $http service. Line 74? JSON PARSE function...
     function supporterRegistrationCtrlFunction($scope, $http, $stateParams, $httpParamSerializerJQLike,$state, $ionicModal, $ionicPopover, $ionicPopup, $timeout)
     {
         $scope.cancelSupporterRegistrationButton = function()
