@@ -18,7 +18,8 @@
     
     <ion-content class="has-header" id="ion-content-post">
         
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+               <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>    
+
     
 
         
@@ -29,7 +30,7 @@
                 
                  <div class="item item-avatar item item-button-right" >
                     <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
-                      <a ng-click="alterPost({{post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                      <a ng-click="alterPost({{text_post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
                     
                     <h2>{{text_post.post_message}}</h2>
                     <p>Posted: <span am-time-ago="text_post.post_created"></span></p>

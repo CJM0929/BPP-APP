@@ -68,26 +68,26 @@
         <div class="row">
             <div class="col text-right">
 
-                <h2 align="center" id="entity-name-entity-profile"><b>{{info.ent_name}}</b></h2>
+                <h2 align="center" id="entity-name-entity-profile"><b>{{entity_information.ent_name}}</b></h2>
             </div>
         </div>
         
         <h4 class="royal" id="info-headers">About</h4>
         <hr>
         <div class="list">
-            <p id="entity-about-entity-profile">{{info.ent_about}}</p>
+            <p id="entity-about-entity-profile">{{entity_information.ent_about}}</p>
         </div>
         
         <h4 class="royal" id="info-headers">website</h4>
         <hr>
         <div class="list">
-            <p id="entity-about-entity-profile">{{info.ent_web}}</p>
+            <p id="entity-about-entity-profile">{{entity_information.ent_web}}</p>
         </div>
         
         
         <h4 class="royal" id="info-headers">Founded in</h4>
 <div class="list">
-       <p id="entity-about-entity-profile">{{info.ent_founded | amDateFormat:'MMMM Do YYYY'}}</p
+       <p id="entity-about-entity-profile">{{entity_information.ent_founded | amDateFormat:'MMMM Do YYYY'}}</p
 
         </div>
            
@@ -95,30 +95,30 @@
         <h4 class="royal" id="info-headers">Address</h4>
         
         <div class="map">
-            <ng-map disableDefaultUI="true" gestureHandling="none" zoomControl="false" draggable="false" center="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}">
-                    <marker position="{{info.ent_address1}} {{info.ent_address2}}, {{info.city_name}} Puerto Rico {{info.ent_zip}}" title="marker" animation="Animation.DROP"></marker>
+            <ng-map disableDefaultUI="true" gestureHandling="none" zoomControl="false" draggable="false" center="{{entity_information.ent_address1}} {{entity_information.ent_address2}}, {{entity_information.city_name}} Puerto Rico {{entity_information.ent_zip}}">
+                    <marker position="{{entity_information.ent_address1}} {{entity_information.ent_address2}}, {{entity_information.city_name}} Puerto Rico {{entity_information.ent_zip}}" title="marker" animation="Animation.DROP"></marker>
             </ng-map>
             
-            <p>{{info.ent_address1}}
-            <br>{{info.ent_address}}
-                {{info.city_name}}, {{info.country_name}}, {{info.ent_zip}}</p>
+            <p>{{entity_information.ent_address1}}
+            <br>{{entity_information.ent_address}}
+                {{entity_information.city_name}}, {{entity_information.country_name}}, {{entity_information.ent_zip}}</p>
         </div>
         
         
         <div class="dropdown">
             <h4 class="royal" id="info-headers">Contact</h4>
             <ion-item class="item-icon-right" ng-click="call()">
-                {{info.ent_phone || 'Not set!'}}
+                {{entity_information.ent_phone || 'Not set!'}}
                 <i class="icon ion-android-call" id="contact-icon-entity-about"></i>
             </ion-item>
             
             <ion-item class="item-icon-right">
-                {{info.ent_fax || 'Not set!'}}
+                {{entity_information.ent_fax || 'Not set!'}}
                 <i class="icon ion-ios-printer" id="contact-icon-entity-about"></i>
             </ion-item>
     
             <ion-item class="item-icon-right" ng-click="mail()">
-                {{info.web_email || 'Not set!'}}
+                {{entity_information.web_email || 'Not set!'}}
                 <i class="icon ion-ios-email" id="contact-icon-entity-about"></i>
             </ion-item>
         </div>

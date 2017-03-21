@@ -20,35 +20,35 @@
         
         <div class="list">
             <div class="item">
-                <h1 class="royal" id="align-text-events">{{post.title}}</h1><br>
-                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.vol_created"></span><br>
-                <b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
-                <b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
-                <b class="royal">Place: </b> {{post.city_name}}
+                <h1 class="royal" id="align-text-events">{{volunteering.title}}</h1><br>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="volunteering.vol_created"></span><br>
+                <b class="royal">Starting date: </b> {{volunteering.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Ending date: </b>{{volunteering.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Place: </b> {{volunteering.city_name}}
                     <br>
    <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)" > Add to Calendar</i>            </div>
             
             <div class="item item-body">
                 <img class="full-image" ng-show="volunteering_photo !== null" ng-src="{{volunteering_photo}}">
-                <b class="royal">Details:<br></b>{{post.description}}<br><br>
-                <b class="royal">Application procedure:</b><br> {{post.app_procedure}}<br>
+                <b class="royal">Details:<br></b>{{volunteering.description}}<br><br>
+                <b class="royal">Application procedure:</b><br> {{volunteering.app_procedure}}<br>
                 <p><b class="royal">Skills Recommended</b></p>
                 
                
-                    <p ng-if="skill.checked === true" ng-repeat="skill in post.skills" ng-if="skill.checked === true"> 
+                    <p ng-if="skill.checked === true" ng-repeat="skill in volunteering.skills" ng-if="skill.checked === true"> 
                         {{skill.text}}
                     </p>
                 
-                    <b class="royal">Needed:</b> <br>{{post.needed}}<br><br>
+                    <b class="royal">Needed:</b> <br>{{volunteering.needed}}<br><br>
 
-                    <b class="royal">Work hours:</b> <br>{{post.work_hours}}<br><br>
-                    <b class="royal">Address:</b><br>{{post.address1}}{{post.address}}<br>
-                    {{post.city_name}}, Puerto Rico, {{post.zip}}<br><br>
-                    <b class="royal">Location description:</b><br> {{post.location_description}}<br><br>
-                    <b class="royal">Website:</b><br> {{post.web}}<br><br>
-                    <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}<br><br>
-                    <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}<br><br>
-                    <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}<br><br>
+                    <b class="royal">Work hours:</b> <br>{{volunteering.work_hours}}<br><br>
+                    <b class="royal">Address:</b><br>{{volunteering.address1}}{{volunteering.address}}<br>
+                    {{volunteering.city_name}}, Puerto Rico, {{volunteering.zip}}<br><br>
+                    <b class="royal">Location description:</b><br> {{volunteering.location_description}}<br><br>
+                    <b class="royal">Website:</b><br> {{volunteering.web}}<br><br>
+                    <b  class="royal">Supervisor name:</b><br> {{volunteering.supervisor_name}}<br><br>
+                    <b class="royal">Supervisor telephone #:</b><br> {{volunteering.supervisor_phone}}<br><br>
+                    <b class="royal">Supervisor email:</b><br> {{volunteering.supervisor_email}}<br><br>
             </div>
         </div>
     

@@ -180,7 +180,7 @@ angular.module('app.routes', ['angular-jwt'])
    
     // this is the ROUTE and CONTROLLER for profile.html
     }).state('supporterProfile', {
-        url: '/profile',
+        url: '/supporterProfile',
         templateUrl: 'templates/supporterProfile.html',
         controller: 'supporterProfileCtrl',
         authorization: true
@@ -199,7 +199,7 @@ angular.module('app.routes', ['angular-jwt'])
 
     // this is the ROUTE and CONTROLLER for followedEntities.html
     }).state('followedEntities', {
-    url: '/followedEntities/:profileId',
+    url: '/followedEntities/',
     templateUrl: 'templates/followedEntities.html',
     controller: 'followedEntitiesCtrl'
 
@@ -251,11 +251,6 @@ angular.module('app.routes', ['angular-jwt'])
     }).state('postVolunt', {
         url: '/postVolunt',
         templateUrl: 'templates/Entity/postVolunt.html',
-        controller: 'postVoluntCtrl'
-
-    }).state('searchSupporters', {
-        url: '/searchSupporters',
-        templateUrl: 'templates/Entity/searchSupporters.html',
         controller: 'postVoluntCtrl'
 
     }).state('emailSent', {
@@ -311,13 +306,7 @@ angular.module('app.routes', ['angular-jwt'])
         templateUrl: 'templates/Entity/editVolunteering.html',
         controller:"editVolunteeringCtrl"
 
-      }).state('editTextPost', {
-
-        url: '/editTextPost',
-        templateUrl: 'templates/Entity/editTextPost.html',
-        controller:"editTextPostCtrl"
-      })
-      .state('guestPage', {
+      }).state('guestPage', {
        url: '/guestPage',
        templateUrl: 'templates/guestPage.html'
     // controller: 'guestPageCtrl'
@@ -362,15 +351,6 @@ angular.module('app.routes', ['angular-jwt'])
             templateUrl: 'templates/allVolunteerings.html',
             controller: 'allVolunteeringsCtrl'
         
-        }).state('guestEventFullView',{
-        url: '/guestEventFullView',
-        templateUrl: 'templates/guestEventFullView.html',
-        controller: 'guestEventFullViewCtrl'
-
-        }).state('guestVolunteeringFullView',{
-        url: '/guestVolunteeringFullView',
-        templateUrl: 'templates/guestVolunteeringFullView.html',
-        controller: 'guestVolunteeringFullViewCtrl'
 
         }).state('termsAndConditions',{
         url: '/terms_and_Condition',
@@ -415,8 +395,8 @@ angular.module('app.routes', ['angular-jwt'])
                       next.name !== 'publicEventFullView'&& 
                       next.name !== 'publicVolunteeringFullView'&&
                       next.name !== 'publicAbout'&&
-                      next.name !== 'guestVolunteeringFullView'&&
-                      next.name !== 'guestEventFullView')
+                      next.name !== 'discoverVolunteeringFullView'&&
+                      next.name !== 'discoverEventFullView')
                   {
                       if (!token)
                       {

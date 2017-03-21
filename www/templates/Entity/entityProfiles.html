@@ -1,4 +1,4 @@
-<ion-view cache-view="false" title="{{info.ent_name}}">
+<ion-view cache-view="false" title="{{entity_information.ent_name}}">
   
     <style>
         #spacer-entity-profiles
@@ -77,20 +77,20 @@
         <div class="row">
             
             <div class="col text-right">
-                <a ng-if="!following" ng-show="supporter" ng-click="follow({{info.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Follow</a>
-                <a ng-if="following" ng-click="unfollow({{info.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Unfollow</a>
-                <h2 align="center" id="entity-name-entity-profiles"><b>{{info.ent_name}}</b></h2>
+                <a ng-if="!following" ng-show="supporter" ng-click="follow({{entity_information.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Follow</a>
+                <a ng-if="following" ng-click="unfollow({{entity_information.ent_id}})" class="button icon-left ion-star button-small button-royal" style="border-radius: 34px;"> Unfollow</a>
+                <h2 align="center" id="entity-name-entity-profiles"><b>{{entity_information.ent_name}}</b></h2>
             </div>
         </div>
         <h4 class="royal" id="info-headers">About</h4>
         <hr>
-        <p id="entity-about-entity-profiles">{{info.ent_about}}</p>
+        <p id="entity-about-entity-profiles">{{entity_information.ent_about}}</p>
         <p class="button button-small icon-left ion-android-list button-royal" style="border-radius: 34px; margin: 8px 13px 13px 8px;" ui-sref="publicAbout"> View more</p>
         
         <ion-list>
         <h4 class="royal" id="info-headers">Events and volunteering <a style="color: black;">({{posts.length}})</a></h4>
             <hr>
-            <h5 ng-if="postsQuantity === 0" style="text-align: center;">{{info.ent_name}} has not yet made any event and volunteering posts yet.</h5>
+            <h5 ng-if="postsQuantity === 0" style="text-align: center;">{{entity_information.ent_name}} has not yet made any event and volunteering posts yet.</h5>
             <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'" id="list-background-gradient">
             
                 <div class="item item-avatar item" ng-if="post.category === 'volunteering' && post.active" ng-click="goToVoluntView(post.id)">
