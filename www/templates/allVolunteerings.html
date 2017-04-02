@@ -11,11 +11,10 @@
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         }
     </style>
-    
     <ion-nav-buttons side="left">
- <button ng-show="u" class="button button-clear" ui-sref="home.discover"><i class="icon ion-chevron-left" ></i> </button>
+ <button ng-show="supporter" class="button button-clear" ui-sref="home.discover"><i class="icon ion-chevron-left" ></i> </button>
 
-<button ng-hide="u" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
+<button ng-hide="supporter" class="button button-clear" ui-sref="guest.events"><i class="icon ion-chevron-left" ></i> </button>
 </ion-nav-buttons>
     
     <ion-content padding="false" id="ion-content-volunteering" class="manual-ios-statusbar-padding">
@@ -35,5 +34,4 @@
         </div>
     
     </ion-content>
-
 </ion-view>

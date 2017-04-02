@@ -85,17 +85,17 @@
                 <div ng-message="minlength" id="input-error">The event description needs at least 6 characters long.</div>
             </div>
             
-            <span class="input-label span-fix">Start Time:</span>
-            <label class="item label-fix item-fix">
-                <input class="input-fix" name="start_time" type="datetime-local" ng-model="eventData.individualEventPost.start_time" ng-required="true" step="1">
+            <span class="input-label span-fix input-label-fix">Start Time</span>
+            <label class="item item-input item-select">
+                <input type="datetime-local" ng-model="eventData.individualEventPost.start_time" ng-required="true" step="1">
             </label>
             <div ng-messages="myForm.start_time.$error" ng-if="myForm.start_time.$touched">
                 <div ng-message="required" id="input-error">A starting time for the event is required!</div>
             </div>
             
-            <span class="input-label span-fix">End time</span>
-            <label class="item label-fix item-fix">
-                <input class="input-fix" type="datetime-local" ng-model="eventData.individualEventPost.end_time" step="1">
+            <span class="input-label span-fix input-label-fix">End Time</span>
+  <label class="item item-input item-select">
+                <input type="datetime-local" ng-model="eventData.individualEventPost.end_time" step="1">
             </label>
 
             <span class="input-label span-fix">Full event address</span>
@@ -109,7 +109,7 @@
             
             <span class="input-label span-fix">City</span>
             <label class="item item-select" style="padding: 21px 0;">
-                <select ng-model="eventData.individualEventPost.city" ng-required="true" name="city">
+                <select ng-model="eventData.individualEventPost.city_name" ng-required="true" name="city">
                     <option value="Adjuntas">Adjuntas</option>
                     <option value="Aguada">Aguada</option>
                     <option value="Aguadilla">Aguadilla</option>

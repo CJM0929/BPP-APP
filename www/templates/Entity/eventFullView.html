@@ -1,6 +1,5 @@
 <ion-view cache-view="false" title="Events">
  
-    </ion-nav-buttons>
     <style>
         #ion-content-events
         {
@@ -14,8 +13,8 @@
         
         #add-to-calendar
         {
-            float: right;
-            font-size: 2.618em;
+            float: left;
+            font-size: 1.618em;
         }
         
     </style>
@@ -29,15 +28,18 @@
 </ion-nav-buttons>
 
     <ion-content class="has-header" id="ion-content-events" scroll="true">
+        
+        
         <div class="list">
             <div class="item">
-                <h1 class="royal" id="align-text-events">{{post.title}}</h1>
-                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.event_created"></span></p>
-                <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
-                <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
-                <p><b class="royal">Place: </b> {{post.city_name}}</p>
-                <i class="icon ion-calendar" id="add-to-calendar" ng-click="addToCalendar(post)"></i>
-            </div>
+                <h1 class="royal" id="align-text-events">{{event.title}}</h1>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="event.event_created"></span></p>
+                <p><b class="royal">Starting date: </b> {{event.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Ending date: </b>{{event.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Place: </b> {{event.city_name}}</p>
+                
+                <br>
+<!--   <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)" > Add to Calendar</i>            </div>-->
             
             <div class="item item-body">
                 <div class="list">
@@ -46,22 +48,22 @@
                     <img class="full-image" ng-show="event_photo !== null" ng-src="{{event_photo}}">
                     <p>
                         <br>
-                        <b  class="royal">Details: </b><br>{{post.description}}<br>
+                        <b  class="royal">Details: </b><br>{{event.description}}<br>
                     
                         <br>
-                        <b class="royal">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
+                        <b class="royal">Address:</b><br> {{event.address}},<br> {{event.city_name}}, Puerto Rico, {{event.zip}}
                         <br>
                         <br>
-                        <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}
+                        <b  class="royal">Supervisor name:</b><br> {{event.supervisor_name}}
                         <br>
                         <br>
-                        <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
+                        <b class="royal">Supervisor telephone #:</b><br> {{event.supervisor_phone}}
                         <br>
                         <br>
-                        <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}
+                        <b class="royal">Supervisor email:</b><br> {{event.supervisor_email}}
                         <br>
                         <br>
-                        <b class="royal">Website:</b><br> {{post.web}}
+                        <b class="royal">Website:</b><br> {{event.web}}
                     </p>
                 </div>
             </div>

@@ -15,9 +15,30 @@
     <ion-content padding="false" class="manual-ios-statusbar-padding" id="ion-content-events">
         
         <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
+        
+        
+        
+          <div ng-if="error !== failure" class="list card">
+              
+              
+              
+            <div class="item item-image">
+                
+                
+                <img id="profile-image-login role_card_img" src="img/empty.png">
+            </div>
+            <a ui-sref="categories" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Find Entities</b>
+            </a>
+        </div>
+        
+        
+ 
+        
 
         <ion-list>
             <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'" >
+                
                 
                 <div class="item item-avatar item item-button-right" ng-if="post.category === 'volunteering' && post.active" ng-click="goToVoluntView(post.id)">
                     <img src="{{i || 'img/volunteer.png'}}">               

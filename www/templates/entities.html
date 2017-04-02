@@ -1,5 +1,5 @@
 <!--Entities view-->
-<ion-view view-title="Entities">
+<ion-view cache-view="false"  view-title="Entities">
    
     <style>
         #spacer-entities
@@ -37,9 +37,9 @@
         
         <ion-list>
     
-            <ion-item ng-repeat="profilelist in cate | filter: query" class="item-avatar-left item-icon-right" ng-click="selectEnt({{profilelist.ent_id}})">
-                <img ng-src="{{profilelist.avatar || 'img/default.png'}}">
-                <h2>{{profilelist.ent_name}}</h2>
+            <ion-item ng-repeat="entity_profile in entity_profiles | filter: query" class="item-avatar-left item-icon-right" ng-click="selectEnt({{entity_profile.ent_id}})">
+                <img ng-src="{{entity_profile.avatar || 'img/default.png'}}">
+                <h2>{{entity_profile.ent_name}}</h2>
                 <i class="icon ion-chevron-right royal"></i>
             </ion-item>
             

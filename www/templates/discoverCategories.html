@@ -1,0 +1,54 @@
+<!--Categories view-->
+<ion-view title="Categories">
+   <ion-nav-buttons side="left">
+        <button ng-show='1' class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+    
+    <style>
+       
+        .item .badge
+        {
+            top:inherit;
+            right: inherit;
+        }
+        
+        #categories_item
+        {
+            font-size:21px; 
+            padding-bottom:21px;
+        }
+       
+        #ion-content-category
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+50,a1dbff+100 */
+            background: #f0f9ff; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #f0f9ff 0%, #cbebff 50%, #a1dbff 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center,  #f0f9ff 0%,#cbebff 50%,#a1dbff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+        
+    </style>
+    
+    <ion-nav-buttons side="left">
+ <button class="button button-clear" ui-sref="home.discover"><i class="icon ion-chevron-left" ></i> </button>
+
+</ion-nav-buttons>
+    
+    <ion-content id="ion-content-category"
+padding="true">
+        
+        <ion-list>
+                    <ion-item class="item-divider item-icon-right custom-item-divider">
+                        Categories</ion-item>
+            <a class="item item-icon-left item-icon-right" ng-repeat="category in categories | orderBy:'cat_name'" ng-click="categorySelection({{category.cat_id}})">
+                <i class="icon ion-ios-people royal"></i>
+                <b>{{category.cat_name}}</b>          
+                <p>Entities: {{category.num_entities}}</p> 
+                <i class="icon ion-chevron-right royal"></i>
+            </a>
+        </ion-list>
+
+    </ion-content>
+    
+</ion-view>

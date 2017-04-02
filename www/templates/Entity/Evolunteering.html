@@ -19,26 +19,33 @@
     <ion-content padding="false" id="ion-content-evolunteerings">
         
         <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>    
-        
+                <div ng-if="post == 'undefined'" class="list card">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/emptyEvents.png">
+            </div>
+            <a ui-sref="home.discover" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Explore Activites</b>
+            </a>
+        </div>
         <ion-list>
             
-            <div class="card list" ng-repeat="post in posts | orderBy: '-vol_created'">
+            <div class="card list" ng-repeat="data in volunteering_data | orderBy: '-vol_created'">
                 
-                <div class="item item-avatar item item-button-right" ng-click="goToVoluntView(post.id)">
+                <div class="item item-avatar item item-button-right" ng-click="goToVoluntView(data.id)">
                     <img src="{{entityAdmin.photo || 'img/volunteer.png'}}">
-                    <a ng-click="alterPost(post.id,$event)" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                    <a ng-click="alterPost(data.id,$event)" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
                     
-                    <h2><b>{{post.title}}</b></h2>
-                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
-                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
-                    Place: {{post.city_name}}
-                    <div item ng-click="goToVoluntView(post.id)" class="item-button-right"></div>
+                    <h2><b>{{data.title}}</b></h2>
+                    Date: {{data.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{data.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{data.city_name}}
+                    <div item ng-click="goToVoluntView(data.id)" class="item-button-right"></div>
                 
                 </div>
                 
                 <div class="button-bar">
-                    <a class="button"><b>Going {{post.going}}</b></a>
-                    <a class="button"><b>Needed {{post.needed}}</b></a>
+                    <a class="button"><b>Going {{data.going}}</b></a>
+                    <a class="button"><b>Needed {{data.needed}}</b></a>
                 </div>
                 
             </div>

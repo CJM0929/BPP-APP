@@ -1,0 +1,107 @@
+<!--Profile view-->
+<ion-view cache-view="false" title="{{supporter_data.sup_fname}} {{supporter_data.sup_lname}}" id="page8" class="">
+    
+    <style>
+        
+        .backgound-img
+        {
+            opacity: 0.618;
+        }
+        
+        #about-username-supporter-profile
+        {
+            color:#525053; 
+            margin-top: -13px;
+        }
+        
+        #about-information-supporter-profile
+        {
+            color:#525053; 
+        }
+        
+        .calmer
+        {
+            background-color: #ddf0f6;
+        }
+        
+        #info-margin
+        {
+            margin-left: 3%;
+        } 
+        
+        #info-margin-2
+        {
+            margin-left: 5%;
+        }
+    </style>
+    
+    <ion-nav-buttons side="right">
+        <button class="button icon-left ion-edit" ng-click="editProfile()"></button>
+    </ion-nav-buttons>
+    
+    <ion-content has-header="true" padding="false">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        
+        <div class="background-img" id="contentUsers" ng-style="{'background-image': 'src(' + supporter_profile_picture + ')'}">
+            <div id="profile-info-user">
+                <p class="center profile">
+                    <img ng-src="{{ supporter_profile_picture || 'img/ionic2.png'}}" style="margin-bottom: 5px;"/>
+                </p>
+                
+                <h4 id="profile-name">
+                    <b>{{supporter_data.sup_fname}} {{supporter_data.sup_lname}}</b>
+                </h4>
+                
+                <h5 id="about-username-supporter-profile" style="margin-top: -10px;">
+                    <b>({{supporter_token.username}})</b>
+                </h5>
+            </div>
+        </div>
+        
+     <div class="button-bar">
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Age:</p>{{supporter_data.sup_age || 'Not set!'}}</a>
+          <a class="button calmer"  style="margin: 0 0 10px; border-top: 2px solid #5aa3d0; border-bottom: 2px solid #5aa3d0;"><p class="royal" style="margin: 0 0 -5px;">Gender: <p>{{supporter_data.sup_gender || 'Not set!'}}</p></p> </a>
+  <a class="button calmer" style="margin: 0 0 10px; border: 2px solid #5aa3d0;"><p style="margin: 0 0 -5px;" class="royal">Area:<p>{{supporter_data.city_name}}</p></p></a>
+</div>
+<h4 class="royal" id="info-margin">Bio:</h4>
+<p id="info-margin-2">{{supporter_data.sup_about || 'Not set!'}}</p>
+             
+            <h4 class="royal"  id="info-margin">Contact information</h4>
+            
+               
+                <ion-item class="item-icon-right"  ng-click="call()">
+                    <b> Phone # : </b>{{supporter_data.sup_phone || 'Not set!'}}
+                    <i class="icon ion-android-call royal"></i>
+                </ion-item>
+            
+                <ion-item class="item-icon-right" id="about-information-supporter-profile" ng-click="mail()">
+                    <b>Email :</b> {{supporter_data.web_email || 'Not set!'}}
+                    <i class="icon ion-ios-email royal"></i>
+                </ion-item>
+            
+
+            
+            <div class="item item-divider custom-item-divider item-icon-right" ng-click="showSkillsFunction()">
+                Skills
+                <i class="icon ion-chevron-down"></i>
+            </div>
+            
+            <ion-list ng-repeat="skill in supporter_data.skills" ng-show="showSkills">
+                <ion-item ng-if="skill.checked === true"><b>{{skill.text}}</b></ion-item>
+            </ion-list>
+            
+            <div class="item item-divider custom-item-divider item-icon-right" ng-click="showInterestsFunction()">
+                Interests
+                <i class="icon ion-chevron-down"></i>
+            </div>
+                      
+            <ion-list ng-repeat="interest in supporter_data.interests" ng-show="showInterests">
+                
+                <ion-item ng-if="interest.checked === true"> 
+                    <b>{{interest.text}}</b>
+                </ion-item>
+            
+            </ion-list>
+            
+    </ion-content>
+</ion-view>

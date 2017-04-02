@@ -14,11 +14,27 @@
     
     <ion-content padding="false" class="manual-ios-statusbar-padding" id="ion-content-events">
         
+             
+        
+        
+          <div ng-if="error == null" class="list card">
+            <div class="item item-image">
+                <img id="profile-image-login role_card_img" src="img/emptyEvents.png">
+            </div>
+            <a ui-sref="home.discover" id="role_card_button" class="button button-balanced button-large button-inline block icon-left ion-ios-paper">
+                <b>Explore Activites</b>
+            </a>
+        </div>
+        
+        
         <ion-list>
             <div class="list card" ng-repeat="post in my_activities | orderBy: '-event_created'">
                 
                 <div  class="item item-avatar item item-button-right" ng-if="post.category === 'volunteering'" ng-click="goToVoluntView(post.id)">
-                    <img src="{{i || 'img/volunteer.png'}}">               
+                    <img src="{{i || 'img/volunteer.png'}}">   
+                   
+     <a class="button button-icon icon icon-right ion-checkmark-circled royal"></a>
+   
                     <h2><b>{{post.title}}</b></h2>
                     Hosted by: {{post.ent_name}}<br><br>
                     Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
@@ -29,13 +45,17 @@
                 
                 <div class="item item-avatar item item-button-right" ng-if="post.category === 'event'" ng-click="goToEventView(post.id)">
             
-                    <img src="{{i || 'img/EventIcon.jpg'}}">               
+                    <img src="{{i || 'img/EventIcon.jpg'}}">      
+
+     <a  ng-if="post.decision == 'going'" class="button button-icon icon icon-right ion-checkmark-circled royal"></a>
+     <a  ng-if="post.decision == 'interested'" class="button button-icon icon icon-right ion-star royal"></a>
                     <h2><b>{{post.title}}</b></h2>
                     Hosted by: {{post.ent_name}}<br><br>
                     Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
                     Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
                     Place: {{post.city_name}}
                     <br><br>
+                    
                 </div>
             </div>
         </ion-list>

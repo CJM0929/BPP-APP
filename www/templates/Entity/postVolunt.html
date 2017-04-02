@@ -65,7 +65,7 @@
             
             <span class="input-label span-fix input-label-fix">Title Name <b style="color:red;">*</b></span>
             <label class="item item-input label-fix item-fix">
-                <input type="text" name="title" ng-model="volunteeringPostObject.volunteering_job.general_info.title" placeholder="Volunteer Opportunity title name" ng-required="true" ng-minlength="3" ng-maxlength="64">
+                <input type="text" style="color:black;" name="title" ng-model="volunteeringPostObject.volunteering_job.general_info.title" placeholder="Volunteer Opportunity title name" ng-required="true" ng-minlength="3" ng-maxlength="64">
             </label>
              <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
                     <div ng-message="required" id="input-error">The volunteering post title field is required!</div>
@@ -75,7 +75,7 @@
             
             <span class="input-label span-fix input-label-fix">Role description <b style="color:red;">*</b></span>
             <label class="item item-input label-fix item-fix">
-                <textarea type="text" name="description" ng-model="volunteeringPostObject.volunteering_job.general_info.description" rows="5" placeholder="Opportunity description" ng-required="true" ng-minlength="3">Opportunity description</textarea>
+                <textarea type="text" style="color:black;" name="description" ng-model="volunteeringPostObject.volunteering_job.general_info.description" rows="5" placeholder="Opportunity description" ng-required="true" ng-minlength="3">Opportunity description</textarea>
             </label>
              <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
                     <div ng-message="required" id="input-error">The opportunity description field is required!</div>
@@ -84,7 +84,7 @@
 
             <span class="input-label span-fix input-label-fix">Application Procedure <b style="color:red;">*</b></span>
             <label class="item item-input label-fix item-fix">
-                <textarea type="text" name="app_procedure" ng-model="volunteeringPostObject.volunteering_job.general_info.app_procedure" rows="3" placeholder="Application Procedure" ng-required="true" ng-minlength="3"></textarea>
+                <textarea style="color:black;" type="text" name="app_procedure" ng-model="volunteeringPostObject.volunteering_job.general_info.app_procedure" rows="3" placeholder="Application Procedure" ng-required="true" ng-minlength="3"></textarea>
             </label>
             <div ng-messages="myForm.app_procedure.$error" ng-if="myForm.app_procedure.$touched">
                     <div ng-message="required" id="input-error">The application procedure field is required!</div>
@@ -260,7 +260,7 @@
             
             <span class="input-label span-fix input-label-fix">Location specific description <b style="color:red;">*</b></span>
             <label class="item item-input label-fix item-fix">
-                <textarea type="text" name="location_description" ng-model="volunteeringPostObject.volunteering_job.address_information.location_description" rows="5" placeholder="Description" ng-minlength="3"></textarea>
+                <textarea style="color:black;" type="text" name="location_description" ng-model="volunteeringPostObject.volunteering_job.address_information.location_description" rows="5" placeholder="Description" ng-minlength="3"></textarea>
             </label>
             <div ng-messages="myForm.location_description.$error" ng-if="myForm.location_description.$touched">
                 <div ng-message="minlength" id="input-error">The location specific description needs to be at least 3 characters long!</div>

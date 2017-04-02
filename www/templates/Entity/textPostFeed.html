@@ -18,20 +18,22 @@
     
     <ion-content class="has-header" id="ion-content-post">
         
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+               <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>    
+
     
 
         
         <ion-list>
            
-            <div class="list card" ng-repeat="post in posts | orderBy: '-post_created'">
+            <div class="list card" ng-repeat="text_post in text_posts | orderBy: '-post_created'">
             
                 
                  <div class="item item-avatar item item-button-right" >
                     <img src="{{entityAdmin.photo || 'img/texticon.png'}}">
-                      <a ng-click="alterPost({{post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
-                    <h2>{{post.post_message}}</h2>
-                    <p>Posted: <span am-time-ago="post.post_created"></span></p>
+                      <a ng-click="alterPost({{text_post}})" class="button button-icon icon icon-right ion-android-more-vertical royal"></a>
+                    
+                    <h2>{{text_post.post_message}}</h2>
+                    <p>Posted: <span am-time-ago="text_post.post_created"></span></p>
                 </div>
 
             

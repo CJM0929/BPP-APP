@@ -18,7 +18,7 @@
     </ion-nav-buttons>
     
     <ion-nav-buttons side="left">
- <button class="button button-clear" ui-sref="dashboard.EactivityFeed"><i class="icon ion-chevron-left" ></i> </button>
+ <button class="button button-clear" ui-sref="dashboard.textPostFeed"><i class="icon ion-chevron-left" ></i> </button>
 </ion-nav-buttons>
     
     <ion-content class="has-header">
@@ -37,7 +37,11 @@
         <h1 class="title"></h1>
         
         <div class="buttons" ng-click="doSomething()">
-            <button class="button button-royal ion-android-send" id="button-text-size-create-post-activity" ng-click="postData()" ui-sref="dashboard.EactivityFeed"></button>
+            <button class="button button-royal ion-android-send" id="button-text-size-create-post-activity" ng-click="postData()"></button>
+        </div>
+        
+        <div class="buttons" ng-click="doSomething()">
+            <button class="button button-left button-light"  ui-sref="dashboard.textPostFeed">cancel</button>
         </div>
     
     </ion-footer-bar>
