@@ -1,5 +1,5 @@
 # BPP-APP
-Backend de plataforma fundación banco popular
+Frontend de plataforma fundación banco popular
 
 Ionic
 
