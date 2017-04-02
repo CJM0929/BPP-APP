@@ -446,7 +446,6 @@
 //    }).success(function (data) {
 //        $rootScope.entity = true;
 //        $scope.info = data.message;
-//        console.log($scope.info);
 //    });
 
     // $http service in charge of retrieving all the text posts for a specific entity
@@ -464,7 +463,6 @@
         $scope.text_posts = data.message.posts;
     }).error(function (error) {
         $scope.error = error.status;
-        console.log($scope.error);
     })
 }
     
@@ -769,7 +767,6 @@
 
             // this variable is to bind the existing data in the city selection field
            $scope.info.message.city = $scope.info.message.city_name;
-           console.log($scope.info);
 
             // image path in order to display the picture
             $scope.img = data.message.sup_pic;
@@ -1001,7 +998,6 @@
                     else if(index === 1)
                         {
                             Events.add(event);
-                            console.log(Events.get(event));
                         }
                 },
 
@@ -2683,6 +2679,7 @@ $http({
     var tokenPayload = jwtHelper.decodeToken(token);
     //los mandamos a la vista como user
     $rootScope.supporter_token = tokenPayload;
+    // default interests and skills flags
     $scope.showInterests = false;
     $scope.showSkills = false;
 
@@ -3050,7 +3047,6 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
                 })
                 .success(function (data) {
                     $scope.volunteering_photo = data;
-//                   console.log("data: " + data);
               }).error(function(data)
                        {
             $scope.photoExists = false;
@@ -3143,7 +3139,6 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
         });
 
       }, function(error){
-        console.log("Could not get location");
       });
 
           // function is triggered by phone button click
@@ -3209,7 +3204,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
       var type = "event";
       
       // variable that holds the picture raw data 
-      $scope.data={};   
+      $scope.data={};   // data.userfile
       
            // this $http service is in charge of retrieving the entity picture raw data in order to display it
            $http({
@@ -3317,18 +3312,20 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     viewData.enableBack = false;
   });// disable backbutton
     
+    // function triggered by clicking the cancel button
        $scope.cancelEdit = function()
         {
             $state.go('volunteeringFullView')
         }
-    
-    $scope.showVolunteeringSkills = false;
         
+       // this is in charge of activating and deactivating the skills dropdown 
+        $scope.showVolunteeringSkills = false;
         $scope.volunteeringShowSkills = function ()
         {
             $scope.showVolunteeringSkills = !$scope.showVolunteeringSkills;
         };
     
+    //JSON Form for the edit volunteering fields
     $scope.volunteeringPostObject =
         {
         "volunteering_job":
@@ -3369,12 +3366,21 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }
         }};
     
+    
+    // the variable voluntData contains an object of all the data of the selected volunteering
+    // it utilize the service volunteeringData with the service function getVoluntPost which  contains the data of the selected volunteering and the containing data was transferred here from the entity volunteering selection controller invoking the volunteeringData service
     $scope.voluntData=volunteeringData.getVoluntPost(); 
+    
     var time=volunteeringData.getVoluntPost();  
+    
+    // here we convert the starting date returened from the backend in order to bind it in the native date picker
     $scope.voluntData.start_time = new Date(time.start_time);
+    
+    // here we convert the end date returened from the backend in order  to bind it in the native date picker
     $scope.voluntData.end_time = new Date(time.end_time);
     
 
+    // this $http service is in charge of retrieving the volunteering post picture raw data in order to display it
      $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -3390,25 +3396,34 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                        {
             $scope.photoExists = false;
         });
-    $scope.data={};
     
-    
-    
+    // variable that holds the picture raw data 
+    $scope.data={}; // data.userfile
+
+          // function triggered by the save volunteering  button click
     $scope.alterPost = function()
     {
+            // in order to upload a picture, the following data need to be sended via parameters
          $scope.picData = {
+                // here an integer 1 need to be submitted
                 'submit' : $scope.submit = 1,
+                // this is where the raw data of the picture taked will be stored
                 'userfile' : $scope.userfile
             }
         
+            // uploadUrl variable is the direction where the picture is going to be uploaded
             var uploadUrl = 'https://hoyportibppr.com/api/entities/volunteering_job_uploadpicture/'+$scope.voluntData.id;
             
+           // here AngularJS watches any changes in the data.userfile variable
+           // when it detect a change, it will automatically upload the picture
+           // and update the view
           $scope.$watch('data.userfile', function (newValue, oldValue) {
-            
               $scope.picData.userfile = newValue;
                 multipartForm.post(uploadUrl, $scope.picData);
             });
         
+        // here we are binding the object created with the current data retrieved from the database
+        // this was done in order to display the current data in the edit volunteering fields
         $scope.volunteeringPostObject.volunteering_job.general_info.title = $scope.voluntData.title;
         $scope.volunteeringPostObject.volunteering_job.general_info.description = $scope.voluntData.description;
         $scope.volunteeringPostObject.volunteering_job.general_info.app_procedure = $scope.voluntData.app_procedure;
@@ -3428,6 +3443,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         $scope.volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_phone =
         $scope.voluntData.supervisor_phone;
         
+        
+              // this $http service is in charge overwriting the new data in the DB
         $http({
                 url: 'https://hoyportibppr.com/api/entities/edit_volunteering/' + $scope.voluntData.id,
                 method: 'POST',
@@ -3452,6 +3469,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }).error(function (data, status, header, config) {
                 $scope.ResponseDetails = data;
                 
+                        // this variables contains the error reply from the backend
+
                 $scope.titleError = data.message.title;
             $scope.descriptionError = data.message.description;
             $scope.start_timeError = data.message.start_time;
@@ -3468,10 +3487,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                         title: 'Error Description',
                         template: $scope.titleError || $scope.descriptionError || $scope.start_timeError || $scope.end_timeError || $scope.addressError || $scope.cityError || 
                 $scope.end_zipError || $scope.supervisor_nameError || $scope.supervisor_phoneError || $scope.supervisor_emailError ||  'There was an error creating the event. Please check the required fields and try again.'
-                    });
-            
-            
-            
+                    });            
             });   
                 }
 }
@@ -3493,7 +3509,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                       'X-API-KEY' : '123456'}
         }).success(function(data) {
             $scope.posts = data.message;
-            console.log($scope.posts);
         });
         
          // this function is activated when the user do the pull down refresh
@@ -3824,7 +3839,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             
         }).error(function (data) {
             $scope.error = data.message;
-            console.log($scope.error);
             
         });
     };
@@ -3925,7 +3939,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             'X-API-KEY' : '123456'}
         }).success(function (data) {
             $scope.posts = data.message;
-            console.log($scope.posts);
             volunteeringData.individualVoluntPost = $scope.posts;
             $state.go('publicVolunteeringFullView');
           });
@@ -3943,7 +3956,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         }
     }).success(function (data) {
         $scope.posts = data.message;
-         console.log( $scope.posts);
     }).error(function (error) {
       $state.go($state.current, $stateParams, {reload: true, inherit: false});
 
@@ -3965,10 +3977,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         }
     }).success(function (data) {
         $scope.posts = data.message;
-         console.log( $scope.posts);
     }).error(function (error) {
         $scope.error = error.status;
-         console.log($scope.error);
     })
 
 }
@@ -3998,7 +4008,6 @@ $http({
          'TOKEN': store.get('token')}
     }).success(function(data) {
     $scope.error=data.message.participation;
-            console.log(data.message.participation);
          $scope.my_activities = [];
     
         data.message.participation.forEach(function(element){
@@ -4016,8 +4025,6 @@ $http({
                             };
                  $scope.my_activities.push(temp);            
         })
-        
-        console.log($scope.my_activitiestit);
     });
     
     $scope.goToEventView = function(eventPost_id){
@@ -4050,7 +4057,6 @@ $http({
             'X-API-KEY' : '123456'}
         }).success(function (data) {
             $scope.posts = data.message;
-            console.log($scope.posts);
             volunteeringData.individualVoluntPost = $scope.posts;
             $state.go('publicVolunteeringFullView');
           });
@@ -4097,7 +4103,6 @@ $http({
 //                }
 //            
 //        $rootScope.supporter_data = data.message;
-//        console.log($rootScope.supporter_data);
 //    });
     
       $scope.selectEnt = function(val) {
@@ -4129,7 +4134,6 @@ $http({
     })
     .success(function (data) {
         $scope.entity = data.message;
-         console.log($scope.entity);
     });
 }
 })();
