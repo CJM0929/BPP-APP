@@ -31,22 +31,22 @@
     
     <ion-content class="has-header" id="ion-content-public-events" scroll="true">
         
-    <div ng-click="selectEnt({{post.ent_id}})" class="item item-avatar">
+    <div ng-click="selectEnt({{event.ent_id}})" class="item item-avatar">
     <img ng-src="{{entityPicture || 'img/default.png'}}" >
-    <h2>{{post.ent_name}}</h2>
-    <p>Posted: <span am-time-ago="post.event_created"></span></p>
+    <h2>{{event.ent_name}}</h2>
+    <p>Posted: <span am-time-ago="event.event_created"></span></p>
   </div>
          <div class="list">
             
             <div class="item">
                 
-                <h1 class="royal" id="align-text-events">{{post.title}}</h1><br>
-                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="post.event_created"></span></p><br>
-                <p><b class="royal">Starting date: </b> {{post.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
-                <p><b class="royal">Ending date: </b>{{post.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
-                <p><b class="royal">Place: </b> {{post.city_name}}</p>
+                <h1 class="royal" id="align-text-events">{{event.title}}</h1><br>
+                <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="event.event_created"></span></p><br>
+                <p><b class="royal">Starting date: </b> {{event.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}} </p>
+                <p><b class="royal">Ending date: </b>{{event.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Place: </b> {{event.city_name}}</p>
                 <br>
-                <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(post)" > Add to Calendar</i>
+                <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(event)" > Add to Calendar</i>
 
             </div>
             
@@ -59,31 +59,31 @@
                     </div>
                     <p>
                         <br>
-                        <b  class="royal">Details: </b><br>{{post.description}}<br>
+                        <b  class="royal">Details: </b><br>{{event.description}}<br>
                     
                         <br>
-                        <b class="royal">Address:</b><br> {{post.address}},<br> {{post.city_name}}, Puerto Rico, {{post.zip}}
+                        <b class="royal">Address:</b><br> {{event.address}},<br> {{event.city_name}}, Puerto Rico, {{event.zip}}
                         <br>
                         <br>
-                        <b  class="royal">Supervisor name:</b><br> {{post.supervisor_name}}
+                        <b  class="royal">Supervisor name:</b><br> {{event.supervisor_name}}
                         <br>
                         <br>
-                        <b class="royal">Supervisor telephone #:</b><br> {{post.supervisor_phone}}
+                        <b class="royal">Supervisor telephone #:</b><br> {{event.supervisor_phone}}
                         <br>
                         <br>
-                        <b class="royal">Supervisor email:</b><br> {{post.supervisor_email}}
+                        <b class="royal">Supervisor email:</b><br> {{event.supervisor_email}}
                         <br>
                         <br>
-                        <b class="royal">Website:</b><br> {{post.web}}
+                        <b class="royal">Website:</b><br> {{event.web}}
                     </p>
                 
                 </div>
             </div>
              <div class="button-bar">
-              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{post.id}})" ng-if="supporter && notgoingg">Going</a>
-              <a class="button button-energized icon-right ion-flag" ng-click="interested({{post.id}})" ng-if="supporter && notgoingg">Interested</a>
+              <a class="button button-balanced icon-left ion-thumbsup" ng-click="going({{event.id}})" ng-if="supporter && notgoingg">Going</a>
+              <a class="button button-energized icon-right ion-flag" ng-click="interested({{event.id}})" ng-if="supporter && notgoingg">Interested</a>
             </div>
-             <a ng-if="supporter && goingg" ng-click="ungoing({{post.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
+             <a ng-if="supporter && goingg" ng-click="ungoing({{event.id}})" class="button icon-left ion-thumbsdown button button-block button-large button-assertive">Not going</a>
         </div>
         
     </ion-content>

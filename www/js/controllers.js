@@ -1306,7 +1306,7 @@ angular
           {
         // here is to verify if the entity is followed or not
         $rootScope.supporter_data.followed_entities.forEach(function(element){
-                if(element.ent_id === $scope.info.ent_id)
+                if(element.ent_id === $scope.entity_information.ent_id)
               {
                   $scope.following = true;
               }
@@ -1990,7 +1990,7 @@ $http({
         // the view will be reloaded after the selected volunteering post is deleted
         $state.go($state.current, $stateParams, {reload: true, inherit: false});
 
-        // popup
+    // popup
     $ionicPopup.alert({
      title: 'Volunteering post deleted',
      template: 'The volunteering post was successfuly deleted.'
@@ -2598,7 +2598,6 @@ $http({
                 'X-API-KEY' : '123456',
                 'TOKEN' : store.get('token')
             }
-
       }).success(function (data, status, headers, config) {
             $scope.PostDataResponse = data.message.vol_id;
 
@@ -2653,8 +2652,7 @@ $http({
                         template: $scope.titleError || $scope.descriptionError || $scope.start_timeError || $scope.end_timeError || $scope.addressError || $scope.cityError || 
                 $scope.end_zipError || $scope.supervisor_nameError || $scope.supervisor_phoneError || $scope.supervisor_emailError || $scope.volunteersQuantityError || $scope.volunteersWorkHours || 'There was an error creating the event. Please check the required fields and try again.'
                     });
-        });
-        
+            });
         };
 
     $scope.tip1 = tip1Function;
@@ -2769,6 +2767,7 @@ $http({
             'Accept': 'application/x-www-form-urlencoded',
             'X-API-KEY' : '123456',
          'TOKEN': store.get('token')}
+        
     }).success(function (data) {
         
         // this binded to the supporter profile view
@@ -2976,7 +2975,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
        // it utilize the service eventData with the service variable individualEventPost which  contains the data of the selected event and the containing data was transferred here from the entity event selection controller invoking the eventData service
       $scope.event = eventData.individualEventPost;
       
-      // here we specify from what type of user we are getting the picture
+      // here we specify from what type of picture we are getting
          var type = "event";
       
         // we send the image path via this http service in order to retrieve the raw data of the image to display it
@@ -3036,7 +3035,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
        // it utilize the service volunteeringData with the service variable individualVoluntPost which  contains the data of the selected volunteering and the containing data was transferred here from the entity volunteering selection controller invoking the volunteeringData service
       $scope.volunteering = volunteeringData.individualVoluntPost;
     
-     // here we specify from what type of user we are getting the picture
+     // here we specify from what type of picture we are getting
          var type = "post";
 
             // we send the image path via this http service in order to retrieve the raw data of the image to display it
@@ -3060,7 +3059,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
     
      $scope.goToEdit = function()
       {
-         volunteeringData.setVoluntPost($scope.post);
+         volunteeringData.setVoluntPost($scope.volunteering);
          $state.go('editVolunteering');
       };
                 
@@ -3071,9 +3070,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
           // the vairable post coontains the data that will be stored in the native calendar of the phone
           Events.add($scope.post);
       };
-    
 }
-
 })();
 
 //publicAboutCtrl
@@ -3090,26 +3087,26 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
       // image path in order to display the picture
       var img =  entityProfiles.individualEntity.ent_pic;
            
-       // here we specify from what type of user we are getting the picture
-       var type = "entity";
+      // here we specify from what type of user we are getting the picture
+      var type = "entity";
       
-            // the reason of this if condition is to avoid a black screen glitch in the entity profile picture logos
-            if(img !== null){
-        // we send the image path via this http service in order to retrieve the raw data of the image to display it
-         $http({
-                method: 'POST',
-                skipAuthorization: true,//es necesario enviar el token
-                url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: ("img=" + img + "&type=" + type),               
-                headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                           'Accept': 'application/x-www-form-urlencoded',
-                          'X-API-KEY' : '123456'}
-                })
-                .success(function (data) {
-                    $scope.entityPicture = data;
-              });
-                
-                      }
+      // the reason of this if condition is to avoid a black screen glitch in the entity profile picture logos
+      if(img !== null){
+      
+      // we send the image path via this http service in order to retrieve the raw data of the image to display it
+      $http({
+            method: 'POST',
+            skipAuthorization: true,//es necesario enviar el token
+            url: 'https://hoyportibppr.com/api/entities/displaypic/',
+            data: ("img=" + img + "&type=" + type),               
+            headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                       'Accept': 'application/x-www-form-urlencoded',
+                      'X-API-KEY' : '123456'}
+            })
+            .success(function (data) {
+                $scope.entityPicture = data;
+          });
+        };// end of if condition
       
       // google maps settings
 
@@ -3183,9 +3180,9 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
   function editEventCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,editEventPost, eventData, $ionicPopup, $log, multipartForm)
   {
       
-       $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
-    viewData.enableBack = false;
-  });// disable backbutton
+        $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+        viewData.enableBack = false;
+      });// disable backbutton
       
  
       //function triggered by the cancel button click
@@ -3198,24 +3195,24 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
        // the variable eventData contains an object of all the data of the selected event
        // it utilize the service eventData with the service function individualEventPost which  contains the data of the selected event and the containing data was transferred here from the entity event list selection controller invoking the eventData service      
       $scope.eventData = eventData;
-            
+                  
       // here we convert the starting date returened from the backend in order to bind it in the native date picker
-      $scope.eventData.individualEventPost.start_time = new Date(time.start_time);
+      $scope.eventData.individualEventPost.start_time = new Date(eventData.individualEventPost.start_time);
       
       // here we convert the end date returened from the backend in order  to bind it in the native date picker
-      $scope.eventData.individualEventPost.end_time = new Date(time.end_time); 
+      $scope.eventData.individualEventPost.end_time = new Date(eventData.individualEventPost.end_time); 
       
-         // image path in order to display the picture
-         var img = eventData.individualEventPost.photo;
-         
-         // here we specify from what type of user we are getting the picture
-         var type = "event";
+      // image path in order to display the picture
+      var img = eventData.individualEventPost.photo;
+
+      // here we specify from what type of user we are getting the picture
+      var type = "event";
       
-        // variable that holds the picture raw data 
-        $scope.data={};   
+      // variable that holds the picture raw data 
+      $scope.data={};   
       
-               // this $http service is in charge of retrieving the entity picture raw data in order to display it
-               $http({
+           // this $http service is in charge of retrieving the entity picture raw data in order to display it
+           $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
                 url: 'https://hoyportibppr.com/api/entities/displaypic/',
@@ -3228,7 +3225,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
                     $scope.event_photo = data;
               }).error(function(data) {
                    $scope.photoExists = false;
-               });
+            });
       
       // function triggered by the save event button click
       $scope.alterPost = function()
@@ -3254,7 +3251,7 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
                 'submit' : $scope.submit = 1,
                 // this is where the raw data of the picture taked will be stored
                 'userfile' : $scope.userfile
-            }
+            };
 
             // uploadUrl variable is the direction where the picture is going to be uploaded
           var uploadUrl = 'https://hoyportibppr.com/api/entities/event_uploadpicture/'+$scope.eventData.individualEventPost.id;
@@ -3308,30 +3305,30 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
 angular.module('app').controller('editVolunteeringCtrl', editVolunteeringCtrlFunction);
 
 editVolunteeringCtrlFunction.$inject = ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment', 'volunteeringData', '$ionicPopup','multipartForm'];
-
+    
 function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, volunteeringData, $ionicPopup,multipartForm)
 {
-       
+    var tokenEncoded = store.get('token');
+    var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);
+    var ent = tokenDecoded;
+    $scope.initializing = true;
+    
      $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
     viewData.enableBack = false;
   });// disable backbutton
     
-        // function is triggered by cancel button click
        $scope.cancelEdit = function()
         {
-           // redirect to volunteeringFullView.html
             $state.go('volunteeringFullView')
         }
     
-       
-        $scope.showVolunteeringSkills = false;
-            // this is in charge of activating and deactivating the skills dropdown 
+    $scope.showVolunteeringSkills = false;
+        
         $scope.volunteeringShowSkills = function ()
         {
             $scope.showVolunteeringSkills = !$scope.showVolunteeringSkills;
         };
     
-    // this object was created in order to bind the existing data to the placeholder
     $scope.volunteeringPostObject =
         {
         "volunteering_job":
@@ -3372,20 +3369,12 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }
         }};
     
-    // the variable voluntData contains an object of all the data of the selected volunteering post
-    // it utilize the service voluntData with the service function getVoluntPost which contains the data of the selected volunteering post and the containing data was transferred here from the entity volunteering list selection controller invoking the voluntData service
-    $scope.voluntData = volunteeringData.getVoluntPost();  
-    
-    // here we convert the starting date returened from the backend in order to bind it in the native date picker
+    $scope.voluntData=volunteeringData.getVoluntPost(); 
+    var time=volunteeringData.getVoluntPost();  
     $scope.voluntData.start_time = new Date(time.start_time);
-    
-    // here we convert the end date returened from the backend in order  to bind it in the native date picker
     $scope.voluntData.end_time = new Date(time.end_time);
-
-    // variable that holds the picture raw data 
-    $scope.data={};   
     
-    // this $http service is in charge of retrieving the entity picture raw data in order to display it
+
      $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
@@ -3401,31 +3390,25 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                        {
             $scope.photoExists = false;
         });
+    $scope.data={};
     
-          // function triggered by the save volunteering button click
+    
+    
     $scope.alterPost = function()
     {
-          // in order to upload a picture, the following data need to be sended via parameters
-          $scope.picData = {
-                // here an integer 1 need to be submitted
+         $scope.picData = {
                 'submit' : $scope.submit = 1,
-                // this is where the raw data of the picture taked will be stored
                 'userfile' : $scope.userfile
             }
-
-            // uploadUrl variable is the direction where the picture is going to be uploaded
+        
             var uploadUrl = 'https://hoyportibppr.com/api/entities/volunteering_job_uploadpicture/'+$scope.voluntData.id;
             
-          // here AngularJS watches any changes in the data.userfile variable
-          // when it detect a change, it will automatically upload the picture
-          // and update the view
           $scope.$watch('data.userfile', function (newValue, oldValue) {
+            
               $scope.picData.userfile = newValue;
                 multipartForm.post(uploadUrl, $scope.picData);
-                   console.log("Hello!");
             });
         
-        // this variables contains the error reply from the backend
         $scope.volunteeringPostObject.volunteering_job.general_info.title = $scope.voluntData.title;
         $scope.volunteeringPostObject.volunteering_job.general_info.description = $scope.voluntData.description;
         $scope.volunteeringPostObject.volunteering_job.general_info.app_procedure = $scope.voluntData.app_procedure;
@@ -3442,9 +3425,9 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         $scope.volunteeringPostObject.volunteering_job.address_information.location_description = $scope.voluntData.location_description;
         $scope.volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_name =  $scope.voluntData.supervisor_name;
         $scope.volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_email = $scope.voluntData.supervisor_email;
-        $scope.volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_phone = $scope.voluntData.supervisor_phone;
+        $scope.volunteeringPostObject.volunteering_job.contactinfo_supervisor.supervisor_phone =
+        $scope.voluntData.supervisor_phone;
         
-        // this $http service is in charge overwriting the new data in the DB
         $http({
                 url: 'https://hoyportibppr.com/api/entities/edit_volunteering/' + $scope.voluntData.id,
                 method: 'POST',
@@ -3452,11 +3435,11 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-API-KEY' : '123456',
-                    'TOKEN' : store.get('token')
+                    'TOKEN' : tokenEncoded
                 }
+        
         }).success(function (data, status, headers, config) {
                 
-                // popup
                 var alertPopup = $ionicPopup.alert(
                     {
                         title: "Volunteering Job edited",
@@ -3464,13 +3447,12 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                     }
                 );
                 
-                // redirect the user to the volunteeringFullView.html
                 $state.go('volunteeringFullView');
             
             }).error(function (data, status, header, config) {
-
-            // this variables contains the error reply from the backend
-            $scope.titleError = data.message.title;
+                $scope.ResponseDetails = data;
+                
+                $scope.titleError = data.message.title;
             $scope.descriptionError = data.message.description;
             $scope.start_timeError = data.message.start_time;
             $scope.end_timeError = data.message.end_time;
@@ -3481,19 +3463,19 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             $scope.supervisor_phoneError = data.message.supervisor_phone;
             $scope.supervisor_emailError = data.message.supervisor_email;
         
-                //popup displaying errors from the backend
                  $ionicPopup.alert(
                     {
                         title: 'Error Description',
                         template: $scope.titleError || $scope.descriptionError || $scope.start_timeError || $scope.end_timeError || $scope.addressError || $scope.cityError || 
                 $scope.end_zipError || $scope.supervisor_nameError || $scope.supervisor_phoneError || $scope.supervisor_emailError ||  'There was an error creating the event. Please check the required fields and try again.'
-                    });            
-                });   
-            };// end of alterPost function
+                    });
+            
+            
+            
+            });   
+                }
 }
-    
 })();
-
 
 //ActivityFeedCtrl
 (function(){
@@ -3501,7 +3483,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     
     function activityFeedCtrlFunction ($scope, $stateParams, $timeout, $http, store, jwtHelper, $httpParamSerializerJQLike, $ionicActionSheet, $state, $ionicPopup, moment, editTextPost) 
     {
-        
+        // $http service in charge of retrieving all the text posts 
         $http({
             method: 'GET',
             skipAuthorization: true,//es necesario enviar el token
@@ -3509,12 +3491,10 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             headers: {'Content-Type': 'application/x-www-form-urlencoded',
                       'Accept': 'application/x-www-form-urlencoded',
                       'X-API-KEY' : '123456'}
-        
         }).success(function(data) {
             $scope.posts = data.message;
             console.log($scope.posts);
         });
-        
         
          // this function is activated when the user do the pull down refresh
          // it will refresh all the data obtaining any changes
@@ -3545,24 +3525,23 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     angular
         .module('app')
         .controller('activityFeedCtrl',activityFeedCtrlFunction);
-    
 })();
 
 //volunteeringCtrl
 (function(){
+    
     "use strict";
     
     angular
         .module('app')
         .controller('volunteeringCtrl', volunteeringCtrlFunction);
     
-    volunteeringCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state', '$ionicPopup','moment','volunteeringData','editVolunteeringPost', 'Events']; //'Upload',
+    volunteeringCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$ionicActionSheet','$state', '$ionicPopup','moment','volunteeringData','editVolunteeringPost', 'Events'];
 
     function volunteeringCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$ionicActionSheet,$state, $ionicPopup,moment,volunteeringData,editVolunteeringPost, Events) 
     {  
-            // function is triggered when the user click the volunteering post card
-             $scope.goToVoluntView = function(voluntPost_id){
-
+        // function is triggered when the user click the volunteering post card
+        $scope.goToVoluntView = function(voluntPost_id){
         // $http service is in charge of retrieving all the data of an espefic volunteering post
         $http({
           method: 'GET',
@@ -3572,20 +3551,18 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             'X-API-KEY' : '123456'}
         }).success(function (data) {
             
-            $scope.posts = data.message;
-
             // here we are using the service volunteeringData 
             // from the service we are using the variable 'individualVoluntPost'
             // the purpose here is to trasfer all the data of the selected volunteering to the 
             // volunteering full view which is in charge of displaying all the data of the volunteering
-            volunteeringData.individualVoluntPost = $scope.posts;
+            volunteeringData.individualVoluntPost = data.message;
             
-            // redirect the user to volunteeringFullView.html
+            // redirect the user to publicVolunteeringFullView.html
             $state.go('publicVolunteeringFullView');
           });
       };
         
-        // this $http service is in charge of retrieving all the existing volunteering posts
+        // this $http service is in charge of retrieving all the existing volunteering posts from all the entitties
         $http({
             method: 'GET',
             skipAuthorization: true,//es necesario enviar el token
@@ -3602,7 +3579,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
          $scope.doRefresh = function() {
              
         // this $http service returns an array of objects
-        // each object contains an event information for a specific volunteering       
+        // each object contains an event information for a specific volunteering
         $http({
             method: 'GET',
             skipAuthorization: true,//es necesario enviar el token
@@ -3620,7 +3597,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     
     };
     
-        $scope.addEventToCalendar = function(event)
+    // this function is in charge adding an event to the native calendar using the Events service and the plugin cordova-plugin-calendar
+    $scope.addEventToCalendar = function(event)
         {
             if(Events.s === true)
                 {
@@ -3630,7 +3608,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                       template: 'You have scheduled the volunteering event successfully to your native calendar!'
                   });
                 }
-            
             else
             {
                 $ionicPopup.alert(
@@ -3639,7 +3616,7 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                       template: 'There was an error scheduling the volunteering event to your native calendar.'
                   });
             }
-        }
+        }//end of addEventToCalendar
     }
     
 })();
@@ -3652,10 +3629,11 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         .module('app')
         .controller('eventsCtrl', eventsCtrlFunction);
     
-    eventsCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$state', '$ionicPopup','moment','$ionicActionSheet','eventData','editEventPost','$ionicPopover']; //'Upload',
+    eventsCtrlFunction.$inject = ['$scope', '$stateParams','$timeout','$http','store','jwtHelper','$httpParamSerializerJQLike','$state', '$ionicPopup','moment','$ionicActionSheet','eventData','editEventPost','$ionicPopover'];
 
     function eventsCtrlFunction($scope, $stateParams, $timeout, $http,store,jwtHelper,$httpParamSerializerJQLike,$state, $ionicPopup,moment, $ionicActionSheet, eventData,editEventPost, $ionicPopover) {
 
+    // this $http service is in charge of retrieving all the existing event posts from all the entitties
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
@@ -3668,8 +3646,9 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         $scope.posts = data.message;
     });
         
-                 $scope.goToEventView = function(eventPost_id){
-        
+    
+    $scope.goToEventView = function(eventPost_id){
+        // $http service is in charge of retrieving all the data of an espefic event post
         $http({
         method: 'GET',
         url: 'https://hoyportibppr.com/api/entities/event/'+eventPost_id,
@@ -3678,20 +3657,26 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-        $scope.posts = data.message;
-        $scope.event = data.message.event;
             
-        eventData.individualEventPost = $scope.event;
+        // here we are using the service eventData 
+        // from the service we are using the variable 'individualEventPost'
+        // the purpose here is to trasfer all the data of the selected event to the 
+        // event full view which is in charge of displaying all the data of the volunteering
+        eventData.individualEventPost = data.message.event;
         
+        // redirect the user to publicEventFullView.html
         $state.go('publicEventFullView');
     });
         
     };
         
-          //Function definitions:
+    // this function is invoked when the user refresh the page with the pulldown refresh
+    // this function is in charge of retrieving all the existing event posts    
     $scope.doRefresh = function() {
-        
-        $http({
+
+    // this $http service returns an array of objects
+    // each object contains an event information for a specific event
+    $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
         url: 'https://hoyportibppr.com/api/entities/all_events/',
@@ -3707,135 +3692,8 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
      });
     };
 }
-    
 })();
 
-//publicVolunteeringFullViewCtrl
-(function(){
-
-  "use strict";
-  angular
-    .module('app')
-    .controller('publicVolunteeringFullViewCtrl', publicVolunteeringFullViewCtrl);
-
-  publicVolunteeringFullViewCtrl.$inject = ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','volunteeringData','$ionicPopup','$ionicActionSheet', 'Events'];
-
-  function publicVolunteeringFullViewCtrl($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,volunteeringData,$ionicPopup,$ionicActionSheet, Events)
-{
-    $scope.goingg = true;
-    $scope.notGoing = false;
-    $scope.post = volunteeringData.individualVoluntPost;
-    
-                $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-                     if($rootScope.supporter)
-        {
-            $rootScope.supporter_data.participation.forEach(function(element){
-
-                if(element.id === $scope.post.id){
-                    console.log("Equal");
-                    $scope.goingg = false;
-                    $scope.notGoing = true;
-                    console.log($scope.goingg, $scope.notGoing);
-                }
-
-            });
-        }
-    });
-    
-     $http({
-                method: 'POST',
-                skipAuthorization: true,//es necesario enviar el token
-                url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: ("img=" + volunteeringData.individualVoluntPost.photo + "&type=" + 'post'),                
-                headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                           'Accept': 'application/x-www-form-urlencoded',
-                          'X-API-KEY' : '123456'}
-                })
-                .success(function (data) {
-                    $scope.volunteering_photo = data;
-              }).error(function(data)
-                       {
-            $scope.photoExists = false;
-        });
-    
-    $scope.going = function(id){
-
-        $http({
-            method: 'POST',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/going_volunteering/'+id,
-             headers:
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY' : '123456',
-                'TOKEN' : store.get('token')
-            }
-        }).success(function (data) {
-            
-            console.log($rootScope.supporter_data.vol_going);
-            $scope.info1 = data.message;
-            $state.go($state.current, $stateParams, {reload: true, inherit: false});
-                  var alertPopup = $ionicPopup.alert({
-                  title: 'Thanks for your awareness!'
-                  });        
-
-        }).error(function (data) {
-            $scope.error = data.message;
-            console.log($scope.error);
-            $scope.data = {};
-        });
-    };
-      
-      $scope.ungoing = function(id){
-          
-        $http({
-            method: 'DELETE',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/going_volunteering/'+id,
-             headers:
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY' : '123456',
-                'TOKEN' : store.get('token')
-            }
-        }).success(function (data) {
-            $scope.info1 = data.message;
-            console.log($rootScope.supporter_data.vol_going);
-                    $state.go($state.current, $stateParams, {reload: true, inherit: false});
-
-            var alertPopup = $ionicPopup.alert({
-                  title: 'No problem!'
-                  });
-        });
-    };
-    
-     $scope.addToCalendar = function (volunteering)
-     {
-         Events.add(volunteering);
-         //Events.get(volunteering);
-         console.log(volunteering);
-     };
-}
-})();
 
 //publicEventFullViewCtrl
 (function(){
@@ -3845,20 +3703,25 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
 
   function publicEventFullViewCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, eventData, $timeout,$ionicPopup,$ionicActionSheet, Events)
   {  
+      
+      // default flags
       $scope.goingg = false;
       $scope.notgoingg = true;
-      $scope.post = eventData.individualEventPost;
+      
+      
+      // the variable event contains an object of all the data of the selected event
+       // it utilize the service eventData with the service function individualEventPost which  contains the data of the selected event and the containing data was transferred here from the entity event list selection controller invoking the eventData service  
+      $scope.event = eventData.individualEventPost;
       
      
-      
+      // here we verify the list of going or interested events and volunteerings of the signed in user
       if($rootScope.supporter === true){
       if($rootScope.supporter_data.participation !== null)   
       {
               $rootScope.supporter_data.participation.forEach(function(element){
                   
-                  if(element.id === $scope.post.id)
+                  if(element.id === $scope.event.id)
                       {
-                          console.log('hello');
                           $scope.goingg = true;
                           $scope.notgoingg = false;
                       }
@@ -3867,38 +3730,42 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
           }
       }
       
+      // image path in order to display the picture
       var img =  eventData.individualEventPost.photo;
       var id = eventData.individualEventPost.id;
       
-       
+      // here we specify from what type of picture we are getting
       var type="event";
+      
+      // this $http service is in charge of retrieving the volunteering picture raw data in order to display it
                $http({
                 method: 'POST',
                 skipAuthorization: true,//es necesario enviar el token
                 url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: ("img=" + eventData.individualEventPost.photo + "&type=" + 'event'),                
+                data: ("img=" + img + "&type=" + type),                
                 headers: {'Content-Type': 'application/x-www-form-urlencoded',
                            'Accept': 'application/x-www-form-urlencoded',
                           'X-API-KEY' : '123456'}
                 })
                 .success(function (data) {
                     $scope.event_photo = data;
-//                   console.log(data);
               }).error(function(data)
                        {
             $scope.photoExists = false;
-                   
         });
       
+        // function triggered by the "going" button click
       $scope.going = function(id){
           
+          // json object that must be sent in order to properly add the event to the ongoing activities
           $scope.goingEvent = 
           {
           "event_decision": { 
-            "event_id":  id, 
-            "decision": "going"}
+            "event_id":  id, // id of the selected event
+            "decision": "going"} // type of decision
           };
           
+        // $http service in charge of storing the information of the event thats being follow
         $http({
             method: 'POST',
             skipAuthorization: true,//es necesario enviar el token
@@ -3911,51 +3778,29 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
                 'TOKEN' : store.get('token')
             }
         }).success(function (data) {
-             $scope.goingg = true;
-      $scope.notgoingg = false;
-            $scope.info1 = data.message;
             
+            // flags changed
+             $scope.goingg = true;
+            $scope.notgoingg = false;
+            
+                // popup
                   var alertPopup = $ionicPopup.alert({
                   title: 'Thanks for your awareness!'
-                  });
-            
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    
-            }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });            
-            
-        }).error(function (data) {
-            $scope.error = data.message;
-            console.log($scope.error);
-        });
+                  });        
+        })
     };
       
        $scope.interested = function(id){
            
+            // json object that must be sent in order to properly add the event to the interested activities
             $scope.interestedEvent = 
           {
           "event_decision": { 
-            "event_id":  id, 
-            "decision": "interested"}
+            "event_id":  id, // id of the selected event
+            "decision": "interested"} // type of decision
           };
       
+        // $http service in charge of storing the information of the event thats being follow
         $http({
             method: 'POST',
             skipAuthorization: true,//es necesario enviar el token
@@ -3969,32 +3814,11 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }
         }).success(function (data) {
                   
+            // changed flags
             $scope.goingg = true;
-      $scope.notgoingg = false;
-            
-            $scope.info1 = data.message;
-            
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });
-                  var alertPopup = $ionicPopup.alert({
+            $scope.notgoingg = false;
+              // popup  
+             var alertPopup = $ionicPopup.alert({
                   title: 'Thanks for your awareness!'
         });
             
@@ -4005,14 +3829,17 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
         });
     };
       
+            // function triggered by "not going" button click
       $scope.ungoing = function(id){
             
+            // json object that must be sent in order to properly add the event to the interested activities
             $scope.ungoingEvent = 
           {
           "event_decision": { 
-            "event_id":  id}
+            "event_id":  id} // id of the event thats going to be deleted
             };
 
+                  // $http service in charge of deleting the information of the event thats being follow
         $http({
             method: 'DELETE',
             skipAuthorization: true,//es necesario enviar el token
@@ -4025,58 +3852,23 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
             }
         }).success(function (data) {
             
+            // flags changes
              $scope.goingg = false;
-      $scope.notgoingg = true;
-            
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-    });
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-    });
-            $scope.info1 = data.message;
-
+            $scope.notgoingg = true;
+    
+            // popup
             var alertPopup = $ionicPopup.alert({
                   title: 'No problem!'
                   });
         });
     };
-    
+      
+         // function is triggered by the add to calendar button click
        $scope.addToCalendar = function (volunteering)
       {
-          console.log(Events.add($scope.post));
+           // invokes Event service with the function add // the service use the cordova calendar plugin
+         // the vairable post coontains the data that will be stored in the native calendar of the phone
+          Events.add($scope.event);
       };
   }
 
@@ -4264,6 +4056,7 @@ $http({
           });
       };
     
+    // this function is in charge adding an event to the native calendar using the Events service and the plugin cordova-plugin-calendar
     $scope.addEventToCalendar = function(event, $event)
     {
         $event.stopPropagation();// Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
@@ -4432,7 +4225,10 @@ $http({
     viewData.enableBack = false;
   });// disable backbutton
 
+            // this function is attached to the pull down refresh
          $scope.doRefresh = function() {
+             
+        // $http service in charge of retrieving all the existing event posts  
        $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
@@ -4442,14 +4238,18 @@ $http({
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-        $scope.posts = data.message;
+           
+        // variable containing all the event posts   
+        $scope.events = data.message;
     })
-    .finally(function() {
+    .finally(function() { // this is trigger after the pull down
        $scope.$broadcast('scroll.refreshComplete');
-     });
+     }); // end of doRefresh
     
     };
         
+        
+            // $http service in charge of retrieving all the existing event posts  
     $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
@@ -4459,9 +4259,11 @@ $http({
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-        $scope.posts = data.message;
+        $scope.events = data.message;
     });
         
+        // this functions is triggered when the user click a specific event post
+        // it will provide all the information of the selected event posts
                  $scope.goToEventView = function(eventPost_id){
         
         $http({
@@ -4472,10 +4274,9 @@ $http({
                   'X-API-KEY' : '123456'}
     })
     .success(function (data) {
-        $scope.posts = data.message;
-        $scope.event = data.message.event;
+        $scope.events = data.message;
             
-        eventData.individualEventPost = $scope.event;
+        eventData.individualEventPost = data.message.event;
         
         $state.go('discoverEventFullView');
     });
@@ -4535,7 +4336,7 @@ $http({
             $scope.posts = data.message;
         });
         
-        // this function is in charge adding an event to the native calendar
+        // this function is in charge adding an event to the native calendar using the Events service and the plugin cordova-plugin-calendar
         $scope.addEventToCalendar = function(event)
         {
             if(Events.s === true)
@@ -4601,6 +4402,8 @@ $http({
 
         // this function is attached to the pull down refresh
          $scope.doRefresh = function() {
+             
+           // $http service in charge of retrieving all existing the text posts
            $http({
                 method: 'GET',
                 skipAuthorization: true,//es necesario enviar el token
@@ -4616,7 +4419,7 @@ $http({
                $scope.$broadcast('scroll.refreshComplete');
                  });
         };  // end of doRefresh
-    }
+    };
     
     allPostsCtrl.$inject =['$scope', '$stateParams', '$timeout', '$http', 'store', 'jwtHelper', '$httpParamSerializerJQLike', '$ionicActionSheet', 'moment', '$ionicActionSheet', '$state', 'editTextPost'];
     
@@ -4637,12 +4440,16 @@ $http({
 
   function publicVolunteeringFullViewCtrl($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment,volunteeringData,$ionicPopup,$ionicActionSheet, Events)
 {
+     // default flags
+    $scope.going_flag = true;
+    $scope.notGoing_flag = false;
     
-    $scope.goingg = true;
-    $scope.notGoing = false;
-    $scope.post = volunteeringData.individualVoluntPost;
+    // the variable volunteering contains an object of all the data of the selected volunteering
+    // it utilize the service volunteeringData with the service variable individualVoluntPost which  contains the data of the selected volunteering and the containing data was transferred here from the entity volunteering selection controller invoking the volunteeringData service
+    $scope.volunteering = volunteeringData.individualVoluntPost;    
     
-                $http({
+    // here we obtain all the data of the signed in supporter
+    $http({
         method: 'GET',
         skipAuthorization: true,//es necesario enviar el token
         url: 'https://hoyportibppr.com/api/supporters/',
@@ -4655,46 +4462,56 @@ $http({
     }).success(function(data) {
 
         $scope.info = data.message;
+        
             if($scope.info.followed_entities === null)
                 {
                     $scope.info.followed_entities = [];
                 }
             
+        
         $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-                     if($rootScope.supporter)
+
+        // here we verify the list of going or interested events and volunteerings of the signed in user
+        if($rootScope.supporter)
         {
             $rootScope.supporter_data.participation.forEach(function(element){
 
-                if(element.id === $scope.post.id){
-                    console.log("Equal");
-                    $scope.goingg = false;
-                    $scope.notGoing = true;
-                    console.log($scope.goingg, $scope.notGoing);
+                if(element.id === $scope.volunteering.id){
+                    $scope.going_flag = false;
+                    $scope.notGoing_flag = true;
                 }
 
             });
         }
     });
     
+          // image path in order to display the picture
+    var img = volunteeringData.individualVoluntPost.photo;
+    
+          // here we specify from what type of picture we are getting
+    var type = 'post';
+    
+     // this $http service is in charge of retrieving the volunteering picture raw data in order to display it
      $http({
-                method: 'POST',
-                skipAuthorization: true,//es necesario enviar el token
-                url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: ("img=" + volunteeringData.individualVoluntPost.photo + "&type=" + 'post'),                
-                headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                           'Accept': 'application/x-www-form-urlencoded',
-                          'X-API-KEY' : '123456'}
-                })
-                .success(function (data) {
-                    $scope.volunteering_photo = data;
-              }).error(function(data)
-                       {
-            $scope.photoExists = false;
+            method: 'POST',
+            skipAuthorization: true,//es necesario enviar el token
+            url: 'https://hoyportibppr.com/api/entities/displaypic/',
+            data: ("img=" + img + "&type=" + type),                
+            headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                       'Accept': 'application/x-www-form-urlencoded',
+                      'X-API-KEY' : '123456'}
+            })
+            .success(function (data) {
+                $scope.volunteering_photo = data;
+          }).error(function(data)
+                   {
+        $scope.photoExists = false;
         });
     
+     // function triggered by the "going" button click
     $scope.going = function(id){
 
+        // $http service in charge of storing the information of the volunteering thats being follow
         $http({
             method: 'POST',
             skipAuthorization: true,//es necesario enviar el token
@@ -4707,255 +4524,25 @@ $http({
             }
         }).success(function (data) {
             
-            console.log($rootScope.supporter_data.vol_going);
-            $scope.info1 = data.message;
-            $state.go($state.current, $stateParams, {reload: true, inherit: false});
-                  var alertPopup = $ionicPopup.alert({
-                  title: 'Thanks for your awareness!'
-                  });         
-
-        }).error(function (data) {
-            $scope.error = data.message;
-            $scope.data = {};            
-        });
-    };
-      
-      $scope.ungoing = function(id){
-          
-        $http({
-            method: 'DELETE',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/going_volunteering/'+id,
-             headers:
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY' : '123456',
-                'TOKEN' : store.get('token')
-            }
-        }).success(function (data) {
-            $scope.info1 = data.message;
-            console.log($rootScope.supporter_data.vol_going);
-                    $state.go($state.current, $stateParams, {reload: true, inherit: false});
-
-            var alertPopup = $ionicPopup.alert({
-                  title: 'No problem!'
-                  });                         
-        });
-    };
-    
-     $scope.addToCalendar = function (volunteering)
-      {
-        console.log(Events.add($scope.post));
-      };
-    
-}
-
-})();
-
-//publicEventFullViewCtrl
-(function(){
-
-  "use strict";
-  angular.module('app').controller('guestEventFullViewCtrl', publicEventFullViewCtrlFunction);
-
-  function publicEventFullViewCtrlFunction($scope, $stateParams, authFactory,$state,jwtHelper, store,$rootScope,$http, $httpParamSerializerJQLike,moment, eventData, $timeout,$ionicPopup,$ionicActionSheet, Events)
-  {  
-      
-/*
-*  this function is in charge of 
-*/
- $scope.selectEnt = function(val) {
-        $http({
-          method: 'GET',
-          skipAuthorization: true,//es necesario enviar el token
-          url: 'https://hoyportibppr.com/api/entities/' + val,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456'}
-        })
-          .success(function (data) {
-            $scope.info = data.message;
-            entityProfiles.individualEntity = $scope.info;
-
-          });
-      }; // end of selectEnt function
-      
-      
-      
-      $scope.goingg = false;
-      $scope.notgoingg = true;
-      
-      $scope.post = eventData.individualEventPost;
-            
-      if($rootScope.supporter === true){
-          
-      if($rootScope.supporter_data.participation !== null)   
-      {
-              $rootScope.supporter_data.participation.forEach(function(element){
-                  
-                  if(element.id === $scope.post.id)
-                      {
-                          console.log('hello');
-                          $scope.goingg = true;
-                          $scope.notgoingg = false;
-                      }
-              })
-          }
-      }
-      
-      var img =  eventData.individualEventPost.photo;
-      var id = eventData.individualEventPost.id;
+        // the view will be reloaded after the entity clicking the going button to reflect the change
+        $state.go($state.current, $stateParams, {reload: true, inherit: false});
        
-      var type="event";
-               $http({
-                method: 'POST',
-                skipAuthorization: true,//es necesario enviar el token
-                url: 'https://hoyportibppr.com/api/entities/displaypic/',
-                data: ("img=" + eventData.individualEventPost.photo + "&type=" + 'event'),                
-                headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                           'Accept': 'application/x-www-form-urlencoded',
-                          'X-API-KEY' : '123456'}
-                })
-                .success(function (data) {
-                    $scope.event_photo = data;
-                   console.log(data);
-              }).error(function(data)
-                       {
-            $scope.photoExists = false;
-                   
-        });
-      
-      $scope.going = function(id){
+            // popop
+            var alertPopup = $ionicPopup.alert({
+        title: 'Thanks for your awareness!'
+        });        
 
-          $scope.goingEvent = 
-          {
-          "event_decision": { 
-            "event_id":  id, 
-            "decision": "going"}
-          };
-          
-        $http({
-            method: 'POST',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/participate_event/',
-            data: JSON.stringify($scope.goingEvent),
-             headers:
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY' : '123456',
-                'TOKEN' : store.get('token')
-            }
-        }).success(function (data) {
-             $scope.goingg = true;
-      $scope.notgoingg = false;
-//            console.log($rootScope.supporter_data.vol_going);
-            $scope.info1 = data.message;
-            
-                  var alertPopup = $ionicPopup.alert({
-                  title: 'Thanks for your awareness!'
-                  });
-            
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
+        })
+    };
     
-            }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });            
-            
-        }).error(function (data) {
-            $scope.error = data.message;
-            console.log($scope.error);
-        });
-    };
-      
-       $scope.interested = function(id){
-           
-            $scope.interestedEvent = 
-          {
-          "event_decision": { 
-            "event_id":  id, 
-            "decision": "interested"}
-          };
-      
-        $http({
-            method: 'POST',
-            skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/participate_event/',
-            data: JSON.stringify($scope.interestedEvent),
-             headers:
-            {
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY' : '123456',
-                'TOKEN' : store.get('token')
-            }
-        }).success(function (data) {
-            
-            $scope.goingg = true;
-      $scope.notgoingg = false;
-            
-            $scope.info1 = data.message;
-            
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
-
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });
-            
-                  var alertPopup = $ionicPopup.alert({
-                  title: 'Thanks for your awareness!'
-        });
-            
-        }).error(function (data) {
-            $scope.error = data.message;
-            console.log($scope.error);
-            
-        });
-    };
-      
-      $scope.ungoing = function(id){
+      // function triggered by "not going" button click
+       $scope.ungoing = function(id){
           
-            $scope.ungoingEvent = 
-          {
-          "event_decision": { 
-            "event_id":  id}
-            };
-          
-          console.log($scope.ungoingEvent);
-
+        // $http service in charge of deleting the information of the volunteering thats being follow
         $http({
             method: 'DELETE',
             skipAuthorization: true,//es necesario enviar el token
-            url: 'https://hoyportibppr.com/api/supporters/participate_event/'+id,
+            url: 'https://hoyportibppr.com/api/supporters/going_volunteering/'+id,
              headers:
             {
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -4964,63 +4551,28 @@ $http({
             }
         }).success(function (data) {
             
-             $scope.goingg = false;
-      $scope.notgoingg = true;
             
-            $http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
 
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
-    });$http({
-        method: 'GET',
-        skipAuthorization: true,//es necesario enviar el token
-        url: 'https://hoyportibppr.com/api/supporters/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/x-www-form-urlencoded',
-            'X-API-KEY' : '123456',
-         'TOKEN': store.get('token')}
-    }).success(function(data) {
+        // the view will be reloaded after the entity clicking the going button to reflect the change
+        $state.go($state.current, $stateParams, {reload: true, inherit: false});
 
-        $scope.info = data.message;
-            if($scope.info.followed_entities === null)
-                {
-                    $scope.info.followed_entities = [];
-                }
-            
-        $rootScope.supporter_data = data.message;
-        console.log($rootScope.supporter_data);
+            //popup
+        var alertPopup = $ionicPopup.alert({
+          title: 'No problem!'
+          });
     });
-            $scope.info1 = data.message;
-
-            var alertPopup = $ionicPopup.alert({
-                  title: 'No problem!'
-                  });
-        });
     };
     
-       $scope.addToCalendar = function (volunteering)
-      {
-          Events.add($scope.post);
-      };
-  }
-  publicEventFullViewCtrlFunction.$inject = ['$scope', '$stateParams','authFactory','$state','jwtHelper', 'store','$rootScope','$http','$httpParamSerializerJQLike','moment','eventData', '$timeout','$ionicPopup','$ionicActionSheet', 'Events'];
+     // function is triggered by the add to calendar button click
+     $scope.addToCalendar = function (volunteering)
+     {
+         // invokes Event service with the function add // the service use the cordova calendar plugin
+         // the vairable post coontains the data that will be stored in the native calendar of the phone
+         Events.add(volunteering);
+     };
+}
 })();
+
 
 //termsAndConditionsCtrl
 (function(){

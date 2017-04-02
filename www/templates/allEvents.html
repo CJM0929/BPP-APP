@@ -24,14 +24,14 @@
         <ion-refresher spinner="bubbles" on-refresh="doRefresh()"></ion-refresher>
         
         <ion-list>
-            <div class="list card" ng-repeat="post in posts | orderBy: '-event_created'">
-                <div class="item item-avatar item item-button-right" ng-click="goToEventView(post.id)">
+            <div class="list card" ng-repeat="event in events | orderBy: '-event_created'">
+                <div class="item item-avatar item item-button-right" ng-click="goToEventView(event.id)">
                     <img src="{{i || 'img/EventIcon.jpg'}}">               
-                    <h2><b>{{post.title}}</b></h2>
-                    Hosted by: {{post.ent_name}}<br><br>
-                    Date: {{post.start_time | amCalendar:referenceTime:formats}}<br>
-                    Time: {{post.start_time | amDateFormat:'h:mm a'}}<br>
-                    Place: {{post.city_name}}
+                    <h2><b>{{event.title}}</b></h2>
+                    Hosted by: {{event.ent_name}}<br><br>
+                    Date: {{event.start_time | amCalendar:referenceTime:formats}}<br>
+                    Time: {{event.start_time | amDateFormat:'h:mm a'}}<br>
+                    Place: {{event.city_name}}
                     <br><br>
                 </div>
             </div>
