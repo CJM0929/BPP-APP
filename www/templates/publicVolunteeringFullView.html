@@ -29,8 +29,8 @@
             <div class="item">
                 <h1 class="royal" id="align-text-events">{{volunteering.title}}</h1><br>
                 <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="volunteering.vol_created"></span><br>
-                <b class="royal">Starting date: </b> {{volunteering.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
-                <b class="royal">Ending date: </b>{{volunteering.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Starting date: </b> {{volunteering.start_time | amUtc | amLocal | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
+                <b class="royal">Ending date: </b>{{volunteering.end_time | amUtc | amLocal | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}<br>
                 <b class="royal">Place: </b> {{volunteering.city_name}}
                     <br>
                 <i class="icon ion-calendar royal" id="add-to-calendar" ng-click="addToCalendar(volunteering)"> Add to Calendar</i>
