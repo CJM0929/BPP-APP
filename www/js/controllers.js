@@ -547,6 +547,7 @@
         
                 // backend response error for each field in the edit page
                 $scope.errorMessage = data.message.ent_name;
+                $scope.errorMessage0 = data.message.about;
                 $scope.errorMessage1 = data.message.fax;
                 $scope.errorMessage2 = data.message.phone;
                 $scope.errorMessage3 = data.message.web;
@@ -562,7 +563,7 @@
                    var alertPopup = $ionicPopup.alert({
                        title: 'Warning',
                        template: $scope.errorMessage || $scope.errorMessage1 || $scope.errorMessage2 || $scope.errorMessage3
-                       || $scope.errorMessage4 || $scope.errorMessage5 ||  $scope.errorMessage6 ||  $scope.errorMessage7 || $scope.errorMessage8
+                       || $scope.errorMessage4 || $scope.errorMessage5 ||  $scope.errorMessage6 ||  $scope.errorMessage7 || $scope.errorMessage8 ||  $scope.errorMessage0
                    });     
                 }// end of if       
             });// end of .error 
@@ -770,7 +771,7 @@
 
             // image path in order to display the picture
             $scope.img = data.message.sup_pic;
-
+            console.log($scope.img);
             // this $Http service is in charge of obtaining the raw data of the picture 
             $http({
                     method: 'POST',
@@ -806,6 +807,7 @@
         // when it detect a change, it will automatically upload the picture
         // and update the view
         $scope.$watch('picture_data.userfile', function (img) {
+            console.log(img);
             $scope.picture_data.userfile = img;
             multipartForm.post(uploadUrl, $scope.picture_data);
         });
@@ -2125,7 +2127,7 @@ $http({
 
         }).success(function (data) {
             
-            if(data.status == "success")
+            if(data.status !== "error")
             {
                 // popup
                 var alertPopup = $ionicPopup.alert(
@@ -2211,7 +2213,8 @@ $http({
     //    TOKEN RETRIEVAL
     var tokenEncoded = store.get('token');// get the encoded token
     var tokenDecoded = jwtHelper.decodeToken(tokenEncoded);// decode the encoded token
-                
+                    console.log(tokenEncoded);
+    
     if(tokenDecoded.role == 'supporter'){
         
         $rootScope.isAuthenticated = true;
@@ -2608,7 +2611,7 @@ $http({
             // uploadUrl variable is the direction where the picture is going to be uploaded
             var uploadUrl = 'https://hoyportibppr.com/api/entities/volunteering_job_uploadpicture/'+$scope.PostDataResponse;
             
-         // here AngularJS watches any changes in the data.userfile variable
+        // here AngularJS watches any changes in the data.userfile variable
         // when it detect a change, it will automatically upload the picture
         // and update the view
           $scope.$watch('data.userfile', function (img) {
@@ -2632,7 +2635,8 @@ $http({
             $scope.descriptionError = data.message.description;
             $scope.start_timeError = data.message.start_time;
             $scope.end_timeError = data.message.end_time;
-            $scope.addressError = data.message.address;
+            $scope.addressError = data.message.address1;
+            $scope.address2Error = data.message.address1;
             $scope.cityError = data.message.city;
             $scope.end_zipError = data.message.zip;
             $scope.supervisor_nameError = data.message.supervisor_name;
@@ -2640,13 +2644,18 @@ $http({
             $scope.supervisor_emailError = data.message.supervisor_email;
             $scope.volunteersQuantityError = data.message.num_of_ppl;
             $scope.volunteersWorkHours = data.message.work_hours;
+            $scope.location_descriptionError = data.message.location_description;
+            $scope.app_procedureError = data.message.app_procedure;
+            $scope.webError = data.message.app_procedure;
 
-                      //popup displaying errors from the backend
+
+
+                //popup displaying errors from the backend
                  $ionicPopup.alert(
                     {
                         title: 'Error Description',
                         template: $scope.titleError || $scope.descriptionError || $scope.start_timeError || $scope.end_timeError || $scope.addressError || $scope.cityError || 
-                $scope.end_zipError || $scope.supervisor_nameError || $scope.supervisor_phoneError || $scope.supervisor_emailError || $scope.volunteersQuantityError || $scope.volunteersWorkHours || 'There was an error creating the event. Please check the required fields and try again.'
+                $scope.end_zipError || $scope.supervisor_nameError || $scope.supervisor_phoneError || $scope.supervisor_emailError || $scope.volunteersQuantityError || $scope.volunteersWorkHours || $scope.location_descriptionError || $scope.address2Error || app_procedureError || $scope.webError || 'There was an error creating the event. Please check the required fields and try again.'
                     });
             });
         };
@@ -3104,6 +3113,8 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
           });
         };// end of if condition
       
+      
+      
       // google maps settings
 
       var options = {timeout: 10000, enableHighAccuracy: true};
@@ -3192,10 +3203,17 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
       $scope.eventData = eventData;
                   
       // here we convert the starting date returened from the backend in order to bind it in the native date picker
-      $scope.eventData.individualEventPost.start_time = new Date(eventData.individualEventPost.start_time);
+      
+       var start_time = new Date(eventData.individualEventPost.start_time);
+    start_time.setHours(start_time.getHours() - 5)
+      
+      $scope.eventData.individualEventPost.start_time = start_time;
       
       // here we convert the end date returened from the backend in order  to bind it in the native date picker
-      $scope.eventData.individualEventPost.end_time = new Date(eventData.individualEventPost.end_time); 
+      var end_time = new Date(eventData.individualEventPost.end_time); 
+    end_time.setHours(end_time.getHours() - 5)
+      
+      $scope.eventData.individualEventPost.end_time = end_time;
       
       // image path in order to display the picture
       var img = eventData.individualEventPost.photo;
@@ -3248,8 +3266,8 @@ function introCtrlFunction($scope, $ionicSlideBoxDelegate, $ionicSideMenuDelegat
                 'userfile' : $scope.userfile
             };
 
-            // uploadUrl variable is the direction where the picture is going to be uploaded
-          var uploadUrl = 'https://hoyportibppr.com/api/entities/event_uploadpicture/'+$scope.eventData.individualEventPost.id;
+    // uploadUrl variable is the direction where the picture is going to be uploaded
+    var uploadUrl = 'https://hoyportibppr.com/api/entities/event_uploadpicture/'+$scope.eventData.individualEventPost.id;
             
            // here AngularJS watches any changes in the data.userfile variable
            // when it detect a change, it will automatically upload the picture
@@ -3374,10 +3392,15 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     var time=volunteeringData.getVoluntPost();  
     
     // here we convert the starting date returened from the backend in order to bind it in the native date picker
-    $scope.voluntData.start_time = new Date(time.start_time);
+    
+    var start_time = new Date(time.start_time);
+    start_time.setHours(start_time.getHours() - 5)
+    $scope.voluntData.start_time = start_time;
     
     // here we convert the end date returened from the backend in order  to bind it in the native date picker
-    $scope.voluntData.end_time = new Date(time.end_time);
+    var end_time = new Date(time.end_time);
+    end_time.setHours(end_time.getHours() - 5)
+    $scope.voluntData.end_time = end_time;
     
 
     // this $http service is in charge of retrieving the volunteering post picture raw data in order to display it
@@ -3963,7 +3986,6 @@ function editVolunteeringCtrlFunction($scope, $stateParams, authFactory,$state,j
     .finally(function() {
        $scope.$broadcast('scroll.refreshComplete');
      });
-    
     };
     
     $http({
@@ -4167,7 +4189,7 @@ $http({
          'TOKEN': store.get('token')}
 
     }).success(function(data) {
-
+        console.log(data.message)
         $scope.info = data.message;
             if($scope.info.followed_entities === null)
                 {
