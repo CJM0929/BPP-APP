@@ -34,8 +34,8 @@
             <div class="item">
                 <h1 class="royal" id="align-text-events">{{event.title}}</h1>
                 <p id="align-text-events"><b class="royal">Posted: </b><span am-time-ago="event.event_created"></span></p>
-                <p><b class="royal">Starting date: </b> {{event.start_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
-                <p><b class="royal">Ending date: </b>{{event.end_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Starting date: </b> {{event.start_time | amUtc | amLocal | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
+                <p><b class="royal">Ending date: </b>{{event.end_time | amUtc | amLocal | amDateFormat:'dddd, MMMM Do YYYY, h:mm a'}}</p>
                 <p><b class="royal">Place: </b> {{event.city_name}}</p>
                 
                 <br>
